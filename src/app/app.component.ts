@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {B2bNgxButtonThemeEnum} from "@b2b/ngx-button";
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,6 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'test-again';
+  title = 'test-again'
+  theme = B2bNgxButtonThemeEnum
 }

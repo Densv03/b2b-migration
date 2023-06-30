@@ -1,0 +1,42 @@
+<label class="ngx-select-label">
+	<ng-content></ng-content>
+</label>
+<ng-select
+	[searchable]="searchable"
+	[clearable]="false"
+	[items]="options"
+	[class]="selectClassName"
+	[bindLabel]="bindLabel"
+	[bindValue]="bindValue"
+	[placeholder]="placeholder"
+	[groupBy]="groupBy"
+	[groupValue]="groupValue"
+	[selectableGroup]="selectableGroup"
+	[selectableGroupAsModel]="selectableGroupAsModel"
+	[formControl]="formControl"
+	[multiple]="multiple"
+	[virtualScroll]="virtualScroll"
+	[isOpen]="isOpen"
+	[class.ng-touched]="touched"
+	[minTermLength]="minTermLength"
+  [closeOnSelect]="closeOnSelect"
+	(search)="emitSearch($event)"
+	(change)="emitChange($event)">
+	<ng-template ng-label-tmp let-item="item">
+		{{ item[bindLabel] }}
+	</ng-template>
+
+	<ng-template ng-optgroup-tmp let-item="item">
+		{{ item[bindLabel] }}
+	</ng-template>
+
+	<ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+		<div class="multiple-selected" *ngFor="let item of items | slice: 0:1">
+			<p>{{ $any(item)[bindLabel] }}</p>
+		</div>
+
+		<div class="multiple-more" *ngIf="items.length > 1">
+			<p>{{ items.length - 1 }} more...</p>
+		</div>
+	</ng-template>
+</ng-select>

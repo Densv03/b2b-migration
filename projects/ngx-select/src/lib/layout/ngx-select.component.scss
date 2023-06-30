@@ -1,0 +1,36 @@
+.ngx-select-label {
+	display: block;
+	font-size: 14px;
+	color: #9fa4bb;
+	margin-bottom: 6px;
+
+	&:empty {
+		display: none;
+	}
+}
+
+:host::ng-deep {
+	.ng-placeholder {
+		font-size: 14px;
+		padding-left: 5px;
+	}
+	.ng-input {
+		top: 13px !important;
+	}
+
+	.multiple-selected {
+		font-size: 14px;
+		color: #556274;
+		margin-left: 8px;
+	}
+
+	.multiple-more {
+		font-size: 14px;
+		color: #556274;
+		margin-left: 8px;
+	}
+	.ng-invalid.ng-touched .ng-select-container {
+		background-color: #e63d3d0d!important;
+		border: 2px solid #e63d3d!important;
+	}
+}

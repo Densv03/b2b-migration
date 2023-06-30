@@ -11,6 +11,17 @@
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
+    "paths": {
+      "@b2b/ngx-button": [
+        "projects/ngx-button/src/public-api"
+      ],
+      "@b2b/ngx-select": [
+        "projects/ngx-select/src/public-api"
+      ],
+      "@b2b/shared": [
+        "project/shared/src/public-api",
+      ]
+    },
     "declaration": false,
     "downlevelIteration": true,
     "experimentalDecorators": true,

@@ -1,0 +1,88 @@
+@import "projects/shared/src/styles/colors";
+
+.b2b-ngx-button {
+  border: 0.16rem solid transparent;
+  border-radius: 0.25rem;
+  &.background {
+    &.background-black {
+      background-color: $color-black-800;
+      color: $color-white-900;
+      &:hover {
+        background-color: $color-black-100;
+      }
+    }
+    &.background-white {
+      background-color: $color-white-900;
+      color: $color-gray-900;
+      box-shadow: 0 0.25rem 1rem rgba(10, 8, 58, 0.1);
+      &:hover {
+        background-color: $color-white-100;
+      }
+    }
+    &.background-red {
+      background-color: #e63d3d;
+      color: white;
+      box-shadow: 0 0.25rem 1rem rgba(10, 8, 58, 0.1);
+      &:hover {
+        background-color: #e63d3d;
+      }
+    }
+    &.background-transparent {
+      background-color: transparent;
+      color: $color-gray-900;
+      &:hover {
+        background-color: $color-white-100;
+      }
+    }
+    &.background-blue {
+      background-color: $color-blue-500;
+      color: $color-white-900;
+      &:hover {
+        background-color: $color-blue-100;
+      }
+    }
+    &.background-hover-black {
+      border-color: #dfe8f5;
+      transition: 0.2s;
+      &:hover {
+        background-color: $color-black-800;
+        border-color: $color-black-800;
+        color: white;
+      }
+    }
+  }
+  &.outline {
+    &.outline-black {
+      border-color: $color-black-800;
+      &:hover {
+        background-color: $color-white-100;
+      }
+    }
+    &.outline-white {
+      border-color: $color-white-900;
+      &:hover {
+        background-color: $color-white-100;
+      }
+    }
+    &.outline-blue {
+      border-color: $color-blue-500;
+      &:hover {
+        background-color: $color-blue-100;
+      }
+    }
+    &.outline-gray {
+      border-color: #dfe8f5;
+      &:hover {
+        background-color: $color-white-100;
+      }
+    }
+  }
+
+  &:disabled {
+    background-color: $color-black-50 !important;
+    color: $color-white-900 !important;
+    &:hover {
+      background-color: $color-black-50 !important;
+    }
+  }
+}
