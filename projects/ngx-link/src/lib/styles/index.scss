@@ -1,0 +1,89 @@
+@import "projects/shared/src/styles/colors";
+
+.b2b-ngx-link {
+	transition: 0.5s;
+	border: 1px solid transparent;
+
+	&.text {
+		&.text-blue {
+			color: $color-blue-500;
+		}
+
+		&.text-black {
+			color: $color-black-800;
+		}
+
+		&.text-white {
+			color: $color-white-900;
+		}
+
+		&.text-gray {
+			color: $color-gray-500;
+		}
+
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+
+	&.background {
+		border: 0.16rem solid transparent;
+
+		&.background-white {
+			background-color: $color-white-900;
+			color: $color-black-800;
+			&:hover {
+				background-color: $color-white-200;
+			}
+		}
+
+		&.background-transparent {
+			background-color: transparent;
+			color: $color-black-800;
+			&:hover {
+				background-color: $color-white-100;
+			}
+		}
+
+		&.background-gray {
+			background-color: $color-blue-500;
+			color: $color-white-900;
+		}
+
+		&.background-black {
+			background-color: $color-black-800;
+			color: $color-white-900;
+			&:hover {
+				background-color: $color-black-100;
+			}
+		}
+
+		&.background-blue {
+			background-color: $color-blue-500;
+			color: $color-white-900;
+			&:hover {
+				background-color: $color-blue-100;
+			}
+		}
+
+		&.background-light-blue {
+			background: #eff4fa;
+			border-radius: 4px;
+			span {
+				color: #005dff !important;
+			}
+			&:hover {
+				background: #e6edfa;
+			}
+		}
+	}
+
+	&.outline {
+		&.outline-white {
+			border-color: $color-white-900;
+			&:hover {
+				background-color: $color-black-100;
+			}
+		}
+	}
+}

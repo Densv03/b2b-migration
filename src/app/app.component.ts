@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {B2bNgxButtonThemeEnum} from "@b2b/ngx-button";
+import {B2bNgxLinkThemeEnum} from "@b2b/ngx-link";
 
 @Component({
   selector: 'app-root',
@@ -8,5 +9,5 @@ import {B2bNgxButtonThemeEnum} from "@b2b/ngx-button";
 })
 export class AppComponent {
   title = 'test-again'
-  theme = B2bNgxButtonThemeEnum
+  theme = B2bNgxLinkThemeEnum
 }
