@@ -14,5 +14,5 @@ import {CommonModule} from "@angular/common";
     B2bNgxButtonDirective
   ]
 })
-export class NgxButtonModule {
+export class B2bNgxButtonModule {
 }

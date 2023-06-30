@@ -21,6 +21,9 @@
       "@b2b/ngx-link": [
         "projects/ngx-link/src/public-api"
       ],
+      "@b2b/ngx-input": [
+        "projects/ngx-input/src/public-api"
+      ],
       "@b2b/shared": [
         "project/shared/src/public-api",
       ],

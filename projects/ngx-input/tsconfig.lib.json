@@ -6,10 +6,9 @@
     "declaration": true,
     "declarationMap": true,
     "inlineSources": true,
-    "types": [],
-    "rootDir": "../../"
+    "types": []
   },
   "exclude": [
     "**/*.spec.ts"
-  ],
+  ]
 }
