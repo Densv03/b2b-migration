@@ -30,6 +30,9 @@
       "@b2b/ngx-icon": [
         "projects/ngx-icon/src/public-api"
       ],
+      "@b2b/ngx-image": [
+        "projects/ngx-image/src/public-api"
+      ],
     },
     "declaration": false,
     "downlevelIteration": true,
