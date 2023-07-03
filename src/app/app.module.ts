@@ -4,8 +4,7 @@ import {BrowserModule} from '@angular/platform-browser';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {B2bNgxCheckboxModule} from "@b2b/ngx-checkbox";
-import {B2bNgxCountrySelectModule} from "@b2b/ngx-country-select";
+import {B2bNgxBackModule} from "@b2b/ngx-back";
 
 @NgModule({
   declarations: [
@@ -16,8 +15,7 @@ import {B2bNgxCountrySelectModule} from "@b2b/ngx-country-select";
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    B2bNgxCheckboxModule,
-    B2bNgxCountrySelectModule,
+    B2bNgxBackModule,
   ],
   bootstrap: [AppComponent]
 })

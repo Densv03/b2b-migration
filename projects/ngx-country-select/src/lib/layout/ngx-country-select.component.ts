@@ -41,11 +41,11 @@ export class B2bNgxCountrySelectComponent implements ControlValueAccessor, OnIni
 	@Input() errors: ValidationErrors = {};
 
 	@Input() showInTransit?: boolean;
-	@Input() public readonly theme: B2bNgxSelectThemeEnum = B2bNgxSelectThemeEnum.BACKGROUND_GRAY;
-	@Input() public readonly className: string = '';
-	@Input() public readonly placeholder: string;
-	@Input() public readonly multiple: boolean = false;
-	@Input() public readonly touched: boolean = false;
+	@Input() public theme: B2bNgxSelectThemeEnum = B2bNgxSelectThemeEnum.BACKGROUND_GRAY;
+	@Input() public className: string = '';
+	@Input() public placeholder: string;
+	@Input() public multiple: boolean = false;
+	@Input() public touched: boolean = false;
 
 	@Output() openSelect: EventEmitter<void> = new EventEmitter<void>();
 	@Output() closeSelect: EventEmitter<void> = new EventEmitter<void>();
