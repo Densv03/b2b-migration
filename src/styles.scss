@@ -1,12 +1,4 @@
-// import styles for custom libs
-@import "projects/ngx-select/src/index";
-@import "projects/ngx-button/src/index";
-@import "projects/ngx-link/src/index";
-@import "projects/ngx-input/src/index";
-
-
-// import styles from downloaded libs
-@import "@ng-select/ng-select/themes/default.theme.css";
+@import "projects/shared/src/styles/index";
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

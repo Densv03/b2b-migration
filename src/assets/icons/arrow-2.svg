@@ -1,0 +1,6 @@
+<svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+<line x1="2" y1="29.5" x2="27" y2="29.5" stroke="#556274"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M8 10H9V9V2V1H10H19H20V2V9V10H21H26.6916H28L27.1562 11L15.1542 25.2247L14.5 26L13.8458 25.2247L1.84375 11L1 10H2.3084H8ZM3.15215 11H9C9.55229 11 10 10.5523 10 10V2H19V10C19 10.5523 19.4477 11 20 11H25.8478L14.5 24.4493L3.15215 11Z" fill="#556274"/>
+<line y1="-0.5" x2="13" y2="-0.5" transform="matrix(4.37112e-08 1 1 -4.37112e-08 15 7)" stroke="#556274"/>
+<line y1="-0.5" x2="3" y2="-0.5" transform="matrix(4.37112e-08 1 1 -4.37112e-08 15 2)" stroke="#556274"/>
+</svg>

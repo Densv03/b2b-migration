@@ -25,7 +25,10 @@
         "projects/ngx-input/src/public-api"
       ],
       "@b2b/shared": [
-        "project/shared/src/public-api",
+        "projects/shared/src/public-api",
+      ],
+      "@b2b/ngx-icon": [
+        "projects/ngx-icon/src/public-api"
       ],
     },
     "declaration": false,

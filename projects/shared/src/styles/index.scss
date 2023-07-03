@@ -1,0 +1,13 @@
+@import "reset";
+
+@import "colors";
+@import "breakpoints";
+@import "deep";
+
+@import "projects/ngx-select/src/index";
+@import "projects/ngx-button/src/index";
+@import "projects/ngx-link/src/index";
+@import "projects/ngx-input/src/index";
+@import "projects/ngx-icon/src/index";
+
+@import "@ng-select/ng-select/themes/default.theme.css";

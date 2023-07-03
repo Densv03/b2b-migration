@@ -1,0 +1,13 @@
+@import "projects/shared/src/styles/colors";
+
+.b2b-ngx-icon {
+	&.circle {
+		height: 3rem;
+		width: 3rem;
+		background-color: $color-gray-100;
+		border-radius: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+}
