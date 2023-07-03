@@ -33,6 +33,9 @@
       "@b2b/ngx-image": [
         "projects/ngx-image/src/public-api"
       ],
+      "@b2b/id-generator": [
+        "projects/id-generator/src/public-api"
+      ],
     },
     "declaration": false,
     "downlevelIteration": true,

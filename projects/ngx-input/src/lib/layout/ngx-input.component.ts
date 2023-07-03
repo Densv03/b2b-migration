@@ -8,8 +8,7 @@ import {
   OnInit,
   SimpleChanges,
 } from "@angular/core";
-// TODO: uncomment code below when libs will be inserted in b2b
-// import { idGenerator } from "@b2b/id-generator";
+import { idGenerator } from "@b2b/id-generator";
 import {ControlValueAccessor, FormControl, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors} from "@angular/forms";
 // TODO: uncomment code below when libs will be inserted in b2b
 // import { UntilDestroy, untilDestroyed } from "@ngneat/until-destroy";
@@ -56,7 +55,7 @@ export class B2bNgxInputComponent implements ControlValueAccessor, OnInit, OnCha
 		this.onTouched = () => null;
 
 		this.formControl = new FormControl<string | null>('');
-		// this.id = idGenerator();
+		this.id = idGenerator();
     this.id = 'id'
 	}
 
