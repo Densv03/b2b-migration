@@ -7,10 +7,10 @@ import { ChangeDetectionStrategy, Component, Input } from "@angular/core";
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class B2bNgxIconComponent {
-	@Input() public readonly name: string = '';
-	@Input() public readonly theme: string = '';
-	@Input() public readonly className: string = '';
-	@Input() public readonly svgStyle: object = {};
+	@Input() public name: string = '';
+	@Input() public theme: string = '';
+	@Input() public className: string = '';
+	@Input() public svgStyle: object = {};
 
 	constructor() {}
 

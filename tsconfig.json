@@ -39,6 +39,9 @@
       "@b2b/ngx-checkbox": [
         "projects/ngx-checkbox/src/public-api"
       ],
+      "@b2b/ngx-country-select": [
+        "projects/ngx-country-select/src/public-api"
+      ],
     },
     "declaration": false,
     "downlevelIteration": true,

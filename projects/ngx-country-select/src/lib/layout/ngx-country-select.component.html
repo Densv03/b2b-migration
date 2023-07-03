@@ -1,0 +1,41 @@
+<label class="ngx-country-label"><ng-content></ng-content></label>
+<ng-select
+	(open)="emitOpen()"
+	(close)="emitClose()"
+	[searchable]="true"
+	[clearable]="false"
+	[multiple]="multiple"
+	[items]="options"
+	bindLabel="label"
+	bindValue="code"
+	[class]="selectClassName"
+	[class.ng-touched]="touched"
+	[placeholder]="placeholder"
+	[formControl]="formControl">
+	<ng-template ng-label-tmp let-item="item">
+		<div class="ngx-country-label-container">
+			<ng-container>
+				<img *ngIf="item.icon" b2bNgxIcon group="flags/" [name]="item.icon" />
+				<p class="ngx-country-select-label">{{ item.label }}</p>
+			</ng-container>
+		</div>
+	</ng-template>
+
+	<ng-template ng-multi-label-tmp let-items="items" let-clear="clear">
+		<div class="ngx-country-label-container" *ngFor="let item of items | slice: 0:1">
+			<img *ngIf="$any(item).icon" b2bNgxIcon group="flags/" [name]="$any(item).icon" />
+			<p class="ngx-country-select-label">{{ $any(item).label }}</p>
+		</div>
+
+		<div class="ngx-country-label-container" *ngIf="items.length > 1">
+			<p class="ngx-country-select-label">{{ items.length - 1 }} more...</p>
+		</div>
+	</ng-template>
+
+	<ng-template ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
+		<div class="ngx-country-option-container">
+			<img b2bNgxIcon group="flags/" [name]="item.icon" />
+			<p class="ngx-country-option">{{ item.label }}</p>
+		</div>
+	</ng-template>
+</ng-select>
