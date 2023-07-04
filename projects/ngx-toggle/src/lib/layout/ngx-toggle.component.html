@@ -1,0 +1,14 @@
+<label class="ngx-toggle">
+	<ng-container *ngIf="!emptyLabel">
+		<span class="ngx-toggle-label-visible" *ngIf="!customLabel && formControl.value">Visible</span>
+		<span class="ngx-toggle-label-hidden" *ngIf="!customLabel && !formControl.value">Hidden</span>
+		<span class="ngx-toggle-label-hidden" *ngIf="customLabel">{{ customLabel }}</span>
+	</ng-container>
+	<input
+		[formControl]="formControl"
+		class="ngx-toggle-input"
+		(click)="emitToggleChange()"
+		type="checkbox"
+		[(ngModel)]="toggled" />
+	<span class="ngx-toggle-custom-input"></span>
+</label>

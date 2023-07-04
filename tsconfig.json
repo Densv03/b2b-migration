@@ -45,6 +45,12 @@
       "@b2b/ngx-back": [
         "projects/ngx-back/src/public-api"
       ],
+      "ngx-category-dropdowns": [
+        "dist/ngx-category-dropdowns"
+      ],
+      "@b2b/ngx-toggle": [
+        "projects/ngx-toggle/src/public-api"
+      ],
     },
     "declaration": false,
     "downlevelIteration": true,
