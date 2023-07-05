@@ -1,0 +1,61 @@
+@import "../../../../shared/styles/src/lib/colors";
+
+::ng-deep {
+	.ngx-treeview-item-button {
+		flex-direction: row-reverse;
+	}
+}
+
+.dropdown-visible {
+	position: absolute;
+	z-index: 3000000000;
+	background-color: #00000070;
+	max-height: 300px;
+	overflow-y: auto;
+}
+
+.dropdown-hidden {
+
+}
+
+
+.subcategory {
+	margin-top: 16px;
+
+	p {
+		font-size: 14px;
+		color: #9fa4bb;
+		margin-bottom: 6px;
+	}
+
+	> div {
+		width: 100%;
+		height: 50px;
+		background: $color-gray-100;
+		border-radius: 4px;
+
+		.input {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			padding: 14px 11px 6px 16px;
+
+			img {
+				width: 12px;
+			}
+
+			> p {
+				color: #999;
+			}
+		}
+
+		.panel {
+			overflow-x: hidden;
+			background-color: $color-white-900;
+		}
+
+		&.disabled {
+			opacity: 0.5;
+		}
+	}
+}

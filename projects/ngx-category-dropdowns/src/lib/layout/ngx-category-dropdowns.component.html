@@ -1,0 +1,40 @@
+<form [formGroup]="form">
+	<b2b-ngx-treeview [label]="parentCategoryLabel" [items]="categories$ | async"
+										[config]="config"
+										[theme]="'gray'"
+										formControlName="categoryLevel1"></b2b-ngx-treeview>
+
+
+	<div class="subcategory">
+		<p>Select subcategory</p>
+
+		<div (click)="toggleDropdown()" [class.disabled]="(categoriesLevel2$ | async).length === 0" #subcategory>
+			<div class="input">
+				<p *ngIf="selectedSubcategories.length === 0; else showCategories">{{ childCategoryLabel }}</p>
+
+				<ng-template #showCategories>
+					<p>
+						{{selectedSubcategories.length > 1 ?
+						(selectedSubcategories.length + ' subcategories selected') :
+						(this.selectedSubcategories[0])}}
+					</p>
+				</ng-template>
+
+				<img b2bNgxIcon name="toggle-up" [ngStyle]="{transform: isDropdownVisible
+                  ? 'rotate(0deg)'
+                  : 'rotate(180deg)'}"/>
+			</div>
+
+			<div [ngClass]="{'d-block': isDropdownVisible, 'd-none': !isDropdownVisible}" style="width: 100%" #panelBlock>
+				<div [ngClass]="{'dropdown-visible': isDropdownVisible, 'dropdown-hidden': !isDropdownVisible}"
+						 *ngIf="categoriesLevel2$ | async as categoriesLevel2" class="panel" [ngStyle]="{width: panelWidth}">
+					<b2b-ngx-subcategory-selectable-part
+						*ngFor="let category of categoriesLevel2"
+						[category]="category"
+						(selectAll)="onSelectAll($event)"
+						(selectSubcategory)="onSelectCheckbox($event)"></b2b-ngx-subcategory-selectable-part>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>

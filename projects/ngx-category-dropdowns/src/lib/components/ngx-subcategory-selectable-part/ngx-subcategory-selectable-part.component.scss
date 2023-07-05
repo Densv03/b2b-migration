@@ -1,0 +1,39 @@
+::ng-deep {
+	.ngx-toggle {
+
+	}
+
+	.ngx-checkbox > span {
+		width: 16px !important;
+		height: 16px !important;
+	}
+}
+
+p {
+	color: #556274;
+	font-weight: 500;
+	font-size: 16px;
+	line-height: 148%;
+	background: #F3F6F8;
+	padding: 16px 12px;
+	margin: 0;
+}
+
+.categories {
+	padding: 8px 10px;
+	align-items: center;
+	cursor: pointer;
+
+	b2b-ngx-checkbox {
+		margin-right: -27px;
+	}
+}
+
+span {
+	font-weight: 400;
+	font-size: 16px;
+	line-height: 148%;
+	letter-spacing: 0.01em;
+	color: #0F0F11;
+}
+

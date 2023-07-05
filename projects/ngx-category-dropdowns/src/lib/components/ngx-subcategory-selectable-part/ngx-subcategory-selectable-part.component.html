@@ -1,0 +1,17 @@
+<p>{{category.name}}</p>
+<div class="d-flex justify-content-between categories">
+	<span>Select all</span>
+
+	<b2b-ngx-toggle [emptyLabel]="true"
+									subcategories="true"
+									[toggled]="category.selectAll"
+									(change)="updateToggle($event, category._id)"></b2b-ngx-toggle>
+</div>
+<div *ngFor="let childCategory of category.children" class="d-flex justify-content-between categories"
+		 (click)="updateCheckbox($event, childCategory._id, category._id)">
+	<span>{{childCategory.name}}</span>
+
+	<b2b-ngx-checkbox
+		(change)="updateCheckbox($event, childCategory._id, category._id)"
+		[checked]="childCategory.checked"></b2b-ngx-checkbox>
+</div>
