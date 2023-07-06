@@ -4,16 +4,25 @@ import {BrowserModule} from '@angular/platform-browser';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {MatTreeModule} from "@angular/material/tree";
+import {MatIconModule} from "@angular/material/icon";
+import {B2bNgxCheckboxModule} from "@b2b/ngx-checkbox";
+import {MaterialExampleComponent} from "./material-example/material-example.component";
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    MatTreeModule,
+    MatIconModule,
+    B2bNgxCheckboxModule,
+    MaterialExampleComponent,
+    FormsModule
   ],
   bootstrap: [AppComponent]
 })

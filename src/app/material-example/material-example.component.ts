@@ -1,14 +1,18 @@
 import {SelectionModel} from '@angular/cdk/collections';
 import {FlatTreeControl} from '@angular/cdk/tree';
-import {Component} from '@angular/core';
-import {MatTreeFlatDataSource, MatTreeFlattener, MatTreeModule} from '@angular/material/tree';
+import {ChangeDetectorRef, Component, forwardRef} from '@angular/core';
+import {
+  MatTreeFlatDataSource,
+  MatTreeFlattener,
+  MatTreeModule,
+} from '@angular/material/tree';
 import {MatIconModule} from '@angular/material/icon';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatButtonModule} from '@angular/material/button';
-import {MaterialExampleService} from "./material-example.service";
-
+import {MaterialExampleService} from './material-example.service';
+import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 
 export class CategoryItemNode {
   children: CategoryItemNode[] = [];
@@ -27,7 +31,14 @@ export class CategoryItemFlatNode {
   selector: 'app-material-example',
   templateUrl: 'material-example.component.html',
   styleUrls: ['material-example.component.scss'],
-  providers: [MaterialExampleService],
+  providers: [
+    MaterialExampleService,
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => MaterialExampleComponent),
+      multi: true,
+    },
+  ],
   standalone: true,
   imports: [
     MatTreeModule,
@@ -38,46 +49,85 @@ export class CategoryItemFlatNode {
     MatIconModule,
   ],
 })
-export class MaterialExampleComponent {
+export class MaterialExampleComponent implements ControlValueAccessor {
   public flatNodeMap = new Map<CategoryItemFlatNode, CategoryItemNode>();
 
   public nestedNodeMap = new Map<CategoryItemNode, CategoryItemFlatNode>();
 
   public treeControl: FlatTreeControl<CategoryItemFlatNode>;
 
-  public treeFlattener: MatTreeFlattener<CategoryItemNode, CategoryItemFlatNode>;
+  public treeFlattener: MatTreeFlattener<
+    CategoryItemNode,
+    CategoryItemFlatNode
+  >;
 
-  public dataSource: MatTreeFlatDataSource<CategoryItemNode, CategoryItemFlatNode>;
+  public dataSource: MatTreeFlatDataSource<
+    CategoryItemNode,
+    CategoryItemFlatNode
+  >;
 
   public checklistSelection = new SelectionModel<CategoryItemFlatNode>(true);
 
-  constructor(private _database: MaterialExampleService) {
+  constructor(private _database: MaterialExampleService,
+              private cdr: ChangeDetectorRef) {
     this.treeFlattener = new MatTreeFlattener(
       this.transformer,
       this.getLevel,
       this.isExpandable,
-      this.getChildren,
+      this.getChildren
     );
-    this.treeControl = new FlatTreeControl<CategoryItemFlatNode>(this.getLevel, this.isExpandable);
-    this.dataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
+    this.treeControl = new FlatTreeControl<CategoryItemFlatNode>(
+      this.getLevel,
+      this.isExpandable
+    );
+    this.dataSource = new MatTreeFlatDataSource(
+      this.treeControl,
+      this.treeFlattener
+    );
 
-    _database.dataChange.subscribe(data => {
+    _database.dataChange.subscribe((data) => {
       this.dataSource.data = data;
     });
+  }
+
+  public writeValue(categoryIds: string[]): void {
+    console.log('write value', categoryIds);
+    const currentNode = this.getNodeByCategoryId(categoryIds[1]);
+    if (currentNode) {
+      this.todoItemSelectionToggle(Object.assign(new CategoryItemFlatNode(), currentNode));
+      this.cdr.detectChanges();
+    }
   }
 
   public getLevel = (node: CategoryItemFlatNode) => node.level;
 
   public isExpandable = (node: CategoryItemFlatNode) => node.expandable;
 
-  public getChildren = (node: CategoryItemNode): CategoryItemNode[] => node.children;
+  public getChildren = (node: CategoryItemNode): CategoryItemNode[] =>
+    node.children;
 
-  public hasChild = (_: number, _nodeData: CategoryItemFlatNode) => _nodeData.expandable;
+  public hasChild = (_: number, _nodeData: CategoryItemFlatNode) =>
+    _nodeData.expandable;
+
+  public onChange: any = () => {
+  };
+  public onTouch: any = () => {
+  };
+
+  public registerOnChange(fn: any): void {
+    this.onChange = fn;
+  }
+
+  public registerOnTouched(fn: any): void {
+    this.onTouch = fn;
+  }
 
   public transformer = (node: CategoryItemNode, level: number) => {
     const existingNode = this.nestedNodeMap.get(node);
     const flatNode =
-      existingNode && existingNode.item === node.item ? existingNode : new CategoryItemFlatNode();
+      existingNode && existingNode.item === node.item
+        ? existingNode
+        : new CategoryItemFlatNode();
     flatNode.item = node.item;
     flatNode.level = level;
     flatNode.expandable = !!node.children?.length;
@@ -91,13 +141,15 @@ export class MaterialExampleComponent {
     const descendants = this.treeControl.getDescendants(node);
     const descAllSelected =
       descendants.length > 0 &&
-      descendants.every(child => this.checklistSelection.isSelected(child));
+      descendants.every((child) => this.checklistSelection.isSelected(child));
     return descAllSelected;
   }
 
   public descendantsPartiallySelected(node: CategoryItemFlatNode): boolean {
     const descendants = this.treeControl.getDescendants(node);
-    const result = descendants.some(child => this.checklistSelection.isSelected(child));
+    const result = descendants.some((child) =>
+      this.checklistSelection.isSelected(child)
+    );
     return result && !this.descendantsAllSelected(node);
   }
 
@@ -108,7 +160,7 @@ export class MaterialExampleComponent {
       ? this.checklistSelection.select(...descendants)
       : this.checklistSelection.deselect(...descendants);
 
-    descendants.forEach(child => this.checklistSelection.isSelected(child));
+    descendants.forEach((child) => this.checklistSelection.isSelected(child));
     this.checkAllParentsSelection(node);
   }
 
@@ -130,7 +182,7 @@ export class MaterialExampleComponent {
     const descendants = this.treeControl.getDescendants(node);
     const descAllSelected =
       descendants.length > 0 &&
-      descendants.every(child => {
+      descendants.every((child) => {
         return this.checklistSelection.isSelected(child);
       });
     if (nodeSelected && !descAllSelected) {
@@ -140,7 +192,9 @@ export class MaterialExampleComponent {
     }
   }
 
-  public getParentNode(node: CategoryItemFlatNode): CategoryItemFlatNode | null {
+  public getParentNode(
+    node: CategoryItemFlatNode
+  ): CategoryItemFlatNode | null {
     const currentLevel = this.getLevel(node);
 
     if (currentLevel < 1) {
@@ -160,8 +214,27 @@ export class MaterialExampleComponent {
   }
 
   public save(): void {
-    const selectedValues: string[] = this.checklistSelection.selected.map(selectedItem => selectedItem.value)
-    // console.log(this.checklistSelection.selected);
-    console.log(selectedValues)
+    const selectedValues: string[] = this.checklistSelection.selected.map(
+      (selectedItem) => selectedItem.value
+    );
+    console.log('on save', this.checklistSelection.selected);
+    this.onChange(selectedValues);
+  }
+
+  private getNodeByCategoryId(categoryId: string): CategoryItemFlatNode | null {
+    let resNode: CategoryItemFlatNode | null = null;
+    this.dataSource.data.forEach(parentNode => {
+      if (parentNode.value === categoryId && !resNode) {
+        resNode = {item: parentNode.item, value: parentNode.value, level: 0, expandable: false};
+      }
+      if (parentNode.children.length) {
+        parentNode.children.forEach(childNode => {
+          if (childNode.value === categoryId && !resNode) {
+            resNode = {item: childNode.item, value: childNode.value, level: 1, expandable: false};
+          }
+        });
+      }
+    });
+    return resNode;
   }
 }
