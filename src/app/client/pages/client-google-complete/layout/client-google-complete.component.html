@@ -1,0 +1,27 @@
+<div class="registration-complete" *transloco="let t">
+	<div class="registration-complete__body">
+		<img b2bNgxImage name="success" />
+		<p>{{ t("GOOGLE-AUTH-COMPLETE.TITLE") }}</p>
+		<span>
+			{{ t("GOOGLE-AUTH-COMPLETE.SUBTITLE") }}
+		</span>
+
+		<div class="registration-complete__body-actions">
+			<button
+				(click)="goToHome()"
+				b2bNgxButton
+				class="client-profile-settings-footer-cancel-button"
+				[theme]="b2bNgxButtonThemeEnum.OUTLINE_BLACK">
+				{{ t("GOOGLE-AUTH-COMPLETE.BACK_TO_HOME") }}
+			</button>
+			<button
+				(click)="goToMarket()"
+				b2bNgxButton
+				type="submit"
+				class="client-profile-settings-footer-save-button"
+				[theme]="b2bNgxButtonThemeEnum.BACKGROUND_BLACK">
+				{{ t("GOOGLE-AUTH-COMPLETE.B2BMarket") }}
+			</button>
+		</div>
+	</div>
+</div>

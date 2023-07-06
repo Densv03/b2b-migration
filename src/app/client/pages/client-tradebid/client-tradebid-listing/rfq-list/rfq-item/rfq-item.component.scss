@@ -1,0 +1,164 @@
+@import "libs/shared/styles/src/lib";
+
+:host {
+	.rfq-item {
+		width: 80%;
+		cursor: pointer;
+		@include breakpoint("4") {
+			width: 90%;
+		}
+		@include breakpoint("3") {
+			width: 96%;
+		}
+
+		@include breakpoint("1") {
+			height: 100%;
+			flex-direction: column;
+			margin-top: 35px;
+		}
+		border-radius: 15px;
+		height: 150px;
+		background-color: #fff;
+		margin: 0 auto 10px;
+		display: flex;
+		flex-direction: row;
+
+		&__product-information {
+			width: 60%;
+			border-right: 1px solid #dfe8f5;
+			padding: 20px 100px 0 20px;
+			@include breakpoint("4") {
+				padding: 20px 70px 0 20px;
+			}
+
+			@include breakpoint("3") {
+				padding: 20px 20px 0 20px;
+				width: 50%;
+			}
+			@include breakpoint("1") {
+				padding: 10px;
+				width: 100%;
+				border-right: none;
+				border-bottom: 1px solid #dfe8f5;
+			}
+
+			h1 {
+				font-size: 18px;
+				font-weight: 500;
+			}
+
+			&__quantity {
+				margin: 10px 0;
+			}
+		}
+
+		&__other-information {
+			width: 100%;
+			display: flex;
+			justify-content: space-between;
+
+			@include breakpoint("1") {
+				flex-direction: column;
+			}
+
+			&__container {
+				display: flex;
+				flex-direction: column;
+
+				&__subcontainer {
+					display: flex;
+					flex-direction: row;
+					align-items: center;
+
+					img {
+						margin-right: 10px;
+					}
+				}
+
+				@include breakpoint("1") {
+					flex-direction: row;
+				}
+
+				&__created-at {
+					@include breakpoint("1") {
+						margin-top: -2px;
+						margin-left: 60px;
+					}
+				}
+			}
+
+			&__flag {
+				width: 30px;
+				@include breakpoint("1") {
+					margin-top: -10px;
+					margin-left: 20px;
+				}
+			}
+		}
+
+		&__person-info {
+			display: flex;
+			width: 20%;
+			justify-content: center;
+			border-right: 1px solid #dfe8f5;
+
+			@include breakpoint("3") {
+				width: 20%;
+			}
+
+			@include breakpoint("1") {
+				border-right: none;
+				border-bottom: 1px solid #dfe8f5;
+				width: 100%;
+				justify-content: center;
+				padding: 15px 0;
+			}
+
+			&__container {
+				display: flex;
+				align-items: center;
+				flex-direction: column;
+				justify-content: space-around;
+				h1 {
+					text-align: center;
+				}
+			}
+		}
+
+		&__quote-now {
+			margin: auto;
+			text-align: center;
+			width: 20%;
+
+			@include breakpoint("1") {
+				margin-top: 10px;
+				width: 100%;
+			}
+
+			button {
+				@include breakpoint("3") {
+					padding: 15px;
+				}
+
+				@include breakpoint("1") {
+					width: 100%;
+				}
+				padding: 11px 31.5px;
+			}
+		}
+	}
+
+	.gray-light {
+		font-weight: 300;
+		color: #9fa4bb;
+	}
+
+	.mb-1 {
+		margin-bottom: 10px;
+	}
+
+	.request-from {
+		font-weight: 400;
+		font-size: 12px;
+	}
+}

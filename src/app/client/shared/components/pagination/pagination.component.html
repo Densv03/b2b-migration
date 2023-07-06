@@ -1,0 +1,13 @@
+<ul class="ngx-pagination">
+	<img (click)="togglePrevPage()" class="left-arrow" b2bNgxIcon name="pagination-arrow" alt="arrow">
+
+	<li
+		*ngFor="let option of options"
+		class="ngx-pagination-item"
+		[class.active]="currentPage == option.label"
+		(click)="togglePage(option.value)">
+		{{ option.label }}
+	</li>
+
+	<img (click)="toggleNextPage()" b2bNgxIcon name="pagination-arrow" alt="arrow">
+</ul>

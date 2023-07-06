@@ -1,0 +1,19 @@
+@import "libs/shared/styles/src/lib";
+
+:host {
+	display: block;
+	height: 100%;
+}
+::ng-deep {
+	.client-offer-document {
+		height: 100%;
+
+		img {
+			object-fit: contain;
+		}
+	}
+	.ngneat-close-dialog {
+		right: 60px !important;
+		top: 21px !important;
+	}
+}

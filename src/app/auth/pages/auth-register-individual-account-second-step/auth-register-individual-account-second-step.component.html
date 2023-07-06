@@ -1,0 +1,101 @@
+<form *transloco="let t" [formGroup]="form" (ngSubmit)="registerWithForm(form)">
+	<input
+		type="text"
+		id="fullName"
+		name="fullName"
+		b2bNgxInput
+		[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"
+		[label]="t('LABELS.FULL_NAME')"
+		labelClass="auth-register-individual-account__main-input"
+		[placeholder]="t('PLACEHOLDERS.YOUR_FULL_NAME')"
+		formControlName="fullName" />
+	<p
+		[@fadeInOut]
+		class="auth-register-individual-account__main-input-error"
+		*ngIf="form.get('fullName').errors?.fullName">
+		{{ t("ERRORS.USER_ENGLISH_NAME") }}
+	</p>
+	<p
+		[@fadeInOut]
+		class="auth-register-individual-account__main-input-error"
+		*ngIf="form.get('fullName').errors?.latin && !form.get('fullName').errors?.fullName">
+		{{ t("ERRORS.USER_ENGLISH_LETTERS") }}
+	</p>
+
+	<b2b-ngx-tel
+		[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"
+		class="auth-register-individual-account__main-input"
+		[placeholder]="t('PLACEHOLDERS.YOUR_PHONE_NUMBER')"
+		[errors]="form.get('phone').errors"
+		formControlName="phone"
+		>{{ t("LABELS.PHONE") }}</b2b-ngx-tel
+	>
+	<input
+		type="company"
+		id="company"
+		name="company"
+		b2bNgxInput
+		[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"
+		[label]="t('LABELS.COMPANY_NAME')"
+		labelClass="auth-register-individual-account__main-input"
+		[placeholder]="t('PLACEHOLDERS.COMPANY_NAME')"
+		formControlName="company" />
+	<p [@fadeInOut] class="auth-register-individual-account__main-input-error" *ngIf="form.get('company').errors?.latin">
+		{{ t("ERRORS.USER_ENGLISH_LETTERS") }}
+	</p>
+
+	<b2b-ngx-country-select
+		[theme]="b2bNgxSelectThemeEnum.BACKGROUND_GRAY"
+		class="auth-register-individual-account__main-input"
+		placeholder="Select Country"
+		formControlName="country"
+		>Company’s country
+	</b2b-ngx-country-select>
+	<b2b-ngx-select
+		[options]="roles$ | async"
+		bindValue="_id"
+		bindLabel="displayName"
+		class="auth-register-individual-account__main-input"
+		placeholder="Select"
+		[theme]="b2bNgxSelectThemeEnum.BACKGROUND_GRAY"
+		formControlName="roleId"
+		>Type of business
+	</b2b-ngx-select>
+	<b2b-categories-dialog
+		class="auth-register-individual-account__main-input"
+		formControlName="categories"
+		[theme]="b2bNgxSelectThemeEnum.BACKGROUND_GRAY"
+		placeholder="What product do you deal with?">
+		Category
+	</b2b-categories-dialog>
+
+	<ng-template let-error let-text="text" #tpl>
+		<label class="control-error">{{ t("ERRORS.TERMS_CONDITIONS") }}</label>
+	</ng-template>
+	<b2b-ngx-checkbox
+		class="auth-register-individual-account__main-checkbox"
+		[errors]="form.get('termsAndConditions').errors"
+		[controlErrorsTpl]="tpl"
+		formControlName="termsAndConditions"
+		>{{ t("AUTH.AGREE") }}
+		<a
+			b2bNgxLink
+			[theme]="b2bNgxLinkThemeEnum.TEXT_BLUE"
+			[routerLink]="b2bNgxLinkService.getLink('/terms-and-conditions') | async"
+			>terms & conditions</a
+		>
+		and
+		<a
+			b2bNgxLink
+			[theme]="b2bNgxLinkThemeEnum.TEXT_BLUE"
+			[routerLink]="b2bNgxLinkService.getLink('/privacy-policy') | async"
+			>privacy policy</a
+		></b2b-ngx-checkbox>
+	<button
+		b2bNgxButton
+		[theme]="b2bNgxButtonThemeEnum.BACKGROUND_BLACK"
+		class="auth-register-individual-account__create-account-button"
+		type="submit">
+		{{ t("BUTTONS.CREATE_ACCOUNT") }}
+	</button>
+</form>

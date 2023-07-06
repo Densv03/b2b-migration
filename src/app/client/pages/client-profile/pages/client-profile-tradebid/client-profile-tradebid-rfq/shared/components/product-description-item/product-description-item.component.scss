@@ -1,0 +1,124 @@
+@import "../../../../../../../../../../../../../libs/shared/styles/src/lib/index";
+
+.rfq-card {
+	width: 100%;
+	min-height: 115px;
+	display: flex;
+	align-items: center;
+	box-shadow: 2px 2px 8px #e3eaf1;
+	margin-bottom: 3px;
+	@include breakpoint("4") {
+		flex-direction: column;
+		align-items: flex-start;
+		width: 70%;
+		min-height: 115px;
+		display: flex;
+		box-shadow: 0 4px 16px rgb(10 8 58 / 16%);
+		margin: auto auto 10px;
+		border-radius: 8px;
+	}
+
+	.rfq-card-item-1 {
+		width: 80%;
+		display: flex;
+		align-items: center;
+		border-right: 2px solid #dfe8f5;
+		@include breakpoint("5") {
+			width: 70%;
+		}
+		@include breakpoint("4") {
+			border-right: none;
+			flex-direction: column;
+			align-items: flex-start;
+			width: 100%;
+		}
+	}
+
+	.item-photo {
+		@include breakpoint("4") {
+			width: 100%;
+		}
+
+		img {
+			width: 160px;
+			height: 150px;
+			object-fit: fill;
+			@include breakpoint("4") {
+				width: 100%;
+				object-fit: contain;
+				border-radius: 8px 8px 0 0;
+			}
+		}
+	}
+
+	.item-descr {
+		margin: 10px 0;
+		margin-left: 25px;
+		@include breakpoint("4") {
+			width: 100%;
+			margin: 0;
+			margin-left: 15px;
+			margin-top: 15px;
+		}
+	}
+
+	.product-name {
+		font-size: 18px;
+		font-weight: 700;
+		color: #101b54;
+		margin-bottom: 10px;
+		@include breakpoint("5") {
+			font-size: 17px;
+		}
+	}
+
+	.product-quantity {
+		font-weight: 400;
+		font-size: 14px;
+		margin-bottom: 15px;
+
+		span {
+			color: rgba(108, 112, 119, 0.6);
+		}
+	}
+
+	.product-info {
+		width: 70%;
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		justify-content: space-between;
+		@include breakpoint("4") {
+			flex-direction: row;
+			align-items: center;
+		}
+	}
+
+	.product-info-title {
+		color: #9fa4bb;
+		font-weight: 500;
+		font-size: 14px;
+		margin-bottom: 10px;
+	}
+
+	.product-info-text {
+		color: #0f0f11;
+		font-size: 14px;
+		font-weight: 500;
+		@include breakpoint("5") {
+			margin-bottom: 5px;
+		}
+	}
+
+	.rfq-card-item-2 {
+		width: 20%;
+		display: flex;
+		flex-direction: column;
+		margin-left: 30px;
+		@include breakpoint("4") {
+			width: 100%;
+			flex-direction: row;
+			align-items: center;
+		}
+	}
+}

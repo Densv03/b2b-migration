@@ -1,0 +1,51 @@
+<div class="wrapper">
+	<h1 class="title">Complete your company profile</h1>
+
+	<form [formGroup]="form" (ngSubmit)="send()" *transloco="let t">
+		<b2b-ngx-select
+			placeholder="Select type"
+			[options]="roles$ | async"
+			bindValue="id"
+			bindLabel="displayName"
+			formControlName="roleId"
+			[theme]="b2bNgxSelectThemeEnum.BACKGROUND_GRAY">
+			Type of company
+		</b2b-ngx-select>
+
+		<b2b-ngx-category-dropdowns formControlName="categories" class="auth-register-individual-account__main-input">
+		</b2b-ngx-category-dropdowns>
+
+		<div class="form-control-wrapper">
+			<b2b-ngx-select
+				[options]="foundationYear$ | async"
+				bindValue="id"
+				bindLabel="value"
+				placeholder="Select"
+				formControlName="yearOfFoundation"
+				[theme]="b2bNgxSelectThemeEnum.BACKGROUND_GRAY">
+				Year of foundation
+			</b2b-ngx-select>
+		</div>
+
+		<div class="form-control-wrapper">
+			<b2b-ngx-select
+				[options]="employeesNumber$ | async"
+				bindValue="id"
+				bindLabel="value"
+				placeholder="Select"
+				formControlName="employeesNumber"
+				[theme]="b2bNgxSelectThemeEnum.BACKGROUND_GRAY">
+				Number of employees
+			</b2b-ngx-select>
+		</div>
+
+		<button
+			b2bNgxButton
+			[disabled]="form.invalid"
+			[theme]="b2bNgxButtonThemeEnum.BACKGROUND_BLACK"
+			class="auth-register-individual-account__create-account-button"
+			type="submit">
+			{{ t("BUTTONS.CREATE_ACCOUNT") }}
+		</button>
+	</form>
+</div>

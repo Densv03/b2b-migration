@@ -1,0 +1,111 @@
+<ng-container *transloco="let t">
+	<div class="client-home__header">
+		<img class="client-home__background-grid" src="assets/images/iso_grid.webp" />
+		<div class="header-content">
+			<div class="client-home__text-wrapper">
+				<h2 class="client-home__title">
+					<a
+						(click)="processTitleBtnsClick('Click on Buy button', { type: 'buy1' })"
+						[routerLink]="b2bNgxLinkService.getLink('/latest-offers') | async"
+						class="client-home__title-buy"
+						[class.ru]="ruVideo">
+						{{ t("B2B.BUY") }}</a
+					>
+					<span class="client-home__title-upe">&</span>
+					<a
+						(click)="processTitleBtnsClick('Click on Sell button', { type: 'sell1' })"
+						[routerLink]="b2bNgxLinkService.getLink('/offer') | async"
+						class="client-home__title-sell"
+						[class.ru]="ruVideo">
+						{{ t("B2B.SELL") }}</a
+					>
+				</h2>
+				<h3 class="client-home__title-2">
+					<span class="client-home__title-2-black">{{ t("B2B.TITLE") }}</span>
+					<span class="client-home__title-2-blue">{{ t("B2B.DISCOUNT") }}</span>
+				</h3>
+				<div class="client-home__description">
+					<p class="client-home__description-text">{{ t("B2B.DESCRIPTION") }}</p>
+					<button class="client-home__description-button" (click)="video.paused ? video.play() : video.pause()">
+						<span class="client-home__description-button-text">{{ t("PAGES.HOW_IT_WORKS") }}</span>
+						<img b2bNgxIcon class="client-home__description-icon" name="play" />
+						<img b2bNgxIcon class="client-home__description-icon-white" name="play-white" />
+					</button>
+				</div>
+			</div>
+			<div class="client-home__background-wrapper">
+				<div class="client-home__background-gradien"></div>
+
+				<div class="video-wrapper">
+					<video
+						[controls]="!video.paused"
+						class="client-home__background-image"
+						poster="assets/images/client_home_background.webp"
+						(ended)="video.load()"
+						(click)="processVideoClick()"
+						#video>
+						<source
+							[src]="ruVideo ? 'assets/videos/promo_eng.mp4' : 'assets/videos/how-it-works.mp4'"
+							type="video/mp4" />
+					</video>
+
+					<button class="client-home__video-button" (click)="video.paused ? video.play() : video.pause()">
+						<img b2bNgxIcon class="client-home__video-button-icon" name="play" [hidden]="!video.paused" />
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="client-home__main">
+		<ng-container *ngIf="offers$ | async as offers; else offersCarouselSleleton">
+			<b2b-client-home-offers-caousel
+				*ngIf="offers.length; else offersCarouselSleleton"
+				[user]="user$ | async"
+				[options]="offers"
+				link="offers/"></b2b-client-home-offers-caousel>
+		</ng-container>
+
+		<ng-template #offersCarouselSleleton>
+			<b2b-client-home-offers-caousel-skeleton></b2b-client-home-offers-caousel-skeleton>
+		</ng-template>
+
+		<div class="client-home__main-block">
+			<div class="client-home__main-block-1">
+				<h3 class="client-home__main-block-1-header-title">
+					<span class="client-home__main-block-1-header-title-1">{{ t("B2B.BUY") }}</span>
+					<span class="client-home__main-block-1-header-title-2">{{ t("B2B.WITH_DISCOUNT") }}</span>
+				</h3>
+				<p class="client-home__main-block-1-header-description">
+					{{ t("B2B.BUY_DESCRIPTION") }}
+				</p>
+				<a
+					b2bNgxLink
+					(click)="processTitleBtnsClick('Click on Buy button', { type: 'buy2' })"
+					class="client-home__main-block-1-header-link"
+					[routerLink]="b2bNgxLinkService.getLink('/latest-offers') | async"
+					[theme]="b2bNgxLinkThemeEnum.BACKGROUND_BLUE"
+					>{{ t("B2B.WANT_TO_BUY") }}</a
+				>
+			</div>
+
+			<div class="client-home__main-block-2">
+				<h3 class="client-home__main-block-2-header-title">
+					<span class="client-home__main-block-2-header-title-1">{{ t("B2B.SELL") }}</span>
+					<span class="client-home__main-block-2-header-title-2">{{ t("B2B.QUICK_AND_EASY") }}</span>
+				</h3>
+				<p class="client-home__main-block-2-header-description">
+					{{ t("B2B.SELL_DESCRIPTION") }}
+				</p>
+				<a
+					b2bNgxLink
+					(click)="processTitleBtnsClick('Click on Sell button', { type: 'sell2' })"
+					class="client-home__main-block-2-header-link"
+					[routerLink]="b2bNgxLinkService.getLink('/offer') | async"
+					[theme]="b2bNgxLinkThemeEnum.BACKGROUND_BLUE"
+					>{{ t("B2B.WANT_TO_SELL") }}
+				</a>
+			</div>
+		</div>
+	</div>
+</ng-container>

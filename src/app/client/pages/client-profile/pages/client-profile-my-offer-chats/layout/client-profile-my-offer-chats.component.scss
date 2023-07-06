@@ -1,0 +1,27 @@
+.client-profile-chats {
+	.client-profile-chats-title {
+		font-weight: bold;
+		font-size: 24px;
+		color: #0f0f11;
+	}
+	.client-profile-chats-container {
+		margin-top: 24px;
+	}
+
+	.client-profile-my-offers-no-offers {
+		padding: 50px;
+		text-align: center;
+		.client-profile-my-offers-no-offers-title {
+			font-weight: bold;
+			font-size: 16px;
+			color: #0f0f11;
+		}
+		.client-profile-my-offers-no-offers-button {
+			display: inline-block;
+			padding: 0.68rem 1.5rem;
+			border-radius: 0.25rem;
+			font-weight: 700;
+			margin-top: 15px;
+		}
+	}
+}

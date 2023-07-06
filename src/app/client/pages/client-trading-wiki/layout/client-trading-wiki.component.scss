@@ -1,0 +1,123 @@
+@import "libs/shared/styles/src/lib";
+
+.wiki {
+	background-color: $color-gray-100;
+	.wiki-header {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 1.25rem 99px;
+		border-bottom: 1px solid #e3eaf1;
+		@include breakpoint("3") {
+			flex-direction: column;
+			padding: 1.25rem 18px;
+		}
+		.wiki-header-title {
+			font-weight: bold;
+			font-size: 24px;
+			line-height: 134%;
+			color: #0f0f11;
+			display: flex;
+			justify-content: space-between;
+			.wiki-header-icon {
+				display: none;
+			}
+			@include breakpoint("3") {
+				width: 100%;
+				.wiki-header-icon {
+					display: block;
+				}
+			}
+		}
+		.wiki-header-search {
+			width: 40%;
+			display: block;
+			@include breakpoint("3") {
+				width: 100%;
+				margin-top: 24px;
+			}
+		}
+		.wiki-header-filters {
+			display: flex;
+			align-items: center;
+			.wiki-header-display-type {
+			}
+			.wiki-header-show-filter,
+			.wiki-header-sort-filter {
+				display: flex;
+				align-items: center;
+			}
+
+			@include breakpoint("3") {
+				.wiki-header-display-type {
+					display: none;
+				}
+			}
+		}
+	}
+
+	.wiki-main {
+		display: flex;
+		padding: 0 99px;
+
+		@include breakpoint("3") {
+			padding: 0 15px;
+		}
+
+		.wiki-main-filters {
+			width: 300px;
+			padding: 24px 0 24px 24px;
+			border-left: 1px solid #e3eaf1;
+			.wiki-main-filters__title {
+				font-weight: bold;
+				font-size: 18px;
+				color: #0f0f11;
+				margin-bottom: 16px;
+			}
+			@include breakpoint("4") {
+				display: none;
+				padding-left: 24px;
+			}
+			.wiki-main-filters__categories,
+			.wiki-main-filters__country,
+			.wiki-main-filters__tags {
+				display: block;
+				margin-top: 0.5rem;
+			}
+
+			.wiki-main-filters__clear-filters {
+				padding: 15px 0;
+				width: 100%;
+				margin-top: 8px;
+			}
+		}
+		.wiki-main-list {
+			flex: 1;
+			padding: 24px 24px 24px 0;
+			@include breakpoint("4") {
+				padding-right: 24px;
+			}
+
+			@include breakpoint("3") {
+				padding: 0;
+			}
+		}
+	}
+
+	.wiki-no-articles-title {
+		text-align: center;
+	}
+}
+
+::ng-deep {
+	.wiki-main-filters__tags {
+		.ng-arrow-wrapper {
+			display: none;
+		}
+		&.hideDropdown {
+			.ng-dropdown-panel {
+				display: none;
+			}
+		}
+	}
+}

@@ -1,0 +1,148 @@
+<!--<div class="auth-register-individual-account__wrapper" *transloco="let t">-->
+<!--	<div class="auth-register-individual-account__header">-->
+<!--		<p class="auth-register-individual-account__header-text-wrapper">-->
+<!--			<span class="auth-register-individual-account__header-text">{{ t("AUTH.ALREADY_HAVE") }}</span>-->
+<!--			<a-->
+<!--				b2bNgxLink-->
+<!--				[theme]="b2bNgxLinkThemeEnum.TEXT_BLUE"-->
+<!--				[routerLink]="b2bNgxLinkService.getLink('/auth/log-in') | async"-->
+<!--				class="auth-register-individual-account__header-link"-->
+<!--				queryParamsHandling="merge"-->
+<!--			>{{ t("AUTH.LOG_IN") }}</a-->
+<!--			>-->
+<!--		</p>-->
+<!--	</div>-->
+
+<!--	<div class="auth-register-individual-account__main">-->
+<!--		<h2 class="auth-register-individual-account__main-title" *ngIf="registrationSystem === 'google'">-->
+<!--			{{ t("AUTH.REGISTER_GOOGLE_ACCOUNT") }}-->
+<!--		</h2>-->
+<!--		<h2 class="auth-register-individual-account__main-title" *ngIf="registrationSystem === 'linkedin'">-->
+<!--			{{ t("AUTH.REGISTER_LINKEDIN_ACCOUNT") }}-->
+<!--		</h2>-->
+<!--		<p class="auth-register-individual-account__main-description">-->
+<!--			{{ t("AUTH.REGISTER_GOOGLE_ACCOUNT_DESCRIPTION") }}-->
+<!--		</p>-->
+
+<!--		<p class="auth-register-individual-account__main-subtitle">-->
+<!--			{{ t("AUTH.REGISTER_COMPLETE_REGISTRATION") }}-->
+<!--		</p>-->
+<!--		<p class="auth-register-individual-account__main-subdescription">-->
+<!--			{{ t("AUTH.REGISTER_COMPLETE_REGISTRATION_DESCRIPTION") + user?.email }}-->
+<!--		</p>-->
+
+<!--		<form-->
+<!--			errorTailor-->
+<!--			class="auth-register-individual-account__main-form"-->
+<!--			[formGroup]="formGroup"-->
+<!--			(ngSubmit)="registerWithForm(formGroup)">-->
+<!--			<b2b-ngx-select-->
+<!--				formControlName="roleId"-->
+<!--				[placeholder]="t('PLACEHOLDERS.CHOOSE_ROLE')"-->
+<!--				[options]="roles$ | async"-->
+<!--				bindValue="_id"-->
+<!--				bindLabel="displayName"-->
+<!--				[theme]="b2bNgxSelectThemeEnum.BACKGROUND_GRAY">-->
+<!--				{{ t("LABELS.CHOOSE_ROLE") }}</b2b-ngx-select-->
+<!--			>-->
+<!--			<div class="tree">-->
+<!--				&lt;!&ndash;				<b2b-ngx-treeview&ndash;&gt;-->
+<!--				&lt;!&ndash;					*ngIf="isTrader"&ndash;&gt;-->
+<!--				&lt;!&ndash;					formControlName="preferences"&ndash;&gt;-->
+<!--				&lt;!&ndash;					theme="gray"&ndash;&gt;-->
+<!--				&lt;!&ndash;					[items]="categories$ | async"&ndash;&gt;-->
+<!--				&lt;!&ndash;					[label]="t('LABELS.CHOOSE_CARGO')"&ndash;&gt;-->
+<!--				&lt;!&ndash;					class="latest-offers-main-filter"&ndash;&gt;-->
+<!--				&lt;!&ndash;					position="right"></b2b-ngx-treeview>&ndash;&gt;-->
+
+<!--				&lt;!&ndash;				<b2b-ngx-select&ndash;&gt;-->
+<!--				&lt;!&ndash;					(click)="openModal()"&ndash;&gt;-->
+<!--				&lt;!&ndash;					[isOpen]="false"&ndash;&gt;-->
+<!--				&lt;!&ndash;					formControlName="preferences"&ndash;&gt;-->
+<!--				&lt;!&ndash;					bindValue="id"&ndash;&gt;-->
+<!--				&lt;!&ndash;					bindLabel="value"&ndash;&gt;-->
+<!--				&lt;!&ndash;					class="auth-register-individual-account__main-input"&ndash;&gt;-->
+<!--				&lt;!&ndash;					[placeholder]="categoriesSelectPlaceholder$ | async"&ndash;&gt;-->
+<!--				&lt;!&ndash;					[theme]="b2bNgxSelectThemeEnum.BACKGROUND_GRAY"&ndash;&gt;-->
+<!--				&lt;!&ndash;					>Category&ndash;&gt;-->
+<!--				&lt;!&ndash;				</b2b-ngx-select>&ndash;&gt;-->
+<!--				<b2b-categories-dialog-->
+<!--					class="auth-register-individual-account__main-input"-->
+<!--					formControlName="preferences"-->
+<!--					[theme]="b2bNgxSelectThemeEnum.BACKGROUND_GRAY">Category</b2b-categories-dialog>-->
+<!--			</div>-->
+<!--			<input-->
+<!--				b2bNgxInput-->
+<!--				[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"-->
+<!--				[label]="t('LABELS.FULL_NAME')"-->
+<!--				labelClass="auth-register-individual-account__main-input"-->
+<!--				[placeholder]="t('PLACEHOLDERS.YOUR_FULL_NAME')"-->
+<!--				formControlName="fullName"/>-->
+<!--			<p-->
+<!--				[@fadeInOut]-->
+<!--				class="auth-register-individual-account__main-input-error"-->
+<!--				*ngIf="formGroup.controls['fullName'].errors?.fullName">-->
+<!--				Enter first and last name in English, separated by a space. For example: John Smith-->
+<!--			</p>-->
+
+<!--			<p-->
+<!--				[@fadeInOut]-->
+<!--				class="auth-register-individual-account__main-input-error"-->
+<!--				*ngIf="formGroup.controls['fullName'].errors?.latin && !formGroup.controls['fullName'].errors?.fullName">-->
+<!--				{{ t("ERRORS.USER_ENGLISH_LETTERS") }}-->
+<!--			</p>-->
+<!--			<input-->
+<!--				b2bNgxInput-->
+<!--				[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"-->
+<!--				[label]="t('LABELS.COMPANY_NAME')"-->
+<!--				labelClass="auth-register-individual-account__main-input"-->
+<!--				[placeholder]="t('PLACEHOLDERS.COMPANY_NAME')"-->
+<!--				formControlName="company"/>-->
+<!--			<p-->
+<!--				[@fadeInOut]-->
+<!--				class="auth-register-individual-account__main-input-error"-->
+<!--				*ngIf="formGroup.controls['company'].errors?.latin">-->
+<!--				{{ t("ERRORS.USER_ENGLISH_LETTERS") }}-->
+<!--			</p>-->
+<!--			<b2b-ngx-tel-->
+<!--				[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"-->
+<!--				class="auth-register-individual-account__main-input"-->
+<!--				[placeholder]="t('PLACEHOLDERS.YOUR_PHONE_NUMBER')"-->
+<!--				[errors]="formGroup.get('phone').errors"-->
+<!--				formControlName="phone"-->
+<!--			>{{ t("LABELS.PHONE") }}</b2b-ngx-tel-->
+<!--			>-->
+<!--			<ng-template let-error let-text="text" #tpl>-->
+<!--				<label class="control-error">{{ t("ERRORS.TERMS_CONDITIONS") }}</label>-->
+<!--			</ng-template>-->
+<!--			<b2b-ngx-checkbox-->
+<!--				class="auth-register-individual-account__main-checkbox"-->
+<!--				[controlErrorsTpl]="tpl"-->
+<!--				[errors]="formGroup.get('termsAndConditions').errors"-->
+<!--				formControlName="termsAndConditions"-->
+<!--			>{{ t("AUTH.AGREE") }}-->
+<!--				<a-->
+<!--					b2bNgxLink-->
+<!--					[theme]="b2bNgxLinkThemeEnum.TEXT_GRAY"-->
+<!--					[routerLink]="b2bNgxLinkService.getLink('/terms-and-conditions') | async"-->
+<!--				>terms & conditions</a-->
+<!--				>-->
+<!--				and-->
+<!--				<a-->
+<!--					b2bNgxLink-->
+<!--					[theme]="b2bNgxLinkThemeEnum.TEXT_GRAY"-->
+<!--					[routerLink]="b2bNgxLinkService.getLink('/privacy-policy') | async"-->
+<!--				>privacy policy</a-->
+<!--				></b2b-ngx-checkbox-->
+<!--			>-->
+
+<!--			<button-->
+<!--				b2bNgxButton-->
+<!--				[theme]="b2bNgxButtonThemeEnum.BACKGROUND_BLACK"-->
+<!--				class="auth-register-individual-account__create-account-button"-->
+<!--				type="submit">-->
+<!--				{{ t("BUTTONS.CREATE_ACCOUNT") }}-->
+<!--			</button>-->
+<!--		</form>-->
+<!--	</div>-->
+<!--</div>-->

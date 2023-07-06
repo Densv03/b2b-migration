@@ -1,0 +1,7 @@
+<div class="rfq-cards" *ngFor="let item of archiveList$ | async">
+	<b2b-product-description-item
+		[buttonType]="buttonType"
+		[myRfqItem]="item"
+		(delete)="this.delete.emit($event)"
+		(restore)="this.restore.emit($event)"></b2b-product-description-item>
+</div>

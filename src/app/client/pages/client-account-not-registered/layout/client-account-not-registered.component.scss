@@ -1,0 +1,72 @@
+@import "libs/shared/styles/src/lib";
+
+:host {
+	.registration-complete {
+		height: 100%;
+		min-height: calc(100vh - 79px - 252px);
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		@include breakpoint("3") {
+			min-height: calc(100vh - 72px);
+		}
+
+		&__body {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			gap: 8px;
+			p {
+				font-size: 24px;
+				line-height: 32px;
+				letter-spacing: 0.01em;
+				text-align: center;
+				font-weight: bold;
+				color: #0f0f11;
+			}
+			span {
+				font-size: 16px;
+				line-height: 23px;
+				letter-spacing: 0.01em;
+				text-align: center;
+				font-weight: 400;
+				color: #556274;
+				max-width: 408px;
+			}
+			&-title {
+				max-width: 300px;
+			}
+
+			.auth-log-in__main {
+				margin: 0 auto;
+				flex: 1;
+				display: flex;
+				justify-content: center;
+				gap: 8px;
+				@include breakpoint("2") {
+					justify-content: flex-start;
+					flex: none;
+				}
+
+				@include breakpoint("2") {
+					width: 90%;
+				}
+				@include breakpoint("3") {
+					width: 90%;
+					flex-direction: column;
+					align-items: center;
+				}
+			}
+			.auth-log-in__log-in-button {
+				margin-top: 16px;
+				padding: 15px 0;
+				width: 220px;
+				&:first-of-type {
+					border: 2px solid #101b54;
+				}
+			}
+		}
+	}
+}

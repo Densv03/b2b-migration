@@ -1,0 +1,14 @@
+<div class="sub-components-wrapper">
+	<mat-tab-group mat-align-tabs="start">
+		<mat-tab label="Chats">
+			<div class="chats" *ngFor="let item of chatsList$ | async">
+				<b2b-chats-item (deleteChat)="updateChat()" [chatsItem]="item" [chatType]="'my-quotation'"> </b2b-chats-item>
+			</div>
+			<b2b-ngx-pagination
+				(togglePageNumber)="togglePageManageList($event)"
+				[length]="totalChatsLength$ | async"
+				[perPage]="7"
+				class="pagination"></b2b-ngx-pagination>
+		</mat-tab>
+	</mat-tab-group>
+</div>

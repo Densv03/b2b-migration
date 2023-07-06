@@ -1,0 +1,218 @@
+<div class="client-profile-settings" *transloco="let t">
+	<div class="settings-header">
+		<h3 class="client-profile-settings-title">{{ t("SETTINGS.TITLE") }}</h3>
+		<div class="header-buttons">
+			<button
+				(click)="saveChanges(baseFormGroup)"
+				[theme]="b2bNgxButtonThemeEnum.BACKGROUND_BLUE"
+				b2bNgxButton
+				class="save-btn">
+				Save changes
+			</button>
+		</div>
+	</div>
+
+	<!--	<form-->
+	<!--		errorTailor-->
+	<!--		#form-->
+	<!--		class="client-profile-settings-form"-->
+	<!--		[formGroup]="baseFormGroup"-->
+	<!--		(ngSubmit)="saveChanges(baseFormGroup)">-->
+	<!--		<div class="client-profile-settings-block">-->
+
+	<!--&lt;!&ndash;			<div class="client-profile-settings-block-input">&ndash;&gt;-->
+	<!--&lt;!&ndash;				<input&ndash;&gt;-->
+	<!--&lt;!&ndash;					b2bNgxInput&ndash;&gt;-->
+	<!--&lt;!&ndash;					[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"&ndash;&gt;-->
+	<!--&lt;!&ndash;					[label]="t('LABELS.COMPANY')"&ndash;&gt;-->
+	<!--&lt;!&ndash;					formControlName="company" />&ndash;&gt;-->
+	<!--&lt;!&ndash;			</div>&ndash;&gt;-->
+	<!--		</div>-->
+	<!--		<div class="client-profile-settings-block">-->
+	<!--&lt;!&ndash;			<div class="client-profile-settings-block-input">&ndash;&gt;-->
+	<!--&lt;!&ndash;				<input&ndash;&gt;-->
+	<!--&lt;!&ndash;					b2bNgxInput&ndash;&gt;-->
+	<!--&lt;!&ndash;					[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"&ndash;&gt;-->
+	<!--&lt;!&ndash;					[label]="t('LABELS.WEB')"&ndash;&gt;-->
+	<!--&lt;!&ndash;					formControlName="site" />&ndash;&gt;-->
+	<!--&lt;!&ndash;			</div>&ndash;&gt;-->
+	<!--&lt;!&ndash;			<div class="client-profile-settings-block-input">&ndash;&gt;-->
+	<!--&lt;!&ndash;				<b2b-ngx-file&ndash;&gt;-->
+	<!--&lt;!&ndash;					formControlName="logo"&ndash;&gt;-->
+	<!--&lt;!&ndash;					[errors]="baseFormGroup.getControl('logo').errors"&ndash;&gt;-->
+	<!--&lt;!&ndash;					[label]="t('LABELS.CHOOSE_LOGO')"&ndash;&gt;-->
+	<!--&lt;!&ndash;					>{{ t("LABELS.LOGO") }}</b2b-ngx-file&ndash;&gt;-->
+	<!--&lt;!&ndash;				>&ndash;&gt;-->
+	<!--&lt;!&ndash;			</div>&ndash;&gt;-->
+	<!--		</div>-->
+	<!--		<div class="client-profile-settings-block">-->
+
+	<!--&lt;!&ndash;			<div class="client-profile-settings-block-input">&ndash;&gt;-->
+	<!--&lt;!&ndash;				<b2b-ngx-country-select&ndash;&gt;-->
+	<!--&lt;!&ndash;					[theme]="b2bNgxSelectThemeEnum.BACKGROUND_GRAY"&ndash;&gt;-->
+	<!--&lt;!&ndash;					formControlName="country"&ndash;&gt;-->
+	<!--&lt;!&ndash;					[errors]="baseFormGroup.getControl('country').errors">&ndash;&gt;-->
+	<!--&lt;!&ndash;					{{ t("LABELS.COUNTRY") }}&ndash;&gt;-->
+	<!--&lt;!&ndash;				</b2b-ngx-country-select>&ndash;&gt;-->
+	<!--&lt;!&ndash;			</div>&ndash;&gt;-->
+	<!--		</div>-->
+	<!--		<div class="client-profile-settings-block">-->
+	<!--			<div class="client-profile-settings-block-input">-->
+	<!--				<b2b-ngx-tel formControlName="phone" [errors]="baseFormGroup.getControl('phone').errors">{{-->
+	<!--					t("LABELS.PHONE_NUMBER")-->
+	<!--				}}</b2b-ngx-tel>-->
+	<!--				<p style="-->
+	<!--				font-size: 14px;-->
+	<!--				color: #9FA4BB;-->
+	<!--				margin-left: 4px;">-->
+	<!--					{{t('LABELS.INDICATE_PHONE_NUMBER')}}-->
+	<!--				</p>-->
+	<!--&lt;!&ndash;				<b2b-ngx-social-medias [options]="socialMedias" [defaultNumber]="user.phone.number" formControlName="socials"></b2b-ngx-social-medias>&ndash;&gt;-->
+	<!--				-->
+	<!--			</div>-->
+	<!--			<div class="client-profile-settings-block-input">-->
+	<!--				<p class="client-profile-settings-block-text-1">{{ t("SETTINGS.PREFERENCIES") }}</p>-->
+	<!--				<p class="client-profile-settings-block-text-2">{{ t("SETTINGS.PREFERENCIES_DESCRIPTION") }}</p>-->
+	<!--				<b2b-ngx-treeview-->
+	<!--					formControlName="preferences"-->
+	<!--					theme="gray"-->
+	<!--					[items]="categories$ | async"-->
+	<!--					class="client-profile-settings-chips"-->
+	<!--					position="right"-->
+	<!--					[errors]="baseFormGroup.getControl('preferences').errors"></b2b-ngx-treeview>-->
+	<!--				<div class="client-profile-settings-block-input__role">-->
+	<!--					<b2b-ngx-select-->
+	<!--						formControlName="roleId"-->
+	<!--						[placeholder]="t('PLACEHOLDERS.CHOOSE_ROLE')"-->
+	<!--						[options]="roles$ | async"-->
+	<!--						bindValue="_id"-->
+	<!--						bindLabel="displayName"-->
+	<!--						[errors]="baseFormGroup.getControl('roleId').errors"-->
+	<!--						[theme]="b2bNgxSelectThemeEnum.BACKGROUND_GRAY">-->
+	<!--						{{ t("LABELS.CHOOSE_ROLE") }}</b2b-ngx-select-->
+	<!--					>-->
+	<!--				</div>-->
+	<!--			</div>-->
+	<!--		</div>-->
+
+	<!--		<div class="client-profile-settings-divider"></div>-->
+	<!--		<button type="button" (click)="deleteAccount()" class="client-profile-settings-delete-button">-->
+	<!--			<img b2bNgxIcon name="trash" class="mr-1" />-->
+	<!--			{{ t("BUTTONS.DELETE_ACCOUNT") }}-->
+	<!--		</button>-->
+
+	<!--		<div class="client-profile-settings-footer">-->
+	<!--			<button-->
+	<!--				b2bNgxButton-->
+	<!--				class="client-profile-settings-footer-cancel-button"-->
+	<!--				[theme]="b2bNgxButtonThemeEnum.OUTLINE_BLACK">-->
+	<!--				{{ t("BUTTONS.CANCEL") }}-->
+	<!--			</button>-->
+	<!--			<button-->
+	<!--				b2bNgxButton-->
+	<!--				type="submit"-->
+	<!--				class="client-profile-settings-footer-save-button"-->
+	<!--				[theme]="b2bNgxButtonThemeEnum.BACKGROUND_BLACK">-->
+	<!--				{{ t("BUTTONS.SAVE_CHANGES") }}-->
+	<!--			</button>-->
+	<!--		</div>-->
+	<!--	</form>-->
+	<!--</div>-->
+
+	<form [formGroup]="baseFormGroup" class="data-form">
+		<div class="inputs">
+			<div class="data-inputs">
+				<div class="client-profile-settings-block-input">
+					<input
+						b2bNgxInput
+						[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"
+						[label]="t('LABELS.EMAIL')"
+						formControlName="email"/>
+				</div>
+
+				<div class="client-profile-settings-block-input">
+					<input
+						b2bNgxInput
+						[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"
+						[label]="t('LABELS.FULL_NAME')"
+						formControlName="fullName"/>
+
+					<p *ngIf="baseFormState['fullName']?.errors?.fullName" [@fadeInOut] class="error">Enter first and last name in
+						English, separated by a space. For example: John Smith</p>
+				</div>
+
+				<div class="client-profile-settings-block-input">
+					<b2b-ngx-tel formControlName="phone" [errors]="baseFormGroup.getControl('phone').errors">{{
+						t("LABELS.PHONE_NUMBER")
+						}}</b2b-ngx-tel>
+				</div>
+
+				<div class="client-profile-settings-block-input">
+					<b2b-ngx-select
+						*ngIf="displayRoleSelector$ | async"
+						formControlName="roleId"
+						[options]="roles$ | async"
+						bindLabel="displayName"
+						bindValue="_id"
+						[theme]="b2bNgxSelectThemeEnum.BACKGROUND_GRAY">
+						Select user role
+					</b2b-ngx-select>
+				</div>
+			</div>
+			<form
+				errorTailor
+				class="client-profile-settings-change-password-form"
+				[formGroup]="passwordFormGroup"
+				*ngIf="!user.socialAuth">
+				<p class="client-profile-settings-change-password-label">{{ t("LABELS.PASSWORD") }}</p>
+				<div class="client-profile-settings-block">
+					<div class="client-profile-settings-block-input">
+						<input
+							type="password"
+							b2bNgxInput
+							[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"
+							[label]="t('LABELS.OLD_PASSWORD')"
+							formControlName="password"/>
+					</div>
+					<div class="client-profile-settings-block-input">
+						<input
+							type="password"
+							b2bNgxInput
+							[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"
+							[label]="t('LABELS.NEW_PASSWORD')"
+							formControlName="newPassword"/>
+					</div>
+				</div>
+				<div class="form-buttons">
+					<button
+						b2bNgxButton
+						type="button"
+						(click)="updatePassword(passwordFormGroup)"
+						class="client-profile-settings-block-submit-button"
+						[theme]="b2bNgxButtonThemeEnum.BACKGROUND_BLACK">
+						{{ t("BUTTONS.CHANGE_PASSWORD") }}
+					</button>
+
+					<button
+						b2bNgxButton
+						(click)="deleteAccount()"
+						[theme]="b2bNgxButtonThemeEnum.OUTLINE_BLACK"
+						class="delete-account-button desktop-delete-button">
+						<img b2bNgxIcon name="delete-red"/>
+						Delete account
+					</button>
+				</div>
+			</form>
+		</div>
+	</form>
+	<div class="header-buttons mobile-buttons">
+		<button [theme]="b2bNgxButtonThemeEnum.OUTLINE_GRAY" b2bNgxButton class="cancel-btn">Cancel</button>
+		<button
+			(click)="saveChanges(baseFormGroup)"
+			[theme]="b2bNgxButtonThemeEnum.BACKGROUND_BLUE"
+			b2bNgxButton
+			class="save-btn">
+			Save changes
+		</button>
+	</div>
+</div>

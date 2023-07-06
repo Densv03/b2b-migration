@@ -1,0 +1,206 @@
+@import "libs/shared/styles/src/lib";
+
+:host {
+	.error {
+		font-size: 14px;
+		color: #e63d3d;
+		margin-top: -10px;
+		margin-bottom: 20px;
+	}
+
+	.supplier-info-error {
+		font-size: 14px;
+		color: #e63d3d;
+		margin-bottom: 20px;
+		margin-top: 10px;
+	}
+	.rfq {
+		width: 100%;
+		padding: 0 6em;
+		padding-bottom: 70px;
+
+		@include breakpoint("2") {
+			padding: 0 0 70px;
+		}
+
+		&__header {
+			height: 30vh;
+			display: flex;
+			justify-content: space-between;
+			flex-direction: row;
+			@include breakpoint("2") {
+				flex-direction: column;
+				padding: 0 20px;
+			}
+			@include breakpoint("1") {
+				justify-content: space-around;
+			}
+			h1 {
+				font-size: 3em;
+				display: flex;
+				text-align: center;
+				justify-content: center;
+				align-items: center;
+				line-height: 50px;
+				@include breakpoint("1") {
+					font-size: 2em;
+					line-height: 36px;
+				}
+			}
+
+			img {
+				height: 100%;
+				width: auto;
+
+				@include breakpoint("4") {
+					height: 70%;
+					margin: auto;
+				}
+
+				@include breakpoint("3") {
+					height: 50%;
+				}
+
+				@include breakpoint("2") {
+					margin: 0 0 0 auto;
+				}
+			}
+		}
+
+		&__product-information {
+			background-color: #fff;
+			width: 100%;
+			height: auto;
+			padding: 3em 19em 3em 10em;
+			margin-top: 3em;
+
+			@include breakpoint("4") {
+				padding: 3em 10em 3em 10em;
+			}
+
+			@include breakpoint("3") {
+				padding: 3em 8em 3em 10em;
+			}
+
+			@include breakpoint("2") {
+				padding: 3em 5em 3em 5em;
+			}
+
+			&__subheader {
+				font-size: 1em;
+				font-weight: 500;
+				color: #000;
+				padding-bottom: 4px;
+				margin-left: -2em;
+				margin-bottom: 2em;
+			}
+		}
+
+		&__form {
+			padding-bottom: 3em;
+		}
+
+		&__container {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+
+			@include breakpoint("3") {
+				flex-direction: column;
+			}
+		}
+
+		&__input {
+			margin-bottom: 1.5em;
+		}
+
+		&__half-space {
+			display: block;
+			width: 49%;
+
+			@include breakpoint("3") {
+				width: 100%;
+			}
+		}
+		.flex-select {
+			display: flex;
+			align-items: center;
+		}
+		.measure-select-wrapper {
+			width: 100%;
+		}
+
+		&__label-first {
+			display: block;
+			margin-top: 2.5em;
+		}
+
+		&__label {
+			margin-top: 1.5em;
+			display: block;
+		}
+
+		&__half-label {
+			display: block;
+		}
+
+		&__textarea {
+			max-width: 50%;
+			min-height: 50px;
+
+			@include breakpoint("3") {
+				max-width: 100%;
+			}
+		}
+
+		&__add-file {
+			margin-top: 1.5em;
+		}
+
+		//button[type=submit] {
+		//	padding: .5em 1em;
+		//
+		//	@include breakpoint("1") {
+		//		width: 100%;
+		//	}
+		//}
+		.form-buttons {
+			display: flex;
+			justify-content: space-around;
+			width: 50%;
+			margin: auto;
+			@include breakpoint("3") {
+				width: 100%;
+				flex-direction: column-reverse;
+			}
+			button {
+				padding: 15px 40px;
+			}
+			.cancel-btn {
+				@include breakpoint("3") {
+					margin-top: 20px;
+					width: 200px;
+				}
+				svg {
+					transform: translateY(2px);
+				}
+				span {
+					font-size: 16px;
+				}
+			}
+		}
+	}
+
+	.ngx-file-wrapper {
+		position: relative;
+	}
+	.empty-file-label {
+		position: absolute;
+		transform: translate(170%, -190%);
+		color: #6c7077;
+		opacity: 0.6;
+		@include breakpoint("1") {
+			transform: translate(0%, 100%);
+		}
+	}
+}

@@ -1,0 +1,17 @@
+<div *ngIf="rfqButtonType === rfqButtonTypeEnum.Archivate">
+	<button b2bNgxButton [theme]="b2bNgxButtonThemeEnum.BACKGROUND_RED" class="rfq-btn-active" (click)="delete.emit()">
+		Delete
+	</button>
+	<button b2bNgxButton [theme]="b2bNgxButtonThemeEnum.OUTLINE_BLUE" class="rfq-btn" (click)="restore.emit()">
+		Restore
+	</button>
+</div>
+
+<div *ngIf="rfqButtonType === rfqButtonTypeEnum.Manage">
+	<button b2bNgxButton [theme]="b2bNgxButtonThemeEnum.BACKGROUND_BLUE" class="rfq-btn-active" (click)="edit.emit()">
+		Edit
+	</button>
+	<button b2bNgxButton [theme]="b2bNgxButtonThemeEnum.OUTLINE_BLUE" class="rfq-btn" (click)="archivate.emit()">
+		Archivate
+	</button>
+</div>

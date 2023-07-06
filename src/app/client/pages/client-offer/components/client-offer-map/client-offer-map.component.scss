@@ -1,0 +1,65 @@
+@import "libs/shared/styles/src/lib";
+
+:host {
+	display: block;
+	height: 100%;
+	.dialog {
+		display: flex;
+		flex-wrap: wrap;
+		height: 100%;
+		overflow: auto;
+		.dialog-left {
+			width: 60%;
+			height: 100%;
+			agm-map {
+				height: 100%;
+			}
+			@include breakpoint("3") {
+				width: 100%;
+				height: 70%;
+			}
+		}
+		.dialog-right {
+			width: 40%;
+			padding: 60px 40px;
+			@include breakpoint("3") {
+				width: 100%;
+			}
+			.tracking-details {
+				font-weight: bold;
+				font-size: 32px;
+				line-height: 36px;
+				letter-spacing: 0.01em;
+				color: #0f0f11;
+			}
+
+			.route,
+			.eta-to-destination,
+			.type {
+				font-size: 14px;
+				line-height: 140%;
+				letter-spacing: 0.01em;
+				color: #0f0f11;
+				&.type {
+					margin-top: 30px;
+				}
+				.link {
+					margin-top: 12px;
+					padding: 4px 10px;
+					background-color: white;
+					&:hover {
+						background-color: #f3f6f8;
+					}
+				}
+			}
+
+			.description {
+				margin-top: 16px;
+				font-size: 14px;
+				line-height: 140%;
+				letter-spacing: 0.01em;
+				color: #9fa4bb;
+			}
+		}
+	}
+}

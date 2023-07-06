@@ -1,0 +1,350 @@
+<div class="client-profile-add-offer-wrapper" *transloco="let t">
+	<div class="client-profile-add-offer">
+		<p class="client-profile-add-offer-title">{{ t(editMode ? "OFFER.EDIT" : "OFFER.ADD") }}</p>
+
+		<p
+			class="badge"
+			[class.invalid]="
+				formGroup.get('title').errors?.latin ||
+				formGroup.get('contactCompanyName').errors?.latin ||
+				formGroup.get('contactPersonName').errors?.latin
+			">
+			<img b2bNgxIcon name="info-1" />
+
+			<span>{{ t("OFFER.BADGE") }}</span>
+		</p>
+
+		<form errorTailor [formGroup]="formGroup" b2bScrollToInvalidControl>
+			<div class="client-profile-add-offer-container">
+				<div class="client-profile-add-offer-left">
+					<p class="client-profile-add-offer-left-seller-details">{{ t("OFFER.SELLER_DETAILS") }}</p>
+					<div class="client-profile-add-offer-left-company-info">
+						<div class="client-profile-add-offer-left-company-name-container">
+							<input
+								b2bNgxInput
+								[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"
+								[label]="t('LABELS.COMPANY_NAME')"
+								labelClass="client-profile-add-offer-company-name"
+								formControlName="contactCompanyName"
+								[placeholder]="t('PLACEHOLDERS.ENTER_COMPANY_NAME')" />
+							<p [@fadeInOut] class="error" *ngIf="formGroup.controls['contactCompanyName'].errors?.latin">
+								{{ t("ERRORS.USER_ENGLISH_LETTERS") }}
+							</p>
+							<b2b-ngx-toggle
+								formControlName="visibilityCompanyName"
+								class="client-profile-add-offer-company-name-visible-toggle"
+								>{{ t("LABELS.VISIBLE") }}</b2b-ngx-toggle
+							>
+						</div>
+						<div class="client-profile-add-offer-left-name-container">
+							<input
+								b2bNgxInput
+								[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"
+								[label]="t('LABELS.CONTACT_PERSON')"
+								labelClass="client-profile-add-offer-name"
+								formControlName="contactPersonName"
+								[placeholder]="t('PLACEHOLDERS.ENTER_NAME')" />
+							<p [@fadeInOut] class="error" *ngIf="formGroup.controls['contactPersonName'].errors?.latin">
+								{{ t("ERRORS.USER_ENGLISH_LETTERS") }}
+							</p>
+							<b2b-ngx-toggle
+								formControlName="visibilityContactPerson"
+								class="client-profile-add-offer-name-visibe-toggle"
+								>{{ t("LABELS.VISIBLE") }}</b2b-ngx-toggle>
+						</div>
+					</div>
+					<div class="client-profile-add-offer-left-contact-information">
+						<div class="client-profile-add-offer-left-phone-number-container">
+							<b2b-ngx-tel
+								formControlName="contactPhone"
+								[errors]="formGroup.getControl('contactPhone').errors"
+								[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"
+								class="client-profile-add-offer-tel"
+								>{{ t("LABELS.PHONE") }}</b2b-ngx-tel
+							>
+							<b2b-ngx-toggle formControlName="visibilityPhone" class="client-profile-add-offer-tel-visible-toggle">{{
+								t("LABELS.VISIBLE")
+							}}</b2b-ngx-toggle>
+						</div>
+						<div class="client-profile-add-offer-left-email-container">
+							<input
+								b2bNgxInput
+								[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"
+								[label]="t('LABELS.EMAIL')"
+								labelClass="client-profile-add-offer-email"
+								formControlName="contactEmail"
+								[placeholder]="t('PLACEHOLDERS.ENTER_EMAIL')" />
+							<b2b-ngx-toggle formControlName="visibilityEmail" class="client-profile-add-offer-email-visible-toggle">{{
+								t("LABELS.VISIBLE")
+							}}</b2b-ngx-toggle>
+						</div>
+					</div>
+					<p class="client-profile-add-offer-left-cargo-details">{{ t("OFFER.CARGO_DETAILS") }}</p>
+					<input
+						b2bNgxInput
+						[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"
+						[label]="t('LABELS.LOT_NAME')"
+						labelClass="client-profile-add-offer-lot-name"
+						formControlName="title"
+						[placeholder]="t('PLACEHOLDERS.ENTER_LOT_NAME')" />
+					<p [@fadeInOut] class="error" *ngIf="formGroup.controls['title'].errors?.latin">
+						{{ t("ERRORS.USER_ENGLISH_LETTERS") }}
+					</p>
+					<div class="client-profile-add-offer-cargo">
+						<div class="client-profile-add-offer-cargo-category">
+							<b2b-ngx-select
+								[touched]="formState['level1Category'].touched"
+								formControlName="level1Category"
+								[placeholder]="t('PLACEHOLDERS.SELECT_CATEGORY')"
+								[options]="level1Categories$ | async"
+								bindValue="_id"
+								bindLabel="name"
+								[theme]="b2bNgxSelectThemeEnum.BACKGROUND_GRAY"
+								>{{ t("LABELS.CARGO") }}</b2b-ngx-select
+							>
+						</div>
+						<div class="client-profile-add-offer-cargo-subcategory">
+							<b2b-ngx-select
+								[touched]="formState['level2Category'].touched"
+								formControlName="level2Category"
+								[placeholder]="t('PLACEHOLDERS.SELECT_SUBCATEGORY')"
+								[options]="level2Categories$ | async"
+								bindValue="_id"
+								bindLabel="name"
+								[theme]="b2bNgxSelectThemeEnum.BACKGROUND_GRAY"></b2b-ngx-select>
+						</div>
+					</div>
+
+					<textarea
+						b2bNgxTextarea
+						[label]="t('LABELS.DESCRIPTION')"
+						labelClass="client-profile-add-offer-description"
+						formControlName="description"
+						[placeholder]="t('PLACEHOLDERS.ENTER_DESCRIPTION')"></textarea>
+					<p [@fadeInOut] class="error" *ngIf="formState['description'].errors?.latin">
+						{{ t("ERRORS.USER_ENGLISH_LETTERS") }}
+					</p>
+
+					<div class="client-profile-add-offer-price">
+						<div class="client-profile-add-offer-contact-price">
+							<input
+								b2bNgxInput
+								[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"
+								[label]="t('LABELS.CONTRACT_PRICE')"
+								formControlName="priceOld"
+								placeholder="$" />
+						</div>
+						<div class="client-profile-add-offer-new-price">
+							<input
+								b2bNgxInput
+								[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"
+								[label]="t('LABELS.NEW_PRICE')"
+								formControlName="priceNew"
+								placeholder="$" />
+						</div>
+						<div class="client-profile-add-offer-discount">
+							<input
+								b2bNgxInput
+								[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"
+								[label]="t('LABELS.DISCOUNT')"
+								formControlName="priceDiscount"
+								placeholder="%" />
+							<p
+								[@fadeInOut]
+								class="error"
+								*ngIf="formState['priceNew'].dirty && formState['priceDiscount'].value < 5">
+								{{ t("OFFER.DISCOUNT") }}
+							</p>
+						</div>
+					</div>
+					<div class="client-profile-add-offer-amount">
+						<div class="client-profile-add-offer-amount-available">
+							<input
+								b2bNgxInput
+								[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"
+								[label]="t('LABELS.AVAILABLE_AMOUNT')"
+								formControlName="amount"
+								placeholder="XX" />
+							<p
+								[@fadeInOut]
+								class="error"
+								*ngIf="formState['amount'].errors?.number && formState['amount'].dirty">
+								Please, use numbers
+							</p>
+						</div>
+						<div class="client-profile-add-offer-contact-price-unit-select">
+							<b2b-ngx-select
+								formControlName="unit"
+								[options]="units$ | async"
+								bindValue="_id"
+								bindLabel="displayName"
+								[theme]="b2bNgxSelectThemeEnum.BACKGROUND_GRAY"></b2b-ngx-select>
+						</div>
+					</div>
+				</div>
+				<div class="client-profile-add-offer-right">
+					<p class="client-profile-add-offer-right-transportation">{{ t("OFFER.TRANSPORTATION") }}</p>
+
+					<div class="client-profile-add-offer-right-transport-wrapper">
+						<div class="client-profile-add-offer-right-transport-type">
+							<b2b-ngx-select
+								[touched]="formState['transportType'].touched"
+								formControlName="transportType"
+								[placeholder]="t('PLACEHOLDERS.SELECT_TRANSPORT_TYPE')"
+								[options]="transportTypes$ | async"
+								bindValue="_id"
+								bindLabel="displayName"
+								[theme]="b2bNgxSelectThemeEnum.BACKGROUND_GRAY"
+								>{{ t("LABELS.TRANSPORTATION_TYPE") }}</b2b-ngx-select
+							>
+						</div>
+					</div>
+
+					<div class="client-profile-add-offer-right-transport-type-wrapper">
+						<div *ngIf="showContainerNumber$ | async" class="client-profile-add-offer-right-container-no">
+							<b2b-ngx-input
+								formControlName="container"
+								[placeholder]="t('PLACEHOLDERS.CONTAINER_VESSEL')"
+								[errors]="formGroup.getControl('container').errors"></b2b-ngx-input>
+							<p
+								class="client-profile-add-offer-right-container-no__error"
+								*ngIf="
+									formGroup.getControl('container').errors?.bulkVesselFormat && formGroup.getControl('container').dirty
+								">
+								There should be only numbers
+							</p>
+							<p
+								class="client-profile-add-offer-right-container-no__error"
+								*ngIf="
+									formGroup.getControl('container').errors?.containerNumberType &&
+									formGroup.getControl('container').dirty
+								">
+								Please, check your “container number”
+							</p>
+							<p class="client-profile-add-offer-right-photos-description">{{ t("HINTS.CONTAINER_NUMBER") }}</p>
+						</div>
+						<div *ngIf="isTransportTypeBulk" class="client-profile-add-offer-right-container-number-type">
+							<b2b-ngx-radio
+								[options]="['IMO', 'MMSI']"
+								formControlName="containerNumberType"
+								[errors]="formGroup.getControl('containerNumberType').errors"></b2b-ngx-radio>
+						</div>
+					</div>
+
+					<b2b-ngx-toggle
+						formControlName="visibilityContainer"
+						class="client-profile-add-offer-right-container-no-toggle">
+						{{ t("LABELS.VISIBLE") }}</b2b-ngx-toggle
+					>
+
+					<div class="client-profile-add-offer-right-transport-destination">
+						<div class="client-profile-add-offer-right-transport-destination-from">
+							<b2b-ngx-country-select
+								[touched]="formState['destinationFrom'].touched"
+								formControlName="destinationFrom"
+								[theme]="b2bNgxSelectThemeEnum.BACKGROUND_GRAY"
+								[placeholder]="t('PLACEHOLDERS.FROM')">
+								{{ t("LABELS.DESTINATION") }}
+							</b2b-ngx-country-select>
+						</div>
+						<div class="client-profile-add-offer-right-transport-destination-to">
+							<b2b-ngx-country-select
+								[touched]="formState['destinationTo'].touched"
+								formControlName="destinationTo"
+								[theme]="b2bNgxSelectThemeEnum.BACKGROUND_GRAY"
+								[placeholder]="t('PLACEHOLDERS.TO')">
+							</b2b-ngx-country-select>
+						</div>
+					</div>
+
+					<div class="current-location">
+						<b2b-ngx-country-select
+							[touched]="formState['currentLocation'].touched"
+							formControlName="currentLocation"
+							[theme]="b2bNgxSelectThemeEnum.BACKGROUND_GRAY"
+							[showInTransit]="true"
+							placeholder="Current location">
+						</b2b-ngx-country-select>
+					</div>
+
+					<p class="client-profile-add-offer-right-photos-and-documents">{{ t("OFFER.PHOTOS_AND_DOCUMENTS") }}</p>
+
+					<b2b-ngx-file
+						formControlName="photos"
+						class="client-profile-add-offer-right-photos"
+						[errors]="formGroup.getControl('photos').errors"
+						[label]="t('LABELS.CHOOSE_PHOTOS')"
+						[isPhoto]="true"
+						>{{ t("LABELS.PHOTOS") }}</b2b-ngx-file>
+
+					<p *ngIf="formState['photos'].touched && formState['photos'].errors?.required" class="error" [@fadeInOut]>
+						Please load at least 1 photo
+					</p>
+
+					<p class="client-profile-add-offer-right-photos-description">{{ t("OFFER.PHOTOS_DESCRIPTION") }}</p>
+
+					<div [hidden]="true">
+						<b2b-ngx-toggle
+							formControlName="visibilityPhotos"
+							class="client-profile-add-offer-right-photos-visible-toggle"
+							>{{ t("LABELS.VISIBLE") }}</b2b-ngx-toggle
+						>
+					</div>
+					<b2b-ngx-file
+						[isClickable]="true"
+						formControlName="documents"
+						class="client-profile-add-offer-right-documents"
+						[errors]="formGroup.getControl('documents').errors"
+						[label]="t('LABELS.CHOOSE_DOCUMENTS')"
+						(clicked)="openDocument($event)"
+						>{{ t("LABELS.DOCUMENTS") }}</b2b-ngx-file>
+
+					<p *ngIf="formState['documents'].touched && formState['documents'].errors?.required" class="error" [@fadeInOut]>
+						Please load at least 1 document
+					</p>
+
+					<p class="client-profile-add-offer-right-documents-description">{{ t("OFFER.DOCUMENTS_DESCRIPTION") }}</p>
+
+					<b2b-ngx-toggle
+						formControlName="visibilityDocuments"
+						class="client-profile-add-offer-right-documents-visible-toggle"
+						>{{ t("LABELS.HIDDEN") }}</b2b-ngx-toggle
+					>
+				</div>
+			</div>
+		</form>
+	</div>
+	<div class="form-buttons">
+		<button
+			*ngIf="showCancelBtn"
+			class="cancel-btn"
+			(click)="backToCompanyForm()"
+			b2bNgxButton
+			[theme]="b2bNgxButtonThemeEnum.OUTLINE_GRAY">
+			<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<path
+					d="M3.29289 8.70711C2.90237 8.31658 2.90237 7.68342 3.29289 7.29289L9.65685 0.928933C10.0474 0.538408 10.6805 0.538408 11.0711 0.928933C11.4616 1.31946 11.4616 1.95262 11.0711 2.34315L5.41421 8L11.0711 13.6569C11.4616 14.0474 11.4616 14.6805 11.0711 15.0711C10.6805 15.4616 10.0474 15.4616 9.65685 15.0711L3.29289 8.70711ZM5 9L4 9L4 7L5 7L5 9Z"
+					fill="#0F0F11" />
+			</svg>
+			<span>Back</span>
+		</button>
+		<button
+			*ngIf="!editMode"
+			b2bNgxButton
+			(click)="reviewAndPost(formGroup)"
+			[disabled]="loading"
+			[theme]="b2bNgxButtonThemeEnum.BACKGROUND_BLACK"
+			class="client-profile-add-offer-form-review-and-post-button">
+			{{ t("OFFER.REVIEW") }}
+		</button>
+		<button
+			*ngIf="editMode"
+			(click)="reviewAndPost(formGroup)"
+			b2bNgxButton
+			[disabled]="loading"
+			[theme]="b2bNgxButtonThemeEnum.BACKGROUND_BLACK"
+			class="client-profile-add-offer-form-review-and-post-button">
+			{{ t("OFFER.EDIT") }}
+		</button>
+	</div>
+</div>

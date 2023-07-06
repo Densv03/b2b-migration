@@ -1,0 +1,16 @@
+<div class="cookies" *transloco="let t">
+	<p class="title">{{ t("COOKIES.TTILE") }}</p>
+	<p class="description">
+		{{ t("COOKIES.DESCRIPTION") }}
+		<a [routerLink]="b2bNgxLinkService.getLink('/cookie-policy') | async"> {{ t("COOKIES.ABOUT") }} </a>.
+	</p>
+
+	<div class="buttons">
+		<button b2bNgxButton [theme]="b2bNgxButtonThemeEnum.OUTLINE_BLACK" (click)="closeModal(false)">
+			{{ t("BUTTONS.ACCEPT") }}
+		</button>
+		<button b2bNgxButton [theme]="b2bNgxButtonThemeEnum.BACKGROUND_BLACK" (click)="closeModal(true)">
+			{{ t("BUTTONS.DECLINE") }}
+		</button>
+	</div>
+</div>

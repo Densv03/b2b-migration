@@ -1,0 +1,88 @@
+<footer class="footer" *transloco="let t">
+	<div class="footer__left">
+		<a b2bNgxLink [routerLink]="b2bNgxLinkService.getLink('/') | async">
+			<img b2bNgxImage class="footer__logo" name="logo_white" />
+		</a>
+		<p class="footer__left-title"><br />480 382 5365 <br />610 N. Gilbert Rd. Suite 201 <br />Gilbert, AZ 85234</p>
+		<p class="footer__left-description">{{currentYear}} ©B2B Discount. All rights reserved.</p>
+	</div>
+	<div class="footer__profile">
+		<ng-container *ngIf="user; else wihtoutUser">
+			<ul class="footer__center-list">
+				<li class="footer__center-list-item-user">
+					<div>
+						<p class="footer__center-list-item-user-name">{{ user.fullName }}</p>
+						<p class="footer__center-list-item-user-email">{{ user.email }}</p>
+					</div>
+					<div>
+						<img b2bNgxIcon name="log-out" />
+					</div>
+				</li>
+				<li *ngFor="let sidenavOption of sidenavOptions" class="footer__center-list-item">
+					<a
+						b2bNgxLink
+						class="footer__center-list-item-link"
+						[routerLink]="b2bNgxLinkService.getLink(sidenavOption.link) | async">
+						<img b2bNgxIcon [name]="sidenavOption.icon" />
+						<span class="footer__center-list-item-link-label">{{ t(sidenavOption.label) }}</span>
+					</a>
+				</li>
+			</ul>
+		</ng-container>
+		<ng-template #wihtoutUser>
+			<div class="footer__center-list-item-without-user">
+				<a
+					b2bNgxLink
+					[routerLink]="b2bNgxLinkService.getLink('/auth/log-in') | async"
+					[theme]="b2bNgxLinkThemeEnum.OUTLINE_WHITE"
+					class="footer__center-list-item-without-user-link"
+					>{{ t("AUTH.LOG_IN") }}</a
+				>
+				<a
+					b2bNgxLink
+					[routerLink]="b2bNgxLinkService.getLink('/auth/register-credentials') | async"
+					[theme]="b2bNgxLinkThemeEnum.BACKGROUND_WHITE"
+					class="footer__center-list-item-without-user-link"
+					>{{ t("AUTH.SIGN_UP") }}</a
+				>
+			</div>
+		</ng-template>
+	</div>
+
+	<div class="footer__wrapper">
+		<ul class="footer__list">
+			<li *ngFor="let option of options" class="footer__list-item">
+				<a
+					b2bNgxLink
+					[routerLink]="b2bNgxLinkService.getLink(option.link) | async"
+					[routerLinkActiveOptions]="{ exact: true }"
+					routerLinkActive="active"
+					class="footer__list-item-link"
+					>{{ t(option.label) }}</a
+				>
+			</li>
+		</ul>
+		<ul class="sub-list">
+			<li *ngFor="let subOption of subOptions" class="sub-item">
+				<a
+					b2bNgxLink
+					class="sub-list-link"
+					[routerLink]="b2bNgxLinkService.getLink(subOption.link) | async"
+					routerLinkActive="active">
+					{{ t(subOption.label) }}</a
+				>
+				<!--				<a href="#">{{t(subOption.label)}}</a>-->
+			</li>
+		</ul>
+	</div>
+
+	<div class="footer__icons">
+		<ul class="footer__icons-list">
+			<li class="footer__icons-list-item" *ngFor="let socialMedia of socialMedias">
+				<a b2bNgxLink class="footer__icons-list-item-link" target="_blank" [href]="socialMedia.href">
+					<img b2bNgxIcon [name]="socialMedia.icon" />
+				</a>
+			</li>
+		</ul>
+	</div>
+</footer>

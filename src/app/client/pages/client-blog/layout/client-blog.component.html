@@ -1,0 +1,74 @@
+<form [formGroup]="formGroup" class="wiki" *transloco="let t">
+<!--	<div class="wiki-header">-->
+<!--		<h3 class="wiki-header-title">-->
+<!--			<span class="wiki-header-title-text">{{ t("BLOG.TITLE") }}</span>-->
+<!--			<span class="wiki-header-icon"></span>-->
+<!--		</h3>-->
+<!--		<input-->
+<!--			b2bNgxInput-->
+<!--			formControlName="q"-->
+<!--			[theme]="b2bNgxInputThemeEnum.BACKGROUND_WHITE"-->
+<!--			class="wiki-header-search"-->
+<!--			[placeholder]="t('PLACEHOLDERS.SEARCH')"/>-->
+<!--		<div class="wiki-header__social-medias"></div>-->
+<!--	</div>-->
+
+	<div class="wiki-main">
+		<div class="wiki-main-list">
+			<ng-container *ngIf="articles$ | async as articles; else noArticles">
+				<ng-container *ngIf="articles.length; else noArticles">
+					<b2b-client-blog-list></b2b-client-blog-list>
+
+					<b2b-pagination
+						[length]="totalBlogLength$ | async"
+						[perPage]="7"
+						(togglePageNumber)="togglePageBlogList($event)"
+						[currentPage]="currentPage$ | async"></b2b-pagination>
+				</ng-container>
+
+			</ng-container>
+
+			<ng-template #noArticles>
+				<div class="wiki-no-articles" *ngIf="!loading">
+					<p class="wiki-no-articles-title">{{ t("BLOG.NO_ARTICLES") }}</p>
+				</div>
+			</ng-template>
+
+			<ng-container *ngIf="loading">
+				<b2b-ngx-skeleton [options]="articlesSkeletonOptions"></b2b-ngx-skeleton>
+			</ng-container>
+		</div>
+		<!-- <div class="wiki-main-filters">
+			<p class="wiki-main-filters__title">{{ t("TRADING_WIKI.FILTERS") }}</p>
+			<b2b-ngx-treeview
+				formControlName="categories[]"
+				[items]="categories$ | async"
+				class="wiki-main-filters__categories"
+				position="left"></b2b-ngx-treeview>
+			<b2b-ngx-country-select
+				formControlName="countries[]"
+				[multiple]="true"
+				class="wiki-main-filters__country"
+				[placeholder]="t('PLACEHOLDERS.SELECT_COUNTRY')"></b2b-ngx-country-select>
+			<b2b-ngx-select
+				[searchable]="true"
+				[multiple]="true"
+				formControlName="tags[]"
+				class="wiki-main-filters__tags"
+				[class.hideDropdown]="searchSubject.value.length < 2"
+				bindValue="_id"
+				bindLabel="name"
+				[minTermLength]="1"
+				[options]="tags$ | async"
+				[placeholder]="t('PLACEHOLDERS.ADD_TAG')"
+				(searched)="searchTags($event)"></b2b-ngx-select>
+			<button
+				(click)="clearFilters()"
+				b2bNgxButton
+				[theme]="b2bNgxButtonThemeEnum.OUTLINE_GRAY"
+				class="wiki-main-filters__clear-filters">
+				{{ t("TRADING_WIKI.CLEAR_ALL") }}
+			</button>
+		</div> -->
+	</div>
+</form>

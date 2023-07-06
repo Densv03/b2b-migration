@@ -1,0 +1,23 @@
+:host {
+	.confirmation-dialog {
+		width: 40vw;
+		height: 20vh;
+		position: relative;
+		h2,
+		.body {
+			text-align: center;
+		}
+	}
+
+	.footer {
+		display: flex;
+		width: 100%;
+		gap: 15px;
+		justify-content: center;
+		margin-top: 20px;
+		.btn {
+			padding: 15px 20px;
+			width: 40%;
+		}
+	}
+}

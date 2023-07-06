@@ -1,0 +1,47 @@
+@import "libs/shared/styles/src/lib";
+::ng-deep {
+	.mat-tab-group {
+		z-index: 1;
+		.mat-tab-header {
+			margin-bottom: 20px;
+			@include breakpoint("4") {
+				margin: auto;
+			}
+			@include breakpoint("1") {
+				width: 100%;
+				font-size: 12px;
+
+				.mat-tab-header-pagination-before {
+					display: none;
+				}
+				.mat-tab-header-pagination-after {
+					display: none;
+				}
+			}
+
+			.mat-ink-bar {
+				background-color: #0f0f11;
+				width: 160px !important;
+				@include breakpoint("2") {
+					width: 115px !important;
+					transform: translate(20%);
+				}
+				@include breakpoint("1") {
+					width: 80px !important;
+					transform: translate(20%);
+				}
+			}
+			.mat-ripple-element {
+				display: none;
+				@include breakpoint("1") {
+					display: none;
+				}
+			}
+			.mat-tab-list {
+				@include breakpoint("1") {
+					width: 100%;
+				}
+			}
+		}
+	}
+}

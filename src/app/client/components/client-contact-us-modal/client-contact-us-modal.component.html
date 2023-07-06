@@ -1,0 +1,63 @@
+<div class="client-contact-us" *transloco="let t">
+	<div class="client-contact-us-header">
+		<h3 class="client-contact-us-header-title">{{ t("CONTACT_US.TITLE") }}</h3>
+		<p class="client-contact-us-header-description">{{ t("CONTACT_US.DESCRIPTION") }}</p>
+	</div>
+
+	<form errorTailor class="client-contact-us-form" [formGroup]="formGroup" (ngSubmit)="sendMessage(formGroup)">
+		<b2b-ngx-select
+			[theme]="b2bNgxSelectThemeEnum.BACKGROUND_GRAY"
+			[options]="subjectOptions"
+			formControlName="type"
+			class="client-contact-us-form-select"
+			[placeholder]="t('PLACEHOLDERS.SUBJECT')"></b2b-ngx-select>
+		<input
+			b2bNgxInput
+			[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"
+			[placeholder]="t('PLACEHOLDERS.ENTER_NAME')"
+			formControlName="name"
+			[label]="t('LABELS.NAME')"
+			labelClass="client-contact-us-form-input" />
+		<input
+			b2bNgxInput
+			[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"
+			type="email"
+			[label]="t('LABELS.EMAIL')"
+			labelClass="client-contact-us-form-input"
+			[placeholder]="t('PLACEHOLDERS.YOUR_EMAIL')"
+			formControlName="email" />
+		<b2b-ngx-tel
+			[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"
+			class="client-contact-us-form-input"
+			[placeholder]="t('PLACEHOLDERS.YOUR_PHONE_NUMBER')"
+			formControlName="phone"
+			>{{ t("INPUTS.PHONE") }}</b2b-ngx-tel
+		>
+		<textarea
+			b2bNgxTextarea
+			[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"
+			[placeholder]="t('PLACEHOLDERS.ENTER_MESSAGE')"
+			formControlName="text"
+			[label]="t('LABELS.MESSAGE')"
+			labelClass="client-contact-us-form-textarea"></textarea>
+		<button
+			b2bNgxButton
+			type="submit"
+			class="client-contact-us-form-button"
+			[theme]="b2bNgxButtonThemeEnum.BACKGROUND_BLACK">
+			{{ t("BUTTONS.SEND") }}
+		</button>
+	</form>
+	<div class="client-contact-us-footer">
+		<ul class="client-contact-us-footer-icons-list">
+			<li class="client-contact-us-footer-icons-list-item" *ngFor="let socialMedia of socialMedias">
+				<a b2bNgxLink [href]="socialMedia.href" class="client-contact-us-footer-icons-list-item-href">
+					<img b2bNgxIcon [name]="socialMedia.icon" class="client-contact-us-footer-icons-list-item-icon" />
+				</a>
+			</li>
+		</ul>
+		<p class="client-contact-us-footer-description">
+			{{ t("CONTACT_US.FEEDBACK") }} <a href="">support@b2b.discount</a>.
+		</p>
+	</div>
+</div>

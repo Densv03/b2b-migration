@@ -1,0 +1,45 @@
+<div class="registration-complete" *transloco="let t">
+	<div class="registration-complete__header"></div>
+	<div class="registration-complete__body">
+		<img b2bNgxImage name="recieve_email" />
+		<p class="registration-complete__body-title">{{ t("EMAIL_VERIFY.TITLE") }}</p>
+		<span>
+			{{ t("EMAIL_VERIFY.SUBTITLE") }}
+		</span>
+		<div class="registration-complete__body__email-wrapper">
+			<input
+				b2bNgxInput
+				type="text"
+				(focusout)="editEmail(true)"
+				[formControl]="formControl"
+				[size]="formControl.value.length"
+				[style]="{ 'padding-left': isInputDisabled ? 0 : null, 'padding-right': isInputDisabled ? 0 : null }"
+				[theme]="isInputDisabled ? null : b2bNgxInputThemeEnum.BACKGROUND_WHITE"
+				class="registration-complete__body__email-wrapper-input" />
+			<img b2bNgxImage name="edit" (click)="editEmail()" />
+		</div>
+		<div class="registration-complete__body-actions">
+			<button
+				(click)="sendEmailAgain()"
+				b2bNgxButton
+				type="button"
+				[disabled]="isDisabled"
+				class="client-profile-settings-footer-save-button"
+				[theme]="b2bNgxButtonThemeEnum.BACKGROUND_BLACK">
+				{{ t("EMAIL_VERIFY.SEND_EMAIL_AGAIN") }}
+				<span #time *ngIf="isDisabled">01:00</span>
+			</button>
+		</div>
+		<span class="registration-complete__body-notification">
+			{{ t("EMAIL_VERIFY.CONFIRM_EMAIL") }}
+		</span>
+	</div>
+	<div class="registration-complete__footer">
+		<p>
+			{{ t("EMAIL_VERIFY.FOOTER_DESCRIPTION_1") }}<span> {{ t("EMAIL_VERIFY.FOOTER_BOLD") }}</span>
+			{{ t("EMAIL_VERIFY.FOOTER_DESCRIPTION_2") }}
+			<button (click)="openContactUsModal()">{{ t("EMAIL_VERIFY.FOOTER_BUTTON") }}</button>
+			{{ t("EMAIL_VERIFY.FOOTER_DESCRIPTION_3") }}
+		</p>
+	</div>
+</div>

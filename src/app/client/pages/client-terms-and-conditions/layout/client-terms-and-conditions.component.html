@@ -1,0 +1,16 @@
+<div class="terms-and-conditions" *transloco="let t">
+	<div class="container">
+		<div class="title-wrapper">
+			<h1 class="title">{{ t("TERMS_AND_CONDITIONS.TITLE") }}</h1>
+			<p class="dates">
+				<span class="effective-date">{{ t("TERMS_AND_CONDITIONS.EFFECTIVE_DATE") }} 04.06.2021</span>
+				<span class="modifed-date">{{ t("TERMS_AND_CONDITIONS.LAST_MODIFED") }} 04.06.2021</span>
+			</p>
+		</div>
+
+		<section class="section" *ngFor="let option of options">
+			<p class="section-title">{{ option.title }}</p>
+			<p class="section-description">{{ option.description }}</p>
+		</section>
+	</div>
+</div>

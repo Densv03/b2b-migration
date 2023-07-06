@@ -1,0 +1,67 @@
+@import "libs/shared/styles/src/lib";
+
+:host {
+	display: block;
+	height: 100%;
+	.dialog {
+		display: flex;
+		flex-wrap: wrap;
+		height: 100%;
+		overflow: auto;
+
+		.wrapper {
+			padding: 40px;
+			display: flex;
+			flex-direction: column;
+			width: 100%;
+			align-items: center;
+			gap: 24px;
+			div {
+				width: 100%;
+			}
+			h1 {
+				font-size: 24px;
+				line-height: 32px;
+				letter-spacing: 0.01em;
+				color: #0f0f11;
+			}
+			textarea {
+				background: #f3f6f8;
+				border-radius: 4px;
+				width: 100%;
+				resize: none;
+			}
+			label {
+				text-align: left;
+				font-family: HelveticaNeue;
+				font-size: 14px;
+				line-height: 20px;
+				letter-spacing: 0.01em;
+				text-align: left;
+				color: #9fa4bb;
+			}
+			button {
+				width: 100%;
+				padding: 15px 0;
+			}
+			span {
+				font-family: HelveticaNeue;
+				font-size: 16px;
+				line-height: 24px;
+				letter-spacing: 0.01em;
+				text-align: center;
+				color: #556274;
+			}
+		}
+	}
+}
+
+::ng-deep {
+	@include breakpoint("3") {
+		.report-dialog {
+			.ngneat-dialog-content {
+				width: 95% !important;
+			}
+		}
+	}
+}

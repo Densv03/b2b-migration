@@ -1,0 +1,68 @@
+@import "libs/shared/styles/src/lib";
+
+:host {
+	.listing {
+		padding: 20px 80px;
+		@include breakpoint("4") {
+			padding: 20px 70px;
+		}
+		@include breakpoint("1") {
+			padding: 20px;
+		}
+		.links-list {
+			display: flex;
+			gap: 7px;
+			li {
+				display: flex;
+				align-items: center;
+				gap: 7px;
+				&:last-child {
+					.divider {
+						display: none;
+					}
+				}
+				.label {
+					color: #556274;
+					font-size: 12px;
+					line-height: 136%;
+					cursor: pointer;
+					&:hover {
+						transform: translateY(-2px);
+						transition: 0.2s all;
+					}
+				}
+			}
+			.active-link {
+				.label {
+					color: #9fa4bb;
+				}
+			}
+		}
+		.title {
+			font-weight: 700;
+			font-size: 32px;
+			letter-spacing: 0.01em;
+			color: #0f0f11;
+			margin-top: 15px;
+		}
+		.categories-list {
+			display: flex;
+			flex-direction: row;
+			gap: 15px;
+			flex-wrap: wrap;
+			margin-top: 30px;
+			.category-wrapper {
+				width: 24%;
+				@include breakpoint("5") {
+					width: 32%;
+				}
+				@include breakpoint("3") {
+					width: 48%;
+				}
+				@include breakpoint("1") {
+					width: 95%;
+				}
+			}
+		}
+	}
+}

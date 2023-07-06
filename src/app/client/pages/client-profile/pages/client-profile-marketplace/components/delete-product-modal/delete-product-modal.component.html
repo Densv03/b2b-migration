@@ -1,0 +1,19 @@
+<div class="dialog">
+	<div class="wrapper">
+		<h1>What is the reason for removing the offer?</h1>
+		<div>
+			<b2b-ngx-radio
+				class="column"
+				[options]="['I sold a cargo at B2B Discount', 'I sold a cargo elsewhere', 'I don\'t sell cargo anymore']"
+				[formControl]="formControl"></b2b-ngx-radio>
+		</div>
+		<button
+			type="button"
+			b2bNgxButton
+			[theme]="b2bNgxButtonThemeEnum.BACKGROUND_BLACK"
+			(click)="deleteProduct()"
+			[disabled]="!formControl.value">
+			Done
+		</button>
+	</div>
+</div>

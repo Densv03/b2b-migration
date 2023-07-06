@@ -1,0 +1,215 @@
+<!--<ng-container *transloco="let t">-->
+<!--	<div class="header-wrapper" [ngClass]="{ 'hidden-header': animationState === 'in' }">-->
+<!--		<b2b-client-header-->
+<!--			*ngIf="displayHeader"-->
+<!--			[options]="options"-->
+<!--			[user]="user$ | async"-->
+<!--			(burgerClicked)="toggleShowPopUp()"></b2b-client-header>-->
+<!--	</div>-->
+
+<!--&lt;!&ndash;	<button&ndash;&gt;-->
+<!--&lt;!&ndash;		*ngIf="displayHeader"&ndash;&gt;-->
+<!--&lt;!&ndash;		b2bNgxButton&ndash;&gt;-->
+<!--&lt;!&ndash;		class="contact-us"&ndash;&gt;-->
+<!--&lt;!&ndash;		[theme]="b2bNgxButtonThemeEnum.BACKGROUND_WHITE"&ndash;&gt;-->
+<!--&lt;!&ndash;		(click)="openContactUsModal()">&ndash;&gt;-->
+<!--&lt;!&ndash;		<img *ngIf="isMobileView; else desktop" b2bNgxIcon [name]="'email-1'" />&ndash;&gt;-->
+
+<!--&lt;!&ndash;		<ng-template #desktop>&ndash;&gt;-->
+<!--&lt;!&ndash;			{{ t("CONTACT_US.TITLE") }}&ndash;&gt;-->
+<!--&lt;!&ndash;		</ng-template>&ndash;&gt;-->
+<!--&lt;!&ndash;	</button>&ndash;&gt;-->
+
+<!--	<div class="overlay-container" [@slideInOut]="animationState">-->
+<!--		<div class="backdrop" #backdrop>-->
+<!--			<div class="content">-->
+<!--				<div class="nav__header">-->
+<!--					<button (click)="toggleShowPopUp()">-->
+<!--						<img b2bNgxIcon name="close" />-->
+<!--					</button>-->
+<!--				</div>-->
+
+<!--				<div class="sidenav">-->
+<!--					<ng-container *ngIf="user$ | async as user; else withoutUser">-->
+<!--						<div *ngIf="user$ | async as user" class="sidenav-header">-->
+<!--							<p class="sidenav-header-title">-->
+<!--								<img b2bNgxIcon name="user-blue" class="mr-1" />-->
+<!--								<span class="sidenav-header-title-text">{{ user.fullName }}</span>-->
+<!--							</p>-->
+<!--							<p class="sidenav-header-description">{{ user.email }}</p>-->
+<!--						</div>-->
+<!--						<ul class="nav-list">-->
+<!--							<li-->
+<!--								*ngFor="let option of mobileLinks" class="nav-list-item"-->
+<!--							(click)="toggleShowPopUp(option.link)">-->
+<!--								<a class="nav-list-item-link">{{t(option.text)}}</a>-->
+<!--								<div *ngIf="option.label" [ngStyle]="{ 'background-color': option.labelBackground }" class="label">-->
+<!--									{{ option.label }}-->
+<!--								</div>-->
+<!--							</li>-->
+<!--						</ul>-->
+
+<!--						<ul class="sidenav-account">-->
+<!--							<li-->
+<!--								routerLink="/profile/your-account"-->
+<!--								routerLinkActive="active"-->
+<!--								(click)="toggleShowPopUp()"-->
+<!--								class="sidenav-list-item">-->
+<!--								<img b2bNgxIcon [name]="'sidenav-man-skeleton'" class="mr-3" />-->
+<!--								<a b2bNgxLink class="sidenav-list-item-link">-->
+<!--									<p>Your account</p>-->
+<!--								</a>-->
+<!--							</li>-->
+<!--							<li *ngFor="let option of sidenavAccountOptions" class="sidenav-list-item">-->
+<!--								<img *ngIf="option.icon" b2bNgxIcon [name]="option.icon" class="mr-3" />-->
+<!--								<a-->
+<!--									b2bNgxLink-->
+<!--									[routerLink]="option.link"-->
+<!--									(click)="toggleShowPopUp()"-->
+<!--									routerLinkActive="active"-->
+<!--									[routerLinkActiveOptions]="{ exact: true }"-->
+<!--									class="sidenav-list-item-link">-->
+<!--									<ng-container *ngTemplateOutlet="content; context: { $implicit: option }"></ng-container>-->
+<!--								</a>-->
+<!--							</li>-->
+<!--						</ul>-->
+<!--						<ul class="sidenav-workspace">-->
+<!--							<li-->
+<!--								routerLink="/profile/your-workspace"-->
+<!--								routerLinkActive="active"-->
+<!--								(click)="toggleShowPopUp()"-->
+<!--								class="sidenav-list-item">-->
+<!--								<img b2bNgxIcon [name]="'desktop'" class="mr-3" />-->
+<!--								<a b2bNgxLink class="sidenav-list-item-link">-->
+<!--									<p>Your workspace</p>-->
+<!--								</a>-->
+<!--							</li>-->
+<!--							<li-->
+<!--								*ngFor="let option of sidenavWorkspaceOptions"-->
+<!--								[class.active]="option.active"-->
+<!--								class="sidenav-list-item">-->
+<!--								<img b2bNgxIcon [name]="option.icon" class="mr-3" />-->
+<!--								<a-->
+<!--									*ngIf="option.link"-->
+<!--									b2bNgxLink-->
+<!--									[routerLink]="option.link"-->
+<!--									(click)="toggleShowPopUp()"-->
+<!--									routerLinkActive="active"-->
+<!--									class="sidenav-list-item-link">-->
+<!--									<ng-container *ngTemplateOutlet="content; context: { $implicit: option }"></ng-container>-->
+<!--								</a>-->
+<!--								<button b2bNgxButton class="sidenav-list-item-button" (click)="option.onClick()" *ngIf="option.onClick">-->
+<!--									<ng-container *ngTemplateOutlet="content; context: { $implicit: option }"></ng-container>-->
+<!--								</button>-->
+<!--							</li>-->
+<!--						</ul>-->
+<!--					</ng-container>-->
+<!--				</div>-->
+
+<!--				<ng-template #content let-option>-->
+<!--					<p class="sidenav-list-item-text">{{ t(option.label) }}</p>-->
+<!--					<ng-container *ngIf="unreadOfferMessagesCount$ | async as unreadMessagesCount">-->
+<!--						<span class="unread-messages" *ngIf="option.label === 'Unclaimed cargo' && unreadMessagesCount > 0">{{-->
+<!--							unreadMessagesCount-->
+<!--						}}</span>-->
+<!--					</ng-container>-->
+
+<!--					<ng-container *ngIf="unreadRfqMessagesCount$ | async as unreadMessagesCount">-->
+<!--						<span class="unread-messages" *ngIf="option.label === 'TradeBid' && unreadMessagesCount > 0">{{-->
+<!--							unreadMessagesCount-->
+<!--						}}</span>-->
+<!--					</ng-container>-->
+
+<!--					<ng-container *ngIf="unreadMarketplaceMessagesCount$ | async as unreadMessagesCount">-->
+<!--						<span class="unread-messages" *ngIf="option.label === 'B2B Market' && unreadMessagesCount > 0">{{-->
+<!--							unreadMessagesCount-->
+<!--						}}</span>-->
+<!--					</ng-container>-->
+<!--				</ng-template>-->
+
+<!--				&lt;!&ndash;		<div class="nav__user">&ndash;&gt;-->
+<!--				&lt;!&ndash;			<ng-container *ngIf="user$ | async as user; else withoutUser">&ndash;&gt;-->
+<!--				&lt;!&ndash;				<div class="nav__user-header">&ndash;&gt;-->
+<!--				&lt;!&ndash;					<div class="nav__user-header-title">&ndash;&gt;-->
+<!--				&lt;!&ndash;						<p class="nav__user-header-fullName">{{ user.fullName }}</p>&ndash;&gt;-->
+<!--				&lt;!&ndash;						<p class="nav__user-header-email">{{ user.email }}</p>&ndash;&gt;-->
+<!--				&lt;!&ndash;					</div>&ndash;&gt;-->
+<!--				&lt;!&ndash;					<button>&ndash;&gt;-->
+<!--				&lt;!&ndash;						<img b2bNgxIcon name="log-out" alt="" (click)="logOut(); nav.classList.toggle('opened')" />&ndash;&gt;-->
+<!--				&lt;!&ndash;					</button>&ndash;&gt;-->
+<!--				&lt;!&ndash;				</div>&ndash;&gt;-->
+<!--				&lt;!&ndash;				<ul class="nav__account-list">&ndash;&gt;-->
+<!--				&lt;!&ndash;					<li *ngFor="let sidenavOption of sidenavAccountOptions" class="nav__user-list-item">&ndash;&gt;-->
+<!--				&lt;!&ndash;						<a&ndash;&gt;-->
+<!--				&lt;!&ndash;							[routerLink]="sidenavOption.link"&ndash;&gt;-->
+<!--				&lt;!&ndash;							(click)="nav.classList.toggle('opened')"&ndash;&gt;-->
+<!--				&lt;!&ndash;							class="nav__user-list-item-link"&ndash;&gt;-->
+<!--				&lt;!&ndash;							routerLinkActive="active">&ndash;&gt;-->
+<!--				&lt;!&ndash;							<img&ndash;&gt;-->
+<!--				&lt;!&ndash;								b2bNgxIcon&ndash;&gt;-->
+<!--				&lt;!&ndash;								[name]="sidenavOption.icon"&ndash;&gt;-->
+<!--				&lt;!&ndash;								alt=""&ndash;&gt;-->
+<!--				&lt;!&ndash;								(click)="logOut(); nav.classList.toggle('opened')"&ndash;&gt;-->
+<!--				&lt;!&ndash;								class="nav__user-list-item-link-icon" />&ndash;&gt;-->
+<!--				&lt;!&ndash;							<span>{{ t(sidenavOption.label) }}</span>&ndash;&gt;-->
+<!--				&lt;!&ndash;						</a>&ndash;&gt;-->
+<!--				&lt;!&ndash;					</li>&ndash;&gt;-->
+<!--				&lt;!&ndash;				</ul>&ndash;&gt;-->
+<!--				&lt;!&ndash;				<ul class="nav-workspace-list">&ndash;&gt;-->
+<!--				&lt;!&ndash;					<li *ngFor="let sidenavOption of sidenavWorkspaceOptions" class="nav__user-list-item">&ndash;&gt;-->
+<!--				&lt;!&ndash;						<a&ndash;&gt;-->
+<!--				&lt;!&ndash;							[routerLink]="sidenavOption.link"&ndash;&gt;-->
+<!--				&lt;!&ndash;							(click)="nav.classList.toggle('opened')"&ndash;&gt;-->
+<!--				&lt;!&ndash;							class="nav__user-list-item-link"&ndash;&gt;-->
+<!--				&lt;!&ndash;							routerLinkActive="active">&ndash;&gt;-->
+<!--				&lt;!&ndash;							<img&ndash;&gt;-->
+<!--				&lt;!&ndash;								b2bNgxIcon&ndash;&gt;-->
+<!--				&lt;!&ndash;								[name]="sidenavOption.icon"&ndash;&gt;-->
+<!--				&lt;!&ndash;								alt=""&ndash;&gt;-->
+<!--				&lt;!&ndash;								(click)="logOut(); nav.classList.toggle('opened')"&ndash;&gt;-->
+<!--				&lt;!&ndash;								class="nav__user-list-item-link-icon" />&ndash;&gt;-->
+<!--				&lt;!&ndash;							<span>{{ t(sidenavOption.label) }}</span>&ndash;&gt;-->
+<!--				&lt;!&ndash;						</a>&ndash;&gt;-->
+<!--				&lt;!&ndash;					</li>&ndash;&gt;-->
+<!--				&lt;!&ndash;				</ul>&ndash;&gt;-->
+<!--				&lt;!&ndash;			</ng-container>&ndash;&gt;-->
+<!--				<ng-template #withoutUser>-->
+<!--					<div class="nav__without-user">-->
+<!--						<a-->
+<!--							b2bNgxLink-->
+<!--							[routerLink]="b2bNgxLinkService.getLink('/auth/log-in') | async"-->
+<!--							(click)="toggleShowPopUp()"-->
+<!--							class="nav__sign-in"-->
+<!--							[theme]="b2bNgxLinkThemeEnum.BACKGROUND_TRANSPARENT">-->
+<!--							<img b2bNgxIcon name="user-filled" class="nav__sign-in-icon" />-->
+<!--							<span>{{ t("AUTH.LOG_IN") }}</span>-->
+<!--						</a>-->
+<!--						<a-->
+<!--							b2bNgxLink-->
+<!--							[routerLink]="b2bNgxLinkService.getLink('/auth/register-credentials') | async"-->
+<!--							(click)="toggleShowPopUp()"-->
+<!--							class="nav__sign-up"-->
+<!--							[theme]="b2bNgxLinkThemeEnum.BACKGROUND_BLACK"-->
+<!--							>{{ t("AUTH.SIGN_UP") }}</a-->
+<!--						>-->
+<!--					</div>-->
+<!--				</ng-template>-->
+<!--				<ul *ngIf="!(user$ | async)" class="nav-list">-->
+<!--					<li *ngFor="let option of mobileLinks" class="nav-list-item" (click)="openInDevelopmentPopUp(option)">-->
+<!--						<a [routerLink]="option.link" (click)="toggleShowPopUp()" class="nav-list-item-link">{{-->
+<!--							t(option.text)-->
+<!--						}}</a>-->
+<!--						<div *ngIf="option.label" [ngStyle]="{ 'background-color': option.labelBackground }" class="label">-->
+<!--							{{ option.label }}-->
+<!--						</div>-->
+<!--					</li>-->
+<!--				</ul>-->
+<!--				&lt;!&ndash;		</div>&ndash;&gt;-->
+<!--			</div>-->
+<!--		</div>-->
+<!--	</div>-->
+
+<!--	<router-outlet></router-outlet>-->
+<!--	&lt;!&ndash; </ng-container> &ndash;&gt;-->
+<!--</ng-container>-->
+<router-outlet></router-outlet>

@@ -1,0 +1,13 @@
+<div class="dialog" *transloco="let t">
+	<div class="wrapper">
+		<h1>By opening this contact, you are using your "1-offer for $39"</h1>
+		<div class="wrapper-actions">
+			<button type="button" b2bNgxButton [theme]="b2bNgxButtonThemeEnum.BACKGROUND_BLACK" (click)="contactSupplier()">
+				Contact supplier
+			</button>
+			<button type="button" b2bNgxButton [theme]="b2bNgxButtonThemeEnum.BACKGROUND_WHITE" (click)="ref.close()">
+				Cancel
+			</button>
+		</div>
+	</div>
+</div>

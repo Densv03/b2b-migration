@@ -1,0 +1,40 @@
+<div class="user-info">
+	<div class="user-info__user">
+		<img b2bNgxImage [name]="getUserImage()" />
+		<div class="user-info__user__name">
+			<h2>{{ user?.fullName }}</h2>
+			<h3>Manager</h3>
+		</div>
+	</div>
+	<div class="user-info__general-info">
+		<div class="user-info__general-info__left">Country:</div>
+		<div class="user-info__general-info__right">{{ getCountryNameByCode(user?.country) }}</div>
+		<div class="user-info__general-info__left">Phone:</div>
+		<div *ngIf="showBuyerInfo; else showBlurredPhoneNumber">
+			<a [href]="getPhoneNumberLink()" class="user-info__general-info__right">
+				{{ getPhoneNumber() }}
+			</a>
+		</div>
+
+		<ng-template #showBlurredPhoneNumber>
+			<div class="user-info__general-info__right blur">
+				{{ getPhoneNumber() }}
+			</div>
+		</ng-template>
+
+		<div class="user-info__general-info__left">Email:</div>
+		<div *ngIf="showBuyerInfo; else showBlurredEmail">
+			<a [href]="getEmailLink()" class="user-info__general-info__right">
+				{{ getEmail() }}
+			</a>
+		</div>
+
+		<ng-template #showBlurredEmail>
+			<div class="user-info__general-info__right blur">
+				{{ getEmail() }}
+				sfvdfvfd
+			</div>
+		</ng-template>
+	</div>
+	<button *ngIf="showBtn" b2bNgxButton (click)="showDetails()" [disabled]="showBuyerInfo">View Details</button>
+</div>

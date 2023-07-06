@@ -1,0 +1,69 @@
+@import "libs/shared/styles/src/lib";
+
+:host {
+	.ngx-offers-carousel {
+		position: relative;
+		overflow: hidden;
+
+		.ngx-offers-carousel-right-button-wrapper,
+		.ngx-offers-carousel-left-button-wrapper {
+			position: absolute;
+			height: 100%;
+			top: 0;
+			z-index: 1;
+
+			display: flex;
+			align-items: center;
+			justify-content: center;
+
+			.ngx-offers-carousel-left-button,
+			.ngx-offers-carousel-right-button {
+				box-shadow: 2px 2px 32px rgba(126, 142, 167, 0.2);
+				width: 50px;
+				height: 50px;
+				background-color: white;
+				border-radius: 50%;
+
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				&:hover {
+					background-color: #f3f6f8;
+				}
+			}
+
+			&.ngx-offers-carousel-right-button-wrapper {
+				right: 24px;
+			}
+			&.ngx-offers-carousel-left-button-wrapper {
+				left: 24px;
+			}
+		}
+
+		.ngx-offers-carousel-list {
+			display: flex;
+
+			padding: 0 0 24px;
+
+			.ngx-offers-carousel-list-item {
+				margin: 0 8px;
+				width: 380px;
+				@include breakpoint("3") {
+					margin: 0 24px;
+				}
+				background: #ffffff;
+				box-shadow: 4px 4px 24px rgba(126, 142, 167, 0.2);
+				border-radius: 4px;
+			}
+			&:hover {
+				animation-play-state: paused;
+			}
+
+			.img {
+				width: 380px;
+				height: 200px;
+				object-fit: cover;
+			}
+		}
+	}
+}

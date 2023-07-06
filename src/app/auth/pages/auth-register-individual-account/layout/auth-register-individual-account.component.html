@@ -1,0 +1,56 @@
+<div class="auth-register-individual-account__wrapper" *transloco="let t">
+	<div class="auth-register-individual-account__header">
+		<p class="auth-register-individual-account__header-text-wrapper">
+			<span class="auth-register-individual-account__header-text">{{ t("AUTH.ALREADY_HAVE") }}</span>
+			<a
+				(click)="processSignInClick()"
+				b2bNgxLink
+				[theme]="b2bNgxLinkThemeEnum.TEXT_BLUE"
+				[routerLink]="b2bNgxLinkService.getLink('/auth/log-in') | async"
+				class="auth-register-individual-account__header-link"
+				queryParamsHandling="merge"
+				>{{ t("AUTH.LOG_IN") }}</a
+			>
+		</p>
+	</div>
+
+	<div class="auth-register-individual-account__main">
+		<h2 class="auth-register-individual-account__main-title">
+			{{ t("AUTH.REGISTER_INDIVIDUAL_ACCOUNT") }}
+		</h2>
+
+		<form class="auth-register-individual-account__main-form">
+			<ng-container>
+				<button
+					b2bNgxButton
+					type="button"
+					[hidden]="false"
+					[theme]="b2bNgxButtonThemeEnum.BACKGROUND_WHITE"
+					class="auth-register-individual-account__register-with-google-button"
+					(click)="registerWithGoogle()">
+					<img b2bNgxImage name="google" class="auth-register-individual-account__register-with-google-button__icon" />
+					{{ t("AUTH.REGISTER_GOOGLE") }}
+				</button>
+				<button
+					b2bNgxButton
+					type="button"
+					[hidden]="false"
+					[theme]="b2bNgxButtonThemeEnum.BACKGROUND_WHITE"
+					class="auth-register-individual-account__register-with-google-button"
+					(click)="registerWithLinkedIn()">
+					<img
+						b2bNgxImage
+						name="linkedin"
+						class="auth-register-individual-account__register-with-google-button__icon" />
+					{{ t("AUTH.REGISTER_LINKEDIN") }}
+				</button>
+				<b2b-ngx-divider [hidden]="false" theme="white" class="auth-register-individual-account__main-divider"
+					>or</b2b-ngx-divider
+				>
+			</ng-container>
+			<div class="auth-register-individual-account__main-input">
+				<router-outlet></router-outlet>
+			</div>
+		</form>
+	</div>
+</div>

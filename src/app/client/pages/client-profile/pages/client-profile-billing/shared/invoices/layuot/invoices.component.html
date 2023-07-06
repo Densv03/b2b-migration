@@ -1,0 +1,21 @@
+<div class="invoices">
+	<p class="invoices-title">Invoices</p>
+	<p class="invoices-description">For the purpose of industry regulation, your details are required.</p>
+
+	<ul class="invoices-list">
+		<li class="invoice">
+			<span class="data-issued">Data issued</span>
+			<span class="invoice-id">Invoice #</span>
+			<span class="transaction-id">Transaction ID</span>
+			<span class="sum">Sum</span>
+			<span class="status">Status</span>
+		</li>
+		<li *ngFor="let invoice of invoices" class="invoice">
+			<span class="data-issued">{{ invoice.createdDate | date }}</span>
+			<span class="invoice-id">{{ invoice.invoice }}</span>
+			<span class="transaction-id">{{ invoice.transactionId }}</span>
+			<span class="sum">{{ invoice.sum }}</span>
+			<span class="status">{{ invoice.status }}</span>
+		</li>
+	</ul>
+</div>

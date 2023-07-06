@@ -1,0 +1,384 @@
+@import "libs/shared/styles/src/lib";
+
+:host {
+	.about-us {
+		.title {
+			font-weight: 700;
+			font-size: 32px;
+			line-height: 36px;
+			letter-spacing: 0.01em;
+			color: #0f0f11;
+			@include breakpoint("3") {
+				font-size: 26px;
+			}
+			@include breakpoint("2") {
+				font-size: 19px;
+				line-height: 24px;
+			}
+		}
+		.subtitle {
+			font-weight: 400;
+			font-size: 16px;
+			line-height: 24px;
+			letter-spacing: 0.01em;
+			color: #556274;
+			margin-top: 10px;
+			@include breakpoint("3") {
+				font-size: 15px;
+			}
+			@include breakpoint("2") {
+				line-height: 21px;
+				font-size: 13px;
+			}
+		}
+		.about-us-header {
+			background-color: #ffffff;
+			.header-wrapper {
+				width: 80%;
+				padding: 70px 0 50px;
+				margin: auto;
+				.title {
+					text-align: center;
+					width: 65%;
+					margin: auto;
+				}
+				.subtitle {
+					font-size: 18px;
+					width: 65%;
+					text-align: center;
+					margin: auto;
+					margin-top: 20px;
+				}
+				.about-us-logo {
+					width: 80%;
+					margin: auto;
+					margin-top: 20px;
+					img {
+						width: 100%;
+					}
+				}
+			}
+			@include breakpoint("4") {
+				.header-wrapper {
+					padding: 40px 0;
+					.title {
+						width: 100%;
+						font-size: 26px;
+					}
+					.subtitle {
+						width: 100%;
+						font-size: 15px;
+					}
+				}
+			}
+			@include breakpoint("2") {
+				.title {
+					width: 85%;
+				}
+				.subtitle {
+					width: 90%;
+				}
+			}
+		}
+		.about-us-body {
+			width: 85%;
+			margin: auto;
+			padding-top: 70px;
+			&-mobile {
+				display: none;
+			}
+			.subtitle {
+				width: 60%;
+			}
+			.link {
+				text-decoration: underline;
+				cursor: pointer;
+			}
+			.button {
+				background-color: #ffffff;
+				box-shadow: 0 2px 14px 1px rgba(0, 0, 0, 0.06);
+				border-radius: 4px;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				padding: 0 20px;
+				height: 65px;
+				cursor: pointer;
+				margin-bottom: 5px;
+				&:last-child {
+					margin-bottom: 0;
+				}
+				.desktop-arrow,
+				.mobile-arrow {
+					width: 25px;
+				}
+				.desktop-arrow {
+					display: none;
+				}
+				.mobile-arrow {
+					transform: rotate(90deg);
+				}
+			}
+			.active-section {
+				display: block;
+				animation: fadeIn ease 1s;
+			}
+			.active-button {
+				border: 2px solid #005dff;
+				.desktop-arrow {
+					display: block;
+				}
+				.mobile-arrow {
+					transform: rotate(-90deg);
+				}
+			}
+
+			&-content {
+				display: flex;
+				gap: 100px;
+				margin-top: 20px;
+				min-height: 400px;
+				&-buttons {
+					width: 30%;
+					.subtitle {
+						width: 100%;
+						margin-bottom: 20px;
+					}
+					.about-us-body-subtitle {
+						margin-bottom: 20px;
+						width: 100%;
+					}
+				}
+				&-market,
+				&-tradebid,
+				&-cargo {
+					display: none;
+					width: 70%;
+					.title {
+						font-size: 24px;
+					}
+					.subtitle {
+						width: 100%;
+					}
+				}
+				&-market {
+					&-info {
+						background-color: #ffffff;
+						padding: 15px;
+						margin-top: 20px;
+						border: 4px;
+						border-radius: 4px;
+						.title {
+							font-size: 18px;
+						}
+						.use-list {
+							margin-top: 15px;
+						}
+					}
+				}
+				&-tradebid {
+					&-info {
+						display: flex;
+						gap: 15px;
+						height: 310px;
+						margin-top: 20px;
+						.use-list {
+							height: 100%;
+							width: 50%;
+							background-color: #ffffff;
+							padding: 10px;
+							border-radius: 4px;
+							.title {
+								line-height: 34px;
+							}
+							li {
+								margin-bottom: 7px;
+							}
+							.highlight {
+								color: #005dff;
+								padding-left: 5px;
+								text-transform: uppercase;
+							}
+							li {
+								&:last-child {
+									margin-top: 10px;
+									line-height: 24px;
+								}
+							}
+						}
+					}
+				}
+				&-cargo {
+					.subtitle {
+						margin-top: 15px;
+						&:first-child {
+							margin-top: 0;
+						}
+					}
+					.cargo-list {
+						margin-top: 15px;
+						li {
+							font-weight: 400;
+							font-size: 16px;
+							line-height: 24px;
+							letter-spacing: 0.01em;
+							color: #556274;
+							list-style-type: disc;
+						}
+					}
+					&-info {
+						min-height: 360px;
+						.use-list {
+							width: 50%;
+						}
+					}
+				}
+			}
+
+			@include breakpoint("5") {
+				&-content {
+					&-tradebid {
+						&-info {
+							.use-list {
+								.title {
+									line-height: 30px;
+									font-size: 20px;
+								}
+							}
+						}
+					}
+				}
+			}
+
+			@include breakpoint("4") {
+				width: 95%;
+				&-content {
+					gap: 30px;
+					&-tradebid {
+						&-info {
+							.use-list {
+								.title {
+									font-size: 17px;
+									line-height: 28px;
+								}
+							}
+						}
+					}
+				}
+			}
+			@include breakpoint("3") {
+				width: 95%;
+				padding-top: 30px;
+				.subtitle {
+					width: 100%;
+				}
+				&-content {
+					gap: 40px;
+					&-tradebid {
+						&-info {
+							height: auto;
+							flex-direction: column;
+							.use-list {
+								width: 100%;
+							}
+						}
+					}
+				}
+			}
+			@include breakpoint("2") {
+				padding: 30px 10px 0;
+				.button {
+					height: 55px;
+				}
+				&-content {
+					display: none;
+					&-market,
+					&-tradebid,
+					&-cargo {
+						width: 100%;
+						.cargo-list {
+							margin-left: 20px;
+						}
+					}
+				}
+				&-mobile {
+					display: block;
+					padding-bottom: 30px;
+					.active-section {
+						overflow: hidden;
+						margin: 10px 0 20px;
+						animation: heightIncrease 1s ease-in;
+					}
+					.subtitle {
+						margin: 20px 0 10px;
+					}
+				}
+			}
+		}
+		.contact-us {
+			padding-top: 20px;
+			height: 435px;
+			position: relative;
+
+			img {
+				position: absolute;
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+			}
+			.text-wrapper {
+				position: relative;
+				padding-top: 50px;
+				width: 50%;
+				margin: auto;
+				@include breakpoint("3") {
+					width: 80%;
+				}
+				@include breakpoint("1") {
+					width: 85%;
+				}
+				.title {
+					color: #ffffff;
+					text-align: center;
+				}
+				.description {
+					margin-top: 25px;
+					font-weight: 400;
+					font-size: 18px;
+					line-height: 134%;
+					letter-spacing: 0.01em;
+					color: #ffffff;
+					@include breakpoint("1") {
+						font-size: 14px;
+					}
+				}
+				button {
+					padding: 15px 50px;
+					display: block;
+					margin: 20px auto 0;
+				}
+			}
+			@include breakpoint("1") {
+				height: 350px;
+			}
+		}
+	}
+
+	@keyframes heightIncrease {
+		0% {
+			max-height: 0;
+		}
+		100% {
+			max-height: 1500px;
+		}
+	}
+
+	@keyframes fadeIn {
+		0% {
+			opacity: 0;
+		}
+		100% {
+			opacity: 1;
+		}
+	}
+}

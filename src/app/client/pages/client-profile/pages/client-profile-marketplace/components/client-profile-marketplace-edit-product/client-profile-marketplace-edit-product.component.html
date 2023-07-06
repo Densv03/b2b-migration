@@ -1,0 +1,156 @@
+<div class="client-profile-add-offer-wrapper">
+	<div class="client-profile-add-offer">
+		<p class="client-profile-add-offer-title">Product editing</p>
+		<div
+			class="badge"
+			[class.invalid]="
+				formState['title']?.errors?.latin ||
+				formState['contactCompanyName']?.errors?.latin ||
+				formState['contactPersonName']?.errors?.latin
+			">
+			<img b2bNgxIcon name="info-1" />
+			<div class="text">B2B Discount is an international platform, therefore, the product info must be entered in English</div>
+		</div>
+
+		<form errorTailor [formGroup]="formGroup">
+			<div class="product-details">
+				<div class="title">Product details</div>
+				<div class="control-wrapper">
+					<input
+						type="text"
+						b2bNgxInput
+						[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"
+						formControlName="title"
+						placeholder="Enter the product name"
+						label="Product name" />
+				</div>
+
+				<div class="control-wrapper">
+					<textarea
+						b2bNgxTextarea
+						[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"
+						class="specifications-area"
+						formControlName="specifications"
+						placeholder="Describe your product"
+						label="Specifications / Features"></textarea>
+				</div>
+
+				<div class="control-wrapper">
+					<b2b-categories-dialog
+						formControlName="category"
+						[touched]="formState['category'].touched"
+						[theme]="b2bNgxSelectThemeEnum.BACKGROUND_GRAY"
+						[required]="true"
+						[multiple]="false"
+						[errors]="formState['category'].errors"
+					></b2b-categories-dialog>
+				</div>
+				<div class="control-wrapper">
+					<input
+						type="text"
+						b2bNgxInput
+						[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"
+						formControlName="price"
+						placeholder="$"
+						label="Price, USD" />
+				</div>
+
+				<div class="control-wrapper">
+					<b2b-ngx-file
+						[isPhoto]="true"
+						[isClickable]="true"
+						formControlName="photos"
+						class="client-profile-add-offer-right-documents"
+						[errors]="formGroup.getControl('documents')?.errors"
+						[label]="'Choose photos'"
+						>Choose photos</b2b-ngx-file
+					>
+				</div>
+				<p *ngIf="formState['photos'].touched && formState['photos'].errors?.required" class="error" [@fadeInOut]>
+					Photo is required
+				</p>
+				<div class="tip">Please use only real photos of the cargo. All photos will be checked by the moderators.</div>
+
+			</div>
+
+			<div class="product-price">
+				<div class="short-selects">
+					<div class="control-wrapper">
+						<input
+							type="text"
+							b2bNgxInput
+							[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"
+							formControlName="amount"
+							placeholder="Enter quantity"
+							label="Supply ability" />
+					</div>
+
+					<div class="control-wrapper">
+						<b2b-ngx-select
+							[options]="unit$ | async"
+							formControlName="unit"
+							[touched]="formState['unit'].touched"
+							bindValue="_id"
+							bindLabel="displayName"
+							label="Measure"
+							[theme]="b2bNgxSelectThemeEnum.BACKGROUND_GRAY"
+							placeholder="Measure"
+							[class.rfq__input]="hideLabel$ | async">
+							<span *ngIf="!(hideLabel$ | async)">&nbsp;</span>
+						</b2b-ngx-select>
+					</div>
+				</div>
+
+				<div class="control-wrapper">
+					<b2b-ngx-country-select
+						formControlName="country"
+						placeholder="Country"
+						[theme]="b2bNgxSelectThemeEnum.BACKGROUND_GRAY">
+						Country of origin
+					</b2b-ngx-country-select>
+				</div>
+
+				<div class="control-wrapper">
+					<div class="title">Shipping information</div>
+					<b2b-ngx-multiselect
+						[touched]="formState['shipping'].touched"
+						[errors]="formState['shipping'].errors"
+						[options]="shippingMethods"
+						formControlName="shipping"
+						placeholder="Select">
+						Available shipping options
+					</b2b-ngx-multiselect>
+				</div>
+
+				<div class="control-wrapper">
+					<div class="title">Payment details</div>
+					<b2b-ngx-multiselect
+						[touched]="formState['paymentMethods'].touched"
+						[errors]="formState['paymentMethods'].errors"
+						[options]="paymentMethods"
+						formControlName="paymentMethods"
+						placeholder="Select">
+						Available payment options
+					</b2b-ngx-multiselect>
+				</div>
+
+			</div>
+		</form>
+	</div>
+	<div *ngIf="editMode === EditModeEnum.ARCHIVE; else editButtons" class="form-buttons">
+		<button (click)="cancel()" b2bNgxButton [theme]="b2bNgxButtonThemeEnum.OUTLINE_GRAY">Cancel</button>
+		<button (click)="updateAndRestore()" b2bNgxButton [theme]="b2bNgxButtonThemeEnum.BACKGROUND_BLACK">
+			Save & Submit
+		</button>
+	</div>
+	<ng-template #editButtons>
+		<div class="form-buttons">
+<!--			<button (click)="delete()" b2bNgxButton [theme]="b2bNgxButtonThemeEnum.OUTLINE_GRAY">Delete</button>-->
+			<button (click)="cancel()" b2bNgxButton [theme]="b2bNgxButtonThemeEnum.OUTLINE_GRAY">Cancel</button>
+			<button (click)="archive()" b2bNgxButton [theme]="b2bNgxButtonThemeEnum.OUTLINE_GRAY">Archive</button>
+			<button (click)="updateProduct()" b2bNgxButton [theme]="b2bNgxButtonThemeEnum.BACKGROUND_BLACK">
+				Save Changes
+			</button>
+		</div>
+	</ng-template>
+</div>

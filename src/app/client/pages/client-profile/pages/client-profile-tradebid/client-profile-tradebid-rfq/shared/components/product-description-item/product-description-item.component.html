@@ -1,0 +1,30 @@
+<div class="rfq-card">
+	<div class="rfq-card-item rfq-card-item-1">
+		<div class="item-photo">
+			<img b2bNgxImage [name]="imageName" [imageExtension]="'svg'" />
+		</div>
+		<div class="item-descr">
+			<div class="product-name">Product: {{ productName }}</div>
+			<div class="product-quantity"><span>Quantity:</span> {{ quantity }} pieces</div>
+			<div class="product-info">
+				<div class="product-info-item">
+					<div class="product-info-title">Received offers</div>
+					<div class="product-info-text">{{ recievedOffers }}</div>
+				</div>
+				<div class="product-info-item">
+					<div class="product-info-title">Posted</div>
+					<div class="product-info-text">{{ myRfqItem.createdAt | date }}</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="rfq-card-item rfq-card-item-2">
+		<b2b-rfq-buttons
+			(edit)="onEdit()"
+			(archivate)="onArchivate()"
+			(restore)="onRestore()"
+			(delete)="onDelete()"
+			[rfqButtonType]="buttonType"
+			[rfqId]="myRfqItem._id"></b2b-rfq-buttons>
+	</div>
+</div>

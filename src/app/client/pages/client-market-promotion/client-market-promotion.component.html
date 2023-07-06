@@ -1,0 +1,157 @@
+<div class="promotion">
+	<div class="promotion__header">
+		<div class="promotion__header__wrapper">
+			<div class="promotion__header__wrapper__info">
+				<div class="promotion__header__wrapper__info__title">B2B Market</div>
+				<h1 class="promotion__header__wrapper__info__subtitle">Supplier Promotion Program</h1>
+				<div class="promotion__header__wrapper__info__text">
+					<b>B2B Discount</b> is a rapidly growing international platform for wholesale trade with more than
+					<b>30 000</b> registered users. Further development of our platform lies in mutually beneficial and close
+					cooperation with suppliers.
+				</div>
+				<div class="promotion__header__wrapper__info__text">
+					This is why we’re launching a new service called
+					<b>the B2B Market Suppliers Promotion Program (SPP).</b>
+				</div>
+				<div class="promotion__header__wrapper__info__text">
+					With this service, we will promote registered suppliers in the digital space and through our business
+					partners.
+				</div>
+
+				<div class="promotion__header__wrapper__info__buttons">
+					<button
+						[routerLink]="
+							(user$ | async) ? '/profile/your-workspace/b2bmarket' : '/auth/register-credentials'
+						"
+						b2bNgxButton
+						[theme]="b2bNgxButtonThemeEnum.BACKGROUND_BLUE">
+						Join us
+					</button>
+					<button
+						(click)="scrollToBlock(promotionSteps)"
+						class="blue-button"
+						b2bNgxButton
+						[theme]="b2bNgxButtonThemeEnum.OUTLINE_BLUE">
+						Learn more
+					</button>
+				</div>
+			</div>
+			<img
+				class="promotion__header__wrapper__image"
+				b2bNgxImage
+				name="market-promotion/promotion-label"
+				imageExtension="jpeg"
+				alt="logo" />
+		</div>
+	</div>
+	<div #promotionSteps class="promotion__steps">
+		<div class="promotion__steps__wrapper">
+			<div class="promotion__steps__wrapper__title">The new service will be free</div>
+			<div class="promotion__steps__wrapper__free-until">until August 31, 2023</div>
+			<div class="promotion__steps__wrapper__subtext">for all those joining the SPP.</div>
+			<div class="promotion__steps__wrapper__subtitle">Here is what you need to do to participate in the Program:</div>
+
+			<div class="promotion__steps__wrapper__block">
+				<div *ngFor="let step of getStepsToParticipateProgram()" class="promotion__steps__wrapper__block__item">
+					<img b2bNgxIcon [name]="step.icon" class="promotion__steps__wrapper__block__item__image" />
+					<div class="promotion__steps__wrapper__block__item__title">{{ step.text }}</div>
+				</div>
+			</div>
+
+			<div class="promotion__steps__wrapper__text">
+				You will automatically become an SPP participant once our moderators check your profile.
+			</div>
+			<button
+				[routerLink]="(user$ | async) ? '/b2bmarket/product' : '/auth/register-credentials'"
+				b2bNgxButton
+				[theme]="b2bNgxButtonThemeEnum.BACKGROUND_BLUE"
+				class="promotion__steps__wrapper__button">
+				Apply as a supplier
+			</button>
+		</div>
+	</div>
+	<div class="promotion__benefit">
+		<div class="promotion__benefit__title">This is how you will benefit from the Program:</div>
+		<div class="promotion__benefit__block">
+			<div *ngFor="let benefit of getProgramBenefits()" class="promotion__benefit__block__item">
+				<div
+					[ngClass]="{ 'modified-block': benefit.backgroundColorIsWhite === true }"
+					class="promotion__benefit__block__item__title">
+					{{ benefit.title }}
+				</div>
+				<div class="promotion__benefit__block__item__text">{{ benefit.text }}</div>
+			</div>
+		</div>
+	</div>
+	<div class="promotion__aim">
+		<div class="promotion__aim__wrapper">
+			<div class="promotion__aim__wrapper__title">The aim of our new SPP service</div>
+			<div class="promotion__aim__wrapper__text">
+				is to attract more companies with quality goods to our platform while also helping them scale their businesses
+				internationally and bring in new clients.
+			</div>
+		</div>
+	</div>
+	<div class="promotion__feedback">
+		<div class="promotion__feedback__wrapper">
+			<div class="promotion__feedback__wrapper__title">Do you have any questions?</div>
+			<div class="promotion__feedback__wrapper__subtitle">
+				Leave a request and our representative will contact you shortly!
+			</div>
+			<form [formGroup]="formGroup" (ngSubmit)="sendMessage(formGroup)" class="promotion__feedback__wrapper__form">
+				<div class="control-wrapper">
+					<input
+						b2bNgxInput
+						[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"
+						[placeholder]="'John Doe'"
+						formControlName="name"
+						[label]="'Full name'"
+						labelClass="client-contact-us-form-input" />
+				</div>
+				<div class="control-wrapper">
+					<b2b-ngx-tel
+						[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"
+						class="client-contact-us-form-input"
+						formControlName="phone"
+						>Phone number
+					</b2b-ngx-tel>
+				</div>
+				<div class="control-wrapper">
+					<textarea
+						b2bNgxTextarea
+						[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"
+						[placeholder]="'Message'"
+						formControlName="text"
+						[label]="'Your comment'"
+						labelClass="client-contact-us-form-textarea"></textarea>
+				</div>
+				<button
+					b2bNgxButton
+					type="submit"
+					class="client-contact-us-form-button"
+					[theme]="b2bNgxButtonThemeEnum.OUTLINE_BLUE">
+					Send
+				</button>
+			</form>
+		</div>
+	</div>
+	<div class="promotion__features">
+		<div class="promotion__features__wrapper">
+			<div class="promotion__features__wrapper__title">Coming soon</div>
+			<div class="promotion__features__wrapper__subtitle">
+				Here are a few other helpful features we plan to introduce within the next 3 months:
+			</div>
+			<div class="promotion__features__wrapper__block">
+				<div *ngFor="let feature of getPromotionFeatures()" class="promotion__features__wrapper__block__item">
+					<div class="title">{{ feature.title }}</div>
+					<div class="description">{{ feature.description }}</div>
+					<div class="footer">
+						<div class="release-date">{{ feature.releaseDate }}</div>
+						<img b2bNgxImage [name]="feature.photo" imageExtension="jpeg" alt="photo" />
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<b2b-write-to-support></b2b-write-to-support>
+</div>

@@ -1,0 +1,59 @@
+<ng-container *transloco="let t">
+	<div class="client-trading-wiki-article" *ngIf="article$ | async as article">
+		<div class="client-trading-wiki-article-container">
+			<p class="client-trading-wiki-article-title">{{ article.title }}</p>
+			<p class="client-trading-wiki-article-date">{{ article.createdAt | date }}, by {{ article.author }}</p>
+
+			<div class="client-trading-wiki-article-text" [innerHTML]="article.description"></div>
+		</div>
+
+		<div class="client-trading-wiki-article__share">
+			<div class="client-trading-wiki-article__share-left">
+				<img b2bNgxIcon name="link" alt="" />
+			</div>
+			<div class="client-trading-wiki-article__share-middle">
+				<p class="client-trading-wiki-article__share-middle-text">{{ t("TRADING_WIKI.SHARE") }}</p>
+			</div>
+			<div class="client-trading-wiki-article__share-right">
+				<ul class="client-trading-wiki-article__share-right-social-medias">
+					<li class="client-trading-wiki-article__share-right-social-media" *ngFor="let socialMedia of socialMedias">
+						<button
+							[shareButton]="socialMedia.share"
+							[description]="article.description"
+							[title]="article.title"
+							class="client-trading-wiki-article__share-right-social-media-link"
+							(click)="processShareBtn(article.share)">
+							<img b2bNgxIcon [name]="socialMedia.icon" />
+						</button>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+		<form
+			[formGroup]="formGroup"
+			(ngSubmit)="createCommnet(article._id, formGroup.value)"
+			class="client-trading-wiki-article__comments">
+			<p class="client-trading-wiki-article__comments-title"></p>
+			<textarea
+				class="client-trading-wiki-article__comments-textarea"
+				rows="5"
+				b2bNgxTextarea
+				[placeholder]="t('PLACEHOLDERS.YOUR_COMMENT')"
+				formControlName="text"></textarea>
+			<button
+				class="client-trading-wiki-article__comments-button"
+				b2bNgxButton
+				[theme]="b2bNgxButtonThemeEnum.BACKGROUND_BLACK">
+				{{ t("TRADING_WIKI.POST_COMMENT") }}
+			</button>
+
+			<ul class="client-trading-wiki-article__comments-list">
+				<li class="client-trading-wiki-article__comment" *ngFor="let comment of commnets$ | async">
+					<p class="client-trading-wiki-article__comment-author">{{ comment.author.fullName }}</p>
+					<p class="client-trading-wiki-article__comment-message">{{ comment.text }}</p>
+				</li>
+			</ul>
+		</form>
+	</div>
+</ng-container>

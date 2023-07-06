@@ -1,0 +1,212 @@
+<div class="client-profile-offer-bg" *transloco="let t">
+	<div
+		[class]="'client-profile-offer ' + (offer.reasonForDeletion ? 'client-profile-offer-deleted' : '')"
+		*ngIf="offer; else loadingOffer">
+		<div *ngIf="offer.hasOwnProperty('offerApproved') && !offer.offerApproved && !offer.offerRejected">
+			<p class="badge badge-moderate">
+				<img b2bNgxIcon name="info-1" />
+
+				{{ t("OFFER.BADGE_MODERATE") }}
+			</p>
+		</div>
+		<div class="client-profile-offer-container">
+			<div class="client-profile-offer-left">
+				<b2b-ngx-images-carousel
+					*ngIf="offer.visibility.photos; else photosHidden"
+					(click)="offer.reasonForDeletion ? null : openImages()"
+					[options]="offer.photos"
+					className="client-profile-offer-images"></b2b-ngx-images-carousel>
+
+				<div *ngIf="offer.reasonForDeletion" class="disable">
+					<p *ngIf="offer.reasonForDeletion === 'Deleted by admin'; else SOLD">DELETED</p>
+					<ng-template #SOLD>
+						<p>SOLD</p>
+					</ng-template>
+				</div>
+			</div>
+
+			<ng-template #photosHidden>
+				<img b2bNgxImage name="logo" src="" alt="" />
+				<p class="hidden-photos">{{ t("OFFER.PHOTO_HIDDEN") }}</p>
+			</ng-template>
+
+			<div class="client-profile-offer-center">
+				<h1 class="client-profile-offer-title">{{ offer.title }}</h1>
+				<hr />
+				<p class="client-profile-offer-available" *ngIf="!offer.reasonForDeletion">
+					<span class="client-profile-offer-units">{{ offer.amount?.count }} {{ offer.amount?.unit?.name }}</span>
+					<span class="client-profile-offer-available-title">{{ t("OFFER.AVAILABLE") }}</span>
+					<span class="client-profile-offer-discount">-{{ offer.price?.discount }}%</span>
+				</p>
+				<p class="client-profile-offer-price-container">
+					<span class="client-profile-offer-price-old-price">${{ offer.price?.old }}</span>
+					<span class="client-profile-offer-price-dollar-sign">$</span>
+					<span class="client-profile-offer-price-current-price">{{ offer.price?.new }} </span>
+					<span class="client-profile-offer-price-units"
+						>{{ t("SHARED.PER") }} {{ t("UNITS." + offer.amount.unit.name.toUpperCase()) }}</span
+					>
+				</p>
+				<hr />
+				<p class="client-profile-offer-shipping-details">{{ t("OFFER.SHIPPING_DETAILS") }}</p>
+				<p class="client-profile-offer-type" *ngIf="isAuth">
+					{{ t("OFFER." + (offer?.transportType?.name === "bulk_vessel" ? "VESSEL_NUMBER" : "CONTAINER_NUMBER")) }}:
+					{{ offer.container }}
+				</p>
+				<p class="client-profile-offer-type" *ngIf="!isAuth">
+					{{ t("OFFER." + (offer?.transportType?.name === "bulk_vessel" ? "VESSEL_NUMBER" : "CONTAINER_NUMBER")) }}:
+					{{ offer.container | slice: 0:2 }}
+					XXX XXX XXX
+					<button
+						b2bNgxButton
+						[theme]="b2bNgxButtonThemeEnum.OUTLINE_BLACK"
+						routerLink="/auth/register-credentials"
+						class="link">
+						Show
+					</button>
+				</p>
+				<p class="client-profile-offer-route">
+					{{ t("TRACKING.FROM") }} {{ offer.destination?.from }} to {{ offer.destination?.to }}
+				</p>
+				<p class="client-profile-offer-eta">
+					Current location: {{getCurrentLocation(offer?.currentLocation)}}
+				</p>
+				<p class="client-profile-offer-eta">
+					POL: <span *ngIf="location?.pol; else none">{{ location.pol }}</span>
+				</p>
+				<p class="client-profile-offer-eta">
+					POD: <span *ngIf="location?.pod; else none">{{ location?.pod }}</span>
+				</p>
+				<p class="client-profile-offer-eta">
+					ЕТА to POD: <span *ngIf="location?.etaToPod; else none">{{ location?.etaToPod | date }}</span>
+				</p>
+				<p class="client-profile-offer-eta" *ngIf="offer?.transportType?.name !== 'bulk_vessel'">
+					{{ t("TRACKING.TRANSIT_PROST") }}
+					<span *ngIf="location?.etaToTransitPort; else none">{{ location?.etaToTransitPort | date }}</span>
+				</p>
+
+				<p class="badge" *ngIf="!location && offer.isMine">
+					{{ t("TRACKING.ERROR_MINE") }}
+				</p>
+				<p class="badge" *ngIf="!location && !offer.isMine">
+					{{ t("TRACKING.ERROR") }}
+				</p>
+
+				<div class="client-profile-offer-map-wrapper">
+					<img b2bNgxImage class="client-profile-offer-map" name="map" alt="" />
+					<button class="client-profile-offer-map-button" (click)="openMap()" [disabled]="offer.reasonForDeletion">
+						<img b2bNgxIcon name="map-arrow" />
+						{{ t("OFFER.VIEW_ON_MAP") }}
+					</button>
+					<div *ngIf="offer.reasonForDeletion" class="client-profile-offer-map-wrapper-disable"></div>
+				</div>
+
+				<ng-template #none>
+					<span>None</span>
+				</ng-template>
+
+				<div *ngIf="!isAuth && offer.documents && offer?.documents?.length" class="see-documents">
+					<div>
+						<p>To see attached document you must sign in</p>
+						<button
+							routerLink="/auth/register-credentials"
+							b2bNgxButton
+							[theme]="b2bNgxButtonThemeEnum.BACKGROUND_BLUE"
+							class="ngx-latest-offers-grid-item-blured-button">
+							<img b2bNgxIcon name="" alt="" />
+							Sign in / Sign up
+						</button>
+					</div>
+				</div>
+				<div [class.blured]="!isAuth" *ngIf="offer.documents && offer?.documents?.length">
+					<p class="client-profile-offer-verified-documents">{{ t("OFFER.VERIFIED_DOCUMENTS") }}</p>
+					<ul class="documents">
+						<li
+							class="document"
+							*ngFor="let document of offer.documents"
+							(click)="offer.reasonForDeletion || !isAuth ? null : openDocument(document)"
+							[class.gray]="document.isDocument">
+							<img *ngIf="document.isImage" [src]="document.fullPath" alt="" />
+							<p *ngIf="document.isDocument">{{ document.extension }}</p>
+						</li>
+					</ul>
+				</div>
+				<ul class="client-profile-offer-verified-documents-list">
+					<li class="client-profile-offer-verified-document"></li>
+				</ul>
+
+				<p class="client-profile-offer-desciption-title">{{ t("OFFER.DESCRIPTION") }}</p>
+				<p class="client-profile-offer-desciption">{{ offer.description }}</p>
+			</div>
+
+			<div class="client-profile-offer-right">
+				<div class="client-profile-offer-contact">
+					<p class="client-profile-offer-contact-title">{{ t("OFFER.CONTACT_SUPPLIER") }}</p>
+					<p class="client-profile-offer-contact-info" [class.blured]="!isAuth">
+						<span class="client-profile-offer-contact-name">{{ offer.contact?.companyName }}</span>
+					</p>
+					<!--					<a-->
+					<!--						b2bNgxLink-->
+					<!--						(click)="processContactSupplierClick(offer)"-->
+					<!--						[class.disabled]="offer.isMine || offer.reasonForDeletion"-->
+					<!--						[routerLink]="null"-->
+					<!--						[theme]="b2bNgxLinkThemeEnum.BACKGROUND_BLACK"-->
+					<!--						class="client-profile-offer-contact-contact-link"-->
+					<!--						>Contact seller</a-->
+					<!--					>-->
+					<button
+						b2bNgxButton
+						[id]="
+							user?._id
+								? 'unclaimed-cargo-offer-details-contact-seller'
+								: 'unclaimed-cargo-unregistered-offer-details-contact-seller'
+						"
+						[theme]="b2bNgxButtonThemeEnum.BACKGROUND_BLACK"
+						(click)="processContactSupplierClick(offer)"
+						[class.disabled]="offer.isMine || offer.reasonForDeletion"
+						class="client-profile-offer-contact-contact-link">
+						Contact seller
+					</button>
+				</div>
+				<div class="client-profile-offer-report">
+					<img b2bNgxImage name="alert" />
+					<button
+						[ngxTippy]="tooltipTemplate"
+						tippyClassName="tooltip"
+						[disabled]="offer.reasonForDeletion"
+						[tippyProps]="{
+							arrow: false,
+							placement: 'bottom',
+							theme: 'light',
+							allowHtml: true
+						}"
+						(click)="openReportPopover()">
+						{{ t("OFFER.REPORT_LOT") }}
+					</button>
+					<span #tooltipTemplate>
+						{{ t("OFFER.REPORT_TOOLTIP") }}
+					</span>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<ng-template #errorOffer>
+		<div class="not-offer-container">
+			<p class="not-offer-title">{{ t("OFFER.IS_NOT_ACTUAL") }}</p>
+
+			<a
+				b2bNgxLink
+				[routerLink]="b2bNgxLinkService.getLink('/latest-offers') | async"
+				[theme]="b2bNgxLinkThemeEnum.BACKGROUND_BLACK"
+				class="not-offer-button"
+				>{{ t("LINKS.GO_TO_OFFERS") }}</a
+			>
+		</div>
+	</ng-template>
+
+	<ng-template #loadingOffer>
+		<ng-container *ngIf="loading; else errorOffer">
+			<b2b-ngx-skeleton [options]="offerSkeletonOptions"></b2b-ngx-skeleton>
+		</ng-container>
+	</ng-template>
+</div>

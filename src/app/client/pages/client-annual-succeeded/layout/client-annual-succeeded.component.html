@@ -1,0 +1,25 @@
+<div class="thank-you" *transloco="let t">
+	<img class="image" b2bNgxIcon name="thank-you" />
+	<p class="title">Thank you!</p>
+	<p class="description">
+		Access will be provided after the bank confirms the payment. Usually it takes no more than 15 minutes. The invoice
+		will be sent to the specified email address.
+	</p>
+
+	<div class="buttons">
+		<a
+			b2bNgxButton
+			[routerLink]="b2bNgxLinkService.getLink('/latest-offers') | async"
+			[theme]="b2bNgxButtonThemeEnum.OUTLINE_BLACK"
+			class="home"
+			>Home Page</a
+		>
+		<a
+			b2bNgxLink
+			[routerLink]="b2bNgxLinkService.getLink('/') | async"
+			[theme]="b2bNgxLinkThemeEnum.BACKGROUND_BLACK"
+			class="view-offers"
+			>View Offers</a
+		>
+	</div>
+</div>

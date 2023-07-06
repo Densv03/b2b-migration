@@ -1,0 +1,7 @@
+<form [formGroup]="form">
+	<b2b-categories-dialog
+		formControlName="productCategories"
+		[required]="false">
+	</b2b-categories-dialog>
+	<button b2bNgxButton [theme]="b2bNgxButtonThemeEnum.OUTLINE_GRAY" (click)="resetForm()">Clear All</button>
+</form>

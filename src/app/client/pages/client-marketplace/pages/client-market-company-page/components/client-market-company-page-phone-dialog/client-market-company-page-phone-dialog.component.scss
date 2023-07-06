@@ -1,0 +1,64 @@
+@import "libs/shared/styles/src/lib";
+
+:host {
+	.modal-wrapper {
+		width: 450px;
+
+		@include breakpoint("2") {
+			width: 260px;
+		}
+
+		&__header {
+			display: flex;
+			width: 100%;
+			justify-content: space-between;
+			margin-bottom: 10px;
+
+			.close-btn {
+				width: 10px;
+			}
+
+			&__title {
+				font-size: 21px;
+				font-weight: 700;
+				@include breakpoint("2") {
+					font-size: 19px;
+				}
+			}
+		}
+
+		.hr {
+			width: 108%;
+			margin-left: -4%;
+			height: 1px;
+			background-color: rgba(0, 0, 0, .12);
+		}
+
+		.phone-container {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			overflow: hidden;
+
+			&__title {
+				font-size: 12px;
+				color: rgba(0, 0, 0, .6);
+			}
+
+			&__button {
+				display: flex;
+				width: 70%;
+				height: 40px;
+				color: #000;
+				padding: 10px;
+				justify-content: center;
+				align-items: center;
+
+				&__icon {
+					margin-right: 10px;
+				}
+			}
+		}
+	}
+}
+

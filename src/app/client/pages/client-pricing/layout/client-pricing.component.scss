@@ -1,0 +1,148 @@
+@import "libs/shared/styles/src/lib";
+
+.client-pricing {
+	background: #f3f6f8;
+	padding: 20px 40px;
+	@include breakpoint("3") {
+		padding: 0;
+	}
+	.client-pricing-container {
+		background-color: white;
+		border-radius: 4px;
+		padding: 30px 32px;
+
+		.client-pricing-container-title {
+			font-size: 32px;
+			letter-spacing: 0.01em;
+			text-align: center;
+			color: #0f0f11;
+			font-weight: bold;
+			@include breakpoint("3") {
+				text-align: left;
+			}
+		}
+		.client-pricing-container-description {
+			margin-top: 8px;
+			font-size: 14px;
+			text-align: center;
+			color: #556274;
+			@include breakpoint("3") {
+				text-align: left;
+			}
+		}
+
+		.client-pricing-packages {
+			display: flex;
+			justify-content: center;
+			flex-wrap: wrap;
+			margin-top: 40px;
+			.client-pricing-package-seller,
+			.client-pricing-package-buyer {
+				display: flex;
+				flex-direction: column;
+				justify-content: space-between;
+				background: #ffffff;
+				box-shadow: 0 2px 14px 1px rgba(0, 0, 0, 0.06);
+				border-radius: 6px;
+				border: 2px solid transparent;
+
+				width: 25%;
+				margin: 0 12.5px;
+
+				&:first-child {
+					margin-left: 0;
+				}
+
+				&:last-child {
+					margin-right: 0;
+				}
+
+				.client-pricing-package-header {
+					padding: 20px 15px;
+					.client-pricing-package-header-title {
+						display: flex;
+						justify-content: space-between;
+						align-items: center;
+						.client-pricing-package-header-title-1 {
+							font-weight: bold;
+							font-size: 32px;
+							color: #000000;
+						}
+						.client-pricing-package-header-title-2 {
+							font-weight: 500;
+							font-size: 22px;
+						}
+						.client-pricing-package-header-title-3 {
+							font-weight: 500;
+							font-size: 22px;
+						}
+						.client-pricing-package-header-title-4 {
+							display: block;
+							font-size: 14px;
+							line-height: 16px;
+							text-align: right;
+							color: #556274;
+						}
+					}
+					.client-pricing-package-header-description {
+						text-align: center;
+						margin-top: 16px;
+						font-size: 14px;
+						line-height: 16px;
+						color: #9fa4bb;
+					}
+				}
+				.client-pricing-package-main {
+					padding: 20px 15px 41px;
+					flex: 1;
+					border-top: 1px solid #e3eaf1;
+				}
+				.client-pricing-package-footer {
+					padding: 20px 15px;
+					.client-pricing-package-footer-link {
+						display: block;
+						width: 100%;
+						padding: 11px 0;
+						text-align: center;
+					}
+				}
+
+				&.client-pricing-package-buyer {
+					border-color: #005dff;
+				}
+
+				@include breakpoint("5") {
+					width: 35%;
+				}
+				@include breakpoint("4") {
+					width: 45%;
+				}
+				@include breakpoint("3") {
+					width: 100%;
+					margin: 24px 0 0;
+					&:first-child {
+						margin-top: 0;
+					}
+				}
+			}
+		}
+	}
+}
+
+.buy,
+.post-your-listing {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 48px;
+	margin-top: 16px;
+
+	border-radius: 4px;
+	&.buy {
+		background: #005dff;
+	}
+	&.post-your-listing {
+		background: #0f0f11;
+	}
+}

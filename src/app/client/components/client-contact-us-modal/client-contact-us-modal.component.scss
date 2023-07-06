@@ -1,0 +1,86 @@
+:host {
+	::ng-deep {
+		.nsm-dialog {
+			max-width: none !important;
+			.nsm-content {
+				padding: 0 !important;
+			}
+		}
+	}
+}
+
+.client-contact-us {
+	.client-contact-us-header {
+		width: 80%;
+		margin: 60px auto 0;
+		.client-contact-us-header-title {
+			font-weight: bold;
+			font-size: 32px;
+			color: #0f0f11;
+			text-align: center;
+		}
+		.client-contact-us-header-description {
+			font-weight: normal;
+			color: #556274;
+			text-align: center;
+			margin-top: 10px;
+		}
+	}
+
+	.client-contact-us-form {
+		width: 80%;
+		margin: 32px auto;
+		.client-contact-us-form-select {
+			display: block;
+		}
+		.client-contact-us-form-input {
+			display: block;
+			margin-top: 16px;
+		}
+		.client-contact-us-form-textarea {
+			display: block;
+			margin-top: 16px;
+		}
+		.client-contact-us-form-button {
+			margin-top: 16px;
+			padding: 15px;
+			width: 100%;
+		}
+	}
+
+	.client-contact-us-footer {
+		margin-top: 24px;
+		padding: 23px 0;
+		background: #f3f6f8;
+		border-radius: 0px 0px 4px 4px;
+		.client-contact-us-footer-icons-list {
+			display: flex;
+			justify-content: center;
+			.client-contact-us-footer-icons-list-item {
+				margin: 0 5px;
+				&:first-child {
+					margin-left: 0;
+				}
+				&:last-child {
+					margin-right: 0;
+				}
+				.client-contact-us-footer-icons-list-item-href {
+					width: 45px;
+					height: 45px;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					border-radius: 50%;
+					background-color: white;
+				}
+			}
+		}
+		.client-contact-us-footer-description {
+			width: 80%;
+			margin: 16px auto;
+			text-align: center;
+			font-size: 14px;
+			color: #556274;
+		}
+	}
+}

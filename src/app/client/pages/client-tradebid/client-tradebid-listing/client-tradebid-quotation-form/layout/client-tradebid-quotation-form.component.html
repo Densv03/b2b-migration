@@ -1,0 +1,386 @@
+<div class="quotation" *transloco="let t">
+	<img b2bNgxImage name="tradebid-quotation-header" imageExtension="png" />
+	<div class="quotation__wrapper">
+		<form class="quotation__wrapper__form" [formGroup]="form" (ngSubmit)="submitForm()">
+			<div class="quotation__wrapper__form__container" formGroupName="quotationForm">
+				<h2>Quotation form</h2>
+
+				<input
+					class="form__input"
+					b2bNgxInput
+					placeholder="Product name"
+					label="Product name"
+					[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"
+					formControlName="productName" />
+				<p
+					*ngIf="
+						this.form.get('quotationForm').get('productName').touched &&
+						this.form.get('quotationForm').get('productName').errors?.latin
+					"
+					class="error"
+					[@fadeInOut]>
+					Please use only latin letters
+				</p>
+				<p
+					*ngIf="
+						this.form.get('quotationForm').get('productName').touched &&
+						this.form.get('quotationForm').get('productName').errors?.required
+					"
+					class="error"
+					[@fadeInOut]>
+					This field is required
+				</p>
+				<input
+					class="form__input normal-inp"
+					b2bNgxInput
+					placeholder="Indicate products specification"
+					label="Specifications"
+					[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"
+					formControlName="specifications" />
+				<p
+					*ngIf="
+						this.form.get('quotationForm').get('specifications').touched &&
+						this.form.get('quotationForm').get('specifications').errors?.required
+					"
+					class="error"
+					[@fadeInOut]>
+					This field is required
+				</p>
+				<p
+					*ngIf="
+						this.form.get('quotationForm').get('specifications').touched &&
+						this.form.get('quotationForm').get('specifications').errors?.cyrillic
+					"
+					class="error"
+					[@fadeInOut]>
+					Please don`t use cyrillic characters
+				</p>
+				<div class="quotation__half-space">
+					<b2b-ngx-select
+						[options]="productionYear$ | async"
+						bindValue="id"
+						bindLabel="value"
+						placeholder="Select"
+						[theme]="b2bNgxSelectThemeEnum.BACKGROUND_GRAY"
+						formControlName="productionYear">
+						{{ productionOrCropsYear$ | async }}
+					</b2b-ngx-select>
+				</div>
+
+				<div
+					[ngStyle]="
+						form.get('quotationForm').get('price').get('price').touched &&
+						form.get('quotationForm').get('price').get('price').errors?.required
+							? { marginBottom: '10px' }
+							: null
+					"
+					class="quotation__container"
+					formGroupName="price">
+					<div class="input-wrapper">
+						<input
+							class="form__input normal-inp"
+							b2bNgxInput
+							placeholder="Price Offer"
+							label="Price Offer"
+							[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"
+							formControlName="price" />
+						<p
+							*ngIf="
+								form.get('quotationForm').get('price').get('price').touched &&
+								form.get('quotationForm').get('price').get('price').errors?.required
+							"
+							class="error price-error"
+							[@fadeInOut]>
+							This field is required
+						</p>
+						<p
+							*ngIf="
+								form.get('quotationForm').get('price').get('price').touched &&
+								form.get('quotationForm').get('price').get('price').errors?.number &&
+								!form.get('quotationForm').get('price').get('price').errors?.required
+							"
+							class="error price-error"
+							[@fadeInOut]>
+							Please, use only numbers
+						</p>
+					</div>
+					<div class="quotation__half-space group-select-wrapper">
+						<b2b-ngx-select
+							[options]="tradeTerms$ | async"
+							bindValue="id"
+							bindLabel="value"
+							[theme]="b2bNgxSelectThemeEnum.BACKGROUND_GRAY"
+							formControlName="tradeTerms">
+							&nbsp;
+						</b2b-ngx-select>
+					</div>
+				</div>
+
+				<div class="quotation__container flex-inp-wrapper">
+					<div class="quotation__half-space">
+						<b2b-ngx-select
+							[options]="unit$ | async"
+							bindValue="displayName"
+							bindLabel="displayName"
+							[theme]="b2bNgxSelectThemeEnum.BACKGROUND_GRAY"
+							formControlName="unit"
+							style="width: 44%"
+							placeholder="Select"
+							(changed)="addValidator($event)">
+							Unit measure
+						</b2b-ngx-select>
+					</div>
+					<div class="input-wrapper">
+						<input
+							*ngIf="showCustomUnitInput$ | async"
+							b2bNgxInput
+							class="measure-input"
+							[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"
+							formControlName="otherUnit"
+							placeholder="Enter unit measure"
+							label="&nbsp;" />
+						<p
+							*ngIf="
+								form.get('quotationForm').get('otherUnit').touched &&
+								form.get('quotationForm').get('otherUnit').errors?.required
+							"
+							class="error other-unit-error"
+							[@fadeInOut]>
+							This field is required
+						</p>
+						<p
+							*ngIf="
+								form.get('quotationForm').get('otherUnit').touched &&
+								form.get('quotationForm').get('otherUnit').errors?.latin
+							"
+							class="error other-unit-error"
+							[@fadeInOut]>
+							Please, use only latin and numbers
+						</p>
+					</div>
+				</div>
+				<textarea
+					b2bNgxTextarea
+					[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"
+					placeholder="Enter at least 20 characters"
+					label="Message to buyer"
+					class="quotation__textarea quotation__half-space"
+					formControlName="moreInformation"></textarea>
+				<p
+					*ngIf="
+						form.get('quotationForm').get('moreInformation').touched &&
+						form.get('quotationForm').get('moreInformation').errors?.required
+					"
+					class="error"
+					[@fadeInOut]>
+					This field is required
+				</p>
+				<p
+					*ngIf="
+						form.get('quotationForm').get('moreInformation').touched &&
+						form.get('quotationForm').get('moreInformation').errors?.cyrillic
+					"
+					class="error"
+					[@fadeInOut]>
+					Please don`t use cyrillic characters
+				</p>
+				<p
+					*ngIf="
+						form.get('quotationForm').get('moreInformation').touched &&
+						form.get('quotationForm').get('moreInformation').errors?.minlength &&
+						!form.get('quotationForm').get('moreInformation').errors?.cyrillic
+					"
+					[ngStyle]="{ marginTop: '15px' }"
+					class="error"
+					[@fadeInOut]>
+					Please, put more than 20 letters, now
+					{{ form.get("quotationForm").get("moreInformation").errors?.minlength.actualLength }} letters
+				</p>
+				<div class="file-wrapper ngx-file-wrapper">
+					<b2b-ngx-file formControlName="photos" [isPhoto]="false" label="Choose file">Products picture </b2b-ngx-file>
+				</div>
+				<div class="quotation__label">Please use only real photos. All photos will be checked by the moderators.</div>
+			</div>
+			<!--			<div class="quotation__wrapper__form__container"-->
+			<!--					 formGroupName="suppliersCompanyInfo">-->
+			<!--				<h2>-->
+			<!--					Suppliers company info-->
+			<!--				</h2>-->
+			<!--				<div class="quotation__middle-space">-->
+			<!--					<input b2bNgxInput-->
+			<!--								 [theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"-->
+			<!--								 placeholder="Company name"-->
+			<!--								 label="Company name"-->
+			<!--								 formControlName="companyName">-->
+			<!--					<p-->
+			<!--						*ngIf="form.get('suppliersCompanyInfo').get('companyName').touched && form.get('suppliersCompanyInfo').get('companyName').errors?.latin"-->
+			<!--						class="supplier-info-error"-->
+			<!--						[@fadeInOut]>-->
+			<!--						Please, use only latin-->
+			<!--					</p>-->
+			<!--					<p-->
+			<!--						*ngIf="form.get('suppliersCompanyInfo').get('companyName').touched && form.get('suppliersCompanyInfo').get('companyName').errors?.required"-->
+			<!--						class="supplier-info-error"-->
+			<!--						[@fadeInOut]>-->
+			<!--						This field is required-->
+			<!--					</p>-->
+			<!--				</div>-->
+			<!--				<div class="quotation__middle-space">-->
+			<!--					<b2b-ngx-country-select-->
+			<!--						placeholder="Select country"-->
+			<!--						formControlName="country"-->
+			<!--						[theme]="b2bNgxSelectThemeEnum.BACKGROUND_GRAY">Country-->
+			<!--					</b2b-ngx-country-select>-->
+			<!--				</div>-->
+			<!--				<div class="quotation__middle-space">-->
+			<!--					<input b2bNgxInput-->
+			<!--								 label="Website"-->
+			<!--								 placeholder="Website"-->
+			<!--								 formControlName="website"-->
+			<!--								 [theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY">-->
+			<!--					<p-->
+			<!--						*ngIf="form.get('suppliersCompanyInfo').get('website').touched && form.get('suppliersCompanyInfo').get('website').errors?.latin"-->
+			<!--						class="supplier-info-error"-->
+			<!--						[@fadeInOut]>-->
+			<!--						Please, use only latin-->
+			<!--					</p>-->
+			<!--					<p-->
+			<!--						*ngIf="form.get('suppliersCompanyInfo').get('website').touched && form.get('suppliersCompanyInfo').get('website').errors?.required"-->
+			<!--						class="supplier-info-error"-->
+			<!--						[@fadeInOut]>-->
+			<!--						This field is required-->
+			<!--					</p>-->
+			<!--				</div>-->
+			<!--				<div class="quotation__middle-space">-->
+			<!--					<b2b-ngx-select [options]="foundationYear$ | async"-->
+			<!--													bindValue="id"-->
+			<!--													bindLabel="value"-->
+			<!--													placeholder="Select"-->
+			<!--													[theme]="b2bNgxSelectThemeEnum.BACKGROUND_GRAY"-->
+			<!--													formControlName="foundationYear">-->
+			<!--						Year of foundation-->
+			<!--					</b2b-ngx-select>-->
+			<!--				</div>-->
+			<!--				<div class="quotation__middle-space">-->
+			<!--					<b2b-ngx-select [options]="businessType$ | async"-->
+			<!--													bindValue="id"-->
+			<!--													bindLabel="value"-->
+			<!--													placeholder="Select"-->
+			<!--													[theme]="b2bNgxSelectThemeEnum.BACKGROUND_GRAY"-->
+			<!--													formControlName="businessType">-->
+			<!--						Business type-->
+			<!--					</b2b-ngx-select>-->
+			<!--				</div>-->
+
+			<!--				<textarea-->
+			<!--					b2bNgxTextarea-->
+			<!--					[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"-->
+			<!--					placeholder="Describe more about your company"-->
+			<!--					label="Company's description"-->
+			<!--					class="quotation__textarea quotation__middle-space"-->
+			<!--					formControlName="companyDescription"></textarea>-->
+			<!--				<p-->
+			<!--					*ngIf="form.get('suppliersCompanyInfo').get('companyDescription').touched && form.get('suppliersCompanyInfo').get('companyDescription').errors?.latin"-->
+			<!--					class="supplier-info-error"-->
+			<!--					[@fadeInOut]>-->
+			<!--					Please, use only latin-->
+			<!--				</p>-->
+			<!--				<p-->
+			<!--					*ngIf="form.get('suppliersCompanyInfo').get('companyDescription').touched && form.get('suppliersCompanyInfo').get('companyDescription').errors?.required"-->
+			<!--					class="supplier-info-error"-->
+			<!--					[@fadeInOut]>-->
+			<!--					This field is required-->
+			<!--				</p>-->
+			<!--				<input-->
+			<!--					disabled-->
+			<!--					class="form__input big-inp"-->
+			<!--					b2bNgxInput-->
+			<!--					placeholder="Name"-->
+			<!--					label="Contact person"-->
+			<!--					[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"-->
+			<!--					formControlName="contactPerson">-->
+
+			<!--				<p-->
+			<!--					*ngIf="form.get('suppliersCompanyInfo').get('contactPerson').touched && form.get('suppliersCompanyInfo').get('contactPerson').errors?.latin"-->
+			<!--					class="error"-->
+			<!--					[@fadeInOut]>-->
+			<!--					Please, use only latin-->
+			<!--				</p>-->
+			<!--				<p-->
+			<!--					*ngIf="form.get('suppliersCompanyInfo').get('contactPerson').touched && form.get('suppliersCompanyInfo').get('contactPerson').errors?.required"-->
+			<!--					class="error"-->
+			<!--					[@fadeInOut]>-->
+			<!--					This field is required-->
+			<!--				</p>-->
+
+			<!--				<div class="quotation__contacts">-->
+			<!--					<div class="quotation__contacts-item">-->
+			<!--						<input-->
+			<!--							class="form__input small-inp"-->
+			<!--							b2bNgxInput placeholder="Email"-->
+			<!--							label="Email"-->
+			<!--							[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"-->
+			<!--							formControlName="email">-->
+			<!--						<p-->
+			<!--							*ngIf="form.get('suppliersCompanyInfo').get('email').touched && form.get('suppliersCompanyInfo').get('email').errors?.email"-->
+			<!--							class="error"-->
+			<!--							[@fadeInOut]>-->
+			<!--							Email should be correct-->
+			<!--						</p>-->
+			<!--						<p-->
+			<!--							*ngIf="form.get('suppliersCompanyInfo').get('email').touched && form.get('suppliersCompanyInfo').get('email').errors?.required"-->
+			<!--							class="error"-->
+			<!--							[@fadeInOut]>-->
+			<!--							This field is required-->
+			<!--						</p>-->
+			<!--					</div>-->
+			<!--					<div class="quotation__contacts-item">-->
+			<!--						<div class="quotation__contacts-block">-->
+			<!--							<b2b-ngx-tel [theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"-->
+			<!--													 formControlName="phone">-->
+			<!--								Phone-->
+			<!--							</b2b-ngx-tel>-->
+			<!--						</div>-->
+			<!--						<div class="quotation__checkbox-block">-->
+			<!--							<div class="quotation__checkbox-block-item">-->
+			<!--								<img b2bNgxIcon [name]='"whats-app"'>-->
+			<!--								<b2b-ngx-checkbox-->
+			<!--									formControlName="whatsapp"-->
+			<!--								>-->
+			<!--									Available-->
+			<!--								</b2b-ngx-checkbox>-->
+			<!--							</div>-->
+			<!--							<div class="quotation__checkbox-block-item">-->
+			<!--								<img b2bNgxIcon [name]='"telegram"'>-->
+			<!--								<b2b-ngx-checkbox-->
+			<!--									formControlName="telegram"-->
+			<!--								>-->
+			<!--									Available-->
+			<!--								</b2b-ngx-checkbox>-->
+			<!--							</div>-->
+			<!--						</div>-->
+			<!--					</div>-->
+			<!--				</div>-->
+			<!--			</div>-->
+		</form>
+
+		<div class="form-buttons">
+			<button
+				*ngIf="showCancelBtn"
+				(click)="backToCompanyForm()"
+				class="cancel-btn"
+				b2bNgxButton
+				[theme]="b2bNgxButtonThemeEnum.OUTLINE_GRAY">
+				<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<path
+						d="M3.29289 8.70711C2.90237 8.31658 2.90237 7.68342 3.29289 7.29289L9.65685 0.928933C10.0474 0.538408 10.6805 0.538408 11.0711 0.928933C11.4616 1.31946 11.4616 1.95262 11.0711 2.34315L5.41421 8L11.0711 13.6569C11.4616 14.0474 11.4616 14.6805 11.0711 15.0711C10.6805 15.4616 10.0474 15.4616 9.65685 15.0711L3.29289 8.70711ZM5 9L4 9L4 7L5 7L5 9Z"
+						fill="#0F0F11" />
+				</svg>
+				<span>Back</span>
+			</button>
+			<button b2bNgxButton [theme]="b2bNgxButtonThemeEnum.BACKGROUND_BLACK" (click)="submitForm()">
+				2/2 Confirm and submit
+			</button>
+		</div>
+	</div>
+</div>

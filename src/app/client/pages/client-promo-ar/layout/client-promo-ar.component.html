@@ -1,0 +1,137 @@
+<div class="hot-it-works-2">
+	<div class="banner">
+		<img b2bNgxImage name="how-it-works-2" class="banner-img desktop" />
+		<img b2bNgxImage name="how-it-works-mobile" class="banner-img mobile" />
+		<div class="info">
+			<p class="subtitle">البضائع غير المطالب بها</p>
+			<p class="subsubtitle">هي مشكلة يتم حلها من خلال</p>
+			<h1 class="title">الخصمB2B</h1>
+			<p class="description">
+				تساعد المنصة البائع في العثور على مشتر جديد لشحنته ، والمشتري - لشراء البضائع المطلوبة بخصم. نحن نربط البائع
+				بالمشتري مباشرة ولا نفرض عمولة على المعاملات
+			</p>
+
+			<div class="buttons">
+				<a [routerLink]="b2bNgxLinkService.getLink('/offers') | async">بيع البضائع</a>
+				<a [routerLink]="b2bNgxLinkService.getLink('/latest-offers') | async">شراء البضائع</a>
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="benefits">
+			<ul>
+				<li>أسهل وأسرع طريقة لبيع البضائع التي لم تتم المطالبة بها-</li>
+				<li>%فرصة شراء سلع عالية الجودة بخصم من 5٪ إلى 90٪-</li>
+				<li>24/7 دعم قانوني وفني-</li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="game">
+		<div class="container">
+			<div class="description">
+				<h2>نهج استباقي</h2>
+				<p>
+					الغرض من المنصة ليس فقط مساعدة المصدرين والتجار في البضائع التي لم تتم المطالبة بها ولكن أيضًا لمنع ظهور مثل
+					هذه البضائع.
+				</p>
+			</div>
+			<img b2bNgxImage name="how-it-works-2-2" />
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="risks">
+			<h2>تقليل المخاطر</h2>
+			<p>
+				B2B Discount إذا كان لديك سبب للشك في مصداقية المرسل إليه ، فتصرف على الفور. أضف البضائع الخاصة بك إلى للعثور
+				على مشترين محتملين آخرين. سيكونون بمثابة شريان الحياة الخاص بك في حالة عدم تنفيذ الاتفاقية الأولية كما هو مخطط
+				لها.
+			</p>
+		</div>
+	</div>
+
+	<div class="anonymity">
+		<div class="container">
+			<img b2bNgxImage name="how-it-works-2-4" />
+
+			<div class="description">
+				<h2>عدم الكشف عن الهوية</h2>
+				<p>
+					تتيح لك المنصة إخفاء معلومات الاتصال الخاصة بك ومعلومات الشحن. سيكون العرض مجهول الهوية حتى يقرر مالك البضاعة
+					فتح البيانات لبيع البضائع إلى مشتر جديد.
+				</p>
+				<a [routerLink]="b2bNgxLinkService.getLink('/offer') | async">اوضع الشحنة</a>
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="verification">
+			<h2>التحقق من البضائع</h2>
+			<p>
+				جميع السلع المعروضة على المنصة خاضعة للإشراف. لا يمكن وضع البضائع إلا في وجود الوثائق المصاحبة ومواد الصور. بفضل
+				نظام التتبع عبر الإنترنت للحاويات والبضائع ، فإن المشتري لديه الفرصة لتتبع موقع البضائع.
+			</p>
+		</div>
+	</div>
+
+	<div class="profit">
+		<div class="container">
+			<div class="description">
+				<h2>الفائدة للجميع</h2>
+				<p>
+					يمكن للمستوردين والتجار الدخول في صفقات مربحة بخصم من 5 إلى 90٪ من سعر السوق للسلع ومساعدة البائع على تجنب
+					الخسائر المالية الكبيرة.
+				</p>
+				<a [routerLink]="b2bNgxLinkService.getLink('/latest-offers') | async">مشاهدة جميع العروض</a>
+			</div>
+			<img b2bNgxImage name="how-it-works-2-3" />
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="mission">
+			<h2>مهمة الشركة</h2>
+			<p>
+				اجمع جميع المشاركين في FEA لخلق بيئة أكثر راحة وأمانًا لجميع الأطراف المشاركة في التجارة الدولية والخدمات
+				اللوجستية.
+			</p>
+
+			<div class="video-wrapper">
+				<video
+					[controls]="!video.paused"
+					class="video"
+					poster="assets/images/client_home_background.png"
+					(ended)="video.load()"
+					#video>
+					<source src="assets/videos/how_it_works_final.mp4" type="video/mp4" />
+				</video>
+
+				<button class="video-button" *ngIf="video.paused" (click)="video.play()">
+					<img b2bNgxIcon class="video-button-icon" name="play" />
+				</button>
+			</div>
+
+			<h3>تسجيل مجاني</h3>
+			<p>
+				هي شركة ناشئة مقرها الولايات المتحدة دخلت B2B Discount السوق الدولية في صيف عام 2021. وستكون جميع خدمات المنصة
+				مجانية حتى 30.06.2022. لا تفوت فرصة الحصول على جميع مزايا خدماتنا الآن.
+			</p>
+			<a [routerLink]="b2bNgxLinkService.getLink('/auth/register-credentials') | async">إنشاء حساب مجاني</a>
+		</div>
+
+		<p class="feedback">
+			نريد أن نجعل المنصة أفضل وأكثر فاعلية. يمكنك مساعدتنا في ذلك عن طريق كتابة رغباتك وأفكارك إلينا على
+			<a href="mailto:support@b2b.discount">support@b2b.discount</a>
+		</p>
+
+		<div class="footer">
+			<a [routerLink]="b2bNgxLinkService.getLink('/') | async">
+				<img b2bNgxIcon name="logo" alt="" />
+			</a>
+			<p>We connect buyers and sellers directly.</p>
+		</div>
+	</div>
+</div>

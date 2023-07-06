@@ -1,0 +1,219 @@
+<div class="annual-payment" *transloco="let t">
+	<div class="left">
+		<div class="breadcrumbs">
+			<span>Pricing </span>
+			<span>Trade Bid Billing</span>
+		</div>
+
+		<p class="annual-payment-title">Trade Bid Billing</p>
+		<p class="description">Enter & confirm the information below for invoicing</p>
+
+		<form [formGroup]="formGroup" (submit)="sendCardData(formGroup.value)">
+			<div class="input-container">
+				<input
+					b2bNgxInput
+					[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"
+					[label]="t('LABELS.CARD_NUMBER')"
+					formControlName="cardNum"
+					disabled />
+			</div>
+			<p
+				*ngIf="formGroup.get('cardNum').touched && formGroup.get('cardNum').errors?.required"
+				class="error"
+				[@fadeInOut]>
+				This field is required
+			</p>
+			<p *ngIf="formGroup.get('cardNum').touched && formGroup.get('cardNum').errors?.number" class="error" [@fadeInOut]>
+				Please, use only numbers!
+			</p>
+			<div class="input-container">
+				<input
+					b2bNgxInput
+					[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"
+					[label]="t('LABELS.EMAIL')"
+					formControlName="email" />
+			</div>
+			<p *ngIf="formGroup.get('email').touched && formGroup.get('email').errors?.required" class="error" [@fadeInOut]>
+				This field is required
+			</p>
+			<p *ngIf="formGroup.get('email').touched && formGroup.get('email').errors?.cyrillic" class="error" [@fadeInOut]>
+				Please, don`t use cyrillic characters
+			</p>
+
+			<div class="inputs-wrapper">
+				<div class="wrapper-container">
+					<input
+						b2bNgxInput
+						[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"
+						[label]="t('LABELS.EXPIRED_DATE')"
+						formControlName="expDate"
+						disabled />
+					<p
+						*ngIf="formGroup.get('expDate').touched && formGroup.get('expDate').errors?.required"
+						class="error"
+						[@fadeInOut]>
+						This field is required
+					</p>
+					<p
+						*ngIf="formGroup.get('expDate').touched && formGroup.get('expDate').errors?.number"
+						class="error"
+						[@fadeInOut]>
+						Please use only numbers
+					</p>
+					<p
+						*ngIf="formGroup.get('expDate').touched && formGroup.get('expDate').errors?.minLength"
+						class="error"
+						[@fadeInOut]>
+						Please put 3 numbers, now is {{ formGroup.get("expDate").errors?.minLength.actualLength }}
+					</p>
+					<p
+						*ngIf="formGroup.get('expDate').touched && formGroup.get('expDate').errors?.maxLength"
+						class="error"
+						[@fadeInOut]>
+						Please put 3 numbers, now is {{ formGroup.get("expDate").errors?.maxLength.actualLength }}
+					</p>
+				</div>
+				<div class="wrapper-container">
+					<input
+						b2bNgxInput
+						[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"
+						[label]="t('LABELS.CVV')"
+						formControlName="cardCode"
+						disabled />
+					<p
+						*ngIf="formGroup.get('cardCode').touched && formGroup.get('cardCode').errors?.required"
+						class="error"
+						[@fadeInOut]>
+						This field is required
+					</p>
+					<p
+						*ngIf="formGroup.get('cardCode').touched && formGroup.get('cardCode').errors?.number"
+						class="error"
+						[@fadeInOut]>
+						Please use only numbers
+					</p>
+					<p
+						*ngIf="formGroup.get('cardCode').touched && formGroup.get('cardCode').errors?.min"
+						class="error"
+						[@fadeInOut]>
+						Please put 3 numbers, now is {{ formGroup.get("cardCode").errors?.min.actual }}
+					</p>
+					<p
+						*ngIf="formGroup.get('cardCode').touched && formGroup.get('cardCode').errors?.maxLength"
+						class="error"
+						[@fadeInOut]>
+						Please put 3 numbers, now is {{ formGroup.get("cardCode").errors?.maxLength.actualLength }}
+					</p>
+				</div>
+			</div>
+			<div class="inputs-wrapper" [ngStyle]="{ alignItems: 'flex-end' }">
+				<div class="inputs-wrapper" [ngStyle]="{ alignItems: 'flex-end' }">
+					<div class="wrapper-container">
+						<b2b-ngx-country-select
+							formControlName="country"
+							[theme]="b2bNgxSelectThemeEnum.BACKGROUND_GRAY"
+							class="admin-article__country"
+							placeholder="Select Country"
+							>Country
+						</b2b-ngx-country-select>
+						<p
+							*ngIf="formGroup.get('country').touched && formGroup.get('country').errors?.required"
+							class="error"
+							[@fadeInOut]>
+							This field is required
+						</p>
+					</div>
+					<div class="wrapper-container">
+						<input
+							b2bNgxInput
+							[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"
+							[label]="t('LABELS.REGION')"
+							formControlName="region" />
+
+						<p
+							*ngIf="formGroup.get('region').touched && formGroup.get('region').errors?.required"
+							class="error"
+							[@fadeInOut]>
+							This field is required
+						</p>
+						<p
+							*ngIf="formGroup.get('region').touched && formGroup.get('region').errors?.number"
+							class="error"
+							[@fadeInOut]>
+							Please use only latin
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="inputs-wrapper">
+				<div class="wrapper-container">
+					<input
+						b2bNgxInput
+						[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"
+						[label]="t('LABELS.POST_CODE')"
+						formControlName="postCode" />
+					<p
+						*ngIf="formGroup.get('postCode').touched && formGroup.get('postCode').errors?.required"
+						class="error"
+						[@fadeInOut]>
+						This field is required
+					</p>
+					<p
+						*ngIf="formGroup.get('postCode').touched && formGroup.get('postCode').errors?.number"
+						class="error"
+						[@fadeInOut]>
+						Please use only numbers
+					</p>
+					<p
+						*ngIf="formGroup.get('postCode').touched && formGroup.get('postCode').errors?.minLength"
+						class="error"
+						[@fadeInOut]>
+						Please put 6 numbers, now is {{ formGroup.get("postCode").errors?.minLength.actualLength }}
+					</p>
+					<p
+						*ngIf="formGroup.get('postCode').touched && formGroup.get('postCode').errors?.maxLength"
+						class="error"
+						[@fadeInOut]>
+						Please put 6 numbers, now is {{ formGroup.get("postCode").errors?.maxLength.actualLength }}
+					</p>
+				</div>
+				<div class="wrapper-container">
+					<input
+						b2bNgxInput
+						[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"
+						[label]="t('LABELS.CITY')"
+						formControlName="city" />
+					<p *ngIf="formGroup.get('city').touched && formGroup.get('city').errors?.required" class="error" [@fadeInOut]>
+						This field is required
+					</p>
+					<p *ngIf="formGroup.get('city').touched && formGroup.get('city').errors?.latin" class="error" [@fadeInOut]>
+						Please use latin
+					</p>
+				</div>
+			</div>
+
+			<button b2bNgxButton class="submit" [theme]="b2bNgxLinkThemeEnum.BACKGROUND_BLACK">Proceed to Payment</button>
+		</form>
+	</div>
+
+	<div class="right">
+		<p class="your-plan">Your plan:</p>
+		<div class="card">
+			<div class="card-wrapper">
+				<p class="card-header">
+					<span class="buyer">{{ quotesCount }} Quotes</span>
+					<span class="price">
+						<span class="currency">For {{ price }}$</span>
+					</span>
+				</p>
+				<div class="divider"></div>
+				<ul class="list">
+					<li>
+						<img b2bNgxIcon name="check-blue" alt="" />
+						<span>To contact {{ quotesCount }} buyers</span>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>

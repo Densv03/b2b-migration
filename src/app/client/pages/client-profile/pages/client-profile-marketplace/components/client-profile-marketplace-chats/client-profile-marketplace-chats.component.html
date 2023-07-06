@@ -1,0 +1,10 @@
+<div *ngIf="!(loading$ | async)">
+	<div *ngIf="chats.length; else noChats">
+		<div *ngFor="let chat of chats">
+			<b2b-chats-item [chatsItem]="chat" [chatType]="'marketplace'" (deleteChat)="deleteChat()"></b2b-chats-item>
+		</div>
+	</div>
+	<ng-template #noChats> No chats </ng-template>
+</div>
+
+<b2b-ngx-skeleton *ngIf="loading$ | async" [options]="marketplaceSkeletonOptions"></b2b-ngx-skeleton>

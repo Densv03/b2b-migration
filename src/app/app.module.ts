@@ -7,22 +7,18 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatTreeModule} from "@angular/material/tree";
 import {MatIconModule} from "@angular/material/icon";
 import {B2bNgxCheckboxModule} from "@b2b/ngx-checkbox";
-import {MaterialExampleComponent} from "./material-example/material-example.component";
+import {CoreModule} from "./core/core.module";
 
 @NgModule({
-  declarations: [
-    AppComponent,
-  ],
+  declarations: [],
   imports: [
     BrowserModule,
-    AppRoutingModule,
+    CoreModule,
     FormsModule,
     ReactiveFormsModule,
     MatTreeModule,
     MatIconModule,
     B2bNgxCheckboxModule,
-    MaterialExampleComponent,
-    FormsModule
   ],
   bootstrap: [AppComponent]
 })

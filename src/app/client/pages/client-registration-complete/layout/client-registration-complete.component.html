@@ -1,0 +1,44 @@
+<div class="registration-complete" *transloco="let t">
+	<div class="registration-complete__body">
+		<img b2bNgxImage name="success" />
+		<p class="registration-complete__body-title">{{ t("GOOGLE-AUTH-COMPLETE.TITLE") }}</p>
+		<span>
+			{{ t("REGISTRATION_COMPLETE.SUBTITLE") }}
+		</span>
+
+		<div class="auth-log-in__main">
+			<h2 class="auth-log-in__main-title">{{ t("REGISTRATION_COMPLETE.LOG_IN") }}</h2>
+
+			<form errorTailor class="auth-log-in__main-form" [formGroup]="formGroup" (ngSubmit)="logInWithForm(formGroup)">
+				<input
+					b2bNgxInput
+					type="email"
+					[theme]="b2bNgxInputThemeEnum.BACKGROUND_WHITE"
+					[label]="t('LABELS.LOGIN')"
+					labelClass="auth-log-in__main-input"
+					formControlName="email"
+					[placeholder]="t('PLACEHOLDERS.YOUR_EMAIL')" />
+				<input
+					b2bNgxInput
+					type="password"
+					[theme]="b2bNgxInputThemeEnum.BACKGROUND_WHITE"
+					[label]="t('LABELS.PASSWORD')"
+					labelClass="auth-log-in__main-input"
+					formControlName="password"
+					[placeholder]="t('PLACEHOLDERS.YOUR_PASSWORD')" />
+
+				<button class="auth-log-in__main-link" type="button" (click)="openResetPasswordModal()">
+					{{ t("AUTH.RESET_PASSWORD") }}
+				</button>
+
+				<button
+					b2bNgxButton
+					[theme]="b2bNgxButtonThemeEnum.BACKGROUND_BLACK"
+					class="auth-log-in__log-in-button"
+					type="submit">
+					{{ t("AUTH.LOG_IN") }}
+				</button>
+			</form>
+		</div>
+	</div>
+</div>

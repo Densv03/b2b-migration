@@ -1,0 +1,40 @@
+<div class="client-profile-my-offers" *transloco="let t">
+	<h3 class="client-profile-my-offers-title">{{ t("OFFERS.MY_OFFERS") }}</h3>
+
+	<div class="client-profile-my-offers-container">
+		<ng-container *ngIf="isLangLoaded && offers$ | async as offers; else noOffers">
+			<b2b-client-profile-my-offers-list
+				*ngIf="offers.length; else noOffers"
+				[options]="offers"
+				link="offers/"
+				[menuOptions]="menuOptions"></b2b-client-profile-my-offers-list>
+		</ng-container>
+		<ng-template #noOffers>
+			<div class="client-profile-my-offers-no-offers" *ngIf="!loading">
+				<p class="client-profile-my-offers-no-offers-title">
+					{{ t("OFFERS.NO_OFFERS_MY") }}
+				</p>
+				<!--				<a-->
+				<!--					b2bNgxLink-->
+				<!--					[routerLink]="b2bNgxLinkService.getLink('/offer') | async"-->
+				<!--					class="client-profile-my-offers-no-offers-button"-->
+				<!--					[theme]="b2bNgxLinkThemeEnum.BACKGROUND_BLACK"-->
+				<!--					>+ {{ t("OFFERS.ADD_OFFER") }}</a-->
+				<!--				>-->
+
+				<button
+					b2bNgxButton
+					[theme]="b2bNgxButtonThemeEnum.BACKGROUND_BLACK"
+					class="client-profile-my-offers-no-offers-button"
+					(click)="goTo('/offer')"
+					id="add-offer-profile">
+					+ {{ t("OFFERS.ADD_OFFER") }}
+				</button>
+			</div>
+		</ng-template>
+
+		<ng-container *ngIf="loading">
+			<b2b-ngx-skeleton [options]="offersSkeletonOptions"></b2b-ngx-skeleton>
+		</ng-container>
+	</div>
+</div>

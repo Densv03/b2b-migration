@@ -1,0 +1,206 @@
+<div class="wrapper">
+	<div *ngIf="formType === 'add-rfq'" class="rfq-header">
+		<h1>Tell the vendors what are you looking to buy</h1>
+		<img b2bNgxImage name="tradebid_rfq-header" imageExtension="png"/>
+	</div>
+	<img *ngIf="formType === 'quotation'" b2bNgxImage name="tradebid-quotation-header" imageExtension="png"/>
+	<div class="company-information">
+		<form [formGroup]="form" class="company-form">
+			<div class="warning">
+				<div class="icon">
+					<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<g clip-path="url(#clip0_1603_268)">
+							<path
+								d="M10 20C15.5228 20 20 15.5228 20 10C20 4.47715 15.5228 0 10 0C4.47715 0 0 4.47715 0 10C0 15.5228 4.47715 20 10 20Z"
+								fill="#005DFF"/>
+							<path d="M10 14.375V10" stroke="white" stroke-width="1.6" stroke-linecap="round"/>
+							<path d="M10 6.66675H10.0089" stroke="white" stroke-width="2" stroke-linecap="round"/>
+						</g>
+						<defs>
+							<clipPath id="clip0_1603_268">
+								<rect width="20" height="20" fill="white"/>
+							</clipPath>
+						</defs>
+					</svg>
+				</div>
+				<div class="text">
+					Please fill up your company’s information profile. You only need to do it once, it won’t be required with a
+					further iteraсtions.
+				</div>
+			</div>
+			<div class="title">Company information</div>
+
+			<div class="form-content">
+				<div class="column">
+					<div class="form-control-wrapper">
+						<input
+							formControlName="companyName"
+							class="form__input"
+							b2bNgxInput
+							placeholder="Company name"
+							label="Company name"
+							[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"/>
+						<!--		<p-->
+						<!--			*ngIf="this.form.get('quotationForm').get('productName').touched && this.form.get('quotationForm').get('productName').errors?.latin"-->
+						<!--			class="error"-->
+						<!--			[@fadeInOut]>-->
+						<!--			Please use only latin letters-->
+						<!--		</p>-->
+						<!--		<p-->
+						<!--			*ngIf="this.form.get('quotationForm').get('productName').touched && this.form.get('quotationForm').get('productName').errors?.required"-->
+						<!--			class="error"-->
+						<!--			[@fadeInOut]>-->
+						<!--			This field is required-->
+						<!--		</p>-->
+					</div>
+					<div class="form-control-wrapper">
+						<b2b-ngx-select
+							[options]="businessType$ | async"
+							[touched]="formState['businessType'].touched"
+							bindValue="id"
+							bindLabel="value"
+							placeholder="Select"
+							formControlName="businessType"
+							[theme]="b2bNgxSelectThemeEnum.BACKGROUND_GRAY">
+							Business type
+						</b2b-ngx-select>
+
+						<!--						<div class="form-control-wrapper__tip">-->
+						<!--							You will be able to choose business type only once-->
+						<!--						</div>-->
+					</div>
+					<div class="form-control-wrapper">
+						<b2b-ngx-country-select
+							placeholder="Select country"
+							formControlName="country"
+							[touched]="formState['country'].touched"
+							[theme]="b2bNgxSelectThemeEnum.BACKGROUND_GRAY"
+						>Country
+						</b2b-ngx-country-select>
+					</div>
+					<div class="form-control-wrapper">
+						<b2b-ngx-select
+							[options]="foundationYear$ | async"
+							bindValue="id"
+							bindLabel="value"
+							placeholder="Select"
+							formControlName="foundationYear"
+							[touched]="formState['foundationYear'].touched"
+							[theme]="b2bNgxSelectThemeEnum.BACKGROUND_GRAY">
+							Year of foundation
+						</b2b-ngx-select>
+					</div>
+					<div class="form-control-wrapper">
+						<b2b-ngx-select
+							[options]="employeesNumber$ | async"
+							bindValue="id"
+							bindLabel="value"
+							placeholder="Select"
+							formControlName="employeesNumber"
+							[touched]="formState['employeesNumber'].touched"
+							[theme]="b2bNgxSelectThemeEnum.BACKGROUND_GRAY">
+							Number of employees
+						</b2b-ngx-select>
+					</div>
+					<div class="form-control-wrapper">
+						<b2b-ngx-select
+							[options]="annualRevenue$ | async"
+							bindValue="id"
+							bindLabel="value"
+							placeholder="Select"
+							formControlName="annualRevenue"
+							[touched]="formState['annualRevenue'].touched"
+							[theme]="b2bNgxSelectThemeEnum.BACKGROUND_GRAY">
+							Annual revenue
+						</b2b-ngx-select>
+					</div>
+				</div>
+				<div class="column">
+					<div class="form-control-wrapper">
+						<b2b-ngx-tel formControlName="phone" [theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"> Phone</b2b-ngx-tel>
+					</div>
+					<div class="form-control-wrapper">
+						<input
+							b2bNgxInput
+							label="Office address "
+							placeholder="Address"
+							formControlName="address"
+							[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"/>
+					</div>
+					<div class="form-control-wrapper">
+						<input
+							b2bNgxInput
+							label="Website"
+							placeholder="Website"
+							formControlName="website"
+							[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"/>
+						<!--				<p-->
+						<!--					*ngIf="form.get('suppliersCompanyInfo').get('website').touched && form.get('suppliersCompanyInfo').get('website').errors?.latin"-->
+						<!--					class="supplier-info-error"-->
+						<!--					[@fadeInOut]>-->
+						<!--					Please, use only latin-->
+						<!--				</p>-->
+						<!--				<p-->
+						<!--					*ngIf="form.get('suppliersCompanyInfo').get('website').touched && form.get('suppliersCompanyInfo').get('website').errors?.required"-->
+						<!--					class="supplier-info-error"-->
+						<!--					[@fadeInOut]>-->
+						<!--					This field is required-->
+						<!--				</p>-->
+					</div>
+					<div class="form-control-wrapper textarea-wrapper">
+						<textarea
+							b2bNgxTextarea
+							[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"
+							placeholder="Describe more about your company"
+							label="Company's description"
+							formControlName="companyDescription"
+							class="quotation__textarea quotation__middle-space"></textarea>
+
+						<p [@fadeInOut] class="form-error"
+							 *ngIf="formState.companyDescription.errors?.minlength && formState.companyDescription.touched">
+							Company description should contain more than 20 symbols
+						</p>
+						<p [@fadeInOut] class="form-error"
+							 *ngIf="formState.companyDescription?.errors?.maxlength && formState.companyDescription.touched">
+							Company description should contain less than 500 symbols
+						</p>
+
+						<!--						<p>{{formState}}</p>-->
+						<!--				<p-->
+						<!--					*ngIf="form.get('suppliersCompanyInfo').get('companyDescription').touched && form.get('suppliersCompanyInfo').get('companyDescription').errors?.latin"-->
+						<!--					class="supplier-info-error"-->
+						<!--					[@fadeInOut]>-->
+						<!--					Please, use only latin-->
+						<!--				</p>-->
+						<!--										<p-->
+						<!--											*ngIf="formState['companyDescription'].touched && formState['companyDescription'].errors?.required"-->
+						<!--											class="supplier-info-error"-->
+						<!--											[@fadeInOut]>-->
+						<!--											This field is required-->
+						<!--										</p>-->
+					</div>
+					<div class="form-control-wrapper">
+						<b2b-ngx-select
+							[options]="position$ | async"
+							bindValue="id"
+							bindLabel="value"
+							placeholder="Select"
+							formControlName="position"
+							[touched]="formState['position'].touched"
+							[theme]="b2bNgxSelectThemeEnum.BACKGROUND_GRAY">
+							Your position
+						</b2b-ngx-select>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+	<button (click)="onSave()" [theme]="b2bNgxButtonThemeEnum.BACKGROUND_BLACK" b2bNgxButton class="next-step-btn">
+		<span>1/2 Next step </span>
+		<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+			<path
+				d="M11.5657 8.56569C11.8781 8.25327 11.8781 7.74673 11.5657 7.43431L6.47452 2.34315C6.1621 2.03073 5.65556 2.03073 5.34315 2.34315C5.03073 2.65557 5.03073 3.1621 5.34315 3.47452L9.86863 8L5.34315 12.5255C5.03073 12.8379 5.03073 13.3444 5.34315 13.6569C5.65557 13.9693 6.1621 13.9693 6.47452 13.6569L11.5657 8.56569ZM10 8.8L11 8.8L11 7.2L10 7.2L10 8.8Z"
+				fill="white"/>
+		</svg>
+	</button>
+</div>

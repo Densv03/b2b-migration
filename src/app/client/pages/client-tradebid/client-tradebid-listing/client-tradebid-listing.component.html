@@ -1,0 +1,41 @@
+<div class="header">
+	<h1>Business begins on TradeBid!</h1>
+	<form class="header__form" [formGroup]="formGroup" (ngSubmit)="onSubmit(formGroup)">
+		<div *ngIf="rfqQuotesCounter" class="quotes-counter">Quotes left: {{ rfqQuotesCounter }}</div>
+		<input
+			type="text"
+			b2bNgxInput
+			[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"
+			[placeholder]="'Search'"
+			formControlName="searchText"
+			class="header__search" />
+
+		<b2b-ngx-select
+			[options]="categories$ | async"
+			formControlName="categories[]"
+			bindValue="id"
+			bindLabel="value"
+			placeholder="Select category"
+			[theme]="b2bNgxSelectThemeEnum.BACKGROUND_GRAY">
+		</b2b-ngx-select>
+
+		<b2b-ngx-country-select
+			formControlName="country"
+			[theme]="b2bNgxSelectThemeEnum.BACKGROUND_GRAY"
+			placeholder="Country"
+			class="header__country">
+		</b2b-ngx-country-select>
+		<button b2bNgxButton type="submit" class="header__button" [theme]="b2bNgxButtonThemeEnum.BACKGROUND_BLUE">
+			Search
+		</button>
+	</form>
+</div>
+
+<b2b-rfq-list class="rfq-list"></b2b-rfq-list>
+
+<b2b-pagination
+	(togglePageNumber)="togglePageNumber($event)"
+	[length]="totalLength$ | async"
+	[perPage]="10"
+	[currentPage]="currentPage$ | async"
+	class="pagination"></b2b-pagination>

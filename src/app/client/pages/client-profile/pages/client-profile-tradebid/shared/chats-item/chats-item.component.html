@@ -1,0 +1,30 @@
+<div [routerLink]="chatRouterLInk" class="chats-item">
+	<div class="chats-profile">
+		<div class="chats-profile-item">
+			<div class="name-block">
+				<h3 class="chats-profile-name">{{ fullName }}</h3>
+				<div class="mobile-activity">{{ activeStatus }}</div>
+			</div>
+
+		</div>
+		<div class="product-divider"></div>
+	</div>
+	<div class="chats-product">
+		<div *ngIf="productDescription" class="chats-product-item main-product-item">
+			<div class="product-label">Product:</div>
+			<div class="chats-product-main">
+				<div class="chats-product-descr">{{ productDescription }}</div>
+			</div>
+		</div>
+		<div class="chats-product-item message-item">
+			<div class="chats-message">
+				<div class="chats-message-center">{{ unreadMessagesCount }}</div>
+			</div>
+		</div>
+		<b2b-ngx-dropdown [options]="dropdownItems" [optionToReturn]="chatsItem">
+			<button b2bNgxButton class="flex items-center">
+				<img b2bNgxIcon name="more" />
+			</button>
+		</b2b-ngx-dropdown>
+	</div>
+</div>

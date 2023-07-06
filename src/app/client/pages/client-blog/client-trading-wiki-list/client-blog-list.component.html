@@ -1,0 +1,9 @@
+<ul class="ngx-wiki-list" *transloco="let t">
+	<li
+		*ngFor="let option of blogList$ | async"
+		[routerLink]="getLink(option)"
+		class="ngx-wiki-list-item">
+		<b2b-client-blog-list-item [articleItem]="option"></b2b-client-blog-list-item>
+
+	</li>
+</ul>

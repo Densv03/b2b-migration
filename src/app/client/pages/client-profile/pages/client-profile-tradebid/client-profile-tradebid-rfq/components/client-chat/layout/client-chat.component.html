@@ -1,0 +1,175 @@
+<div class="client-profile-chat-wrapper" *transloco="let t">
+	<div class="rfq-info">
+		<h2>RFQ: {{ rfqInfo?.offerTitle }}</h2>
+		<div class="rfq-params">
+			<span>Destination to: {{ getDestination() }}</span>
+		</div>
+	</div>
+	<div class="client-profile-chat" *ngIf="chatInfo$ | async as chatInfo">
+		<form
+			(keydown.enter)="enterPressed($event)"
+			[formGroup]="formGroup"
+			(ngSubmit)="sendMessage(formGroup.get('message').value)"
+			class="client-profile-chat-container">
+			<p class="client-profile-chat-started">{{ t("CHAT.CHAT_STARTED") }}: {{ chatInfo.createdAt | date }}</p>
+
+			<div class="client-profile-chat-messages">
+				<ul class="client-profile-chat-messages-list" #chatContainer>
+					<li *ngFor="let message of messages$ | async" class="client-profile-chat-messages-list-item">
+						<p class="client-profile-chat-messages-list-item-info">
+							<span class="client-profile-chat-messages-list-item-from">{{ message.contact.author }}</span>
+							<span class="client-profile-chat-messages-list-item-date">{{ message.createdAt | date }}</span>
+						</p>
+						<p class="client-profile-chat-messages-list-item-message">
+							{{ message.body }}
+						</p>
+					</li>
+					<li *ngIf="!(messages$ | async)?.length" class="client-profile-chat-no-messages">
+						{{ t("CHAT.NO_MESSAGES") }}
+					</li>
+				</ul>
+			</div>
+
+			<textarea
+				formControlName="message"
+				[placeholder]="t('PLACEHOLDERS.ENTER_TO_SEND')"
+				class="client-profile-chat-textarea"
+				rows="5"></textarea>
+			<div class="client-profile-chat-actions">
+				<div class="chat-actions-item-icons">
+					<div class="icon-wrapper">
+						<svg width="12" height="16" viewBox="0 0 12 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<path
+								d="M10.3257 7.99998C11.3462 7.1743 12 5.9121 12 4.49997C12 2.01855 9.98142 0
+						7.49997 0H0V2.00001H0.999989V14H0V16H7.5C9.98145 16 12 13.9815 12 11.5C12 10.0879
+						11.3462 8.82566 10.3257 7.99998ZM7.49997 14H2.99997V9.00001H7.49997C8.8784 9.00001
+						9.99996 10.1216 9.99996 11.5C9.99996 12.8784 8.8784 14 7.49997 14ZM7.49997
+						6.99999H2.99997V2.00001H7.49997C8.8784 2.00001 9.99996 3.1216 9.99996
+						4.5C9.99996 5.87841 8.8784 6.99999 7.49997 6.99999Z"
+								fill="#9FA4BB" />
+						</svg>
+					</div>
+
+					<div class="icon-wrapper">
+						<svg width="12" height="16" viewBox="0 0 12 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<path
+								d="M12 2.00001V0H5.99997V2.00001H7.48355L2.34073 14H0V16H6V14H4.51642L9.65921 2.00001H12Z"
+								fill="#9FA4BB" />
+						</svg>
+					</div>
+					<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<rect width="32" height="32" rx="4" fill="white" />
+						<g clip-path="url(#clip0_1026_5781)">
+							<path d="M11.585 15.1309H24.1564V17.4166H11.585V15.1309Z" fill="#9FA4BB" />
+							<path d="M11.585 21.0405H24.1564V23.3263H11.585V21.0405Z" fill="#9FA4BB" />
+							<path d="M11.585 9.22119H24.1564V11.5069H11.585V9.22119Z" fill="#9FA4BB" />
+							<path d="M8.03906 9.22119H10.3248V11.5069H8.03906V9.22119Z" fill="#9FA4BB" />
+							<path d="M8.03906 15.1309H10.3248V17.4166H8.03906V15.1309Z" fill="#9FA4BB" />
+							<path d="M8.03906 21.0405H10.3248V23.3263H8.03906V21.0405Z" fill="#9FA4BB" />
+						</g>
+						<defs>
+							<clipPath id="clip0_1026_5781">
+								<rect width="16" height="16" fill="white" transform="translate(8 8)" />
+							</clipPath>
+						</defs>
+					</svg>
+
+					<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<rect width="32" height="32" rx="4" fill="white" />
+						<path
+							d="M16 8C11.5817 8 8 11.5817 8 16C8 20.4183 11.5817 24 16 24C20.4183 24 24 20.4183 24 16C23.9953 11.5837 20.4163 8.00472 16 8ZM16 22.8571C12.2129 22.8571 9.14285 19.7871 9.14285 16C9.14285 12.2129 12.2129 9.14285 16 9.14285C19.7871 9.14285 22.8571 12.2129 22.8571 16C22.853 19.7854 19.7854 22.853 16 22.8571Z"
+							fill="#9FA4BB"
+							stroke="#9FA4BB"
+							stroke-width="0.6" />
+						<path
+							d="M13.1428 16C13.774 16 14.2857 15.4884 14.2857 14.8572C14.2857 14.226 13.774 13.7144 13.1428 13.7144C12.5117 13.7144 12 14.226 12 14.8572C12 15.4884 12.5117 16 13.1428 16Z"
+							fill="#9FA4BB"
+							stroke="#9FA4BB"
+							stroke-width="0.6" />
+						<path
+							d="M18.8572 16C19.4884 16 20 15.4884 20 14.8572C20 14.226 19.4884 13.7144 18.8572 13.7144C18.226 13.7144 17.7144 14.226 17.7144 14.8572C17.7144 15.4884 18.226 16 18.8572 16Z"
+							fill="#9FA4BB"
+							stroke="#9FA4BB"
+							stroke-width="0.6" />
+						<path
+							d="M18.1881 17.9314C17.9994 17.6784 17.6413 17.6264 17.3884 17.8152C17.3775 17.8233 17.3669 17.8319 17.3565 17.8408C16.5484 18.431 15.4514 18.431 14.6433 17.8408C14.4046 17.6344 14.0437 17.6607 13.8374 17.8995C13.631 18.1382 13.6573 18.4991 13.896 18.7055C13.9063 18.7144 13.917 18.7229 13.9279 18.7311C15.1511 19.666 16.8488 19.666 18.0719 18.7311C18.3249 18.5423 18.3769 18.1843 18.1881 17.9314Z"
+							fill="#9FA4BB"
+							stroke="#9FA4BB"
+							stroke-width="0.6" />
+					</svg>
+				</div>
+				<div class="chat-actions-item-buttons">
+					<div class="chat-actions-item-block">
+						<b2b-ngx-file [isPhoto]="false" label=""></b2b-ngx-file>
+					</div>
+					<div class="chat-actions-item-block">
+						<button
+							b2bNgxButton
+							type="submit"
+							[theme]="b2bNgxButtonThemeEnum.BACKGROUND_BLACK"
+							class="client-profile-chat-actions-send-button">
+							<span>{{ t("BUTTONS.SEND") }}</span>
+							<svg
+								class="client-profile-chat-actions-send-button-icon"
+								width="16"
+								height="16"
+								viewBox="0 0 16 16"
+								fill="none"
+								xmlns="http://www.w3.org/2000/svg">
+								<path
+									d="M15.832 7.26899C15.6676 6.92953 15.3935 6.65544 15.0541 6.49106L2.407 0.371217C1.57387
+						 -0.0324159 0.571319 0.315791 0.167686 1.14892C-0.0379446 1.57341 -0.0552305 2.06491 0.120117
+						  2.50279L2.31929 7.99965L0.120117 13.4971C-0.222426 14.3594 0.198984 15.3362 1.06135 15.6787C1.25634
+						  15.7562 1.46413 15.7964 1.67395 15.7974C1.92781 15.7974 2.17839 15.7401 2.407 15.6298L15.054
+						  9.50824C15.8872 9.10471 16.2355 8.10216 15.832 7.26899ZM1.92034 14.6224C1.64259 14.7568 1.30843 14.6407
+						  1.17397 14.3629C1.10545 14.2214 1.09975 14.0576 1.15822 13.9116L3.29929 8.55837H14.4523L1.92034 14.6224ZM3.29932
+						  7.4409L1.15826 2.08763C1.06914 1.87424 1.12447 1.62782 1.29625 1.47303C1.46253 1.31101 1.7136 1.273 1.92034
+						  1.37861L14.4523 7.4409H3.29932Z"
+									fill="#9FA4BB" />
+							</svg>
+						</button>
+					</div>
+				</div>
+			</div>
+		</form>
+
+		<div class="client-profile-chat-buyer-info">
+			<div class="buyer-info-profile">
+				<div class="buyer-info-title">{{ chatInfo.displayInfo.role }} info</div>
+				<div class="buyer-info-header">
+					<div class="buyer-info-header-name">{{ chatInfo.displayInfo.fullName }}</div>
+				</div>
+				<!--			<div class="buyer-info-country">from </div>-->
+				<div class="buyer-info-block">
+					<div class="subtitle">Email</div>
+					<div class="subtext">{{ chatInfo.displayInfo.email }}</div>
+				</div>
+				<div class="buyer-info-block">
+					<div class="subtitle">Phone</div>
+					<div class="subtext">{{ chatInfo.displayInfo.phone.e164Number }}</div>
+				</div>
+			</div>
+			<div class="buyer-info-product">
+				<div class="buyer-info-product-title">Media</div>
+			</div>
+			<div class="buyer-info-warning">
+				<svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<path
+						d="M7.119 1.77272C7.49724 1.07443 8.49934 1.07443 8.87758 1.77272L14.9665 13.0137C15.3274 13.68 14.8449 14.49 14.0872 14.49H1.90941C1.15164 14.49 0.669209 13.68 1.03012 13.0137L7.119 1.77272Z"
+						stroke="#9FA4BB"
+						stroke-width="1.6"
+						stroke-linejoin="round" />
+				</svg>
+				<div class="buyer-info-warning-link">
+					<a href="">Report this buyer</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<ng-template #userDeleted *transloco="let t">
+	<p class="user-deleted">
+		{{ t("CHAT.USER_DELETED") }}
+	</p>
+</ng-template>

@@ -1,0 +1,27 @@
+@keyframes scroll {
+	0% {
+		transform: translateX(0);
+	}
+	100% {
+		transform: translateX(calc((-380px - 16px) * 5));
+	}
+}
+
+:host {
+	div {
+		overflow: hidden;
+
+		ul {
+			animation: scroll 10s linear infinite;
+			display: flex;
+			width: calc((380px + 16px) * 10);
+
+			padding: 0 0 24px;
+
+			li {
+				width: 380px;
+				margin: 0 8px;
+			}
+		}
+	}
+}

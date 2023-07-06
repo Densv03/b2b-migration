@@ -1,0 +1,30 @@
+<div class="carousel">
+
+<!--	<swiper [config]="swiperConfig">-->
+<!--		<ng-template-->
+<!--			*ngFor="let item of items"-->
+<!--			swiperSlide>-->
+<!--			<a-->
+<!--				[routerLink]="'/b2bmarket/products/' + item._id"-->
+<!--				class="slide">-->
+<!--				<div class="slide__header">-->
+<!--					<img b2bNgxImage [name]="item.photos[0].lg"></div>-->
+<!--				<div class="slide__body">-->
+<!--					<div class="slide__body-title">{{cutString(item.title, 4)}}</div>-->
+<!--					<div class="slide__body-description medium-text">{{cutString(item.specifications, 10)}}</div>-->
+<!--					<div class="slide__body-footer">-->
+<!--						<div class="slide__body-footer-companyName medium-text">{{item.company.companyName}}</div>-->
+<!--						<div class="slide__body-footer-country">-->
+<!--							<img b2bNgxIcon group="flags/" [name]="item.company.country | uppercase" alt="" />-->
+<!--							<div class="name medium-text">{{getCountryName(item.company.country)}}</div>-->
+<!--						</div>-->
+<!--					</div>-->
+
+<!--				</div>-->
+<!--			</a>-->
+<!--		</ng-template>-->
+
+<!--	</swiper>-->
+	<div [id]="navigationButtonsIds.prevId" class="swiper-button-prev"></div>
+	<div [id]="navigationButtonsIds.nextId" class="swiper-button-next"></div>
+</div>

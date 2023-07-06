@@ -1,0 +1,57 @@
+<ul class="ngx-my-offers-list" *transloco="let t">
+	<li
+		*ngFor="let option of parsedOptions"
+		[class]="
+			'ngx-my-offers-list-item ' + (option.reasonForDeletion || option.hidden ? 'ngx-my-offers-list-item-disabled' : '')
+		">
+		<a [routerLink]="b2bNgxLinkService.getLink('/offers/' + option._id) | async" class="ngx-my-offers-list-item-link">
+			<img class="ngx-my-offers-list-item-img" b2bNgxImage [name]="option.previewPhoto" />
+			<div class="ngx-my-offers-list-item-info">
+				<p class="ngx-my-offers-list-item-info-title">
+					{{ option.title }}
+				</p>
+				<b2b-client-badge
+					*ngIf="option.reasonForDeletion"
+					[bgColor]="'#9FA4BB'"
+					[text]="
+							option.reasonForDeletion === 'I don\'t sell cargo anymore'
+								? t('BADGE.REMOVED_BY_OWNER')
+								: option.reasonForDeletion === 'Deleted by admin'
+								? t('BADGE.REJECTED')
+								: t('BADGE.SOLD')
+						">
+				</b2b-client-badge>
+				<b2b-client-badge
+					*ngIf="!option.offerApproved && !option.offerRejected"
+					[bgColor]="'#9FA4BB'"
+					[text]="t('BADGE.MODERATE')"></b2b-client-badge>
+				<b2b-client-badge
+					*ngIf="option.hidden"
+					[bgColor]="option.userTypeWhoHideOffer === 'user' ? '#9FA4BB' : '#E63D3D'"
+					[text]="
+							option.userTypeWhoHideOffer === 'user' ? t('BADGE.HIDDEN') : t('BADGE.HIDDEN_BY_ADMIN')
+						"></b2b-client-badge>
+				<p class="ngx-my-offers-list-item-info-additional">
+					<span class="ngx-my-offers-list-item-info-added">{{ option.createdAt | date }}</span>
+					<img b2bNgxIcon name="eye" class="ngx-my-offers-list-item-info-icon" />
+					<span class="ngx-my-offers-list-item-info-views">{{ option.views }}</span>
+					<img b2bNgxIcon name="star" class="ngx-my-offers-list-item-info-icon" />
+					<span class="ngx-my-offers-list-item-info-stars">{{ option.stars }}</span>
+				</p>
+			</div>
+			<div class="ngx-my-offers-list-item-chats" *ngIf="false">
+				<p class="ngx-my-offers-list-item-chat">
+					<span class="ngx-my-offers-list-item-chat-amount">1 Chat</span>
+					<span class="ngx-my-offers-list-item-chat-messages">5</span>
+				</p>
+			</div>
+			<div class="ngx-my-offers-list-item-more">
+				<b2b-ngx-dropdown [options]="option.updatedOptions" [optionToReturn]="option">
+					<button b2bNgxButton class="flex items-center">
+						<img b2bNgxIcon name="more" />
+					</button>
+				</b2b-ngx-dropdown>
+			</div>
+		</a>
+	</li>
+</ul>

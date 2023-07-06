@@ -1,0 +1,248 @@
+<form class="rfq__form" [formGroup]="form" (ngSubmit)="submitForm(form)">
+	<div class="rfq__form__product-information" formGroupName="productInformation">
+		<div class="title">Product information</div>
+		<input
+			type="text"
+			b2bNgxInput
+			[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"
+			[label]="'Product name'"
+			[placeholder]="'Product name'"
+			labelClass="rfq__label-first"
+			formControlName="productName"
+			class="rfq__input" />
+		<p
+			*ngIf="
+				this.form.get('productInformation').get('productName').touched &&
+				this.form.get('productInformation').get('productName').errors?.latin
+			"
+			class="error"
+			[@fadeInOut]>
+			Please use only latin letters
+		</p>
+		<p
+			*ngIf="
+				this.form.get('productInformation').get('productName').touched &&
+				this.form.get('productInformation').get('productName').errors?.required
+			"
+			class="error"
+			[@fadeInOut]>
+			This field is required
+		</p>
+		<div class="rfq__half-space">
+			<b2b-ngx-select
+				[options]="categories$ | async"
+				formControlName="category"
+				bindValue="id"
+				bindLabel="value"
+				placeholder="Select category"
+				[theme]="b2bNgxSelectThemeEnum.BACKGROUND_GRAY"
+				>Category
+			</b2b-ngx-select>
+		</div>
+
+		<b2b-ngx-select
+			[options]="sourcingPurpose$ | async"
+			formControlName="sourcingPurpose"
+			[theme]="b2bNgxSelectThemeEnum.BACKGROUND_GRAY"
+			bindValue="id"
+			bindLabel="value"
+			[placeholder]="'Select'"
+			class="rfq__label rfq__half-space"
+			>Purpose</b2b-ngx-select
+		>
+
+		<div formGroupName="quantity" class="rfq__container">
+			<div class="rfq__half-space">
+				<input
+					type="text"
+					b2bNgxInput
+					[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"
+					[label]="'Quantity'"
+					[placeholder]="'Quantity'"
+					labelClass="rfq__label"
+					formControlName="quantity"
+					class="rfq__input" />
+				<p
+					*ngIf="
+						this.form.get('productInformation').get('quantity').get('quantity').touched &&
+						this.form.get('productInformation').get('quantity').get('quantity').errors?.required &&
+						!this.form.get('productInformation').get('budget').get('maxBudget').errors?.required
+					"
+					class="error"
+					[@fadeInOut]>
+					This field is required
+				</p>
+				<p
+					*ngIf="
+						this.form.get('productInformation').get('quantity').get('quantity').touched &&
+						this.form.get('productInformation').get('quantity').get('quantity').errors?.number
+					"
+					class="error"
+					[@fadeInOut]>
+					Please use only numbers
+				</p>
+			</div>
+			<div class="rfq__half-space flex-select">
+				<div class="measure-select-wrapper">
+					<b2b-ngx-select
+						[options]="unit$ | async"
+						formControlName="measure"
+						bindValue="_id"
+						bindLabel="displayName"
+						[theme]="b2bNgxSelectThemeEnum.BACKGROUND_GRAY"
+						[placeholder]="'Measure'"
+						[class.rfq__input]="hideLabel$ | async">
+						<span *ngIf="!(hideLabel$ | async)">&nbsp;</span>
+					</b2b-ngx-select>
+				</div>
+			</div>
+		</div>
+		<b2b-ngx-select
+			[options]="tradeTerms$ | async"
+			formControlName="tradeTerms"
+			bindLabel="value"
+			bindValue="id"
+			[theme]="b2bNgxSelectThemeEnum.BACKGROUND_GRAY"
+			class="rfq__half-space">
+			Trade terms
+		</b2b-ngx-select>
+
+		<div class="rfq__container" formGroupName="budget">
+			<div class="rfq__half-space">
+				<input
+					type="text"
+					b2bNgxInput
+					[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"
+					[label]="'Max budget'"
+					[placeholder]="'Max budget'"
+					labelClass="rfq__label"
+					formControlName="maxBudget"
+					class="rfq__input" />
+				<p
+					*ngIf="
+						this.form.get('productInformation').get('budget').get('maxBudget').touched &&
+						this.form.get('productInformation').get('budget').get('maxBudget').errors?.number &&
+						!this.form.get('productInformation').get('budget').get('maxBudget').errors?.required
+					"
+					class="error"
+					[@fadeInOut]>
+					Please use only numbers
+				</p>
+				<p
+					*ngIf="
+						this.form.get('productInformation').get('budget').get('maxBudget').touched &&
+						this.form.get('productInformation').get('budget').get('maxBudget').errors?.required
+					"
+					class="error"
+					[@fadeInOut]>
+					This field is required
+				</p>
+			</div>
+			<div class="rfq__half-space flex-select">
+				<div class="measure-select-wrapper">
+					<b2b-ngx-select
+						[options]="currencies$ | async"
+						formControlName="currency"
+						bindLabel="value"
+						bindValue="id"
+						[theme]="b2bNgxSelectThemeEnum.BACKGROUND_GRAY"
+						[class.rfq__input]="hideLabel$ | async">
+						<span *ngIf="!(hideLabel$ | async)">&nbsp;</span>
+					</b2b-ngx-select>
+				</div>
+			</div>
+		</div>
+		<textarea
+			b2bNgxTextarea
+			formControlName="moreInformation"
+			[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"
+			[placeholder]="'Enter at least 20 characters'"
+			[label]="'More information'"
+			labelClass="rfq__half-label"
+			class="rfq__textarea rfq__half-space"></textarea>
+		<p
+			*ngIf="
+				this.form.get('productInformation').get('moreInformation').touched &&
+				this.form.get('productInformation').get('moreInformation').errors?.latin
+			"
+			[ngStyle]="{ marginTop: '15px' }"
+			class="error"
+			[@fadeInOut]>
+			Please use only latin letters and numbers
+		</p>
+		<p
+			*ngIf="
+				this.form.get('productInformation').get('moreInformation').touched &&
+				this.form.get('productInformation').get('moreInformation').errors?.required
+			"
+			[ngStyle]="{ marginTop: '15px' }"
+			class="error"
+			[@fadeInOut]>
+			This field is required
+		</p>
+		<p
+			*ngIf="
+				this.form.get('productInformation').get('moreInformation').touched &&
+				this.form.get('productInformation').get('moreInformation').errors?.minlength
+			"
+			[ngStyle]="{ marginTop: '15px' }"
+			class="error"
+			[@fadeInOut]>
+			Please, put more than 20 letters, now
+			{{ form.get("productInformation").get("moreInformation").errors?.minlength.actualLength }} letters
+		</p>
+		<div class="ngx-file-wrapper">
+			<b2b-ngx-file formControlName="photos" class="rfq__label" label="Choose file" [isPhoto]="true"
+				>Attachments</b2b-ngx-file
+			>
+		</div>
+	</div>
+
+	<!--	PAYMENT AND SHIPPING	-->
+
+	<div class="rfq__form__product-information" formGroupName="paymentShipping">
+		<div class="title">Payment Shipping</div>
+
+		<b2b-ngx-select
+			formControlName="shippingMethod"
+			[placeholder]="'Select'"
+			[options]="shippingMethod$ | async"
+			[theme]="b2bNgxSelectThemeEnum.BACKGROUND_GRAY"
+			bindValue="id"
+			bindLabel="value"
+			class="rfq__label-first rfq__half-space">
+			Shipping Method
+		</b2b-ngx-select>
+
+		<b2b-ngx-country-select
+			formControlName="destination"
+			[theme]="b2bNgxSelectThemeEnum.BACKGROUND_GRAY"
+			[placeholder]="'Select country'"
+			class="rfq__label rfq__half-space"
+			>Destination</b2b-ngx-country-select
+		>
+
+		<b2b-ngx-select
+			formControlName="paymentMethod"
+			[options]="paymentMethod$ | async"
+			[theme]="b2bNgxSelectThemeEnum.BACKGROUND_GRAY"
+			bindValue="id"
+			bindLabel="value"
+			class="rfq__label rfq__half-space">
+			PAYMENT METHOD
+		</b2b-ngx-select>
+
+		<b2b-ngx-checkbox formControlName="readRFQRules" class="rfq__label"
+			>I have read and I agree with RFQ posting rules.</b2b-ngx-checkbox
+		>
+
+		<button
+			b2bNgxButton
+			[theme]="b2bNgxButtonThemeEnum.BACKGROUND_BLACK"
+			type="submit"
+			class="rfq__label-first"
+			[disabled]="!(isSubmitButtonActive$ | async)">
+			SUBMIT
+		</button>
+	</div>
+</form>

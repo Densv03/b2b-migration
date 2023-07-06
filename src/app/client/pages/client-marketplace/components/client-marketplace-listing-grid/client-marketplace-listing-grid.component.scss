@@ -1,0 +1,23 @@
+@import "libs/shared/styles/src/lib";
+
+.marketplace-grid {
+	display: grid;
+	grid-template-columns: repeat(4, 25%);
+	justify-content: space-evenly;
+	gap: 15px;
+	.grid-item {
+		margin-bottom: 15px;
+	}
+	@include breakpoint("4") {
+		grid-template-columns: repeat(3, 31%);
+	}
+	@include breakpoint("3") {
+		grid-template-columns: repeat(2, 45%);
+	}
+	@include breakpoint("2") {
+		grid-template-columns: repeat(2, 40%);
+	}
+	@include breakpoint("1") {
+		grid-template-columns: repeat(1, 90%);
+	}
+}

@@ -1,0 +1,32 @@
+@import "libs/shared/styles/src/lib";
+
+.client-profile {
+	display: flex;
+	background: #f3f6f8;
+	padding: 0 100px;
+	@include breakpoint("5") {
+		padding: 0 30px 0 70px;
+	}
+	@include breakpoint("3") {
+		padding: 0;
+	}
+	.client-profile-sidenav {
+		padding: 40px 24px 0 0;
+		border-right: 1px solid #e3eaf1;
+		@include breakpoint("3") {
+			display: none;
+		}
+	}
+	.client-profile-pages {
+		width: 100%;
+		flex: 1;
+		padding: 40px 0 40px 24px;
+
+		@include breakpoint("5") {
+			padding-left: 0;
+		}
+		@include breakpoint("3") {
+			padding: 0;
+		}
+	}
+}

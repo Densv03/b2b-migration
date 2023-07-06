@@ -1,0 +1,156 @@
+<ul class="ngx-latest-offers-list" *transloco="let t">
+	<li *ngFor="let option of options" class="ngx-latest-offers-list-item">
+		<a
+			[routerLink]="b2bNgxLinkService.getLink(option?.path ? '/offers/' + option.path : '/offers/' + option._id) | async"
+			class="ngx-latest-offers-list-item-link">
+			<div class="ngx-latest-offers-list-item-img-wrapper">
+				<img b2bNgxImage [name]="option.previewPhoto" class="ngx-latest-offers-list-item-img" />
+				<p class="ngx-latest-offers-list-item-img-discount">-{{ option?.price?.discount }}%</p>
+				<div class="icons">
+					<img
+						b2bNgxIcon
+						*ngIf="option.verifiedTrack"
+						ngxTippy
+						data-tippy-content="Verified track"
+						[name]="'verified-2'"
+						class="ngx-saved-offers-list-item-info-icon" />
+					<img
+						b2bNgxIcon
+						*ngIf="option.highDemand"
+						ngxTippy
+						data-tippy-content="This offer is in high demand!"
+						[name]="'flame'"
+						class="ngx-saved-offers-list-item-info-icon" />
+					<img
+						b2bNgxIcon
+						*ngIf="option.priceDrop"
+						ngxTippy
+						data-tippy-content="Price Drop"
+						[name]="'price-drop'"
+						class="ngx-saved-offers-list-item-info-icon" />
+				</div>
+			</div>
+			<div class="ngx-latest-offers-list-item-info">
+				<p class="ngx-latest-offers-list-item-info-title">
+					<span class="ngx-latest-offers-list-item-info-title-text">{{ option.title }} </span>
+					<span class="ngx-latest-offers-list-item-info-title-icon">
+						<button (click)="emitStarClick(option, $event)">
+							<img b2bNgxIcon name="star" alt="" class="ngx-latest-offers-list-item-info-title-star" />
+						</button>
+					</span>
+				</p>
+				<div *ngIf="user; else noUser" class="ngx-latest-offers-list-item-additional-info">
+					<div class="ngx-latest-offers-list-item-additional-info-seller">
+						<p class="ngx-latest-offers-list-item-additional-info-seller-text">
+							{{ t("OFFERS.SELLER") }}
+						</p>
+						<p class="ngx-latest-offers-list-item-additional-info-seller-container">
+							<!--							<img b2bNgxImage name="" class="ngx-latest-offers-list-item-additional-info-seller-logo">-->
+							<span class="ngx-latest-offers-list-item-additional-info-seller-name">{{
+								option.contact?.companyName
+							}}</span>
+							<!--							<img b2bNgxIcon name="verified-2" class="ngx-latest-offers-list-item-additional-info-seller-verified">-->
+						</p>
+					</div>
+					<div class="ngx-latest-offers-list-item-additional-info-route">
+						<p class="ngx-latest-offers-list-item-additional-info-route-title">
+							{{ t("OFFERS.ROUTE") }}
+						</p>
+						<p class="ngx-latest-offers-list-item-additional-info-route-router-from-to">
+							<img
+								b2bNgxIcon
+								[name]="option.destination?.from | uppercase"
+								group="flags/"
+								class="ngx-latest-offers-list-item-additional-info-route-first-country-icon" />
+							<span class="ngx-latest-offers-list-item-additional-info-route-first-country-name">{{
+								option.destination?.from
+							}}</span>
+							<img
+								b2bNgxIcon
+								name="arrow-r-blue-2"
+								class="ngx-latest-offers-list-item-additional-info-route-arrow-icon" />
+							<img
+								b2bNgxIcon
+								[name]="option.destination?.to | uppercase"
+								group="flags/"
+								class="ngx-latest-offers-list-item-additional-info-route-second-country-icon" />
+							<span class="ngx-latest-offers-list-item-additional-info-route-second-country-name">{{
+								option.destination?.to
+							}}</span>
+						</p>
+					</div>
+					<div class="ngx-latest-offers-list-item-additional-info-eta">
+						<p class="ngx-latest-offers-list-item-additional-info-eta-title">
+							{{ t("OFFERS.ETA") }}
+						</p>
+						<p class="ngx-latest-offers-list-item-additional-info-eta-description">
+							{{ option.createdAt | date }}
+						</p>
+					</div>
+				</div>
+
+				<ng-template #noUser>
+					<div class="no-user">
+						<img class="no-user-img" b2bNgxImage name="blured-offer-2" />
+					</div>
+				</ng-template>
+			</div>
+			<div class="ngx-latest-offers-list-item-price-container">
+				<p class="ngx-latest-offers-list-item-price">
+					<span class="ngx-latest-offers-list-item-price-dollar-sign">$</span>
+					<span class="ngx-latest-offers-list-item-price-number">{{ option.price?.new }}</span>
+					<span class="ngx-latest-offers-list-item-price-amount">
+						{{ t("OFFERS.PER") }}
+						{{ t("UNITS." + option.amount.unit.name.toUpperCase()) }}</span
+					>
+				</p>
+				<p class="ngx-latest-offers-list-item-old-price">
+					{{ t("OFFERS.OLD_PRICE") }}
+					{{ option.price.old }}$
+					{{ t("OFFERS.PER") }}
+					{{
+						option.amount?.unit?._id === "60a784830a04b16c574e8145"
+							? t("UNITS.QUANTITY_COUNT")
+							: option.amount?.unit?._id === "60a784830a04b16c574e8143"
+							? t("UNITS.TONS_COUNT")
+							: t("UNITS.M3_COUNT")
+					}}
+				</p>
+				<p class="ngx-latest-offers-list-item-available">
+					{{ option.amount?.count }} {{ t("UNITS." + option.amount?.unit?.name.toUpperCase()) }}
+				</p>
+				<ng-container *ngIf="user; else noUserButton">
+					<a
+						*ngIf="!option.isChatExist"
+						b2bNgxLink
+						[routerLink]="b2bNgxLinkService.getLink('/offers/' + option._id) | async"
+						[theme]="b2bNgxLinkThemeEnum.BACKGROUND_LIGHT_BLUE"
+						class="ngx-latest-offers-list-item-button">
+						<img b2bNgxIcon name="chat-blue" />
+						<span class="ngx-latest-offers-list-item-button-text"> {{ t("OFFERS.MAKE_AN_OFFER") }}</span>
+					</a>
+					<a
+						*ngIf="option.isChatExist"
+						b2bNgxLink
+						[routerLink]="b2bNgxLinkService.getLink('/offers/' + option._id + '/chat') | async"
+						[theme]="b2bNgxLinkThemeEnum.BACKGROUND_LIGHT_BLUE"
+						class="ngx-latest-offers-list-item-button">
+						<img b2bNgxIcon name="chat-blue" />
+						<span class="ngx-latest-offers-list-item-button-text">{{ t("OFFERS.OPEN_CHAT") }}</span>
+					</a>
+				</ng-container>
+
+				<ng-template #noUserButton>
+					<a
+						b2bNgxLink
+						[routerLink]="b2bNgxLinkService.getLink('/pricing') | async"
+						[theme]="b2bNgxLinkThemeEnum.BACKGROUND_BLACK"
+						class="ngx-latest-offers-list-item-button">
+						<img b2bNgxIcon name="upgrade" class="update-icon" />
+						<span class="ngx-latest-offers-list-item-button-text">{{ t("OFFERS.UPGRADE") }}</span>
+					</a>
+				</ng-template>
+			</div>
+		</a>
+	</li>
+</ul>

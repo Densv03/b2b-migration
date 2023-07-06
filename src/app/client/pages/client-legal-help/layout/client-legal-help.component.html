@@ -1,0 +1,52 @@
+<div class="legal-help" *transloco="let t">
+	<div class="container">
+		<div class="legal-help-header">
+			<h3 class="legal-help-title">{{ t("LEGAL_HELP.TITLE") }}</h3>
+			<p class="legal-help-description">
+				{{ t("LEGAL_HELP.DESCRIPTION_1") }}
+				<img class="logo" b2bNgxIcon class="client-home__description-icon" name="Interlegal" />
+			</p>
+			<p class="legal-help-description">{{ t("LEGAL_HELP.DESCRIPTION_2") }}</p>
+		</div>
+
+		<form errorTailor class="legal-help-form" [formGroup]="formGroup" (ngSubmit)="sendMessage(formGroup)">
+			<input
+				b2bNgxInput
+				[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"
+				[placeholder]="t('PLACEHOLDERS.ENTER_NAME')"
+				formControlName="fullName"
+				[label]="t('LABELS.FULL_NAME')"
+				labelClass="legal-help-input" />
+			<input
+				b2bNgxInput
+				[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"
+				type="email"
+				[label]="t('LABELS.EMAIL')"
+				labelClass="legal-help-input"
+				[placeholder]="t('PLACEHOLDERS.YOUR_EMAIL')"
+				formControlName="email" />
+			<b2b-ngx-country-select
+				[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"
+				formControlName="country"
+				[errors]="formGroup.getControl('country').errors"
+				>{{ t("INPUTS.COUNTRY") }}</b2b-ngx-country-select
+			>
+			<textarea
+				b2bNgxTextarea
+				maxlength="1000"
+				rows="5"
+				[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"
+				[placeholder]="t('PLACEHOLDERS.ENTER_MESSAGE')"
+				formControlName="text"
+				[label]="t('LABELS.MESSAGE')"
+				labelClass="legal-help-textarea"></textarea>
+			<button b2bNgxButton type="submit" class="legal-help-button" [theme]="b2bNgxButtonThemeEnum.BACKGROUND_BLACK">
+				{{ t("BUTTONS.SEND_MESSAGE") }}
+			</button>
+
+			<pre class="legal-help-text">
+{{ t('LEGAL_HELP.DESCRIPTION_3') }}<a href="https://interlegal.com.ua/ru/" target="_blank">{{ t('LEGAL_HELP.INTER_LEGAL') }}</a> {{ t('LEGAL_HELP.DESCRIPTION_4') }}
+			</pre>
+		</form>
+	</div>
+</div>

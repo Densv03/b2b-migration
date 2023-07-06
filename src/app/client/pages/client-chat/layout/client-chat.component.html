@@ -1,0 +1,116 @@
+<div class="client-profile-chat-wrapper" *transloco="let t">
+
+	<div class="client-profile-chat" *ngIf="chatInfo$ | async as chatInfo">
+		<form
+			(keydown.enter)="enterPressed($event)"
+			[formGroup]="formGroup"
+			(ngSubmit)="sendMessage(formGroup.get('message').value)"
+			class="client-profile-chat-container">
+			<p class="client-profile-chat-breadcrumbs">
+				<a [routerLink]="b2bNgxLinkService.getLink('/profile') | async">{{ t("PAGES.PROFILE") + " " }}</a>
+				<a [routerLink]="b2bNgxLinkService.getLink('/profile/my-offers') | async">{{ t("PAGES.MY_CHATS") }} </a>
+				<a [routerLink]="b2bNgxLinkService.getLink('/profile/my-offers' + chatInfo.offer._id) | async"
+					>{{ chatInfo.offer.title }}
+				</a>
+			</p>
+
+			<p class="client-profile-chat-title">{{ chatInfo.offer.title }}</p>
+			<p class="client-profile-chat-started">{{ t("CHAT.CHAT_STARTED") }}: {{ chatInfo.createdAt | date }}</p>
+
+			<div class="client-profile-chat-messages">
+				<ul class="client-profile-chat-messages-list" #chatContainer>
+					<li *ngFor="let message of messages$ | async" class="client-profile-chat-messages-list-item">
+						<p class="client-profile-chat-messages-list-item-info">
+							<span class="client-profile-chat-messages-list-item-from">{{ message.contact.author }}</span>
+							<span class="client-profile-chat-messages-list-item-date">{{ message.createdAt | date }}</span>
+						</p>
+						<p class="client-profile-chat-messages-list-item-message">
+							{{ message.body }}
+						</p>
+					</li>
+					<li *ngIf="!(messages$ | async)?.length" class="client-profile-chat-no-messages">
+						{{ t("CHAT.NO_MESSAGES") }}
+					</li>
+				</ul>
+			</div>
+
+			<textarea
+				formControlName="message"
+				[placeholder]="t('PLACEHOLDERS.ENTER_TO_SEND')"
+				class="client-profile-chat-textarea"
+				rows="5"></textarea>
+
+			<div class="client-profile-chat-actions">
+				<button
+					b2bNgxButton
+					type="submit"
+					[theme]="b2bNgxButtonThemeEnum.BACKGROUND_BLACK"
+					class="client-profile-chat-actions-send-button">
+					<span>{{ t("BUTTONS.SEND") }}</span>
+					<img b2bNgxIcon name="chat" class="client-profile-chat-actions-send-button-icon" />
+				</button>
+			</div>
+		</form>
+
+		<div routerLink="/profile/your-workspace/unclaimed-cargo" class="client-profile-chat-buyer-info">
+			<div class="go-back">
+				<img b2bNgxIcon name="arrow-l" alt="icon">
+				<div class="label">Go back</div>
+			</div>
+
+
+			<div class="client-profile-chat-buyer-info-container" *ngIf="chatInfo.displayInfo; else userDeleted">
+				<p class="client-profile-chat-buyer-info-text">
+					{{ chatInfo.displayInfo.role }}
+				</p>
+				<p class="client-profile-chat-buyer-info-title">
+					<span>{{ chatInfo.displayInfo.author }} </span>
+				</p>
+				<p class="client-profile-chat-buyer-info-from" *ngIf="chatInfo.displayInfo.country">
+					{{ t("LABELS.FROM") }} {{ chatInfo.displayInfo.country }}
+				</p>
+
+				<p class="client-profile-chat-buyer-email-title" *ngIf="chatInfo.displayInfo.email">
+					{{ t("LABELS.EMAIL") }}
+				</p>
+				<p class="client-profile-chat-buyer-email">
+					{{ chatInfo.displayInfo.email }}
+				</p>
+
+				<p class="client-profile-chat-buyer-phone-title" *ngIf="chatInfo.displayInfo.phone?.e164Number">
+					{{ t("LABELS.PHONE") }}
+				</p>
+				<p class="client-profile-chat-buyer-phone">
+					{{ chatInfo.displayInfo.phone?.e164Number }}
+				</p>
+
+				<p class="client-profile-chat-buyer-web-title" *ngIf="chatInfo.displayInfo.site">
+					{{ t("LABELS.WEB") }}
+				</p>
+				<p class="client-profile-chat-buyer-web">
+					{{ chatInfo.displayInfo.site }}
+				</p>
+			</div>
+			<div class="client-profile-chat-buyer-info-media">
+				<button class="my-btn requested" *ngIf="displayContactsOpened">
+					{{ t("CHAT.CONTACTS_OPENED") }}
+				</button>
+				<button class="my-btn" *ngIf="displayRequestContacts" (click)="requestContacts()">
+					{{ t("CHAT.REQUEST_CONTACTS") }}
+				</button>
+				<button class="my-btn" *ngIf="displayOpenContacts" (click)="openContacts()">
+					{{ t("CHAT.OPEN_CONTACTS") }}
+				</button>
+				<button class="my-btn" *ngIf="displayCloseContacts" (click)="closeContacts()">
+					{{ t("CHAT.CLOSE_CONTACTS") }}
+				</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<ng-template #userDeleted *transloco="let t">
+	<p class="user-deleted">
+		{{ t("CHAT.USER_DELETED") }}
+	</p>
+</ng-template>

@@ -1,0 +1,25 @@
+<div class="cookies-policy" *transloco="let t">
+	<div class="container">
+		<div class="title-wrapper">
+			<h1 class="title">{{ t("COOKIES.NAME") }}</h1>
+			<p class="dates">
+				<span class="effective-date">{{ t("COOKIES.EFFECTIVE_DATE") }}: 04.06.2021</span>
+				<span class="modifed-date">{{ t("COOKIES.LAST_MODIFED") }}: 04.06.2021</span>
+			</p>
+		</div>
+
+		<section class="section" *ngFor="let option of options">
+			<p class="section-title">{{ option.title }}</p>
+			<p class="section-description">{{ option.description }}</p>
+
+			<ngx-datatable
+				class="material section-table"
+				*ngIf="option.rows"
+				[rows]="option.rows"
+				[columns]="option.columns"
+				columnMode="force"
+				rowHeight="auto"
+				headerHeight="50"></ngx-datatable>
+		</section>
+	</div>
+</div>
