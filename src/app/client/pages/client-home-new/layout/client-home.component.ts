@@ -16,7 +16,6 @@ import {CategoriesService} from "../../../services/categories/categories.service
 import {FormControl, Validators} from "@angular/forms";
 import {environment} from "../../../../../environments/environment";
 import {B2bNgxInputThemeEnum} from "@b2b/ngx-input";
-import {HotToastService} from "@ngneat/hot-toast";
 import {HomepageService} from "../../../shared/services/homepage/homepage.service";
 import {untilDestroyed} from "@ngneat/until-destroy";
 import SwiperCore from "swiper";
@@ -56,7 +55,6 @@ export class ClientHomeComponent implements OnInit {
 		private readonly homePageService: HomepageService,
 		private readonly tradebidService: TradebidService,
 		private readonly blogService: BlogService,
-		private readonly hotToastService: HotToastService
 	) {
 		// this.offers$ = this.getOffers();
 		this.user$ = this._usersService.getUser$();

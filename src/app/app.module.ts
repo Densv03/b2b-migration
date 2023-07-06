@@ -8,6 +8,7 @@ import {MatTreeModule} from "@angular/material/tree";
 import {MatIconModule} from "@angular/material/icon";
 import {B2bNgxCheckboxModule} from "@b2b/ngx-checkbox";
 import {CoreModule} from "./core/core.module";
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [],
@@ -19,6 +20,7 @@ import {CoreModule} from "./core/core.module";
     MatTreeModule,
     MatIconModule,
     B2bNgxCheckboxModule,
+    HttpClientModule
   ],
   bootstrap: [AppComponent]
 })

@@ -1,4 +1,4 @@
-@import "libs/shared/styles/src/lib";
+@import "projects/shared/src/styles";
 
 .hot-it-works-2 {
 	background-color: white;
@@ -544,7 +544,7 @@
 		}
 
 		h3 {
-			@import "libs/shared/styles/src/lib";
+      @import "projects/shared/src/styles";
 
 			.hot-it-works-2 {
 				background-color: white;
