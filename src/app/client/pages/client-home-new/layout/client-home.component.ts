@@ -16,11 +16,11 @@ import {CategoriesService} from "../../../services/categories/categories.service
 import {FormControl, Validators} from "@angular/forms";
 import {environment} from "../../../../../environments/environment";
 import {B2bNgxInputThemeEnum} from "@b2b/ngx-input";
-import SwiperCore from "swiper";
-import {Scrollbar} from "swiper/types/modules";
 import {HotToastService} from "@ngneat/hot-toast";
 import {HomepageService} from "../../../shared/services/homepage/homepage.service";
 import {untilDestroyed} from "@ngneat/until-destroy";
+import SwiperCore from "swiper";
+import Scrollbar from "swiper"
 
 SwiperCore.use([Scrollbar]);
 
@@ -38,7 +38,7 @@ export class ClientHomeComponent implements OnInit {
 	public readonly articles$: Observable<any[]>;
 	public url = environment.apiUrl;
 	public solutionsLink = "";
-	public categories = [];
+	public categories: any[] = [];
 	public email = new FormControl('', Validators.required);
 	public b2bNgxInputThemeEnum: typeof B2bNgxInputThemeEnum = B2bNgxInputThemeEnum;
 	public readonly b2bNgxLinkThemeEnum: typeof B2bNgxLinkThemeEnum;

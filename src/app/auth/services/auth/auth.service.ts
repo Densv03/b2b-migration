@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { BehaviorSubject, Observable } from "rxjs";
+import {BehaviorSubject, Observable} from "rxjs";
 import { take, tap } from "rxjs/operators";
 
 import { User } from "../../../core/models/user/user.model";
@@ -32,10 +32,10 @@ export class AuthService {
 		this.updateToken(token || "");
 
 		this.apiService
-			.get("user/")
+			.get<User>("user/")
 			.pipe(take(1))
 			.subscribe({
-				next: (user: User) => this.updateUser(<User>user),
+				next: (user) => this.updateUser(<User>user),
 				error: () => this.updateUser(null),
 			});
 	}

@@ -2,9 +2,9 @@
 	<div class="title">Latest products</div>
 	<div *ngIf="data.length > 0" class="tabs">
 		<tabset class="scrollable-tabs">
-			<tab *ngFor="let tab of data; let idx = index" [heading]="tab.name">
+			<tab *ngFor="let tab of data; let idx = index" [heading]="$any(tab).name">
 			<b2b-home-latest-products-slider
-				[items]="tab.products"
+				[items]="$any(tab).products"
 				[navigationButtonsIds]="{nextId: 'prev-' + idx, prevId: 'next-' + idx}"
 			></b2b-home-latest-products-slider>
 			</tab>

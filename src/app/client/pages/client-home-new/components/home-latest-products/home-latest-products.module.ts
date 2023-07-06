@@ -19,7 +19,8 @@ import {CarouselModule} from "ngx-bootstrap/carousel";
 
         // SwiperModule,
         HomeLatestProductsSliderModule,
-        RouterModule
+        RouterModule,
+        TabsModule
     ]
 })
 export class HomeLatestProductsModule { }

@@ -186,12 +186,12 @@
 				<b2b-ngx-checkbox
 					(change)="selectedCategories($event, category.value)"
 					*ngFor="let category of categories"
-					[checked]="category.checked"
+					[checked]="$any(category).checked"
 					[customClass]="'subscription-checkbox'">
 					<div class="d-flex checkbox-content">
 						<img [src]="category.icon" class="checkbox-icon">
 
-						<span class="checkbox-text">{{category.text}}</span>
+						<span class="checkbox-text">{{$any(category).text}}</span>
 					</div>
 				</b2b-ngx-checkbox>
 			</div>
