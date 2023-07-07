@@ -20,6 +20,7 @@ import {HomepageService} from "../../../shared/services/homepage/homepage.servic
 import {untilDestroyed} from "@ngneat/until-destroy";
 import SwiperCore from "swiper";
 import Scrollbar from "swiper"
+import {HotToastService} from "@ngneat/hot-toast";
 
 SwiperCore.use([Scrollbar]);
 
@@ -55,6 +56,7 @@ export class ClientHomeComponent implements OnInit {
 		private readonly homePageService: HomepageService,
 		private readonly tradebidService: TradebidService,
 		private readonly blogService: BlogService,
+    private readonly hotToastService: HotToastService
 	) {
 		// this.offers$ = this.getOffers();
 		this.user$ = this._usersService.getUser$();
@@ -67,6 +69,7 @@ export class ClientHomeComponent implements OnInit {
 	ngOnInit() {
 		this.getCategories();
 		this.solutionsLink = this.getSolutionsLink();
+    this.hotToastService.info('test')
 	}
 
 	public getSolutionsLink(): string {
@@ -156,7 +159,7 @@ export class ClientHomeComponent implements OnInit {
 	private getCategories(): void {
 		this.categoriesService
 			.getCategories()
-			.pipe(untilDestroyed(this))
+			.pipe()
 			.subscribe((el: any) => {
 				this.categories = el.categories.map((category: any) => {
 					return {value: category._id, text: category.name, icon: this.url + category.icon, checked: false};
