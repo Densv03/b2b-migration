@@ -22,7 +22,7 @@ import { TranslocoRootModule } from './transloco-root.module';
     MatIconModule,
     B2bNgxCheckboxModule,
     HttpClientModule,
-    TranslocoRootModule
+    TranslocoRootModule,
   ],
   bootstrap: [AppComponent]
 })

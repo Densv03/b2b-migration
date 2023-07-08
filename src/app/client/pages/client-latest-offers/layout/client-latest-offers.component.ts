@@ -19,7 +19,7 @@ import {AuthService} from "../../../../auth/services/auth/auth.service";
 import {BrowserStorageKeysEnum} from "../../../shared/enums/browser-storage-keys.enum";
 import {B2bNgxInputThemeEnum} from "@b2b/ngx-input";
 import {B2bNgxButtonThemeEnum} from "@b2b/ngx-button";
-import {TranslocoService} from "@ngneat/transloco";
+// import {TranslocoService} from "@ngneat/transloco";
 
 function toFlat(arr: any[]): any {
 	return arr.reduce((pre, { children = [], ...cur }) => [...pre, ...toFlat(children), cur], []);
@@ -94,7 +94,7 @@ export class ClientLatestOffersComponent implements OnInit {
 		private readonly _authService: AuthService,
 		private readonly _hotToastService: HotToastService,
 		public readonly b2bNgxLinkService: B2bNgxLinkService,
-		private readonly _translocoService: TranslocoService,
+		// private readonly _translocoService: TranslocoService,
 		private readonly _router: Router,
 		private readonly _route: ActivatedRoute
 	) {
@@ -119,8 +119,8 @@ export class ClientLatestOffersComponent implements OnInit {
 			map((transports: any[]) =>
 				transports.map((transport: any) => ({
 					...transport,
-          // displayName: 'Name without transloco'
-					displayName: this._translocoService.translate(transport.displayName),
+          displayName: 'Name without transloco'
+					// displayName: this._translocoService.translate(transport.displayName),
 				}))
 			),
 			tap((transports) => (this.localTransportTypes = transports))
