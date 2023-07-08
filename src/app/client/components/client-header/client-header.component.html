@@ -1,4 +1,4 @@
-<header class="header transparent">
+<header class="header transparent" *transloco="let t">
 	<a b2bNgxLink [routerLink]="b2bNgxLinkService.getLink('/') | async">
 		<img b2bNgxImage class="header__logo" name="logo" />
 	</a>
@@ -11,7 +11,7 @@
 					class="header__list-item-link"
 					[routerLink]="b2bNgxLinkService.getLink(option.link) | async"
 					(click)="processRouteClick(option.link)">
-          {{option.label}}
+          {{t(option.label)}}
         </a>
 			</div>
 			<div class="header__list-item">

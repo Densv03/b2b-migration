@@ -12,22 +12,24 @@ import {B2bNgxIconModule} from "@b2b/ngx-icon";
 import {B2bNgxButtonModule} from "@b2b/ngx-button";
 import {B2bNgxImageModule} from "@b2b/ngx-image";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {TranslocoModule} from "@ngneat/transloco";
 
 
 @NgModule({
 	declarations: [AppComponent, CoreComponent, ClientHeaderComponent],
-  imports: [
-    CommonModule,
-    CoreRoutingModule,
-    RouterOutlet,
-    TabsModule.forRoot(),
-    CarouselModule.forRoot(),
-    B2bNgxLinkModule,
-    B2bNgxIconModule,
-    B2bNgxButtonModule,
-    B2bNgxImageModule,
-    BrowserAnimationsModule
-  ],
+    imports: [
+        CommonModule,
+        CoreRoutingModule,
+        RouterOutlet,
+        TabsModule.forRoot(),
+        CarouselModule.forRoot(),
+        B2bNgxLinkModule,
+        B2bNgxIconModule,
+        B2bNgxButtonModule,
+        B2bNgxImageModule,
+        BrowserAnimationsModule,
+        TranslocoModule
+    ],
 	exports: [AppComponent],
 })
 export class CoreModule {
