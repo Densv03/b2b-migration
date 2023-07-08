@@ -153,7 +153,6 @@ export class CoreComponent implements OnInit, AfterViewInit {
   }
 
   public get displayHeader(): boolean {
-    console.log(!this._router.url.includes("admin"))
     return !this._router.url.includes("admin");
   }
 

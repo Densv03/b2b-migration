@@ -27,7 +27,7 @@ export class ClientLatestOffersGridComponent implements OnChanges {
 		if (changes && changes['options'].currentValue) {
 			this.options = changes['options'].currentValue.map((el: any) => ({
 				...el,
-				isChatExist: !!el.chatStarted?.find((id: any) => id === this.user._id),
+				isChatExist: !!el.chatStarted?.find((id: any) => id === this.user?._id),
 			}));
 		}
 	}
