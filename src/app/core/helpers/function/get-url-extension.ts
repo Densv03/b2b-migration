@@ -3,5 +3,5 @@ export function GetUrlExtension(url: string): string {
 		return '';
 	}
 
-	return url.split(/[#?]/)[0].split(".").pop().trim();
+	return url.split(/[#?]/)[0].split(".").pop()!.trim();
 }

@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from "@angular/core";
 import { B2bNgxButtonThemeEnum } from "@b2b/ngx-button";
-import { B2bNgxLinkService, B2bNgxLinkThemeEnum } from "libs/ngx-link/src";
 import { Router } from "@angular/router";
+import {B2bNgxLinkService, B2bNgxLinkThemeEnum} from "@b2b/ngx-link";
 
 @Component({
 	selector: "b2b-client-latest-offers-grid",
@@ -9,10 +9,10 @@ import { Router } from "@angular/router";
 	styleUrls: ["./client-latest-offers-grid.component.scss"],
 })
 export class ClientLatestOffersGridComponent implements OnChanges {
-	@Output() public readonly starClicked: EventEmitter<string>;
+	@Output() public starClicked: EventEmitter<string>;
 
-	@Input() public options: any[];
-	@Input() public readonly user: any;
+	@Input() public options!: any[];
+	@Input() public user: any;
 
 	public readonly b2bNgxButtonThemeEnum: typeof B2bNgxButtonThemeEnum;
 	public readonly b2bNgxLinkThemeEnum: typeof B2bNgxLinkThemeEnum;
@@ -24,10 +24,10 @@ export class ClientLatestOffersGridComponent implements OnChanges {
 	}
 
 	ngOnChanges(changes: SimpleChanges): void {
-		if (changes && changes.options.currentValue) {
-			this.options = changes.options.currentValue.map((el) => ({
+		if (changes && changes['options'].currentValue) {
+			this.options = changes['options'].currentValue.map((el: any) => ({
 				...el,
-				isChatExist: !!el.chatStarted?.find((id) => id === this.user._id),
+				isChatExist: !!el.chatStarted?.find((id: any) => id === this.user._id),
 			}));
 		}
 	}
@@ -38,11 +38,11 @@ export class ClientLatestOffersGridComponent implements OnChanges {
 		return wordsArr.length > 4 ? wordsArr.slice(0, wordsToSplice).join(' ') + '...' : str;
 	}
 
-	public openChat(event): void {
+	public openChat(event: any): void {
 		event.stopImmediatePropagation();
 	}
 
-	public emitStarClick(id, event): void {
+	public emitStarClick(id: any, event: any): void {
 		event.preventDefault();
 		event.stopImmediatePropagation();
 		this.starClicked.emit(id);

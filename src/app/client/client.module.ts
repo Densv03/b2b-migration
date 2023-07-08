@@ -30,6 +30,7 @@ import {ClientComponent} from "./layout/client.component";
 		FormsModule,
 		ReactiveFormsModule,
 		B2bNgxInputModule,
+    B2bNgxButtonModule,
 		// B2bNgxTelModule,
 		// B2bNgxTextareaModule,
 		B2bNgxSelectModule,

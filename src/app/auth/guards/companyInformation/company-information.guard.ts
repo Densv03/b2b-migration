@@ -33,7 +33,7 @@ export class CompanyInformationGuard implements CanActivate {
 				this.tradebidService.updateCompanyInfo({ companyName: "" }).subscribe();
 				return this.tradebidService.getCompanyData();
 			}),
-			map((companyData) => {
+			map((companyData: any) => {
 				const requiredFields: string[] = [
 					"address",
 					"annualRevenue",

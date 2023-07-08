@@ -1,12 +1,11 @@
 import { Injectable } from "@angular/core";
-import { io } from "socket.io-client";
+// import { io } from "socket.io-client";
 import { UserService } from "../../pages/client-profile/services/user/user.service";
 import { environment } from "../../../../environments/environment";
 import { combineLatest, filter } from "rxjs/operators";
 import { BehaviorSubject, Subject } from "rxjs";
 import { ApiService } from "../../../core/services/api/api.service";
 import { Router } from "@angular/router";
-import { AmplitudeService } from "../../../core/services/amplitude/amplitude.service";
 
 @Injectable({
 	providedIn: "root",
@@ -34,7 +33,6 @@ export class SocketService {
 		private readonly _usersService: UserService,
 		private readonly _apiService: ApiService,
 		private readonly _router: Router,
-		private readonly _ampService: AmplitudeService
 	) {
 		this.openConnection();
 		this.getUnreadMessagesCount();
@@ -103,20 +101,20 @@ export class SocketService {
 					this._socket.disconnect();
 				}
 
-				this._socket = io(environment.apiUrl, {
-					path: "/app",
-					auth: {
-						token,
-					},
-				});
+				// this._socket = io(environment.apiUrl, {
+				// 	path: "/app",
+				// 	auth: {
+				// 		token,
+				// 	},
+				// });
 
-				this.subscribeOnNewMessage();
-				this.subscribeOnStatusChange();
+				// this.subscribeOnNewMessage();
+				// this.subscribeOnStatusChange();
 			});
 	}
 
 	private subscribeOnNewMessage() {
-		return this._socket.on("new_message", (newMessage) => {
+		return this._socket.on("new_message", (newMessage: any) => {
 			if (this._router.url.includes(newMessage.room)) {
 				return;
 			}
@@ -143,7 +141,6 @@ export class SocketService {
 
 			const unreadMessagesCount = this._unreadMessagesCountBehaviourSubject.getValue();
 
-			this._ampService.logEvent("Message recieved");
 
 			this._unreadMessagesCountBehaviourSubject.next(unreadMessagesCount + 1);
 		});
@@ -166,7 +163,6 @@ export class SocketService {
 	}
 
 	public readMessages(count: number) {
-		this._ampService.logEvent("Read message");
 		const newCount = this._unreadMessagesCountBehaviourSubject.getValue() - count;
 		this._unreadMessagesCountBehaviourSubject.next(newCount);
 	}
@@ -176,11 +172,11 @@ export class SocketService {
 	}
 
 	private subscribeOnStatusChange() {
-		this._socket.on("online", (user) => {
+		this._socket.on("online", (user: any) => {
 			this._statusSubject.next({online: true, user});
 		});
 
-		this._socket.on("offline", (user) => {
+		this._socket.on("offline", (user: any) => {
 			this._statusSubject.next({online: false, user});
 		});
 	}

@@ -69,7 +69,6 @@ export class ClientHomeComponent implements OnInit {
 	ngOnInit() {
 		this.getCategories();
 		this.solutionsLink = this.getSolutionsLink();
-    this.hotToastService.info('test')
 	}
 
 	public getSolutionsLink(): string {

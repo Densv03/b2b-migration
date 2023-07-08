@@ -1,29 +1,31 @@
 import {ChangeDetectionStrategy, Component, OnInit} from "@angular/core";
 import {BehaviorSubject, Observable, Subject} from "rxjs";
-import { OffersService } from "apps/site/src/app/client/services/offers/offers.service";
-import { B2bNgxInputThemeEnum } from "libs/ngx-input/src";
-import { B2bNgxButtonThemeEnum } from "libs/ngx-button/src";
-import { B2bNgxSelectThemeEnum } from "libs/ngx-select/src/lib/enums/ngx-select-theme.enum";
-import { CategoriesService } from "apps/site/src/app/client/services/categories/categories.service";
-import { TransportTypesService } from "apps/site/src/app/client/services/transport-types/transport-types.service";
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { UntilDestroy, untilDestroyed } from "@ngneat/until-destroy";
 import { map, startWith, switchMap, tap } from "rxjs/operators";
-import { AuthService } from "apps/site/src/app/auth/services/auth/auth.service";
 import { HotToastService } from "@ngneat/hot-toast";
 import { B2bNgxLinkService, B2bNgxLinkThemeEnum } from "@b2b/ngx-link";
-import { TranslocoService } from "@ngneat/transloco";
-import { AmplitudeService } from "apps/site/src/app/core/services/amplitude/amplitude.service";
+// import { TranslocoService } from "@ngneat/transloco";
+// import { AmplitudeService } from "apps/site/src/app/core/services/amplitude/amplitude.service";
 import {animate, state, style, transition, trigger} from "@angular/animations";
 import {ShowMoreModeEnum} from "../enums/show-more-mode.enum";
-import {BrowserStorageKeysEnum} from "../../../../shared/enums/browser-storage-keys.enum";
+// import {BrowserStorageKeysEnum} from "../../../../shared/enums/browser-storage-keys.enum";
 import {ActivatedRoute, Router} from "@angular/router";
+import {B2bNgxSelectThemeEnum} from "@b2b/ngx-select";
+import {OffersService} from "../../../services/offers/offers.service";
+import {CategoriesService} from "../../../services/categories/categories.service";
+import {TransportTypesService} from "../../../services/transport-types/transport-types.service";
+import {AuthService} from "../../../../auth/services/auth/auth.service";
+import {BrowserStorageKeysEnum} from "../../../shared/enums/browser-storage-keys.enum";
+import {B2bNgxInputThemeEnum} from "@b2b/ngx-input";
+import {B2bNgxButtonThemeEnum} from "@b2b/ngx-button";
+import {TranslocoService} from "@ngneat/transloco";
 
-function toFlat(arr: any[]) {
+function toFlat(arr: any[]): any {
 	return arr.reduce((pre, { children = [], ...cur }) => [...pre, ...toFlat(children), cur], []);
 }
 
-function generateQueryString(obj) {
+function generateQueryString(obj: any) {
 	return Object.entries(obj)
 		.filter(([key, value]: any) => !!value)
 		.reduce((queryString: string, [key, value]: any) => {
@@ -57,25 +59,25 @@ function generateQueryString(obj) {
 	]
 })
 export class ClientLatestOffersComponent implements OnInit {
-	public readonly offers$: Observable<any>;
-	public readonly offersSkeletonOptions: any[];
-	public readonly offersCount$: Observable<number>;
+	public offers$: Observable<any>;
+	public offersSkeletonOptions: any[];
+	public offersCount$: Observable<number>;
 
-	public readonly b2bNgxInputThemeEnum: typeof B2bNgxInputThemeEnum;
-	public readonly b2bNgxButtonThemeEnum: typeof B2bNgxButtonThemeEnum;
-	public readonly b2bNgxSelectThemeEnum: typeof B2bNgxSelectThemeEnum;
-	public readonly b2bNgxLinkThemeEnum: typeof B2bNgxLinkThemeEnum;
+	public b2bNgxInputThemeEnum: typeof B2bNgxInputThemeEnum;
+	public b2bNgxButtonThemeEnum: typeof B2bNgxButtonThemeEnum;
+	public b2bNgxSelectThemeEnum: typeof B2bNgxSelectThemeEnum;
+	public b2bNgxLinkThemeEnum: typeof B2bNgxLinkThemeEnum;
 
-	public offersListTheme: "list" | "grid";
-	public showMoreMode: "in" | "out";
+	public offersListTheme: "list" | "grid" = 'list';
+	public showMoreMode!: "in" | "out";
 	public showMoreModeEnum: typeof ShowMoreModeEnum = ShowMoreModeEnum;
-	public readonly categories$: Observable<any>;
-	public readonly transportTypes$: Observable<any>;
-	public readonly sortTypes: any[];
+	public categories$: Observable<any>;
+	public transportTypes$: Observable<any>;
+	public sortTypes: any[];
 
-	public readonly formGroup: FormGroup;
-	public readonly user$: any;
-	public loading: boolean;
+	public formGroup: FormGroup;
+	public user$: Observable<any>;
+	public loading!: boolean;
 
 	public forceUpdate = new Subject();
 
@@ -93,7 +95,6 @@ export class ClientLatestOffersComponent implements OnInit {
 		private readonly _hotToastService: HotToastService,
 		public readonly b2bNgxLinkService: B2bNgxLinkService,
 		private readonly _translocoService: TranslocoService,
-		private readonly _ampService: AmplitudeService,
 		private readonly _router: Router,
 		private readonly _route: ActivatedRoute
 	) {
@@ -109,25 +110,16 @@ export class ClientLatestOffersComponent implements OnInit {
 		this.sortTypes = this.getSortTypes();
 		this.formGroup = this.getFormGroup();
 		this.formGroup.valueChanges.pipe(untilDestroyed(this)).subscribe((val) => {
-			if (val.transportType || val.destinationTo || val.destinationFrom || val["categories[]"].length > 0) {
-				this._ampService.logEvent("Use filters", {
-					category: {
-						transportType: val.transportType
-							? this.localTransportTypes.find((el) => el._id == val.transportType).name
-							: "",
-						destinationFrom: val.destinationFrom,
-						destinationTo: val.destinationTo,
-						categories: val["categories[]"].length > 0 ? this.getCategoriesNames(val["categories[]"]) : [],
-					},
-				});
+			if (val.transportType || val.destinationTo || val.destinationFrom || val["categories[]"]?.length > 0) {
 			}
 		});
 
 		this.categories$ = this.getCategories();
 		this.transportTypes$ = this._transportTypesService.getTransportTypes().pipe(
-			map((transports) =>
-				transports.map((transport) => ({
+			map((transports: any[]) =>
+				transports.map((transport: any) => ({
 					...transport,
+          // displayName: 'Name without transloco'
 					displayName: this._translocoService.translate(transport.displayName),
 				}))
 			),
@@ -150,7 +142,7 @@ export class ClientLatestOffersComponent implements OnInit {
 		this.showMoreMode = this.showMoreMode === ShowMoreModeEnum.OUT ? 'in' : 'out';
 	}
 
-	public groupValueFn(value, ...args) {
+	public groupValueFn(value: any, ...args: any[]) {
 		return value.value;
 	}
 
@@ -159,8 +151,8 @@ export class ClientLatestOffersComponent implements OnInit {
 		return categoriesIds.map((el) => parsedCategories[el].text);
 	}
 
-	parseCategories(categories, level = 1) {
-		return categories.reduce((pre, curr) => {
+	parseCategories(categories: any, level = 1) {
+		return categories.reduce((pre: any, curr: any) => {
 			return {
 				...pre,
 				[curr.value]: { ...curr, level },
@@ -172,12 +164,12 @@ export class ClientLatestOffersComponent implements OnInit {
 	public getCategories() {
 		return this._categoriesService.getCategories().pipe(
 			map(({ categories }) =>
-				categories.map((category) => ({
+				categories.map((category: any) => ({
 					text: category.name,
 					value: category._id,
 					collapsed: true,
 					checked: false,
-					children: category.children.map((level2Category) => ({
+					children: category.children.map((level2Category: any) => ({
 						text: level2Category.name,
 						value: level2Category._id,
 						collapsed: true,
@@ -195,7 +187,7 @@ export class ClientLatestOffersComponent implements OnInit {
 		);
 	}
 
-	public getOffers() {
+	public getOffers(): Observable<any> {
 		this.loading = true;
 		return this.formGroup.valueChanges.pipe(
 			switchMap((filters) => {
@@ -205,9 +197,10 @@ export class ClientLatestOffersComponent implements OnInit {
 					switchMap(() => this._offersService.getOffers(queryString))
 				);
 			}),
-			// map((offers) => offers.filter((offer) => !offer.hidden)),
+			map((offers) => offers.filter((offer: any) => !offer.hidden)),
 			tap(() => {
 				this.loading = false;
+        console.log('OFFER')
 			})
 		);
 	}
@@ -232,11 +225,13 @@ export class ClientLatestOffersComponent implements OnInit {
 	public getSortTypes() {
 		return [
 			{
-				label: this._translocoService.translate("PLACEHOLDERS.SORT_RECENT"),
+        label: 'PLACEHOLDERS.SORT_RECENT',
+				// label: this._translocoService.translate("PLACEHOLDERS.SORT_RECENT"),
 				value: "createdAt",
 			},
 			{
-				label: this._translocoService.translate("PLACEHOLDERS.SORT_RECOMMENDED"),
+        label: 'PLACEHOLDERS.SORT_RECOMMENDED',
+				// label: this._translocoService.translate("PLACEHOLDERS.SORT_RECOMMENDED"),
 				value: "DESC",
 			},
 		];
@@ -252,13 +247,13 @@ export class ClientLatestOffersComponent implements OnInit {
 				.removeFavoriteOffer(offer._id)
 				.pipe(
 					untilDestroyed(this),
-					this._hotToastService.observe({
-						loading: this._translocoService.translate("OFFERS.REMOVE_FROM_SAVED_LOADING"),
-						success: this._translocoService.translate("OFFERS.REMOVE_FROM_SAVED_SUCCESS"),
-						error: this._translocoService.translate("OFFERS.REMOVE_FROM_SAVED_ERROR"),
-					})
+					// this._hotToastService.observe({
+					// 	loading: this._translocoService.translate("OFFERS.REMOVE_FROM_SAVED_LOADING"),
+					// 	success: this._translocoService.translate("OFFERS.REMOVE_FROM_SAVED_SUCCESS"),
+					// 	error: this._translocoService.translate("OFFERS.REMOVE_FROM_SAVED_ERROR"),
+					// })
 				)
-				.subscribe((response) => {
+				.subscribe((response: any) => {
 					this.forceUpdate.next(true);
 				});
 		} else {
@@ -266,13 +261,13 @@ export class ClientLatestOffersComponent implements OnInit {
 				.addFavoriteOffer(offer._id)
 				.pipe(
 					untilDestroyed(this),
-					this._hotToastService.observe({
-						loading: this._translocoService.translate("OFFERS.ADDED_TO_SAVED_LOADING"),
-						success: this._translocoService.translate("OFFERS.ADDED_TO_SAVED_SUCCESS"),
-						error: this._translocoService.translate("OFFERS.ADDED_TO_SAVED_ERROR"),
-					})
+					// this._hotToastService.observe({
+					// 	loading: this._translocoService.translate("OFFERS.ADDED_TO_SAVED_LOADING"),
+					// 	success: this._translocoService.translate("OFFERS.ADDED_TO_SAVED_SUCCESS"),
+					// 	error: this._translocoService.translate("OFFERS.ADDED_TO_SAVED_ERROR"),
+					// })
 				)
-				.subscribe((response) => {
+				.subscribe((response: any) => {
 					this.forceUpdate.next(true);
 				});
 		}
@@ -290,7 +285,7 @@ export class ClientLatestOffersComponent implements OnInit {
 		];
 	}
 
-	public getPageOffers(page): void {
+	public getPageOffers(page: any): void {
 		this.formGroup.patchValue({ offset: (page - 1) * 12, limit: 12 });
 
 		this._router.navigate([], {
@@ -314,7 +309,7 @@ export class ClientLatestOffersComponent implements OnInit {
 	}
 
 	private offersPageInit(): void {
-		let page = this._route.snapshot.queryParams.page;
+		let page = this._route.snapshot.queryParams['page'];
 		if (!page) {
 			this._router.navigate([], {
 				relativeTo: this._route,

@@ -2,8 +2,8 @@ import { Injectable } from "@angular/core";
 import { ActivatedRoute, ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from "@angular/router";
 import { B2bNgxLinkService } from "@b2b/ngx-link";
 import { HotToastService } from "@ngneat/hot-toast";
-import { TranslocoService } from "@ngneat/transloco";
-import { AuthService } from "apps/site/src/app/auth/services/auth/auth.service";
+// import { TranslocoService } from "@ngneat/transloco";
+import { AuthService} from "../../services/auth/auth.service";
 import { map, filter } from "rxjs/operators";
 
 @Injectable({
@@ -16,14 +16,14 @@ export class DefaultRoleGuard implements CanActivate {
 		private readonly _hotToastrService: HotToastService,
 		private readonly _activatedRoute: ActivatedRoute,
 		public readonly b2bNgxLinkService: B2bNgxLinkService,
-		public readonly _translocoService: TranslocoService,
+		// public readonly _translocoService: TranslocoService,
 		public readonly _hotToastService: HotToastService
 	) {}
 
 	canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
 		return this._authService.getUser().pipe(
 			filter((user) => user !== undefined),
-			map((user) => {
+			map((user: any) => {
 				if (state.url?.includes("auth/register")) {
 					return true;
 				}

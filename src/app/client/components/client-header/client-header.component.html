@@ -1,4 +1,4 @@
-<header class="header transparent" *transloco="let t">
+<header class="header transparent">
 	<a b2bNgxLink [routerLink]="b2bNgxLinkService.getLink('/') | async">
 		<img b2bNgxImage class="header__logo" name="logo" />
 	</a>
@@ -10,9 +10,9 @@
 					b2bNgxLink
 					class="header__list-item-link"
 					[routerLink]="b2bNgxLinkService.getLink(option.link) | async"
-					(click)="processRouteClick(option.link)"
-					>{{ t(option.label) }}</a
-				>
+					(click)="processRouteClick(option.link)">
+          {{option.label}}
+        </a>
 			</div>
 			<div class="header__list-item">
 				<div class="label">NEW</div>
@@ -87,7 +87,7 @@
 				b2bNgxButton
 				[theme]="b2bNgxButtonThemeEnum.BACKGROUND_BLACK"
 				class="header__buttons-add-offer">
-				{{ t("HEADER.ADD_OFFER") }}
+				Add offer
 			</button>
 		</ng-container>
 		<ng-template #withoutUser>
@@ -98,7 +98,7 @@
 				class="header__buttons-log-in"
 				[theme]="b2bNgxLinkThemeEnum.BACKGROUND_TRANSPARENT">
 				<img b2bNgxIcon name="user-filled" class="header__buttons-log-in-icon" />
-				<span>{{ t("AUTH.SIGN_IN") }}</span>
+				<span>Sign in</span>
 			</a>
 			<a
 				(click)="processSignUpClick()"
@@ -106,7 +106,7 @@
 				[routerLink]="b2bNgxLinkService.getLink('/auth/register-credentials') | async"
 				class="header__button-sign-up"
 				[theme]="b2bNgxLinkThemeEnum.BACKGROUND_BLACK"
-				>{{ t("AUTH.SIGN_UP") }}</a
+				>Sign up</a
 			>
 		</ng-template>
 		<button b2bNgxButton (click)="emitBurgerClick()" class="header__burger">

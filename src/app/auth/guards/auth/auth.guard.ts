@@ -1,13 +1,13 @@
 import { Injectable } from "@angular/core";
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router, ActivatedRoute } from "@angular/router";
-import { AuthService } from "apps/site/src/app/auth/services/auth/auth.service";
+
 import { filter, map, tap } from "rxjs/operators";
 import { HotToastService } from "@ngneat/hot-toast";
 import { AuthGuardComponent } from "../../components/auth-guard/auth-guard.component";
 import { B2bNgxLinkService } from "@b2b/ngx-link";
-import { TranslocoService } from "@ngneat/transloco";
+import {AuthService} from "../../services/auth/auth.service";
 
-const messages = {
+const messages: any = {
 	"legal-help": "GUARDS.LEGAL_HELP",
 	"offer": "GUARDS.ADD_OFFER",
 	"offers": "GUARDS.VIEW_OFFERS",
@@ -15,7 +15,7 @@ const messages = {
 	"annual-payment": "GUARDS.ADD_PAYMENT_DETAILS",
 };
 
-const queryParams = {
+const queryParams: any = {
 	"annual-payment": "pricing",
 	"latest-offers": "latest-offers",
 	"legal-help": "legal-help",
@@ -31,7 +31,7 @@ export class AuthGuard implements CanActivate {
 		private readonly _hotToastrService: HotToastService,
 		private readonly _activatedRoute: ActivatedRoute,
 		public readonly b2bNgxLinkService: B2bNgxLinkService,
-		public readonly _translocoService: TranslocoService,
+		// public readonly _translocoService: TranslocoService,
 		public readonly _hotToastService: HotToastService
 	) {}
 

@@ -59,13 +59,14 @@
 			[placeholder]="t('PLACEHOLDERS.SEARCH')"/>
 		<div class="latest-offers-header-filters">
 			<p *ngIf="false" class="latest-offers-header-show-filter">
+				<span class="latest-offers-header-show-filter-text">SHOW</span>
 				<span class="latest-offers-header-show-filter-text">{{ t("OFFERS.SHOW") }}:</span>
 				<b2b-ngx-select
 					[theme]="b2bNgxSelectThemeEnum.BACKGROUND_TRANSPARENT"
 					[placeholder]="t('PLACEHOLDERS.SELECT_SHOW_TYPE')"></b2b-ngx-select>
 			</p>
 			<p class="latest-offers-header-sort-filter">
-				<span class="latest-offers-header-sort-filter-text">{{ t("OFFERS.SORT_BY") }}:</span>
+				<span class="latest-offers-header-sort-filter-text">SORT_BY</span>
 				<b2b-ngx-select
 					formControlName="sort"
 					[options]="sortTypes"
@@ -92,12 +93,12 @@
 				bindLabel="displayName"
 				class="latest-offers-main-filter"
 				[placeholder]="t('PLACEHOLDERS.TRANSPORT_TYPE')"></b2b-ngx-select>
-			<b2b-ngx-treeview
-				formControlName="categories[]"
-				[items]="categories$ | async"
-				class="latest-offers-main-filter"
-				[buttonName]="t('SIDENAV.SAVE')"
-				position="right"></b2b-ngx-treeview>
+<!--			<b2b-ngx-treeview-->
+<!--				formControlName="categories[]"-->
+<!--				[items]="categories$ | async"-->
+<!--				class="latest-offers-main-filter"-->
+<!--				[buttonName]="t('SIDENAV.SAVE')"-->
+<!--				position="right"></b2b-ngx-treeview>-->
 			<b2b-ngx-country-select
 				formControlName="destinationFrom"
 				class="latest-offers-main-filter"
@@ -129,12 +130,12 @@
 						[options]="offers"
 						link="offers/"
 						(starClicked)="toggleFavoriteOffers($event)"></b2b-client-latest-offers-grid>
-					<b2b-pagination
-						*ngIf="user$ | async; else upgradeToSeeMore"
-						[length]="offersCount$ | async"
-						[perPage]="12"
-						(togglePageNumber)="getPageOffers($event)"
-						[currentPage]="currentPage$ | async"></b2b-pagination>
+<!--					<b2b-pagination-->
+<!--						*ngIf="user$ | async; else upgradeToSeeMore"-->
+<!--						[length]="offersCount$ | async"-->
+<!--						[perPage]="12"-->
+<!--						(togglePageNumber)="getPageOffers($event)"-->
+<!--						[currentPage]="currentPage$ | async"></b2b-pagination>-->
 				</ng-container>
 			</ng-container>
 
@@ -155,13 +156,13 @@
 
 			<ng-template #offersSleleton>
 				<ng-container *ngIf="loading; else noOffers">
-					<b2b-ngx-skeleton [options]="offersSkeletonOptions"></b2b-ngx-skeleton>
+<!--					<b2b-ngx-skeleton [options]="offersSkeletonOptions"></b2b-ngx-skeleton>-->
 				</ng-container>
 			</ng-template>
 
 			<ng-template #noOffers>
 				<div class="latest-offers-no-offers">
-					<p class="latest-offers-no-offers-title">{{ t("OFFERS.NO_OFFERS") }}</p>
+<!--					<p class="latest-offers-no-offers-title">{{ t("OFFERS.NO_OFFERS") }}</p>-->
 					<button
 						class="view-all-offers"
 						b2bNgxButton

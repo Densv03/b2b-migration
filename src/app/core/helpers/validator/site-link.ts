@@ -1,6 +1,5 @@
 
-import {AbstractControl, ValidatorFn} from "@ngneat/reactive-forms";
-import {ValidationErrors} from "@angular/forms";
+import {AbstractControl, ValidationErrors, ValidatorFn} from "@angular/forms";
 
 
 export const websiteProtocolRegex = /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)/

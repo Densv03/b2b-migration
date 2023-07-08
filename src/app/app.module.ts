@@ -9,6 +9,7 @@ import {MatIconModule} from "@angular/material/icon";
 import {B2bNgxCheckboxModule} from "@b2b/ngx-checkbox";
 import {CoreModule} from "./core/core.module";
 import {HttpClientModule} from "@angular/common/http";
+import { TranslocoRootModule } from './transloco-root.module';
 
 @NgModule({
   declarations: [],
@@ -20,7 +21,8 @@ import {HttpClientModule} from "@angular/common/http";
     MatTreeModule,
     MatIconModule,
     B2bNgxCheckboxModule,
-    HttpClientModule
+    HttpClientModule,
+    TranslocoRootModule
   ],
   bootstrap: [AppComponent]
 })

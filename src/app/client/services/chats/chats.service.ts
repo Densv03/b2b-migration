@@ -1,9 +1,9 @@
 import { Injectable } from "@angular/core";
-import { TranslocoService } from "@ngneat/transloco";
-import { ApiService } from "apps/site/src/app/core/services/api/api.service";
+// import { TranslocoService } from "@ngneat/transloco";
+import { ApiService} from "../../../core/services/api/api.service";
 import { BehaviorSubject, combineLatest, Observable, of, toArray } from "rxjs";
 import { map, startWith, switchMap, tap } from "rxjs/operators";
-import { io } from "socket.io-client";
+// import { io } from "socket.io-client";
 import { environment } from "../../../../environments/environment";
 import { AuthService } from "../../../auth/services/auth/auth.service";
 import { SocketService } from "../socket/socket.service";
@@ -24,7 +24,6 @@ export class ChatsService {
 		private readonly _apiService: ApiService,
 		private readonly _socketService: SocketService,
 		public authService: AuthService,
-		private readonly _translocoService: TranslocoService
 	) {
 		this._chatsBehaviourSubject = new BehaviorSubject<any>([]);
 		this._chats$ = this._chatsBehaviourSubject.asObservable();
@@ -35,7 +34,7 @@ export class ChatsService {
 		this.updateChats$ = this.updateChatsByUser.asObservable();
 	}
 
-	public requestContacts(chat) {
+	public requestContacts(chat: any) {
 		this.openConnection(this.authService.getToken());
 
 		return this._apiService.post(`request/contacts/${chat._id}`, {}).pipe(
@@ -52,17 +51,17 @@ export class ChatsService {
 		);
 	}
 
-	openConnection(token) {
+	openConnection(token: string) {
 		if (this._socket) {
 			this._socket.disconnect();
 		}
 
-		this._socket = io(environment.apiUrl, {
-			path: "/chat",
-			auth: {
-				token,
-			},
-		});
+		// this._socket = io(environment.apiUrl, {
+		// 	path: "/chat",
+		// 	auth: {
+		// 		token,
+		// 	},
+		// });
 	}
 
 	closeConnection() {
@@ -71,7 +70,7 @@ export class ChatsService {
 		}
 	}
 
-	public sendContacts(offer, userId) {
+	public sendContacts(offer: any, userId: string) {
 		this.openConnection(this.authService.getToken());
 
 		const body = `Seller sent contact details for you\n\nCompany name: ${offer.contact.companyName}\nContact person: ${offer.contact.personName}\nPhone number: ${offer.contact.phone?.e164Number}\nEmail: ${offer.contact.email}\n`;
@@ -84,7 +83,7 @@ export class ChatsService {
 		});
 	}
 
-	public openContacts(offer, userId) {
+	public openContacts(offer: any, userId: string) {
 		this.openConnection(this.authService.getToken());
 
 		return this._apiService.post(`offer/${offer._id}/open/${userId}`, {}).pipe(
@@ -101,7 +100,7 @@ export class ChatsService {
 		);
 	}
 
-	public closeContacts(offerId, userId) {
+	public closeContacts(offerId: string, userId: string) {
 		this.openConnection(this.authService.getToken());
 
 		return this._apiService.post(`offer/${offerId}/close/${userId}`, {}).pipe(
@@ -135,22 +134,23 @@ export class ChatsService {
 		return this.updateChats$.pipe(
 			switchMap(() => combineLatest([status$, newMessage$, this.chats$(), user$])),
 			map(([status, newMessage, myChats, user]: any) => {
-				const modifiedChats = myChats.map((myChat) => {
-					const iAm =
-						myChat.buyer?._id === user._id
-							? this._translocoService.translate("CHAT.BUYER")
-							: this._translocoService.translate("CHAT.SELLER");
+				const modifiedChats = myChats.map((myChat: any) => {
+					const iAm = true;
+						// myChat.buyer?._id === user._id
+						// 	? this._translocoService.translate("CHAT.BUYER")
+						// 	: this._translocoService.translate("CHAT.SELLER");
 					const isSeller = myChat.lastMessage.author === myChat.seller?._id;
 
 					const displayInfo = isSeller ? { ...myChat.offer.contact } : { ...myChat.buyer };
-					const author =
-						displayInfo?.fullName ||
-						displayInfo?.personName ||
-						`${
-							isSeller
-								? this._translocoService.translate("CHAT.SELLER")
-								: this._translocoService.translate("CHAT.BUYER")
-						} of ${myChat.offer?.title || "Deleted Offer"}`;
+          const author = 'Sasha'
+					// const author =
+					// 	displayInfo?.fullName ||
+					// 	displayInfo?.personName ||
+					// 	`${
+					// 		isSeller
+					// 			? this._translocoService.translate("CHAT.SELLER")
+					// 			: this._translocoService.translate("CHAT.BUYER")
+					// 	} of ${myChat.offer?.title || "Deleted Offer"}`;
 
 					return {
 						...myChat,
@@ -162,21 +162,21 @@ export class ChatsService {
 						},
 					};
 				});
-				const newMessageIndex = modifiedChats.findIndex((modifiedChat) => modifiedChat._id === newMessage?.room);
+				const newMessageIndex = modifiedChats.findIndex((modifiedChat: any) => modifiedChat._id === newMessage?.room);
 
 				if (newMessageIndex !== -1) {
 					const isSeller = newMessage.author === modifiedChats[newMessageIndex].seller?._id;
 					const displayInfo = isSeller
 						? { ...modifiedChats[newMessageIndex].offer.contact }
 						: { ...modifiedChats[newMessageIndex].buyer };
-					const author =
-						displayInfo?.fullName ||
-						displayInfo?.personName ||
-						`${
-							isSeller
-								? this._translocoService.translate("CHAT.SELLER")
-								: this._translocoService.translate("CHAT.BUYER")
-						} of ${modifiedChats[newMessageIndex].offer?.title}`;
+					const author = 'Sasha';
+					// 	displayInfo?.fullName ||
+					// 	displayInfo?.personName ||
+					// 	`${
+					// 		isSeller
+					// 			? this._translocoService.translate("CHAT.SELLER")
+					// 			: this._translocoService.translate("CHAT.BUYER")
+					// 	} of ${modifiedChats[newMessageIndex].offer?.title}`;
 
 					modifiedChats[newMessageIndex].lastMessage = {
 						...newMessage,
@@ -192,7 +192,7 @@ export class ChatsService {
 				}
 
 				const statusIndex = modifiedChats.findIndex(
-					(modifiedChat) => modifiedChat.lastMessage.author?._id === status?.user
+					(modifiedChat: any) => modifiedChat.lastMessage.author?._id === status?.user
 				);
 
 				if (statusIndex !== -1 && modifiedChats[statusIndex].lastMessage.author) {
@@ -212,20 +212,21 @@ export class ChatsService {
 
 		return combineLatest([status$, newMessage$, this._apiService.get(`offer/${offerId}/chats`)]).pipe(
 			map(([status, newMessage, myChats]: any) => {
-				const modifiedChats = myChats.map((myChat) => {
+				const modifiedChats = myChats.map((myChat: any) => {
 					const isSeller = myChat.lastMessage.author === myChat.seller?._id;
 					const displayInfo = isSeller ? { ...myChat.offer.contact } : { ...myChat.buyer };
 					const author =
 						displayInfo?.fullName ||
 						displayInfo?.personName ||
 						`${
-							isSeller
-								? this._translocoService.translate("CHAT.SELLER")
-								: this._translocoService.translate("CHAT.BUYER")
+							isSeller ? 'Seller' : 'Buyer'
+								// ? this._translocoService.translate("CHAT.SELLER")
+								// : this._translocoService.translate("CHAT.BUYER")
 						} of ${myChat.offer?.title}`;
 					return {
 						...myChat,
-						iAm: this._translocoService.translate("CHAT.SELLER"),
+            iAm: 'SELLER',
+						// iAm: this._translocoService.translate("CHAT.SELLER"),
 						lastMessage: {
 							...myChat.lastMessage,
 							author: isSeller ? myChat.seller : myChat.buyer,
@@ -233,7 +234,7 @@ export class ChatsService {
 						},
 					};
 				});
-				const newMessageIndex = modifiedChats.findIndex((modifiedChat) => modifiedChat._id === newMessage?.room);
+				const newMessageIndex = modifiedChats.findIndex((modifiedChat: any) => modifiedChat._id === newMessage?.room);
 
 				if (newMessageIndex !== -1) {
 					const isSeller = newMessage.author === modifiedChats[newMessageIndex].seller?._id;
@@ -244,9 +245,10 @@ export class ChatsService {
 						displayInfo?.fullName ||
 						displayInfo?.personName ||
 						`${
-							isSeller
-								? this._translocoService.translate("CHAT.SELLER")
-								: this._translocoService.translate("CHAT.BUYER")
+              isSeller ? 'Seller' : 'Buyer'
+							// isSeller
+							// 	? this._translocoService.translate("CHAT.SELLER")
+							// 	: this._translocoService.translate("CHAT.BUYER")
 						} of ${modifiedChats[newMessageIndex].offer?.title}`;
 
 					modifiedChats[newMessageIndex].lastMessage = {
@@ -263,7 +265,7 @@ export class ChatsService {
 				}
 
 				const statusIndex = modifiedChats.findIndex(
-					(modifiedChat) => modifiedChat.lastMessage.author?._id === status?.user
+					(modifiedChat: any) => modifiedChat.lastMessage.author?._id === status?.user
 				);
 
 				if (statusIndex !== -1) {
@@ -275,9 +277,9 @@ export class ChatsService {
 		);
 	}
 
-	public getChatById(id) {
+	public getChatById(id: string) {
 		const chats = this._chatsBehaviourSubject.getValue();
-		const foundChat = chats.find((chatToFind) => chatToFind.id === id);
+		const foundChat = chats.find((chatToFind: any) => chatToFind.id === id);
 
 		if (foundChat) {
 			return of(foundChat);

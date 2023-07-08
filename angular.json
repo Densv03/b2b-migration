@@ -118,7 +118,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "tsConfig": "projects/ngx-select/tsconfig.spec.json",
+            "tsConfig": "projects/ngx-select/tsconfig.spec.json"
           }
         }
       }

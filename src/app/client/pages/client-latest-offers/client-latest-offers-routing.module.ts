@@ -1,6 +1,6 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { ClientLatestOffersComponent } from "apps/site/src/app/client/pages/client-latest-offers/layout/client-latest-offers.component";
+import {ClientLatestOffersComponent} from "./layout/client-latest-offers.component";
 
 const routes: Routes = [
 	{

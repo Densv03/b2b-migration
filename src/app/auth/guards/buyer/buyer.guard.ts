@@ -19,7 +19,7 @@ export class BuyerGuard implements CanActivate {
 		state: RouterStateSnapshot): Observable<boolean> | boolean {
 
 
-		return this.authService.user$.pipe(map(user => this.showPopUp(user?.rootRole.name)));
+		return this.authService.user$.pipe(map((user: any) => this.showPopUp(user?.rootRole.name)));
 	}
 
 	private showPopUp(rootRole: string): boolean {

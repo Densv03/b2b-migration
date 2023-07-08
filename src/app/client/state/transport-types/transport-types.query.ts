@@ -6,7 +6,7 @@ import { TransportTypesState, TransportTypesStore } from "./transport-types.stor
 @Injectable({ providedIn: "root" })
 export class TransportTypesQuery extends Query<TransportTypesState> {
 	public readonly selectTransportTypes$: Observable<any>;
-	constructor(protected store: TransportTypesStore) {
+	constructor(protected override store: TransportTypesStore) {
 		super(store);
 
 		this.selectTransportTypes$ = this.select("transportTypes");

@@ -20,7 +20,7 @@ export class ChatGuard implements CanActivate {
 
 	canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
 		const user$ = this._authService.getUser();
-		const chat$ = this._chatsService.getChatById(route.params.id);
+		const chat$ = this._chatsService.getChatById(route.params['id']);
 
 		return combineLatest([user$, chat$]).pipe(
 			filter(([user, chat]) => !!user),

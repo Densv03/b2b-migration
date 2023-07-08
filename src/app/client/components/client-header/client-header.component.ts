@@ -13,17 +13,16 @@ import {BehaviorSubject, Observable, of} from "rxjs";
 import {filter, map, skip} from "rxjs/operators";
 import {B2bNgxLinkService, B2bNgxLinkThemeEnum} from "@b2b/ngx-link";
 import {SocketService} from "../../services/socket/socket.service";
-import {FormControl} from "@ngneat/reactive-forms";
 import {UntilDestroy, untilDestroyed} from "@ngneat/until-destroy";
 import {I18nService} from "../../../core/services/i18n/i18n.service";
-import {CookieService} from "ngx-cookie-service";
-import {AmplitudeService} from "../../../core/services/amplitude/amplitude.service";
+// import {CookieService} from "ngx-cookie-service";
 import {snakeCase} from "../../../core/helpers/function/snake-case";
-import {TranslocoService} from "@ngneat/transloco";
-import {B2bNgxSelectComponent} from "../../../../../../../libs/ngx-select/src/lib/layout/ngx-select.component";
+// import {TranslocoService} from "@ngneat/transloco";
+import {B2bNgxSelectComponent} from "@b2b/ngx-select";
 import {B2bNgxButtonThemeEnum} from "@b2b/ngx-button";
 import {AuthService} from "../../../auth/services/auth/auth.service";
 import {UserService} from "../../pages/client-profile/services/user/user.service";
+import {FormControl} from "@angular/forms";
 
 @UntilDestroy()
 @Component({
@@ -33,35 +32,34 @@ import {UserService} from "../../pages/client-profile/services/user/user.service
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ClientHeaderComponent implements OnInit {
-	@Output() public readonly burgerClicked: EventEmitter<any>;
+	@Output() public burgerClicked: EventEmitter<any>;
 
-	@Input() public readonly headerLinks: any[];
-	@Input() public readonly options: any[];
-	@Input() public readonly className: string;
-	@Input() public readonly user: any;
+	@Input() public headerLinks: any[] = [];
+	@Input() public options: any[] = [];
+	@Input() public className: string = '';
+	@Input() public user: any;
 
 	public readonly b2bNgxLinkThemeEnum = B2bNgxLinkThemeEnum;
 	public b2bNgxButtonThemeEnum = B2bNgxButtonThemeEnum;
 	public readonly isHomePage: any;
 	public readonly formControl: FormControl;
 	public readonly linkDropdown: FormControl;
-	public headerLinks$: Observable<any>;
+	public headerLinks$: Observable<any> = of([]);
 	public addOfferUrl: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 	public makeRfqUrl: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 	public addProductUrl: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 	private isAuthPageSource: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 	public isAuthPage$: Observable<boolean> = this.isAuthPageSource.asObservable();
-	public isAuth$: Observable<boolean>;
-	public rootRole$: Observable<boolean>;
+	public isAuth$: Observable<boolean> = of(false);
+	public rootRole$: Observable<boolean> = of(false);
 
 	constructor(
 		private readonly router: Router,
 		private readonly socketService: SocketService,
 		private readonly i18nService: I18nService,
 		public readonly b2bNgxLinkService: B2bNgxLinkService,
-		private readonly cookieService: CookieService,
-		private readonly ampService: AmplitudeService,
-		private readonly translocoService: TranslocoService,
+		// private readonly cookieService: CookieService,
+		// private readonly translocoService: TranslocoService,
 		private readonly activatedRoute: ActivatedRoute,
 		private readonly authService: AuthService,
 		private readonly userService: UserService
@@ -97,22 +95,22 @@ export class ClientHeaderComponent implements OnInit {
 
 			this.i18nService.setActiveLang(lang);
 			this.b2bNgxLinkService.setLanguage(lang);
-			this.cookieService.set("lang", lang);
+			// this.cookieService.set("lang", lang);
 
 			await this.router.navigateByUrl(this.b2bNgxLinkService.lang + this.b2bNgxLinkService.getUrl(routerUrl));
 		});
 
-		const langFromCookies = this.cookieService.get("lang");
+		// const langFromCookies = this.cookieService.get("lang");
 
 		const browserLanguage = ["en", "ru"].find((language) => navigator.language.includes(language)) || "en";
 
-		if (langFromCookies) {
-			if (langFromCookies !== this.formControl.value) {
-				this.formControl.setValue(langFromCookies);
-			}
-		} else if (navigator.language && browserLanguage !== this.formControl.value) {
-			this.formControl.setValue(browserLanguage);
-		}
+		// if (langFromCookies) {
+		// 	if (langFromCookies !== this.formControl.value) {
+		// 		this.formControl.setValue(langFromCookies);
+		// 	}
+		// } else if (navigator.language && browserLanguage !== this.formControl.value) {
+		// 	this.formControl.setValue(browserLanguage);
+		// }
 	}
 
 	public get unreadMessagesCount$(): Observable<any> {
@@ -123,24 +121,24 @@ export class ClientHeaderComponent implements OnInit {
 		this.burgerClicked.emit();
 	}
 
-	public processRouteClick(link): void {
+	public processRouteClick(link: string): void {
 		if (link !== "/latest-offers") {
 			return;
 		}
 
-		this.ampService.logEvent("Click on latest offers");
+		// this.ampService.logEvent("Click on latest offers");
 	}
 
 	public processSignUpClick(): void {
-		this.ampService.logEvent("Click sign up button");
+		// this.ampService.logEvent("Click sign up button");
 	}
 
 	public processSignInClick(): void {
-		this.ampService.logEvent("Click sign in button");
-		this.ampService.logEvent("View login page", {
-			type: "Sign in",
-			source: localStorage.getItem("source"),
-		});
+		// this.ampService.logEvent("Click sign in button");
+		// this.ampService.logEvent("View login page", {
+		// 	type: "Sign in",
+		// 	source: localStorage.getItem("source"),
+		// });
 	}
 
 	public navigateLink(link: string): void {
@@ -165,7 +163,7 @@ export class ClientHeaderComponent implements OnInit {
 		return of(headerLinks).pipe(
 			map((links) => {
 				return links.map((link) => {
-					return {...link, label: this.translocoService.translate(`HEADER.${snakeCase(link.label)}`)};
+					return {...link};
 				});
 			})
 		);
@@ -182,7 +180,7 @@ export class ClientHeaderComponent implements OnInit {
 	}
 
 	@ViewChild(B2bNgxSelectComponent)
-	private b2bNgxSelectComponent: B2bNgxSelectComponent;
+	private b2bNgxSelectComponent!: B2bNgxSelectComponent;
 
 	public goTo(link: string): void {
 		this.router.navigate([link]);

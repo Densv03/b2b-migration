@@ -1,6 +1,11 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { ClientComponent } from "./layout/client.component";
+import {DefaultRoleGuard} from "../auth/guards/defaultRole/deafult-role.guard";
+import {AuthGuard} from "../auth/guards/auth/auth.guard";
+import {ChatGuard} from "../auth/guards/chat/chat.guard";
+import {CompanyInformationGuard} from "../auth/guards/companyInformation/company-information.guard";
+import {BuyerGuard} from "../auth/guards/buyer/buyer.guard";
 
 const routes: Routes = [
 	{
@@ -21,17 +26,17 @@ const routes: Routes = [
 					},
 				},
 			},
-			// // {
-			// // 	path: "",
-			// // 	canActivate: [DefaultRoleGuard],
-			// // 	loadChildren: () => import("./pages/client-home/client-home-old.module").then((m) => m.ClientHomeOldModule),
-			// // 	data: {
-			// // 		meta: {
-			// // 			title: "B2B Discount - Buy and Sell B2B Cargo with Discount!",
-			// // 			description: "B2B Discount - Buy and Sell B2B Cargo with Discount!",
-			// // 		},
-			// // 	},
-			// // },
+			// {
+			// 	path: "",
+			// 	canActivate: [DefaultRoleGuard],
+			// 	loadChildren: () => import("./pages/client-home/client-home-old.module").then((m) => m.ClientHomeOldModule),
+			// 	data: {
+			// 		meta: {
+			// 			title: "B2B Discount - Buy and Sell B2B Cargo with Discount!",
+			// 			description: "B2B Discount - Buy and Sell B2B Cargo with Discount!",
+			// 		},
+			// 	},
+			// },
 			// {
 			// 	path: 'market-promotion',
 			// 	loadChildren: () => import('./pages/client-market-promotion/client-market-promotion.module').then(m => m.ClientMarketPromotionModule)
@@ -259,18 +264,18 @@ const routes: Routes = [
 			// 		},
 			// 	},
 			// },
-			// {
-			// 	path: "latest-offers",
-			// 	canActivate: [AuthGuard],
-			// 	loadChildren: () =>
-			// 		import("./pages/client-latest-offers/client-latest-offers.module").then((m) => m.ClientLatestOffersModule),
-			// 	data: {
-			// 		meta: {
-			// 			title: "B2B Discount - Buy and Sell B2B Cargo with Discount!",
-			// 			description: "B2B Discount - Latest Offers",
-			// 		},
-			// 	},
-			// },
+			{
+				path: "latest-offers",
+				canActivate: [],
+				loadChildren: () =>
+					import("./pages/client-latest-offers/client-latest-offers.module").then((m) => m.ClientLatestOffersModule),
+				data: {
+					meta: {
+						title: "B2B Discount - Buy and Sell B2B Cargo with Discount!",
+						description: "B2B Discount - Latest Offers",
+					},
+				},
+			},
 			// {
 			// 	path: "offers/:id",
 			// 	canActivate: [DefaultRoleGuard],
