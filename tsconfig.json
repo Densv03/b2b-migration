@@ -51,6 +51,9 @@
       "@b2b/ngx-toggle": [
         "projects/ngx-toggle/src/public-api"
       ],
+      "@b2b/ngx-textarea": [
+        "projects/ngx-textarea/src/public-api"
+      ],
     },
     "declaration": false,
     "downlevelIteration": true,

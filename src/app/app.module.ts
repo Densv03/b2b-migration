@@ -8,6 +8,7 @@ import {MatTreeModule} from "@angular/material/tree";
 import {MatIconModule} from "@angular/material/icon";
 import {B2bNgxCheckboxModule} from "@b2b/ngx-checkbox";
 import {MaterialExampleComponent} from "./material-example/material-example.component";
+import {B2bNgxTextareaModule} from "@b2b/ngx-textarea";
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import {MaterialExampleComponent} from "./material-example/material-example.comp
     MatIconModule,
     B2bNgxCheckboxModule,
     MaterialExampleComponent,
-    FormsModule
+    FormsModule,
+    B2bNgxTextareaModule
   ],
   bootstrap: [AppComponent]
 })
