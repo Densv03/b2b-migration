@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { AmplitudeService } from "apps/site/src/app/core/services/amplitude/amplitude.service";
+import {B2bNgxButtonThemeEnum} from "@b2b/ngx-button";
 
 @Component({
 	selector: "b2b-auth-confirm-email",
@@ -7,7 +7,5 @@ import { AmplitudeService } from "apps/site/src/app/core/services/amplitude/ampl
 	styleUrls: ["./auth-confirm-email.component.scss"],
 })
 export class AuthConfirmEmailComponent {
-	constructor(private readonly _ampService: AmplitudeService) {
-		this._ampService.logEvent("View confirmation page");
-	}
+  protected readonly B2bNgxButtonThemeEnum = B2bNgxButtonThemeEnum;
 }

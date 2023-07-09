@@ -16,6 +16,7 @@ import {B2bNgxCheckboxModule} from "@b2b/ngx-checkbox";
 // import {ErrorTailorModule} from "@ngneat/error-tailor";
 import {B2bNgxInputModule} from "@b2b/ngx-input";
 import {RouterModule} from "@angular/router";
+import {B2bNgxTelModule} from "../../../../../projects/ngx-tel/src/lib/ngx-tel.module";
 
 @NgModule({
   declarations: [ClientHomeComponent],
@@ -37,6 +38,7 @@ import {RouterModule} from "@angular/router";
     // ErrorTailorModule,
     B2bNgxInputModule,
     FormsModule,
+    B2bNgxTelModule
   ],
 })
 export class ClientHomeModule {

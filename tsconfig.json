@@ -55,6 +55,9 @@
       "pidor": [
         "dist/pidor"
       ],
+      "ngx-tel": [
+        "dist/ngx-tel"
+      ],
     },
     "declaration": false,
     "downlevelIteration": true,

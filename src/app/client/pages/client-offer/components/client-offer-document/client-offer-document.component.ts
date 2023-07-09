@@ -14,6 +14,6 @@ export class ClientOfferDocumentComponent implements OnInit {
 	constructor(public ref: DialogRef) {}
 
 	ngOnInit(): void {
-		this.document = this.ref.data;
+		// this.document = this.ref.data;
 	}
 }

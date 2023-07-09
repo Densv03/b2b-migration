@@ -2,14 +2,14 @@ import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 
 import { B2bNgxButtonModule } from "@b2b/ngx-button";
-import { B2bNgxImagesCarouselModule } from "@b2b/ngx-images-carousel";
+// import { B2bNgxImagesCarouselModule } from "@b2b/ngx-images-carousel";
 import { B2bNgxLinkModule } from "@b2b/ngx-link";
-import { B2bNgxTooltipModule } from "@b2b/ngx-tooltip";
+// import { B2bNgxTooltipModule } from "@b2b/ngx-tooltip";
 import { B2bNgxIconModule } from "@b2b/ngx-icon";
-import { B2bNgxDividerModule } from "@b2b/ngx-divider";
-import { ClientOfferComponent } from "apps/site/src/app/client/pages/client-offer/layout/client-offer.component";
-import { ClientOfferRoutingModule } from "apps/site/src/app/client/pages/client-offer/client-offer-routing.module";
-import { B2bNgxSkeletonModule } from "@b2b/ngx-skeleton";
+// import { B2bNgxDividerModule } from "@b2b/ngx-divider";
+import { ClientOfferComponent} from "./layout/client-offer.component";
+import { ClientOfferRoutingModule} from "./client-offer-routing.module";
+// import { B2bNgxSkeletonModule } from "@b2b/ngx-skeleton";
 import { B2bNgxImageModule } from "@b2b/ngx-image";
 import { ClientOfferMapComponent } from "./components/client-offer-map/client-offer-map.component";
 // import { AgmCoreModule } from "@agm/core";
@@ -17,11 +17,12 @@ import { ClientOfferDocumentComponent } from "./components/client-offer-document
 import { ClientOfferImagesComponent } from "./components/client-offer-images/client-offer-images.component";
 import { NgxDocViewerModule } from "ngx-doc-viewer";
 import { TranslocoModule } from "@ngneat/transloco";
-import { NgxTippyModule } from "ngx-tippy-wrapper";
+// import { NgxTippyModule } from "ngx-tippy-wrapper";
 import { ClientOfferReportComponent } from "./components/client-offer-report/client-offer-report.component";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { ClientOfferContactSupplierComponent } from "./components/client-offer-contact-supplier/client-offer-contact-supplier.component";
 import {Meta} from "@angular/platform-browser";
+import {NgxIntlTelInputModule} from "ngx-intl-tel-input";
 @NgModule({
 	declarations: [
 		ClientOfferComponent,
@@ -36,18 +37,19 @@ import {Meta} from "@angular/platform-browser";
 		FormsModule,
 		ReactiveFormsModule,
 		ClientOfferRoutingModule,
-		B2bNgxImagesCarouselModule,
+		// B2bNgxImagesCarouselModule,
 		B2bNgxButtonModule,
 		B2bNgxLinkModule,
-		B2bNgxTooltipModule,
+		// B2bNgxTooltipModule,
 		B2bNgxIconModule,
-		B2bNgxDividerModule,
-		B2bNgxSkeletonModule,
+		// B2bNgxDividerModule,
+		// B2bNgxSkeletonModule,
 		B2bNgxImageModule,
 		// AgmCoreModule,
 		NgxDocViewerModule,
-		NgxTippyModule,
+		// NgxTippyModule,
 		TranslocoModule,
+    NgxIntlTelInputModule
 	],
 	providers: [Meta]
 })

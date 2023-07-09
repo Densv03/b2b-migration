@@ -1,280 +1,280 @@
 <div class="company-information">
-	<form [formGroup]="form" class="company-form">
-		<div class="form-header">
-			<div class="title">Company information</div>
-		</div>
-		<div class="main-info">
-			<div class="column">
-				<div class="form-control-wrapper">
-					<input
-						formControlName="companyName"
-						class="form__input"
-						b2bNgxInput
-						placeholder="Company name"
-						label="Company name"
-						[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"/>
-					<p
-						*ngIf="formState['companyName'].touched && formState['companyName'].errors?.required"
-						class="error"
-						[@fadeInOut]>
-						Company name is required
-					</p>
-				</div>
+<!--	<form [formGroup]="form" class="company-form">-->
+<!--		<div class="form-header">-->
+<!--			<div class="title">Company information</div>-->
+<!--		</div>-->
+<!--		<div class="main-info">-->
+<!--			<div class="column">-->
+<!--				<div class="form-control-wrapper">-->
+<!--&lt;!&ndash;					<input&ndash;&gt;-->
+<!--&lt;!&ndash;						formControlName="companyName"&ndash;&gt;-->
+<!--&lt;!&ndash;						class="form__input"&ndash;&gt;-->
+<!--&lt;!&ndash;						b2bNgxInput&ndash;&gt;-->
+<!--&lt;!&ndash;						placeholder="Company name"&ndash;&gt;-->
+<!--&lt;!&ndash;						label="Company name"&ndash;&gt;-->
+<!--&lt;!&ndash;						[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"/>&ndash;&gt;-->
+<!--					<p-->
+<!--						*ngIf="formState['companyName'].touched && formState['companyName'].errors?.required"-->
+<!--						class="error"-->
+<!--						[@fadeInOut]>-->
+<!--						Company name is required-->
+<!--					</p>-->
+<!--				</div>-->
 
-				<div class="form-control-wrapper">
-					<b2b-ngx-country-select
-						placeholder="Select country"
-						formControlName="country"
-						[theme]="b2bNgxSelectThemeEnum.BACKGROUND_GRAY"
-					>Country
-					</b2b-ngx-country-select>
-					<p *ngIf="formState['country'].touched && formState['country'].errors?.required" class="error" [@fadeInOut]>
-						Country is required
-					</p>
-				</div>
-				<div class="form-control-wrapper">
-					<b2b-ngx-select
-						[options]="foundationYear$ | async"
-						bindValue="id"
-						bindLabel="value"
-						placeholder="Select"
-						formControlName="foundationYear"
-						[theme]="b2bNgxSelectThemeEnum.BACKGROUND_GRAY">
-						Year of foundation
-					</b2b-ngx-select>
-					<p
-						*ngIf="formState['foundationYear'].touched && formState['foundationYear'].errors?.required"
-						class="error"
-						[@fadeInOut]>
-						Year of foundation is required
-					</p>
-				</div>
-				<div class="form-control-wrapper">
-					<ng-container *ngIf="employeesNumber$ | async as employeesNumber">
-            <b2b-ngx-select
-              [options]="employeesNumber"
-              bindValue="id"
-              bindLabel="value"
-              placeholder="Select"
-              formControlName="employeesNumber"
-              [theme]="b2bNgxSelectThemeEnum.BACKGROUND_GRAY">
-              Number of employees
-            </b2b-ngx-select>
-          </ng-container>
-					<p
-						*ngIf="formState['employeesNumber'].touched && formState['employeesNumber'].errors?.required"
-						class="error"
-						[@fadeInOut]>
-						Number of employees is required
-					</p>
-				</div>
-				<div class="form-control-wrapper">
-					<ng-container *ngIf="annualRevenue$ | async as annualRevenue">
-<!--            <b2b-ngx-select-->
-<!--              [options]="annualRevenue"-->
-<!--              bindValue="id"-->
-<!--              bindLabel="value"-->
-<!--              placeholder="Select"-->
-<!--              formControlName="annualRevenue"-->
-<!--              [theme]="b2bNgxSelectThemeEnum.BACKGROUND_GRAY">-->
-<!--              Annual revenue-->
-<!--            </b2b-ngx-select>-->
-          </ng-container>
-					<p
-						*ngIf="formState['annualRevenue'].touched && formState['annualRevenue'].errors?.required"
-						class="error"
-						[@fadeInOut]>
-						Annual revenue is required
-					</p>
-				</div>
-			</div>
-			<div class="column">
-				<div class="form-control-wrapper phone-control-wrapper">
-<!--					<b2b-ngx-tel-->
-<!--						[showErrorMessage]="false"-->
-<!--						formControlName="phone"-->
-<!--						[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY">-->
-<!--						Phone number-->
-<!--					</b2b-ngx-tel>-->
-					<p *ngIf="formState['phone'].touched && formState['phone'].errors?.required" class="error" [@fadeInOut]>
-						Phone number is required
-					</p>
-				</div>
-				<div class="form-control-wrapper">
-<!--					<input-->
-<!--						b2bNgxInput-->
-<!--						label="Office address"-->
-<!--						placeholder="Address"-->
-<!--						formControlName="address"-->
-<!--						[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"/>-->
-					<p *ngIf="formState['address'].touched && formState['address'].errors?.required" class="error" [@fadeInOut]>
-						Office address is required
-					</p>
-				</div>
-				<div class="form-control-wrapper">
-					<input
-						b2bNgxInput
-						label="Website"
-						placeholder="Website"
-						formControlName="website"
-						[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"/>
-					<p *ngIf="formState['website'].touched && formState['website'].errors?.siteError" class="error" [@fadeInOut]>
-						Correct link example: https://example.com
-					</p>
-				</div>
-				<div class="form-control-wrapper textarea-wrapper">
-<!--					<textarea-->
-<!--						b2bNgxTextarea-->
-<!--						[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"-->
-<!--						placeholder="Describe more about your company"-->
-<!--						label="Company's description"-->
-<!--						formControlName="companyDescription"-->
-<!--						class="quotation__textarea quotation__middle-space"></textarea>-->
-					<p
-						[@fadeInOut]
-						class="error"
-						*ngIf="formState.companyDescription.errors?.minlength && formState.companyDescription.touched">
-						Company description should contain more than 20 symbols
-					</p>
-					<p
-						[@fadeInOut]
-						class="error"
-						*ngIf="formState.companyDescription?.errors?.maxlength && formState.companyDescription.touched">
-						Company description should contain less than 500 symbols
-					</p>
-					<p
-						*ngIf="formState['companyDescription'].touched && formState['companyDescription'].errors?.required"
-						class="error"
-						[@fadeInOut]>
-						Company information is required
-					</p>
-				</div>
-				<div class="form-control-wrapper">
-					<ng-container *ngIf="position$ | async as position">
-<!--            <b2b-ngx-select-->
-<!--              [options]="position"-->
-<!--              bindValue="id"-->
-<!--              bindLabel="value"-->
-<!--              placeholder="Select"-->
-<!--              formControlName="position"-->
-<!--              [theme]="b2bNgxSelectThemeEnum.BACKGROUND_GRAY">-->
-<!--              Your position-->
-<!--            </b2b-ngx-select>-->
-          </ng-container>
-					<p *ngIf="formState['position'].touched && formState['position'].errors?.required" class="error" [@fadeInOut]>
-						Your position is required
-					</p>
-				</div>
-			</div>
-		</div>
-		<div class="account-type">
-			<div class="title">Account type</div>
-<!--			<b2b-ngx-radio [options]="isAdmin ? ['Admin'] : ['Supplier', 'Buyer']" class="ngx-radio"-->
-<!--										 formControlName="rootRole"></b2b-ngx-radio>-->
-			<div class="form-control-wrapper">
-        <ng-container *ngIf="availableRoles$ | async as availableRoles">
-<!--          <b2b-ngx-select-->
-<!--            *ngIf="!isAdmin"-->
-<!--            [options]="availableRoles"-->
-<!--            bindValue="id"-->
-<!--            bindLabel="displayName"-->
-<!--            placeholder="Select"-->
-<!--            formControlName="businessType"-->
-<!--            [theme]="b2bNgxSelectThemeEnum.BACKGROUND_GRAY">-->
-<!--            Business type-->
-<!--          </b2b-ngx-select>-->
-<!--          <b2b-ngx-select-->
-<!--            *ngIf="isAdmin"-->
-<!--            [options]="availableRoles"-->
-<!--            bindValue="_id"-->
-<!--            bindLabel="displayName"-->
-<!--            placeholder="Select"-->
-<!--            formControlName="businessType"-->
-<!--            [theme]="b2bNgxSelectThemeEnum.BACKGROUND_GRAY">-->
-<!--            Business type-->
-<!--          </b2b-ngx-select>-->
-        </ng-container>
-				<p
-					*ngIf="formState['businessType'].touched && formState['businessType'].errors?.required"
-					class="error"
-					[@fadeInOut]>
-					Business type is required
-				</p>
-			</div>
-		</div>
-		<div class="social">
-			<div class="title">Social networks</div>
-			<div class="social-buttons">
-				<div
-					*ngFor="let button of socialButtons"
-					(click)="addSocialControl(button.type)"
-					class="social-buttons-wrapper">
-					<img b2bNgxIcon [name]="button.icon" alt="social" class="icon"/>
-				</div>
-			</div>
-			<div class="controls">
-				<div *ngFor="let control of presentSocialControls" class="control">
-					<div class="control-header">
-						<img b2bNgxIcon [name]="control.icon" alt="social" class="control-header-icon"/>
-						<div class="control-header-name">{{ control.placeholder }}</div>
-					</div>
-					<div class="control-body">
-<!--						<input-->
-<!--							b2bNgxInput-->
-<!--							[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"-->
-<!--							[placeholder]="control.placeholder"-->
-<!--							[formControlName]="control.name"/>-->
-						<img (click)="removeSocialControl(control.name)" class="cancel-btn" b2bNgxIcon name="cancel" alt="cancel"/>
-					</div>
+<!--				<div class="form-control-wrapper">-->
+<!--&lt;!&ndash;					<b2b-ngx-country-select&ndash;&gt;-->
+<!--&lt;!&ndash;						placeholder="Select country"&ndash;&gt;-->
+<!--&lt;!&ndash;						formControlName="country"&ndash;&gt;-->
+<!--&lt;!&ndash;						[theme]="b2bNgxSelectThemeEnum.BACKGROUND_GRAY"&ndash;&gt;-->
+<!--&lt;!&ndash;					>Country&ndash;&gt;-->
+<!--&lt;!&ndash;					</b2b-ngx-country-select>&ndash;&gt;-->
+<!--					<p *ngIf="formState['country'].touched && formState['country'].errors?.required" class="error" [@fadeInOut]>-->
+<!--						Country is required-->
+<!--					</p>-->
+<!--				</div>-->
+<!--				<div class="form-control-wrapper">-->
+<!--&lt;!&ndash;					<b2b-ngx-select&ndash;&gt;-->
+<!--&lt;!&ndash;						[options]="foundationYear$ | async"&ndash;&gt;-->
+<!--&lt;!&ndash;						bindValue="id"&ndash;&gt;-->
+<!--&lt;!&ndash;						bindLabel="value"&ndash;&gt;-->
+<!--&lt;!&ndash;						placeholder="Select"&ndash;&gt;-->
+<!--&lt;!&ndash;						formControlName="foundationYear"&ndash;&gt;-->
+<!--&lt;!&ndash;						[theme]="b2bNgxSelectThemeEnum.BACKGROUND_GRAY">&ndash;&gt;-->
+<!--&lt;!&ndash;						Year of foundation&ndash;&gt;-->
+<!--&lt;!&ndash;					</b2b-ngx-select>&ndash;&gt;-->
+<!--					<p-->
+<!--						*ngIf="formState['foundationYear'].touched && formState['foundationYear'].errors?.required"-->
+<!--						class="error"-->
+<!--						[@fadeInOut]>-->
+<!--						Year of foundation is required-->
+<!--					</p>-->
+<!--				</div>-->
+<!--				<div class="form-control-wrapper">-->
+<!--					<ng-container *ngIf="employeesNumber$ | async as employeesNumber">-->
+<!--&lt;!&ndash;            <b2b-ngx-select&ndash;&gt;-->
+<!--&lt;!&ndash;              [options]="employeesNumber"&ndash;&gt;-->
+<!--&lt;!&ndash;              bindValue="id"&ndash;&gt;-->
+<!--&lt;!&ndash;              bindLabel="value"&ndash;&gt;-->
+<!--&lt;!&ndash;              placeholder="Select"&ndash;&gt;-->
+<!--&lt;!&ndash;              formControlName="employeesNumber"&ndash;&gt;-->
+<!--&lt;!&ndash;              [theme]="b2bNgxSelectThemeEnum.BACKGROUND_GRAY">&ndash;&gt;-->
+<!--&lt;!&ndash;              Number of employees&ndash;&gt;-->
+<!--&lt;!&ndash;            </b2b-ngx-select>&ndash;&gt;-->
+<!--          </ng-container>-->
+<!--					<p-->
+<!--						*ngIf="formState['employeesNumber'].touched && formState['employeesNumber'].errors?.required"-->
+<!--						class="error"-->
+<!--						[@fadeInOut]>-->
+<!--						Number of employees is required-->
+<!--					</p>-->
+<!--				</div>-->
+<!--				<div class="form-control-wrapper">-->
+<!--					<ng-container *ngIf="annualRevenue$ | async as annualRevenue">-->
+<!--&lt;!&ndash;            <b2b-ngx-select&ndash;&gt;-->
+<!--&lt;!&ndash;              [options]="annualRevenue"&ndash;&gt;-->
+<!--&lt;!&ndash;              bindValue="id"&ndash;&gt;-->
+<!--&lt;!&ndash;              bindLabel="value"&ndash;&gt;-->
+<!--&lt;!&ndash;              placeholder="Select"&ndash;&gt;-->
+<!--&lt;!&ndash;              formControlName="annualRevenue"&ndash;&gt;-->
+<!--&lt;!&ndash;              [theme]="b2bNgxSelectThemeEnum.BACKGROUND_GRAY">&ndash;&gt;-->
+<!--&lt;!&ndash;              Annual revenue&ndash;&gt;-->
+<!--&lt;!&ndash;            </b2b-ngx-select>&ndash;&gt;-->
+<!--          </ng-container>-->
+<!--					<p-->
+<!--						*ngIf="formState['annualRevenue'].touched && formState['annualRevenue'].errors?.required"-->
+<!--						class="error"-->
+<!--						[@fadeInOut]>-->
+<!--						Annual revenue is required-->
+<!--					</p>-->
+<!--				</div>-->
+<!--			</div>-->
+<!--			<div class="column">-->
+<!--				<div class="form-control-wrapper phone-control-wrapper">-->
+<!--&lt;!&ndash;					<b2b-ngx-tel&ndash;&gt;-->
+<!--&lt;!&ndash;						[showErrorMessage]="false"&ndash;&gt;-->
+<!--&lt;!&ndash;						formControlName="phone"&ndash;&gt;-->
+<!--&lt;!&ndash;						[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY">&ndash;&gt;-->
+<!--&lt;!&ndash;						Phone number&ndash;&gt;-->
+<!--&lt;!&ndash;					</b2b-ngx-tel>&ndash;&gt;-->
+<!--					<p *ngIf="formState['phone'].touched && formState['phone'].errors?.required" class="error" [@fadeInOut]>-->
+<!--						Phone number is required-->
+<!--					</p>-->
+<!--				</div>-->
+<!--				<div class="form-control-wrapper">-->
+<!--&lt;!&ndash;					<input&ndash;&gt;-->
+<!--&lt;!&ndash;						b2bNgxInput&ndash;&gt;-->
+<!--&lt;!&ndash;						label="Office address"&ndash;&gt;-->
+<!--&lt;!&ndash;						placeholder="Address"&ndash;&gt;-->
+<!--&lt;!&ndash;						formControlName="address"&ndash;&gt;-->
+<!--&lt;!&ndash;						[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"/>&ndash;&gt;-->
+<!--					<p *ngIf="formState['address'].touched && formState['address'].errors?.required" class="error" [@fadeInOut]>-->
+<!--						Office address is required-->
+<!--					</p>-->
+<!--				</div>-->
+<!--				<div class="form-control-wrapper">-->
+<!--&lt;!&ndash;					<input&ndash;&gt;-->
+<!--&lt;!&ndash;						b2bNgxInput&ndash;&gt;-->
+<!--&lt;!&ndash;						label="Website"&ndash;&gt;-->
+<!--&lt;!&ndash;						placeholder="Website"&ndash;&gt;-->
+<!--&lt;!&ndash;						formControlName="website"&ndash;&gt;-->
+<!--&lt;!&ndash;						[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"/>&ndash;&gt;-->
+<!--					<p *ngIf="formState['website'].touched && formState['website'].errors?.siteError" class="error" [@fadeInOut]>-->
+<!--						Correct link example: https://example.com-->
+<!--					</p>-->
+<!--				</div>-->
+<!--				<div class="form-control-wrapper textarea-wrapper">-->
+<!--&lt;!&ndash;					<textarea&ndash;&gt;-->
+<!--&lt;!&ndash;						b2bNgxTextarea&ndash;&gt;-->
+<!--&lt;!&ndash;						[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"&ndash;&gt;-->
+<!--&lt;!&ndash;						placeholder="Describe more about your company"&ndash;&gt;-->
+<!--&lt;!&ndash;						label="Company's description"&ndash;&gt;-->
+<!--&lt;!&ndash;						formControlName="companyDescription"&ndash;&gt;-->
+<!--&lt;!&ndash;						class="quotation__textarea quotation__middle-space"></textarea>&ndash;&gt;-->
+<!--					<p-->
+<!--						[@fadeInOut]-->
+<!--						class="error"-->
+<!--						*ngIf="formState.companyDescription.errors?.minlength && formState.companyDescription.touched">-->
+<!--						Company description should contain more than 20 symbols-->
+<!--					</p>-->
+<!--					<p-->
+<!--						[@fadeInOut]-->
+<!--						class="error"-->
+<!--						*ngIf="formState.companyDescription?.errors?.maxlength && formState.companyDescription.touched">-->
+<!--						Company description should contain less than 500 symbols-->
+<!--					</p>-->
+<!--					<p-->
+<!--						*ngIf="formState['companyDescription'].touched && formState['companyDescription'].errors?.required"-->
+<!--						class="error"-->
+<!--						[@fadeInOut]>-->
+<!--						Company information is required-->
+<!--					</p>-->
+<!--				</div>-->
+<!--				<div class="form-control-wrapper">-->
+<!--					<ng-container *ngIf="position$ | async as position">-->
+<!--&lt;!&ndash;            <b2b-ngx-select&ndash;&gt;-->
+<!--&lt;!&ndash;              [options]="position"&ndash;&gt;-->
+<!--&lt;!&ndash;              bindValue="id"&ndash;&gt;-->
+<!--&lt;!&ndash;              bindLabel="value"&ndash;&gt;-->
+<!--&lt;!&ndash;              placeholder="Select"&ndash;&gt;-->
+<!--&lt;!&ndash;              formControlName="position"&ndash;&gt;-->
+<!--&lt;!&ndash;              [theme]="b2bNgxSelectThemeEnum.BACKGROUND_GRAY">&ndash;&gt;-->
+<!--&lt;!&ndash;              Your position&ndash;&gt;-->
+<!--&lt;!&ndash;            </b2b-ngx-select>&ndash;&gt;-->
+<!--          </ng-container>-->
+<!--					<p *ngIf="formState['position'].touched && formState['position'].errors?.required" class="error" [@fadeInOut]>-->
+<!--						Your position is required-->
+<!--					</p>-->
+<!--				</div>-->
+<!--			</div>-->
+<!--		</div>-->
+<!--		<div class="account-type">-->
+<!--			<div class="title">Account type</div>-->
+<!--&lt;!&ndash;			<b2b-ngx-radio [options]="isAdmin ? ['Admin'] : ['Supplier', 'Buyer']" class="ngx-radio"&ndash;&gt;-->
+<!--&lt;!&ndash;										 formControlName="rootRole"></b2b-ngx-radio>&ndash;&gt;-->
+<!--			<div class="form-control-wrapper">-->
+<!--        <ng-container *ngIf="availableRoles$ | async as availableRoles">-->
+<!--&lt;!&ndash;          <b2b-ngx-select&ndash;&gt;-->
+<!--&lt;!&ndash;            *ngIf="!isAdmin"&ndash;&gt;-->
+<!--&lt;!&ndash;            [options]="availableRoles"&ndash;&gt;-->
+<!--&lt;!&ndash;            bindValue="id"&ndash;&gt;-->
+<!--&lt;!&ndash;            bindLabel="displayName"&ndash;&gt;-->
+<!--&lt;!&ndash;            placeholder="Select"&ndash;&gt;-->
+<!--&lt;!&ndash;            formControlName="businessType"&ndash;&gt;-->
+<!--&lt;!&ndash;            [theme]="b2bNgxSelectThemeEnum.BACKGROUND_GRAY">&ndash;&gt;-->
+<!--&lt;!&ndash;            Business type&ndash;&gt;-->
+<!--&lt;!&ndash;          </b2b-ngx-select>&ndash;&gt;-->
+<!--&lt;!&ndash;          <b2b-ngx-select&ndash;&gt;-->
+<!--&lt;!&ndash;            *ngIf="isAdmin"&ndash;&gt;-->
+<!--&lt;!&ndash;            [options]="availableRoles"&ndash;&gt;-->
+<!--&lt;!&ndash;            bindValue="_id"&ndash;&gt;-->
+<!--&lt;!&ndash;            bindLabel="displayName"&ndash;&gt;-->
+<!--&lt;!&ndash;            placeholder="Select"&ndash;&gt;-->
+<!--&lt;!&ndash;            formControlName="businessType"&ndash;&gt;-->
+<!--&lt;!&ndash;            [theme]="b2bNgxSelectThemeEnum.BACKGROUND_GRAY">&ndash;&gt;-->
+<!--&lt;!&ndash;            Business type&ndash;&gt;-->
+<!--&lt;!&ndash;          </b2b-ngx-select>&ndash;&gt;-->
+<!--        </ng-container>-->
+<!--				<p-->
+<!--					*ngIf="formState['businessType'].touched && formState['businessType'].errors?.required"-->
+<!--					class="error"-->
+<!--					[@fadeInOut]>-->
+<!--					Business type is required-->
+<!--				</p>-->
+<!--			</div>-->
+<!--		</div>-->
+<!--		<div class="social">-->
+<!--			<div class="title">Social networks</div>-->
+<!--			<div class="social-buttons">-->
+<!--				<div-->
+<!--					*ngFor="let button of socialButtons"-->
+<!--					(click)="addSocialControl(button.type)"-->
+<!--					class="social-buttons-wrapper">-->
+<!--					<img b2bNgxIcon [name]="button.icon" alt="social" class="icon"/>-->
+<!--				</div>-->
+<!--			</div>-->
+<!--			<div class="controls">-->
+<!--				<div *ngFor="let control of presentSocialControls" class="control">-->
+<!--					<div class="control-header">-->
+<!--						<img b2bNgxIcon [name]="control.icon" alt="social" class="control-header-icon"/>-->
+<!--						<div class="control-header-name">{{ control.placeholder }}</div>-->
+<!--					</div>-->
+<!--					<div class="control-body">-->
+<!--&lt;!&ndash;						<input&ndash;&gt;-->
+<!--&lt;!&ndash;							b2bNgxInput&ndash;&gt;-->
+<!--&lt;!&ndash;							[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"&ndash;&gt;-->
+<!--&lt;!&ndash;							[placeholder]="control.placeholder"&ndash;&gt;-->
+<!--&lt;!&ndash;							[formControlName]="control.name"/>&ndash;&gt;-->
+<!--						<img (click)="removeSocialControl(control.name)" class="cancel-btn" b2bNgxIcon name="cancel" alt="cancel"/>-->
+<!--					</div>-->
 
-					<p
-						*ngIf="formState[control.name].touched && formState[control.name].errors?.socialError"
-						class="error"
-						[@fadeInOut]>
-						Correct link example: {{ control.validLinkExample }}
-					</p>
-				</div>
-			</div>
-		</div>
+<!--					<p-->
+<!--						*ngIf="formState[control.name].touched && formState[control.name].errors?.socialError"-->
+<!--						class="error"-->
+<!--						[@fadeInOut]>-->
+<!--						Correct link example: {{ control.validLinkExample }}-->
+<!--					</p>-->
+<!--				</div>-->
+<!--			</div>-->
+<!--		</div>-->
 
-		<div class="product-range">
-			<div class="title">Your product range</div>
-			<div class="categories-block">
-				<div *ngFor="let category of chips" class="category">
-					<span>{{ category.text }}</span>
-					<img (click)="removeCategory(category.value)" class="cancel-btn" b2bNgxIcon name="cancel" alt="cancel"/>
-				</div>
-			</div>
-<!--			<button-->
-<!--				b2bNgxButton-->
-<!--				[theme]="b2bNgxButtonThemeEnum.BACKGROUND_BLACK"-->
-<!--				(click)="addCategory()"-->
-<!--				class="categories-button">-->
-<!--				Select the product-->
-<!--			</button>-->
-		</div>
+<!--		<div class="product-range">-->
+<!--			<div class="title">Your product range</div>-->
+<!--			<div class="categories-block">-->
+<!--				<div *ngFor="let category of chips" class="category">-->
+<!--					<span>{{ category.text }}</span>-->
+<!--					<img (click)="removeCategory(category.value)" class="cancel-btn" b2bNgxIcon name="cancel" alt="cancel"/>-->
+<!--				</div>-->
+<!--			</div>-->
+<!--&lt;!&ndash;			<button&ndash;&gt;-->
+<!--&lt;!&ndash;				b2bNgxButton&ndash;&gt;-->
+<!--&lt;!&ndash;				[theme]="b2bNgxButtonThemeEnum.BACKGROUND_BLACK"&ndash;&gt;-->
+<!--&lt;!&ndash;				(click)="addCategory()"&ndash;&gt;-->
+<!--&lt;!&ndash;				class="categories-button">&ndash;&gt;-->
+<!--&lt;!&ndash;				Select the product&ndash;&gt;-->
+<!--&lt;!&ndash;			</button>&ndash;&gt;-->
+<!--		</div>-->
 
-		<div class="company-logo">
-			<div class="title">Company logo</div>
-			<div class="file-wrapper">
-<!--				<b2b-ngx-logo formControlName="logo"></b2b-ngx-logo>-->
-			</div>
-			<div class="conditional">Supported file types: SVG, PNG and JPG files. Maximum size: 5 MB</div>
-		</div>
-		<div *ngIf="formState?.documents" class="company-documents">
-			<div class="title">Documents</div>
-			<div class="file-wrapper">
-<!--				<b2b-ngx-file label="Choose file" (clicked)="openDocument($event)" formControlName="documents"></b2b-ngx-file>-->
-			</div>
-			<div class="conditional">
-				Supported file types: PDF, XLS, TXT, DOCX and JPG files. Maximum size: 50 MB (total)
-			</div>
-		</div>
-		<div class="form-buttons">
-<!--			<button (click)="onCancel()" b2bNgxButton [theme]="b2bNgxButtonThemeEnum.OUTLINE_GRAY">Cancel</button>-->
-<!--			<button (click)="onSave(form)" b2bNgxButton [theme]="b2bNgxButtonThemeEnum.BACKGROUND_BLUE">Save changes</button>-->
-		</div>
-	</form>
+<!--		<div class="company-logo">-->
+<!--			<div class="title">Company logo</div>-->
+<!--			<div class="file-wrapper">-->
+<!--&lt;!&ndash;				<b2b-ngx-logo formControlName="logo"></b2b-ngx-logo>&ndash;&gt;-->
+<!--			</div>-->
+<!--			<div class="conditional">Supported file types: SVG, PNG and JPG files. Maximum size: 5 MB</div>-->
+<!--		</div>-->
+<!--		<div *ngIf="formState?.documents" class="company-documents">-->
+<!--			<div class="title">Documents</div>-->
+<!--			<div class="file-wrapper">-->
+<!--&lt;!&ndash;				<b2b-ngx-file label="Choose file" (clicked)="openDocument($event)" formControlName="documents"></b2b-ngx-file>&ndash;&gt;-->
+<!--			</div>-->
+<!--			<div class="conditional">-->
+<!--				Supported file types: PDF, XLS, TXT, DOCX and JPG files. Maximum size: 50 MB (total)-->
+<!--			</div>-->
+<!--		</div>-->
+<!--		<div class="form-buttons">-->
+<!--&lt;!&ndash;			<button (click)="onCancel()" b2bNgxButton [theme]="b2bNgxButtonThemeEnum.OUTLINE_GRAY">Cancel</button>&ndash;&gt;-->
+<!--&lt;!&ndash;			<button (click)="onSave(form)" b2bNgxButton [theme]="b2bNgxButtonThemeEnum.BACKGROUND_BLUE">Save changes</button>&ndash;&gt;-->
+<!--		</div>-->
+<!--	</form>-->
 	<div class="mobile-buttons">
 <!--		<button (click)="onCancel()" b2bNgxButton [theme]="b2bNgxButtonThemeEnum.OUTLINE_GRAY">Cancel</button>-->
 <!--		<button (click)="onSave(form)" b2bNgxButton [theme]="b2bNgxButtonThemeEnum.BACKGROUND_BLUE">Save changes</button>-->

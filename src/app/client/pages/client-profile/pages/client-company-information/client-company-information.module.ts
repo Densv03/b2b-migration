@@ -7,7 +7,7 @@ import { B2bNgxSelectModule } from "@b2b/ngx-select";
 import { B2bNgxCountrySelectModule } from "@b2b/ngx-country-select";
 // import { B2bNgxTelModule } from "@b2b/ngx-tel";
 // import { B2bNgxTextareaModule } from "@b2b/ngx-textarea";
-import { ReactiveFormsModule } from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { B2bNgxIconModule } from "@b2b/ngx-icon";
 import {B2bNgxButtonModule} from "@b2b/ngx-button";
 // import { B2bNgxFileModule } from "@b2b/ngx-file";
@@ -27,6 +27,7 @@ import {B2bNgxButtonModule} from "@b2b/ngx-button";
     ReactiveFormsModule,
     B2bNgxIconModule,
     B2bNgxButtonModule,
+    FormsModule
     // B2bNgxFileModule,
     // B2bNgxLogoModule,
     // B2bNgxRadioModule,
