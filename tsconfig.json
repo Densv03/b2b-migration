@@ -54,6 +54,9 @@
       "@b2b/ngx-textarea": [
         "projects/ngx-textarea/src/public-api"
       ],
+      "@b2b/ngx-password": [
+        "projects/ngx-password/src/public-api"
+      ],
     },
     "declaration": false,
     "downlevelIteration": true,

@@ -9,6 +9,7 @@ import {MatIconModule} from "@angular/material/icon";
 import {B2bNgxCheckboxModule} from "@b2b/ngx-checkbox";
 import {MaterialExampleComponent} from "./material-example/material-example.component";
 import {B2bNgxTextareaModule} from "@b2b/ngx-textarea";
+import {NgxPasswordModule} from "@b2b/ngx-password";
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import {B2bNgxTextareaModule} from "@b2b/ngx-textarea";
     B2bNgxCheckboxModule,
     MaterialExampleComponent,
     FormsModule,
-    B2bNgxTextareaModule
+    B2bNgxTextareaModule,
+    NgxPasswordModule
   ],
   bootstrap: [AppComponent]
 })
