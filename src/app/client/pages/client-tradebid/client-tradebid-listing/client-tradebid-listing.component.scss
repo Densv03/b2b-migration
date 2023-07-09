@@ -1,0 +1,70 @@
+@import "libs/shared/styles/src/lib";
+:host {
+	.header {
+		background-color: #fff;
+		overflow-x: hidden;
+		@include breakpoint("2") {
+			min-height: 450px;
+		}
+		@include breakpoint("1") {
+			min-height: 500px;
+		}
+		h1 {
+			font-size: 48px;
+			text-align: center;
+			font-weight: 500;
+			margin-top: 1em;
+			margin-bottom: 1em;
+			line-height: 60px;
+		}
+
+		&__form {
+			display: grid;
+			width: 40%;
+			margin: 0 auto;
+			padding-bottom: 2em;
+			grid-template-areas:
+				"a a"
+				"b c"
+				"d d";
+			grid-gap: 1em;
+			position: relative;
+			@include breakpoint("2") {
+				width: 90%;
+			}
+			.quotes-counter {
+				position: absolute;
+				bottom: 35px;
+				right: -200px;
+				//align-self: center;
+				color: #9fa4bb;
+				@include breakpoint("2") {
+					left: 0;
+					bottom: -15px;
+				}
+			}
+		}
+
+		&__search {
+			grid-area: a;
+		}
+
+		&__categories {
+			grid-area: b;
+		}
+
+		&__country {
+			grid-area: c;
+		}
+
+		&__button {
+			grid-area: d;
+			height: 50px;
+		}
+	}
+
+	.pagination {
+		display: block;
+		padding-bottom: 30px;
+	}
+}

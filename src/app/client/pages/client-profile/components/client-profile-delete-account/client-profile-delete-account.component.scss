@@ -1,0 +1,129 @@
+@import "libs/shared/styles/src/lib";
+
+:host {
+	display: block;
+	height: 100%;
+
+	.dialog {
+		display: flex;
+		flex-wrap: wrap;
+		height: 100%;
+		overflow: auto;
+
+		.wrapper {
+			padding: 40px;
+			display: flex;
+			flex-direction: column;
+			width: 100%;
+			align-items: center;
+			gap: 24px;
+
+			div {
+				width: 100%;
+			}
+
+			p {
+				text-align: center;
+				font-weight: 400;
+				font-size: 16px;
+				line-height: 24px;
+				letter-spacing: 0.01em;
+				color: #556274;
+			}
+
+			.restore-account {
+				margin-top: 8px;
+			}
+
+			h1 {
+				text-align: center;
+				font-size: 32px;
+				line-height: 36px;
+				letter-spacing: 0.01em;
+				color: #0f0f11;
+			}
+
+			textarea {
+				margin-top: 24px;
+				background: #f3f6f8;
+				border-radius: 4px;
+				width: 100%;
+				resize: none;
+				padding: 14px 16px;
+
+				&.ng-invalid.ng-touched {
+					background-color: $color-red-50;
+					border: 2px solid $color-red-500;
+				}
+			}
+
+			.error {
+				text-align: left;
+				font-size: 14px;
+				color: hsla(218, 5%, 45%, 0.6);
+			}
+
+			label {
+				text-align: left;
+				font-family: HelveticaNeue;
+				font-size: 14px;
+				line-height: 20px;
+				letter-spacing: 0.01em;
+				text-align: left;
+				color: #9fa4bb;
+			}
+
+			button {
+				width: 100%;
+				padding: 15px 0;
+				font-size: 14px;
+			}
+
+			span {
+				font-family: HelveticaNeue;
+				font-size: 16px;
+				line-height: 24px;
+				letter-spacing: 0.01em;
+				text-align: center;
+				color: #556274;
+			}
+		}
+
+		&-icon {
+			width: 80px;
+			height: 80px;
+		}
+
+		.actions {
+			display: flex;
+			gap: 8px;
+		}
+
+		.delete {
+			background-color: #9fa4bb;
+			color: white;
+
+			&:hover {
+				background-color: #0f0f11;
+			}
+		}
+	}
+}
+
+::ng-deep {
+	@include breakpoint("3") {
+		.report-dialog {
+			.ngneat-dialog-content {
+				width: 95% !important;
+			}
+		}
+	}
+
+	.ngneat-close-dialog {
+		right: 20px !important;
+	}
+
+	.ngneat-dialog-backdrop.ngneat-dialog-backdrop-visible {
+		z-index: 1070;
+	}
+}

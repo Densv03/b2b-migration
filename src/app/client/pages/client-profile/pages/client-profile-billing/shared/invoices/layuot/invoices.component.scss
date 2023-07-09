@@ -1,0 +1,82 @@
+@import "libs/shared/styles/src/lib";
+
+.invoices {
+	margin-top: 32px;
+
+	.invoices-list {
+		margin-top: 16px;
+		.invoice {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			padding: 0 24px;
+			@include breakpoint("1") {
+				padding: 0 10px;
+				font-size: 12px;
+			}
+
+			&:first-child {
+				height: 28px;
+				background: #f3f6f8;
+				color: #556274;
+				@include breakpoint("1") {
+					font-size: 11px;
+				}
+			}
+
+			&:not(:first-child) {
+				height: 48px;
+			}
+
+			.data-issued {
+				width: 20%;
+				@include breakpoint("1") {
+					width: 23%;
+				}
+			}
+			.invoice-id {
+				width: 20%;
+				@include breakpoint("1") {
+					width: 16%;
+				}
+			}
+			.transaction-id {
+				width: 20%;
+				@include breakpoint("1") {
+					width: 27%;
+				}
+			}
+			.sum {
+				width: 20%;
+				@include breakpoint("1") {
+					width: 10%;
+				}
+			}
+			.status {
+				width: 20%;
+				@include breakpoint("1") {
+					width: 10%;
+				}
+			}
+		}
+	}
+
+	.invoices-title {
+		font-weight: bold;
+		font-size: 18px;
+		line-height: 134%;
+		display: flex;
+		align-items: center;
+		color: #0f0f11;
+	}
+
+	.invoices-description {
+		margin-top: 8px;
+		font-style: normal;
+		font-weight: normal;
+		font-size: 14px;
+		line-height: 140%;
+		letter-spacing: 0.01em;
+		color: #556274;
+	}
+}

@@ -1,0 +1,67 @@
+<ul class="ngx-saved-offers-list">
+	<li *ngFor="let option of options" class="ngx-saved-offers-list-item">
+		<a
+			[routerLink]="b2bNgxLinkService.getLink('/offers/' + option._id) | async"
+			class="ngx-saved-offers-list-item-link">
+			<img class="ngx-saved-offers-list-item-img" b2bNgxImage [name]="option.previewPhoto" />
+			<div class="ngx-saved-offers-list-item-info">
+				<p class="ngx-saved-offers-list-item-info-title">
+					<span class="ngx-saved-offers-list-item-info-title">{{ option.title }}</span>
+					<img
+						b2bNgxIcon
+						*ngIf="option.verifiedTrack"
+						ngxTippy
+						data-tippy-content="Verified track"
+						name="verified-2"
+						class="ngx-saved-offers-list-item-info-icon" />
+					<img
+						b2bNgxIcon
+						*ngIf="option.highDemand"
+						ngxTippy
+						data-tippy-content="This offer is in high demand!"
+						name="flame"
+						class="ngx-saved-offers-list-item-info-icon" />
+					<img
+						b2bNgxIcon
+						*ngIf="option.priceDrop"
+						ngxTippy
+						data-tippy-content="Price Drop"
+						name="price-drop"
+						class="ngx-saved-offers-list-item-info-icon" />
+				</p>
+				<p class="ngx-saved-offers-list-item-info-additional">
+					<span class="ngx-saved-offers-list-item-info-added">Added on {{ option.createdAt | date }}</span>
+					<span class="ngx-saved-offers-list-item-info-status">Status: {{ option.status }}</span>
+				</p>
+				<p class="ngx-saved-offers-list-item-route">
+					<img
+						b2bNgxIcon
+						group="flags/"
+						[name]="option.destination?.from | uppercase"
+						class="ngx-saved-offers-list-item-route-first-country-icon" />
+					<span class="ngx-saved-offers-list-item-route-first-country-name">{{ option.destination?.from }}</span>
+					<img b2bNgxIcon name="arrow-r-blue-2" class="ngx-saved-offers-list-item-route-arrow-icon" />
+					<img
+						b2bNgxIcon
+						group="flags/"
+						[name]="option.destination?.to | uppercase"
+						class="ngx-saved-offers-list-item-route-second-country-icon" />
+					<span class="ngx-saved-offers-list-item-route-second-country-name">{{ option.destination?.to }}</span>
+				</p>
+			</div>
+			<div class="ngx-saved-offers-list-item-chats" *ngIf="false">
+				<p class="ngx-saved-offers-list-item-chat">
+					<span class="ngx-saved-offers-list-item-chat-amount">1 Chat</span>
+					<span class="ngx-saved-offers-list-item-chat-messages">5</span>
+				</p>
+			</div>
+			<div class="ngx-saved-offers-list-item-more">
+				<b2b-ngx-dropdown [options]="menuOptions" [optionToReturn]="option">
+					<button b2bNgxButton class="flex items-center">
+						<img b2bNgxIcon name="more" />
+					</button>
+				</b2b-ngx-dropdown>
+			</div>
+		</a>
+	</li>
+</ul>

@@ -1,0 +1,145 @@
+<div class="hot-it-works-2">
+	<div class="banner">
+		<img b2bNgxImage name="how-it-works-2" class="banner-img desktop" />
+		<img b2bNgxImage name="how-it-works-mobile" class="banner-img mobile" />
+		<div class="info">
+			<p class="subtitle">MARCHANDISES NON RÉCLAMÉES</p>
+			<p class="subsubtitle">IL S'AGIT DE PROBLÈME QUE RÈGLE</p>
+			<h1 class="title">B2B DISCOUNT</h1>
+			<p class="description">
+				Cette platforme aide le vendeur à trouver un nouvel acheteur pour sa marchandise, tandis que l'acheteur obtient
+				avec un rabais les produits dont il a besoin. Nous mettons en relation le vendeur et l'acheteur et nous ne
+				chargeons pas de frais pour les transactions.
+			</p>
+
+			<div class="buttons">
+				<a [routerLink]="b2bNgxLinkService.getLink('/latest-offers') | async">ACHETER UNE MARCHANDISE</a>
+				<a [routerLink]="b2bNgxLinkService.getLink('/offer') | async">VENDRE UNE MARCHANDISE</a>
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="benefits">
+			<ul>
+				<li>Le moyen le plus simple et rapide à vendre la marchandise non réclamée</li>
+				<li>L'occasion d'acheter les produits de qualité au rabais allant de 5 à 90%</li>
+				<li>Aide juridique et technique 24/7</li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="game">
+		<div class="container">
+			<div class="description">
+				<h2>Longueur d'avance</h2>
+				<p>
+					L'objectif de la plateforme consiste non seulement à aider les exportateurs et les opérateurs financiers avec
+					les marchandises non réclamées, mais de ne pas admettre l'apparition de ces marchandises.
+				</p>
+			</div>
+			<img b2bNgxImage name="how-it-works-2-2" />
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="risks">
+			<h2>Minimisation des risques</h2>
+			<p>
+				Il faut agir sans tarder si vous avez des motifs à vous douter de la fiabilité du destinataire. Placez votre
+				marchandise B2B Discount afin de trouver d'autres acheteurs éventuels. Cela sera votre bouée de sauvetage au cas
+				où la transaction initiale ne se déroulerait pas comme cela a été prévu.
+			</p>
+		</div>
+	</div>
+
+	<div class="anonymity">
+		<div class="container">
+			<img b2bNgxImage name="how-it-works-2-4" />
+
+			<div class="description">
+				<h2>Anonymat</h2>
+				<p>
+					La plateforme permet de rendre confidentielles vos coordonnées et l'information au sujet de la marchandise.
+					L'offre restera anonyme tant et aussi longtemps que le détenteur de la marchandise ne décide pas divulguer les
+					renseignements pour la vente du produit au nouvel acheteur.
+				</p>
+				<a [routerLink]="b2bNgxLinkService.getLink('/offer') | async">PLACER UNE MARCHANDISE</a>
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="verification">
+			<h2>Vérification de la marchandise</h2>
+			<p>
+				Toutes les marchandises mises à la plateforme passent une vérification. La marchandise peut être placée
+				seulement lorsque le dossier d'accompagnement et des photos correspondantes existent. L'acheteur est en mesure
+				de localiser la marchandise qui l'intéresse à travers un système en ligne, mis en œuvre pour tracer les
+				contenants et les marchandises.
+			</p>
+		</div>
+	</div>
+
+	<div class="profit">
+		<div class="container">
+			<div class="description">
+				<h2>C'est avantageux pour tout le monde</h2>
+				<p>
+					Les importateurs et les opérateurs financiers peuvent contracter les transactions profitables avec un rabais
+					allant de 5 à 90% de prix du marché de la marchandise et d'aider le vendeur à éviter les grosses pertes
+					financières.
+				</p>
+				<a [routerLink]="b2bNgxLinkService.getLink('/latest-offers') | async">PASSER EN REVUE L'ENSEMBLE DES OFFRES</a>
+			</div>
+			<img b2bNgxImage name="how-it-works-2-3" />
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="mission">
+			<h2>Mission de la compagnie</h2>
+			<p>
+				Réunir tous les acteurs des activités économiques extérieures pour créer l'environnement sans risque et
+				confortable pour l'ensemble des acteurs du commerce international et logistique.
+			</p>
+
+			<div class="video-wrapper">
+				<video
+					[controls]="!video.paused"
+					class="video"
+					poster="assets/images/client_home_background.png"
+					(ended)="video.load()"
+					#video>
+					<source src="assets/videos/how_it_works_final.mp4" type="video/mp4" />
+				</video>
+
+				<button class="video-button" *ngIf="video.paused" (click)="video.play()">
+					<img b2bNgxIcon class="video-button-icon" name="play" />
+				</button>
+			</div>
+
+			<h3>Registration gratuite</h3>
+			<p>
+				B2B Discount est une entreprise en démarrage qui est apparue aux États-Unis et a accédé au marché international
+				en été 2021. L'ensemble des services de la plateforme seront offerts sans frais jusqu'au 30.06.2022. Saisissez
+				l'occasion de profiter de l'ensemble de nos services dès maintenant.
+			</p>
+			<a [routerLink]="b2bNgxLinkService.getLink('/auth/register-credentials') | async"
+				>CRÉER UN COMPTE GRATUIT</a
+			>
+		</div>
+
+		<p class="feedback">
+			Nous voulons rendre notre plateforme mieux et plus fonctionnel. Vous pouvez nous aider en écrivant vos suggestions
+			et idées à <a href="mailto:support@b2b.discount">support@b2b.discount</a>
+		</p>
+
+		<div class="footer">
+			<a [routerLink]="b2bNgxLinkService.getLink('/') | async">
+				<img b2bNgxIcon name="logo" alt="" />
+			</a>
+			<p>We connect buyers and sellers directly.</p>
+		</div>
+	</div>
+</div>

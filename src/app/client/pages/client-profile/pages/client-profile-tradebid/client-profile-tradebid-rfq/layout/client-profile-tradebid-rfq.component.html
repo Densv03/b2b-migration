@@ -1,0 +1,36 @@
+<div class="sub-components-wrapper">
+	<mat-tab-group mat-align-tabs="start">
+		<mat-tab label="Chats">
+			<b2b-client-profile-tradebid-chats (deleteChat)="updateComponent()"></b2b-client-profile-tradebid-chats>
+			<b2b-ngx-pagination
+				(togglePageNumber)="togglePageChatsList($event)"
+				[length]="totalChatsLength$ | async"
+				[perPage]="7"
+				class="pagination"></b2b-ngx-pagination>
+		</mat-tab>
+		<mat-tab label="Manage my RFQ">
+			<b2b-client-profile-tradebid-manage-rfq
+				(edit)="onEdit($event)"
+				(archivate)="onArchivate($event)"
+				[buttonType]="rfqButtonEnum.Manage">
+			</b2b-client-profile-tradebid-manage-rfq>
+			<b2b-ngx-pagination
+				(togglePageNumber)="togglePageManageList($event)"
+				[length]="totalManageLength$ | async"
+				[perPage]="7"
+				class="pagination"></b2b-ngx-pagination>
+		</mat-tab>
+		<mat-tab label="Archived">
+			<b2b-client-profile-tradebid-archived
+				(delete)="onDelete($event)"
+				(restore)="onRestore($event)"
+				[buttonType]="rfqButtonEnum.Archivate">
+			</b2b-client-profile-tradebid-archived>
+			<b2b-ngx-pagination
+				(togglePageNumber)="togglePageArchiveList($event)"
+				[length]="totalArchivedLength$ | async"
+				[perPage]="7"
+				class="pagination"></b2b-ngx-pagination>
+		</mat-tab>
+	</mat-tab-group>
+</div>

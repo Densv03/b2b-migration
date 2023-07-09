@@ -1,0 +1,57 @@
+@import "libs/shared/styles/src/lib";
+
+:host {
+	ul {
+		li {
+			&.active {
+				background-color: #005dff;
+				color: #ffffff;
+			}
+		}
+	}
+}
+
+.ngx-pagination {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	margin-top: 24px;
+	flex-wrap: wrap;
+	row-gap: 10px;
+	.left-arrow {
+		transform: rotate(180deg);
+	}
+
+	img {
+		cursor: pointer;
+	}
+	.ngx-pagination-item {
+		width: 40px;
+		height: 40px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin: 0 4px;
+		border: 1px solid #dfe8f5;
+		cursor: pointer;
+		&:hover:not(.active) {
+			background-color: #eff4fa;
+		}
+		&:active {
+			background: #ffffff;
+		}
+		&:first-child {
+			margin-left: 0;
+		}
+		&:last-child {
+			margin-right: 0;
+		}
+	}
+	@include breakpoint("1") {
+		gap: 10px;
+		.ngx-pagination-item {
+			width: 30px;
+			margin: 0 !important;
+		}
+	}
+}

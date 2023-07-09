@@ -1,0 +1,110 @@
+<div class="wrapper">
+
+	<h1 class="title">Choose your account type</h1>
+
+	<div class="content">
+		<div class="account-type-block"
+			[style.opacity]="selectedBlock === 'supplier' ? 1 : 0.5">
+			<div class="txt-wrapper">
+
+				<h1 class="title">Supplier account</h1>
+
+				<h3 class="subtitle">Register as a supplier to:</h3>
+
+				<ul>
+					<li> Create your company profile and promote your products;</li>
+					<li> Receive buyer’s request;</li>
+					<li> Get a database of a buyer’s leads to offer them your product;</li>
+					<li> Trade unclaimed cargo.</li>
+				</ul>
+			</div>
+
+			<button
+				b2bNgxButton
+				[theme]="b2bNgxButtonThemeEnum.BACKGROUND_BLACK"
+				(click)="selectBlock('supplier')">
+				Choose
+			</button>
+		</div>
+
+		<div class="account-type-block"
+			[style.opacity]="selectedBlock === 'buyer' ? 1 : 0.5">
+			<div class="txt-wrapper">
+				<h1 class="title">Buyer account</h1>
+
+				<h3 class="subtitle">Register as a seller to:</h3>
+
+				<ul>
+					<li> Source products and request for a supplier’s quotes</li>
+					<li> Create RFQ so suppliers could contact you</li>
+					<li> Get an access to an unclaimed cargoes</li>
+				</ul>
+			</div>
+
+			<button
+				b2bNgxButton
+				[theme]="b2bNgxButtonThemeEnum.BACKGROUND_BLACK"
+				(click)="selectBlock('buyer')">
+				Choose
+			</button>
+		</div>
+
+
+
+		<div class="account-type-mobile-buttons">
+			<div [@buttonMove]="selectedBlock === 'supplier' ? 'start' : 'end'" class="button-overlay"></div>
+			<button (click)="selectBlock('supplier')">Supplier account</button>
+			<button (click)="selectBlock('buyer')">Buyer account</button>
+		</div>
+
+
+	</div>
+
+	<div class="account-type-block mobile-type"
+			 [style.display]="(selectedBlock  === 'supplier') && deviceIsMobile ? 'flex' : 'none'">
+		<div class="txt-wrapper">
+
+			<h1 class="title">Supplier account</h1>
+
+			<h3 class="subtitle">Register as a supplier to:</h3>
+
+			<ul>
+				<li> Create your company profile and promote your products;</li>
+				<li> Receive buyer’s request;</li>
+				<li> Get a database of a buyer’s leads to offer them your product;</li>
+				<li> Trade unclaimed cargo.</li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="account-type-block mobile-type"
+			 [style.display]="(selectedBlock  === 'buyer') && deviceIsMobile ? 'flex' : 'none'">
+		<div class="txt-wrapper">
+			<h1 class="title">Buyer account</h1>
+
+			<h3 class="subtitle">Register as a seller to:</h3>
+
+			<ul>
+				<li> Source products and request for a supplier’s quotes</li>
+				<li> Create RFQ so suppliers could contact you</li>
+				<li> Get an access to an unclaimed cargoes</li>
+			</ul>
+		</div>
+	</div>
+
+
+
+	<div class="footer">
+		<p>
+			*You still will be able to switch to another account type in case you need it
+		</p>
+
+		<button
+			b2bNgxButton
+			[theme]="b2bNgxButtonThemeEnum.BACKGROUND_BLACK"
+			[disabled]="!selectedBlock"
+			(click)="sendUserType()">
+			{{deviceIsMobile ? 'Choose' : 'Continue'}}
+		</button>
+	</div>
+</div>

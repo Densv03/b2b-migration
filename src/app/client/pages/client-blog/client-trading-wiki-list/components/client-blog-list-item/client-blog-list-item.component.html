@@ -1,0 +1,18 @@
+<a class="ngx-wiki-list-item-link">
+	<div class="ngx-wiki-list-item-link-info">
+		<h3 class="ngx-wiki-list-item-link-info-label">{{ articleItem.title }}</h3>
+		<div class="ngx-wiki-list-item-link-info-date">
+			{{ articleItem.createdAt | date }} {{ articleItem.author ? "by " + articleItem.author : "" }}
+			{{ articleItem.category?.name ? "Category" + " : " + articleItem.category?.name : "" }}
+		</div>
+		<div class="ngx-wiki-list-item-link-info-description">{{ articleItem?.shortDescription }}</div>
+		<button
+			b2bNgxButton
+			[theme]="b2bNgxButtonThemeEnum.BACKGROUND_HOVER_BLACK"
+			class="ngx-wiki-list-item-link-info-button">
+			<span>Read More</span>
+			<img class="ngx-wiki-list-item-link-info-button__icon" b2bNgxIcon name="arrow-r-blue-3"/>
+		</button>
+	</div>
+	<img b2bNgxImage class="ngx-wiki-list-item-link-img" [name]="articleItem.image?.lg"/>
+</a>

@@ -1,0 +1,21 @@
+@import "projects/shared/src/styles";
+
+:host {
+	.auth-container {
+		display: flex;
+		flex-wrap: wrap;
+		height: 100%;
+		width: 100%;
+
+		.auth-container__pages-container {
+			flex: 1;
+			order: 1;
+			height: 100vh;
+			overflow: auto;
+		}
+
+		@include breakpoint("2") {
+			height: 90%;
+		}
+	}
+}

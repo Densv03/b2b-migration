@@ -1,0 +1,68 @@
+@import "projects/shared/src/styles";
+
+:host {
+	.ngx-wiki-list-item-link {
+		display: flex;
+		justify-content: space-between;
+		flex-wrap: wrap;
+		background: #ffffff;
+		box-shadow: 2px 2px 8px #e3eaf1;
+		border-radius: 4px;
+		.ngx-wiki-list-item-link-info {
+			flex: 1;
+			padding: 24px 32px;
+			.ngx-wiki-list-item-link-info-label {
+				color: #0f0f11;
+				font-weight: bold;
+				font-size: 24px;
+			}
+			.ngx-wiki-list-item-link-info-date {
+				font-weight: 500;
+				font-size: 12px;
+				color: #9fa4bb;
+				margin-top: 4px;
+			}
+			.ngx-wiki-list-item-link-info-description {
+				height: 48px;
+				font-size: 14px;
+				color: #556274;
+				margin-top: 12px;
+				overflow: hidden;
+				line-height: 16px;
+				width: 600px;
+				@include breakpoint("3") {
+					width: 500px;
+				}
+				@include breakpoint("1") {
+					width: 275px;
+				}
+			}
+			.ngx-wiki-list-item-link-info-button {
+				padding: 11px 16px;
+				margin-top: 12px;
+				display: flex;
+				align-items: center;
+				.ngx-wiki-list-item-link-info-button__icon {
+					margin-left: 20px;
+				}
+			}
+
+			@include breakpoint("3") {
+				width: 100%;
+				order: 2;
+				padding: 12px 16px;
+			}
+		}
+		.ngx-wiki-list-item-link-img {
+			width: 263px;
+			height: 204px;
+			object-fit: cover;
+			border-radius: 0 4px 4px 0;
+
+			@include breakpoint("3") {
+				width: 100%;
+				order: 1;
+			}
+		}
+	}
+}

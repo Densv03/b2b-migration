@@ -1,0 +1,32 @@
+<div class="client-profile-saved-offers" *transloco="let t">
+	<h3 class="client-profile-saved-offers-title">{{ t("OFFERS.SAVED_OFFERS") }}</h3>
+
+	<div class="client-profile-saved-offers-container">
+		<ng-container *ngIf="offers$ | async as offers; else noSavedOffers">
+			<b2b-client-profile-saved-offers-list
+				*ngIf="offers.length; else noSavedOffers"
+				[options]="offers"
+				link="offers/"
+				[menuOptions]="menuOptions"></b2b-client-profile-saved-offers-list>
+		</ng-container>
+
+		<ng-template #noSavedOffers>
+			<div class="client-profile-saved-offers-no-offers" *ngIf="!loading">
+				<p class="client-profile-saved-offers-no-offers-title">
+					{{ t("OFFERS.NO_SAVED_OFFERS") }}
+				</p>
+				<a
+					b2bNgxLink
+					[routerLink]="b2bNgxLinkService.getLink('/latest-offers') | async"
+					class="client-profile-saved-offers-no-offers-button"
+					[theme]="b2bNgxLinkThemeEnum.BACKGROUND_BLACK"
+					>{{ t("OFFERS.LATEST_OFFERS") }}</a
+				>
+			</div>
+		</ng-template>
+
+		<ng-container *ngIf="loading">
+			<b2b-ngx-skeleton [options]="offersSkeletonOptions"></b2b-ngx-skeleton>
+		</ng-container>
+	</div>
+</div>

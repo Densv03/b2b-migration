@@ -1,0 +1,39 @@
+@import "libs/shared/styles/src/lib";
+
+
+.header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-top: 30px;
+	padding: 0 15px;
+	.place-product-btn {
+		padding: 11px 24px;
+	}
+
+	.products-filter {
+		display: flex;
+		align-items: center;
+		.select-wrapper {
+			min-width: 100px;
+		}
+	}
+
+	@include breakpoint('1') {
+		margin-top: 15px;
+		.place-product-btn {
+			font-size: 12px;
+			padding: 11px 14px;
+		}
+
+		.products-filter {
+			.select-wrapper {
+				min-width: 80px;
+			}
+		}
+	}
+}
+.products {
+	margin-top: 30px;
+	padding: 0 5px 30px 5px;
+}

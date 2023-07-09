@@ -1,0 +1,8 @@
+<div class="rfq-cards" *ngFor="let item of manageList$ | async">
+	<b2b-product-description-item
+		[buttonType]="buttonType"
+		[myRfqItem]="item"
+		(edit)="onEdit($event)"
+		(archivate)="onArchivate($event)">
+	</b2b-product-description-item>
+</div>

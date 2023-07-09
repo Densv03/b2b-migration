@@ -1,0 +1,25 @@
+<ul class="ngx-wiki-list" *transloco="let t">
+	<li *ngFor="let option of options" class="ngx-wiki-list-item">
+		<a
+			[routerLink]="b2bNgxLinkService.getLink('/trade-wiki/' + option._id) | async"
+			class="ngx-wiki-list-item-link"
+			(click)="processArticleClick(option._id)">
+			<div class="ngx-wiki-list-item-link-info">
+				<h3 class="ngx-wiki-list-item-link-info-label">{{ option.title }}</h3>
+				<p class="ngx-wiki-list-item-link-info-date">
+					{{ option.updatedAt | date }} by {{ option.author }}&nbsp;&nbsp;&nbsp;&nbsp;{{ t("TRADING_WIKI.CATEGORY") }}:
+					{{ option.category?.name }}
+				</p>
+				<p class="ngx-wiki-list-item-link-info-description" [innerHTML]="option.preview"></p>
+				<button
+					b2bNgxButton
+					[theme]="b2bNgxButtonThemeEnum.BACKGROUND_HOVER_BLACK"
+					class="ngx-wiki-list-item-link-info-button">
+					<span>{{ t("TRADING_WIKI.READ_MORE") }}</span>
+					<img class="ngx-wiki-list-item-link-info-button__icon" b2bNgxIcon name="arrow-r-blue-3" />
+				</button>
+			</div>
+			<img b2bNgxImage class="ngx-wiki-list-item-link-img" [name]="option.image?.lg" />
+		</a>
+	</li>
+</ul>

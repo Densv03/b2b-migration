@@ -1,0 +1,7 @@
+<div class="products">
+	<b2b-client-profile-marketplace-product-item
+		*ngFor="let product of archivedProducts$ | async"
+		[product]="product"
+		[itemsForDropdown]="itemsForDropdown">
+	</b2b-client-profile-marketplace-product-item>
+</div>

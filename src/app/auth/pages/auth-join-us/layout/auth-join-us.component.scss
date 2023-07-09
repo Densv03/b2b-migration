@@ -1,0 +1,79 @@
+@import "libs/shared/styles/src/lib";
+
+:host {
+	.auth-join-us__wrapper {
+		display: flex;
+		align-items: center;
+		flex-direction: column;
+		height: 100%;
+		padding: 1.75rem 0;
+		.auth-join-us__header {
+			width: 70%;
+			margin: 0 auto;
+			display: flex;
+			justify-content: flex-end;
+			.auth-join-us__header-text-wrapper {
+				margin-top: 2rem;
+				.auth-join-us__header-text {
+					color: $color-gray-200;
+					font-size: 1rem;
+				}
+				.auth-join-us__header-link {
+					margin-left: 0.25rem;
+				}
+			}
+
+			@include breakpoint("2") {
+				width: 90%;
+				justify-content: center;
+			}
+		}
+		.auth-join-us__main {
+			width: 50%;
+			margin: 0 auto;
+			flex: 1;
+			display: flex;
+			flex-direction: column;
+			justify-content: flex-start;
+			margin-top: 10%;
+			@include breakpoint("2") {
+				flex: none;
+				justify-content: flex-start;
+			}
+			.auth-join-us__main-title {
+				font-weight: bold;
+				color: $color-gray-900;
+				font-size: 2rem;
+			}
+			.auth-join-us__main-description {
+				width: 50%;
+				color: $color-gray-500;
+				font-size: 0.875rem;
+				line-height: 1.25rem;
+				font-weight: 300;
+				margin-top: 0.5rem;
+
+				@include breakpoint("2") {
+					width: 100%;
+				}
+			}
+			.auth-join-us__main-cards {
+				margin-top: 2.8rem;
+				width: 100%;
+
+				@include breakpoint("2") {
+					width: 100%;
+				}
+			}
+
+			@include breakpoint("2") {
+				width: 90%;
+			}
+		}
+
+		@include breakpoint("2") {
+			flex-direction: column-reverse;
+			justify-content: flex-end;
+		}
+	}
+}

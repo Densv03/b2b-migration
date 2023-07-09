@@ -1,0 +1,35 @@
+<div *ngIf="rfqItem" class="rfq-item" [routerLink]="rfqItem.path">
+	<div class="rfq-item__product-information">
+		<h1>Product: {{ rfqItem.productName }}</h1>
+		<div class="rfq-item__product-information__quantity">
+			<span class="gray-light">Quantity: </span>
+			<span>{{ rfqItem.amount.count + " " + measureName }}</span>
+		</div>
+		<div class="rfq-item__other-information">
+			<div class="rfq-item__other-information__container">
+				<span class="gray-light mb-1 request-from">REQUEST FROM</span>
+				<div class="rfq-item__other-information__container__subcontainer">
+					<img
+						*ngIf="rfqItem"
+						b2bNgxIcon
+						group="flags/"
+						[name]="countryIconName"
+						class="rfq-item__other-information__flag" />
+					<span>{{ getCountryNameByCode(rfqItem?.destination?.to) }}</span>
+				</div>
+			</div>
+			<div class="rfq-item__other-information__container">
+				<div class="gray-light mb-1 request-from">POSTED</div>
+				<div class="rfq-item__other-information__container__created-at">{{ rfqItem.createdAt | date }}</div>
+			</div>
+		</div>
+	</div>
+	<div class="rfq-item__person-info">
+		<div class="rfq-item__person-info__container">
+			<h1>{{ fullName }}</h1>
+		</div>
+	</div>
+	<div class="rfq-item__quote-now">
+		<button b2bNgxButton [theme]="b2bNgxButtonTheme.BACKGROUND_BLUE" [routerLink]="rfqItem._id">Quote Now</button>
+	</div>
+</div>

@@ -1,0 +1,243 @@
+@import "projects/shared/src/styles";
+
+:host {
+	.ngx-latest-offers-list {
+		.ngx-latest-offers-list-item {
+			position: relative;
+			margin-top: 8px;
+			.ngx-latest-offers-list-item-link {
+				height: 152px;
+				display: flex;
+				justify-content: space-between;
+				flex-wrap: wrap;
+				background: #ffffff;
+				box-shadow: 2px 2px 8px #e3eaf1;
+				border-radius: 4px;
+				.ngx-latest-offers-list-item-img-wrapper {
+					position: relative;
+					height: 100%;
+					@include breakpoint("3") {
+						width: 100%;
+					}
+					.ngx-latest-offers-list-item-img {
+						min-height: 148px;
+						height: 100%;
+						width: 158px;
+						border-radius: 4px 0 0 4px;
+						object-fit: cover;
+						border: none;
+						@include breakpoint("3") {
+							width: 100%;
+							height: 158px;
+						}
+					}
+					.ngx-latest-offers-list-item-img-discount {
+						position: absolute;
+						left: 0;
+						top: 20px;
+						background: #0f0f11;
+						box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+						border-radius: 0px 3px 3px 0px;
+						color: #ffffff;
+						text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.25);
+						padding: 4px 8px;
+					}
+				}
+				.ngx-latest-offers-list-item-info {
+					flex: 1;
+					padding: 20px 25px;
+					display: flex;
+					flex-direction: column;
+					justify-content: space-between;
+					@include breakpoint("3") {
+						width: 100%;
+					}
+					.ngx-latest-offers-list-item-info-title {
+						display: flex;
+						justify-content: space-between;
+						.ngx-latest-offers-list-item-info-title-text {
+							font-weight: bold;
+							font-size: 18px;
+							color: #0f0f11;
+						}
+					}
+					.ngx-latest-offers-list-item-additional-info {
+						display: flex;
+						justify-content: space-between;
+						.ngx-latest-offers-list-item-additional-info-seller {
+							flex: 1;
+							.ngx-latest-offers-list-item-additional-info-seller-text {
+								font-weight: 500;
+								font-size: 11px;
+								text-transform: uppercase;
+								color: #9fa4bb;
+							}
+							.ngx-latest-offers-list-item-additional-info-seller-container {
+								display: flex;
+								align-items: center;
+								margin-top: 10px;
+								.ngx-latest-offers-list-item-additional-info-seller-logo {
+									width: 24px;
+									height: 24px;
+								}
+								.ngx-latest-offers-list-item-additional-info-seller-name {
+									margin-left: 5px;
+								}
+								.ngx-latest-offers-list-item-additional-info-seller-verified {
+									margin-left: 5px;
+								}
+							}
+						}
+						.ngx-latest-offers-list-item-additional-info-route {
+							flex: 1;
+							.ngx-latest-offers-list-item-additional-info-route-title {
+								font-weight: 500;
+								font-size: 11px;
+								text-transform: uppercase;
+								color: #9fa4bb;
+							}
+							.ngx-latest-offers-list-item-additional-info-route-router-from-to {
+								margin-top: 10px;
+								display: flex;
+								align-items: center;
+								.ngx-latest-offers-list-item-additional-info-route-first-country-icon {
+									width: 26px;
+									height: 18px;
+									object-fit: cover;
+								}
+								.ngx-latest-offers-list-item-additional-info-route-first-country-name {
+									margin-left: 5px;
+									text-transform: uppercase;
+								}
+								.ngx-latest-offers-list-item-additional-info-route-arrow-icon {
+									margin-left: 5px;
+								}
+								.ngx-latest-offers-list-item-additional-info-route-second-country-icon {
+									margin-left: 5px;
+									width: 26px;
+									height: 18px;
+									object-fit: cover;
+								}
+								.ngx-latest-offers-list-item-additional-info-route-second-country-name {
+									margin-left: 5px;
+									text-transform: uppercase;
+								}
+							}
+						}
+						.ngx-latest-offers-list-item-additional-info-eta {
+							flex: 1;
+							.ngx-latest-offers-list-item-additional-info-eta-title {
+								font-weight: 500;
+								font-size: 11px;
+								text-transform: uppercase;
+								color: #9fa4bb;
+							}
+							.ngx-latest-offers-list-item-additional-info-eta-description {
+								margin-top: 10px;
+								font-size: 14px;
+								color: #0f0f11;
+							}
+						}
+					}
+				}
+				.ngx-latest-offers-list-item-price-container {
+					display: flex;
+					flex-direction: column;
+					justify-content: space-between;
+					padding: 15px 17px;
+					border-left: 1px solid #dfe8f5;
+					text-align: center;
+					@include breakpoint("3") {
+						width: 100%;
+					}
+					.ngx-latest-offers-list-item-price {
+						display: flex;
+						justify-content: center;
+						align-items: flex-end;
+						height: 28px;
+						.ngx-latest-offers-list-item-price-dollar-sign {
+							font-weight: 500;
+							color: #9fa4bb;
+							font-size: 28px;
+						}
+						.ngx-latest-offers-list-item-price-number {
+							font-weight: 500;
+							font-size: 28px;
+							color: #0f0f11;
+						}
+						.ngx-latest-offers-list-item-price-amount {
+							font-size: 16px;
+							color: rgba(108, 112, 119, 0.6);
+						}
+					}
+					.ngx-latest-offers-list-item-old-price {
+						font-weight: 500;
+						font-size: 12px;
+						color: rgba(108, 112, 119, 0.6);
+						margin-top: 10px;
+						height: 16px;
+						display: flex;
+						align-items: center;
+						justify-content: center;
+					}
+					.ngx-latest-offers-list-item-available {
+						font-weight: 500;
+						font-size: 12px;
+						color: #0f0f11;
+						height: 16px;
+						display: flex;
+						align-items: center;
+						justify-content: center;
+					}
+					.ngx-latest-offers-list-item-button {
+						display: flex;
+						align-items: center;
+						justify-content: center;
+						margin-top: 10px;
+						padding: 10px 25px;
+						width: 180px;
+						.ngx-latest-offers-list-item-button-text {
+							margin-left: 8px;
+						}
+
+						@include breakpoint("3") {
+							margin: 10px auto 0;
+						}
+					}
+				}
+				&:first-child {
+					margin-top: 0;
+				}
+			}
+		}
+	}
+
+	.no-user {
+		position: relative;
+		.no-user-img {
+			object-fit: cover;
+			width: 100%;
+		}
+	}
+}
+
+.update-icon {
+	height: 16px;
+	width: 16px;
+}
+
+.icons {
+	z-index: 2;
+	position: absolute;
+	right: 5px;
+	top: 10px;
+	padding: 5px 10px;
+	border-radius: 3px;
+	img {
+		margin: 0 5px;
+		width: 20px;
+	}
+	&:empty {
+		display: none;
+	}
+}

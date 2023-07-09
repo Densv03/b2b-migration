@@ -1,0 +1,26 @@
+<div class="container">
+	<h1>Quote purchasing</h1>
+	<h2>For the purpose of industry regulation, your details are required.</h2>
+	<div class="container__cards-container">
+		<div *ngFor="let paymentPlan of quotesPaymentPlans$ | async" class="container__cards-container__card">
+			<div class="container__cards-container__card__content">
+				<div class="container__cards-container__card__content__quotes-amount">
+					{{ paymentPlan.amountOfQuotes }} quotes
+				</div>
+				<div class="container__cards-container__card__content__buyers-amount">
+					<svg width="10" height="8" viewBox="0 0 10 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<path
+							fill-rule="evenodd"
+							clip-rule="evenodd"
+							d="M9.73914 0.275664C10.0876 0.643217 10.0876 1.23914 9.73914 1.60669L4.2006 7.72433C3.85214 8.09189 3.28717 8.09189 2.93871 7.72433L0.261834 4.90081C-0.0866271 4.53326 -0.0866271 3.93734 0.261834 3.56978C0.610296 3.20223 1.17526 3.20223 1.52372 3.56978L3.56965 5.7278L8.47725 0.275664C8.82571 -0.0918881 9.39068 -0.0918881 9.73914 0.275664Z"
+							fill="#005DFF" />
+					</svg>
+					To contact {{ paymentPlan.amountOfQuotes }} buyers
+				</div>
+				<div class="container__cards-container__card__content__price">For {{ paymentPlan.price }}$</div>
+			</div>
+			<button (click)="closeDialog()" b2bNgxButton [theme]="b2bNgxButtonThemeEnum.BACKGROUND_BLUE">Purchase</button>
+		</div>
+	</div>
+	<p>The more quotes you buy, the more you save!</p>
+</div>

@@ -1,0 +1,292 @@
+<div class="about-us">
+	<div class="about-us-header">
+		<div class="header-wrapper">
+			<div class="title">B2B Discount is a global platform for businesses that engage in foreign trade.</div>
+			<div class="subtitle">
+				We have created a handy tool for companies that work in the export-import industry. B2B Discount provides all
+				the services required to expand a business in foreign trade. Our users can find new customers, conduct
+				procurement, sell and buy discounted unclaimed cargo.
+			</div>
+			<div class="about-us-logo"><img b2bNgxImage name="about-us-main" alt="logo" /></div>
+		</div>
+	</div>
+
+	<div class="about-us-body">
+		<div class="title">What we do exactly</div>
+		<div class="subtitle">
+			We provide a safe space where any legitimate company or private entrepreneur can offer their products to buyers,
+			find direct suppliers or sell unclaimed cargo.
+		</div>
+		<div class="about-us-body-content">
+			<div class="about-us-body-content-buttons">
+				<div class="subtitle">There are 3 tools on the platform to do that:</div>
+				<div
+					(click)="changeActiveSectionType(sectionInfoType.market)"
+					[ngClass]="{ 'active-button': activeSectionInfoType === sectionInfoType.market }"
+					class="button">
+					<b class="text">B2B Market</b>
+					<img class="desktop-arrow" b2bNgxIcon name="arrow-r-blue" alt="arrow-icon" />
+				</div>
+				<div
+					(click)="changeActiveSectionType(sectionInfoType.cargo)"
+					[ngClass]="{ 'active-button': activeSectionInfoType === sectionInfoType.cargo }"
+					class="button">
+					<b class="text">Unclaimed Cargo</b>
+					<img class="desktop-arrow" b2bNgxIcon name="arrow-r-blue" alt="arrow-icon" />
+				</div>
+				<div
+					(click)="changeActiveSectionType(sectionInfoType.tradebid)"
+					[ngClass]="{ 'active-button': activeSectionInfoType === sectionInfoType.tradebid }"
+					class="button">
+					<b class="text">TradeBid</b>
+					<img class="desktop-arrow" b2bNgxIcon name="arrow-r-blue" alt="arrow-icon" />
+				</div>
+			</div>
+			<div
+				class="about-us-body-content-market"
+				[ngClass]="{ 'active-section': activeSectionInfoType === sectionInfoType.market }">
+				<div class="title">B2B Market</div>
+				<div class="subtitle">
+					B2B Market is a classic b2b marketplace for companies that sell their products for export. Here they can
+					acquire new customers and ultimately increase their sales and expand to new markets.
+				</div>
+				<div class="about-us-body-content-market-info">
+					<div class="title">How to use B2B Market:</div>
+					<ul class="use-list">
+						<li><b>1.</b> Go to the <span class="link" routerLink="/b2bmarket">B2B Market</span> section;</li>
+						<li><b>2.</b> Create an account for your company;</li>
+						<li><b>3.</b> Fill up its profile with all the required information;</li>
+						<li><b>4.</b> Create a product showcase which then will be listed on the platform.</li>
+					</ul>
+				</div>
+			</div>
+			<div
+				id="cargo"
+				class="about-us-body-content-cargo"
+				[ngClass]="{ 'active-section': activeSectionInfoType === sectionInfoType.cargo }">
+				<div class="title">Unclaimed Cargo</div>
+				<div class="subtitle">
+					Unclaimed Cargo is a unique tool which you won’t find anywhere else on the web. This service is dedicated to
+					helping traders resell at a discount a cargo that’s been left unclaimed by its initial buyer.
+				</div>
+				<div class="subtitle">
+					“Unclaimed” doesn't mean the product is spoiled or damaged and carries no value anymore. It is a cargo that
+					hasn’t been imported to the destination country yet due to various reasons like:
+				</div>
+				<ul class="cargo-list">
+					<li>Consignee’s personal troubles (frequently financial ones);</li>
+					<li>Change of import regulations during shipping;</li>
+					<li>Expiry of importer’s license;</li>
+					<li>Pandemic effects and many other unpredictable causes.</li>
+				</ul>
+
+				<div class="subtitle">
+					Finding a new buyer with the Unclaimed Cargo tool is a good solution to the problem. Otherwise, the cargo
+					owner faces a risk of getting into trouble with the shipping line and port authorities as they will charge him
+					with demurrage and port storage costs.
+				</div>
+
+				<div class="about-us-body-content-tradebid-info">
+					<ul class="use-list">
+						<li class="title">How to use TradeBid if you are <br /><b class="highlight">to sell</b>:</li>
+						<li><b>1.</b> Go to <span class="link" routerLink="/latest-offers">Unclaimed cargo</span> section;</li>
+						<li><b>2.</b> Press “+Add Offer” button;</li>
+						<li><b>3.</b> Fill in the form, add photos, etc.;</li>
+						<li>
+							We’ve already accumulated a lot of foreign-trade companies on the platform to increase your chances of
+							selling the goods. Potential buyers among our users will contact you via chat.
+						</li>
+					</ul>
+					<ul class="use-list">
+						<li class="title">How to use TradeBid if you are <br /><b class="highlight">to buy</b>:</li>
+						<li><b>1.</b> Go to <span class="link" routerLink="/latest-offers">Unclaimed cargo</span> section;</li>
+						<li><b>2.</b> Choose an offer;</li>
+						<li><b>3.</b> Press the “Open Chat” button.</li>
+						<li>
+							Our team conducts a verification process for each cargo to make sure that the offer is real and buyers
+							won’t face a scam on the platform.
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div
+				class="about-us-body-content-tradebid"
+				[ngClass]="{ 'active-section': activeSectionInfoType === sectionInfoType.tradebid }">
+				<div class="title">TradeBid</div>
+				<div class="subtitle">
+					TradeBid was designed to connect buyers who know exactly what they want with sellers who have the product. It
+					is helpful for those who are dealing with procurement on a daily basis and are looking to buy some specific
+					commodity at a good price.
+				</div>
+				<div class="about-us-body-content-tradebid-info">
+					<ul class="use-list">
+						<li class="title">
+							<span>How to use TradeBid if you are</span><span class="highlight">interested in procurement</span>:
+						</li>
+						<li><b>1.</b> Go to the <span class="link" routerLink="/tradebid">TradeBid</span> section;</li>
+						<li><b>2.</b> Press the “Make an RFQ” button (Request for Quotation);</li>
+						<li><b>3.</b> Indicate commodity specs and requirements in the form.</li>
+						<li>
+							Your request will be listed on the platform and all registered users will be able to see it and make their
+							commercial offer.
+						</li>
+					</ul>
+					<ul class="use-list">
+						<li class="title">
+							<span>How to use TradeBid if you are</span> <span class="highlight">looking to sell</span>:
+						</li>
+						<li><b>1.</b> Go to the <span class="link" routerLink="/tradebid">TradeBid</span> section;</li>
+						<li><b>2.</b> Press the “Offer Quotation” button;</li>
+						<li><b>3.</b> Choose an RFQ and press “Quote Now” button;</li>
+						<li><b>4.</b> Fill in the quotation form.</li>
+						<li>You can now engage in an active chat with the buyer and get his contact details.</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<div class="about-us-body-mobile">
+			<div class="subtitle">There are 3 tools on the platform to do that:</div>
+			<div
+				(click)="changeActiveSectionType(sectionInfoType.market)"
+				[ngClass]="{ 'active-button': activeSectionInfoType === sectionInfoType.market }"
+				class="button active-button">
+				<b class="text">B2B Market</b>
+				<img class="mobile-arrow" b2bNgxIcon name="arrow-r-blue" alt="arrow-icon" />
+			</div>
+			<div
+				class="about-us-body-content-market"
+				[ngClass]="{ 'active-section': activeSectionInfoType === sectionInfoType.market }">
+				<div class="title">B2B Market</div>
+				<div class="subtitle">
+					B2B Market is a classic b2b marketplace for companies that sell their products for export. Here they can
+					acquire new customers and ultimately increase their sales and expand to new markets.
+				</div>
+				<div class="about-us-body-content-market-info">
+					<div class="title">How to use B2B Market:</div>
+					<ul class="use-list">
+						<li><b>1.</b> Go to the <span class="link" routerLink="/b2bmarket">B2B Market</span> section;</li>
+						<li><b>2.</b> Create an account for your company;</li>
+						<li><b>3.</b> Fill up its profile with all the required information;</li>
+						<li><b>4.</b> Create a product showcase which then will be listed on the platform.</li>
+					</ul>
+				</div>
+			</div>
+			<div
+				(click)="changeActiveSectionType(sectionInfoType.cargo)"
+				[ngClass]="{ 'active-button': activeSectionInfoType === sectionInfoType.cargo }"
+				class="button">
+				<b class="text">Unclaimed Cargo</b>
+				<img class="mobile-arrow" b2bNgxIcon name="arrow-r-blue" alt="arrow-icon" />
+			</div>
+			<div
+				class="about-us-body-content-cargo"
+				[ngClass]="{ 'active-section': activeSectionInfoType === sectionInfoType.cargo }">
+				<div class="title">Unclaimed Cargo</div>
+				<div class="subtitle">
+					Unclaimed Cargo is a unique tool which you won’t find anywhere else on the web. This service is dedicated to
+					helping traders resell at a discount a cargo that’s been left unclaimed by its initial buyer.
+				</div>
+				<div class="subtitle">
+					“Unclaimed” doesn't mean the product is spoiled or damaged and carries no value anymore. It is a cargo that
+					hasn’t been imported to the destination country yet due to various reasons like:
+				</div>
+				<ul class="cargo-list">
+					<li>Consignee’s personal troubles (frequently financial ones);</li>
+					<li>Change of import regulations during shipping;</li>
+					<li>Expiry of importer’s license;</li>
+					<li>Pandemic effects and many other unpredictable causes.</li>
+				</ul>
+
+				<div class="subtitle">
+					Finding a new buyer with the Unclaimed Cargo tool is a good solution to the problem. Otherwise, the cargo
+					owner faces a risk of getting into trouble with the shipping line and port authorities as they will charge him
+					with demurrage and port storage costs.
+				</div>
+
+				<div class="about-us-body-content-tradebid-info">
+					<ul class="use-list">
+						<li class="title">How to use TradeBid if you are <br /><b class="highlight">to sell</b>:</li>
+						<li><b>1.</b> Go to <span class="link" routerLink="/latest-offers">Unclaimed cargo</span> section;</li>
+						<li><b>2.</b> Press “+Add Offer” button;</li>
+						<li><b>3.</b> Fill in the form, add photos, etc.;</li>
+						<li>
+							We’ve already accumulated a lot of foreign-trade companies on the platform to increase your chances of
+							selling the goods. Potential buyers among our users will contact you via chat.
+						</li>
+					</ul>
+					<ul class="use-list">
+						<li class="title">How to use TradeBid if you are <br /><b class="highlight">to buy</b>:</li>
+						<li><b>1.</b> Go to <span class="link" routerLink="/latest-offers">Unclaimed cargo</span> section;</li>
+						<li><b>2.</b> Choose an offer;</li>
+						<li><b>3.</b> Press the “Open Chat” button.</li>
+						<li>
+							Our team conducts a verification process for each cargo to make sure that the offer is real and buyers
+							won’t face a scam on the platform.
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div
+				(click)="changeActiveSectionType(sectionInfoType.tradebid)"
+				[ngClass]="{ 'active-button': activeSectionInfoType === sectionInfoType.tradebid }"
+				class="button">
+				<b class="text">TradeBid</b>
+				<img class="mobile-arrow" b2bNgxIcon name="arrow-r-blue" alt="arrow-icon" />
+			</div>
+			<div
+				class="about-us-body-content-tradebid"
+				[ngClass]="{ 'active-section': activeSectionInfoType === sectionInfoType.tradebid }">
+				<div class="title">TradeBid</div>
+				<div class="subtitle">
+					TradeBid was designed to connect buyers who know exactly what they want with sellers who have the product. It
+					is helpful for those who are dealing with procurement on a daily basis and are looking to buy some specific
+					commodity at a good price.
+				</div>
+				<div class="about-us-body-content-tradebid-info">
+					<ul class="use-list">
+						<li class="title">
+							<span>How to use TradeBid if you are</span><span class="highlight">interested in procurement</span>:
+						</li>
+						<li><b>1.</b> Go to the <span class="link" routerLink="/tradebid">TradeBid</span> section;</li>
+						<li><b>2.</b> Press the “Make an RFQ” button (Request for Quotation);</li>
+						<li><b>3.</b> Indicate commodity specs and requirements in the form.</li>
+						<li>
+							Your request will be listed on the platform and all registered users will be able to see it and make their
+							commercial offer.
+						</li>
+					</ul>
+					<ul class="use-list">
+						<li class="title">
+							<span>How to use TradeBid if you are</span> <span class="highlight">looking to sell</span>:
+						</li>
+						<li><b>1.</b> Go to the <span class="link" routerLink="/tradebid">TradeBid</span> section;</li>
+						<li><b>2.</b> Press the “Offer Quotation” button;</li>
+						<li><b>3.</b> Choose an RFQ and press “Quote Now” button;</li>
+						<li><b>4.</b> Fill in the quotation form.</li>
+						<li>You can now engage in an active chat with the buyer and get his contact details.</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="contact-us">
+		<img b2bNgxImage name="big-main-container-photo" alt="container-photo" />
+		<div class="text-wrapper">
+			<div class="title">Contact us</div>
+			<div class="description">
+				Our team is always in touch with users and ready to help in any subject related to the trade on the platform.
+				<br /><br />
+				Contact us via the contact form below and we will answer your questions about B2B Discount. Also, feel free to
+				send us your proposals or report any issues that you’ve encountered while using the platform.
+			</div>
+			<button
+				b2bNgxButton
+				routerLink="/contact-us"
+				[theme]="b2bNgxButtonThemeEnum.BACKGROUND_BLUE"
+				id="footer-get-started">
+				Contact us
+			</button>
+		</div>
+	</div>
+</div>

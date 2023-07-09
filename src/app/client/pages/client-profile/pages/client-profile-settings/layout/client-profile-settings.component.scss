@@ -1,0 +1,232 @@
+@import "libs/shared/styles/src/lib";
+
+.error {
+	font-size: 14px;
+	color: #e63d3d;
+	margin-top: 7px;
+	margin-bottom: 0;
+}
+
+.client-profile-settings {
+	background-color: white;
+	border-radius: 4px;
+	padding: 40px;
+	@include breakpoint("3") {
+		padding: 40px 20px;
+	}
+
+	.delete-account-button {
+		margin-top: 20px;
+
+		&.mobile-delete-button {
+			width: 100%;
+			padding: 15px 0;
+		}
+	}
+
+	.mobile-buttons {
+		display: none;
+		@include breakpoint("2") {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			margin-top: 25px;
+		}
+
+		button {
+			padding: 15px 40px;
+			width: 48%;
+		}
+
+		button:nth-child(2) {
+			padding: 15px;
+		}
+	}
+
+	.settings-header {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+
+		.client-profile-settings-title {
+			font-weight: bold;
+			font-size: 24px;
+			color: #0f0f11;
+		}
+
+		.header-buttons {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			@include breakpoint("2") {
+				display: none;
+			}
+
+			button {
+				padding: 15px 40px;
+				margin: 0 4px;
+				@include breakpoint("3") {
+					font-size: 14px;
+				}
+
+				&:first-child {
+					margin-left: 0;
+				}
+
+				&:last-child {
+					margin-right: 0;
+				}
+			}
+		}
+	}
+
+	.data-form {
+		display: flex;
+		align-items: flex-start;
+		justify-content: space-between;
+		margin-top: 25px;
+		@include breakpoint("2") {
+			flex-direction: column;
+		}
+
+		.inputs {
+			width: 47%;
+			@include breakpoint("2") {
+				width: 100%;
+			}
+
+			.client-profile-settings-change-password-form {
+				margin-top: 40px;
+
+				.form-buttons {
+					display: flex;
+					align-items: center;
+					gap: 20px;
+					@include breakpoint("3") {
+						flex-direction: column;
+						align-items: flex-start;
+						gap: 0;
+					}
+					@include breakpoint("2") {
+						gap: 20px;
+						flex-direction: row;
+					}
+					button {
+						padding: 15px 10px;
+						margin-top: 20px;
+						display: flex;
+						align-items: center;
+						gap: 5px;
+					}
+				}
+
+				.client-profile-settings-change-password-label {
+					font-weight: bold;
+					font-size: 16px;
+					color: #0f0f11;
+				}
+			}
+		}
+
+		.client-profile-settings-block-input {
+			margin-top: 15px;
+		}
+	}
+
+	.client-profile-settings-form {
+		margin-top: 32px;
+
+		.client-profile-settings-block {
+			display: flex;
+			justify-content: space-between;
+			flex-wrap: wrap;
+			margin-top: 24px;
+			@include breakpoint("2") {
+				flex-direction: column;
+			}
+
+			.client-profile-settings-block-input {
+				width: 49%;
+				@include breakpoint("3") {
+					width: 100%;
+					margin-top: 15px;
+				}
+
+				&__role {
+					margin-top: 24px;
+				}
+			}
+		}
+
+		.client-profile-settings-footer {
+			margin-top: 40px;
+			display: flex;
+			justify-content: center;
+
+			.client-profile-settings-footer-cancel-button,
+			.client-profile-settings-footer-save-button {
+				padding: 15px 40px;
+				margin: 0 4px;
+				@include breakpoint("3") {
+					font-size: 14px;
+				}
+
+				&:first-child {
+					margin-left: 0;
+				}
+
+				&:last-child {
+					margin-right: 0;
+				}
+			}
+		}
+
+		.client-profile-settings-block-submit-button {
+			padding: 11px 24px;
+			margin-top: 20px;
+		}
+
+		.client-profile-settings-block-text-1 {
+			font-weight: bold;
+			font-size: 16px;
+			color: #0f0f11;
+		}
+
+		.client-profile-settings-block-text-2 {
+			font-weight: normal;
+			font-size: 14px;
+			color: #9fa4bb;
+			margin-top: 12px;
+		}
+
+		.client-profile-settings-chips {
+			display: block;
+			margin-top: 12px;
+		}
+	}
+
+	.client-profile-settings-divider {
+		height: 1px;
+		width: 100%;
+		background-color: #e3eaf1;
+		margin-top: 32px;
+	}
+
+	.client-profile-settings-delete-button {
+		margin-left: 10px;
+		margin-top: 32px;
+		color: #9fa4bb;
+		font-size: 14px;
+		background: none;
+		border: none;
+		padding: 0;
+		font: inherit;
+		cursor: pointer;
+		outline: inherit;
+
+		img {
+			position: relative;
+			top: 2px;
+		}
+	}
+}

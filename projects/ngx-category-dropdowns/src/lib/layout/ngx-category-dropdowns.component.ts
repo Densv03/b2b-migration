@@ -8,12 +8,12 @@ import {
 	OnInit,
 	ViewChild
 } from "@angular/core";
-import {CategoriesService} from "../../../../../apps/site/src/app/client/services/categories/categories.service";
+import {CategoriesService} from "../../../../../src/app/client/services/categories/categories.service";
 import {BehaviorSubject, Observable, tap} from "rxjs";
 import {map} from "rxjs/operators";
-import {TreeviewConfig} from "ngx-treeview";
-import {FormBuilder, FormGroup} from "@ngneat/reactive-forms";
-import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
+// import {TreeviewConfig} from "ngx-treeview";
+// import {FormBuilder, FormGroup} from "@ngneat/reactive-forms";
+import {ControlValueAccessor, FormBuilder, FormGroup, NG_VALUE_ACCESSOR} from "@angular/forms";
 
 @Component({
 	selector: "b2b-ngx-category-dropdowns",
@@ -37,13 +37,13 @@ export class NgxCategoryDropdownsComponent implements OnInit, ControlValueAccess
 	@Input() childCategoryLabel: string = "Select subcategory";
 	@Input() childCategoryPlaceholder: string = "Select subcategory";
 	public categories$: Observable<any> = this.getCategories$();
-	public config: TreeviewConfig = TreeviewConfig.create({
-		hasAllCheckBox: false,
-		hasFilter: false,
-		hasCollapseExpand: false,
-		decoupleChildFromParent: false,
-		maxHeight: 400,
-	});
+	// public config: TreeviewConfig = TreeviewConfig.create({
+	// 	hasAllCheckBox: false,
+	// 	hasFilter: false,
+	// 	hasCollapseExpand: false,
+	// 	decoupleChildFromParent: false,
+	// 	maxHeight: 400,
+	// });
 	public selectedSubcategories: string[] = [];
 	public form: FormGroup = this.fb.group({
 		categoryLevel1: [null],
@@ -69,7 +69,7 @@ export class NgxCategoryDropdownsComponent implements OnInit, ControlValueAccess
 	}
 
 	writeValue(categories: string | string[]): void {
-		this.categoriesService.getCategories().subscribe((data) => {
+		this.categoriesService.getCategories().subscribe((data: any) => {
 			if (typeof categories === "string") {
 				this.patchValueToForm(data.categories, [categories]);
 			} else if (Array.isArray(categories)) {
@@ -160,9 +160,9 @@ export class NgxCategoryDropdownsComponent implements OnInit, ControlValueAccess
 
 	private getCategories$(): Observable<any> {
 		return this.categoriesService.getCategories().pipe(
-			map((data) => data.categories),
-			tap((categories) => (this.categoriesList = categories)),
-			map((categories) =>
+			map((data: any) => data.categories),
+			tap((categories: any[]) => (this.categoriesList = categories)),
+			map((categories: any[]) =>
 				categories.map((category: any) => ({
 					text: category.name,
 					value: category._id,
@@ -174,7 +174,7 @@ export class NgxCategoryDropdownsComponent implements OnInit, ControlValueAccess
 	}
 
 	private updateLevel2CategoriesSource(): void {
-		this.form.get("categoryLevel1").valueChanges.subscribe((parentCategoriesArr: string[]) => {
+		this.form.get("categoryLevel1")?.valueChanges.subscribe((parentCategoriesArr: string[]) => {
 			const categoriesSourceIds = this.categoriesLevel2Source.getValue().map((category) => category._id);
 
 			if (parentCategoriesArr?.length < this.categoriesLevel2Source.getValue().length) {
@@ -263,7 +263,7 @@ export class NgxCategoryDropdownsComponent implements OnInit, ControlValueAccess
 			}
 		});
 
-		this.form.get("categoryLevel1").setValue(parentCategoriesArr);
+		this.form.get("categoryLevel1")?.setValue(parentCategoriesArr);
 	}
 
 	private setValuesToChildrenCategoriesDropdown(categoriesList: any[], categoriesIds: string[]): void {

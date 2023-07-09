@@ -1,0 +1,81 @@
+<div class="billing" *transloco="let t">
+	<div class="container">
+		<div class="left">
+			<!--			<p class="payment-method">Payment method</p>-->
+
+			<!--			<ng-container *ngIf="payment && payment.cardNumber; else noPayment">-->
+			<!--				<div class="exist-payment">-->
+			<!--					<img b2bNgxIcon [name]="payment.type" alt="" />-->
+
+			<!--					<p>{{ payment.type }} **{{ payment.cardNumber }}</p>-->
+			<!--				</div>-->
+
+			<!--				<button class="edit" (click)="edit()">Edit</button>-->
+			<!--				<button class="delete" (click)="delete()">Delete</button>-->
+			<!--			</ng-container>-->
+
+			<!--			<ng-template #noPayment>-->
+			<!--				<p class="no-payment">No payment method added</p>-->
+
+			<!--				<button class="add-payment-method" (click)="addPaymentMethod()">-->
+			<!--					<img b2bNgxIcon name="blue-add" alt="" />-->
+			<!--					<span>Add payment method</span>-->
+			<!--				</button>-->
+			<!--			</ng-template>-->
+
+			<div class="tariffs">
+				<div *ngFor="let paymentPlan of quotesPaymentPlans$ | async" class="card">
+					<div class="card-title">{{ paymentPlan?.amountOfQuotes }} quotes</div>
+					<div class="card-info">
+						<div class="card-info-text">
+							<svg width="10" height="8" viewBox="0 0 10 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path
+									fill-rule="evenodd"
+									clip-rule="evenodd"
+									d="M9.73963 0.275664C10.0881 0.643217 10.0881
+							 1.23914 9.73963 1.60669L4.20109 7.72433C3.85262 8.09189 3.28766 8.09189 2.9392 7.72433L0.262323
+							 4.90081C-0.0861388 4.53326 -0.0861388 3.93734 0.262323 3.56978C0.610784 3.20223 1.17575 3.20223
+							  1.52421 3.56978L3.57014 5.7278L8.47774 0.275664C8.8262 -0.0918881 9.39117 -0.0918881 9.73963 0.275664Z"
+									fill="#005DFF" />
+							</svg>
+							<div class="text">To contact {{ paymentPlan!.amountOfQuotes }} buyers</div>
+						</div>
+						<div class="subtitle">For {{ paymentPlan.price }}$</div>
+					</div>
+					<form #purchaseForm method="post" [action]="getPaymentLink()" name="formAuthorizeNetTestPage" target="blank">
+						<input type="hidden" name="token" [value]="" />
+						<button
+							type="button"
+							(click)="goOnPaymentPage(paymentPlan!.amountOfQuotes.toString(), paymentPlan.price)"
+							b2bNgxButton
+							[theme]="b2bNgxButtonThemeEnum.BACKGROUND_BLUE"
+							class="upgrade-plan b2b-ngx-button background background-blue"
+							tabindex="0">
+							Purchase
+						</button>
+					</form>
+				</div>
+			</div>
+
+			<p class="supported-payment-types">Supported payment types</p>
+			<ul class="list-of-types">
+				<li>
+					<img b2bNgxIcon name="mastercard" alt="" />
+				</li>
+				<li>
+					<img b2bNgxIcon name="maestro" alt="" />
+				</li>
+				<li>
+					<img b2bNgxIcon name="visa" alt="" />
+				</li>
+				<li>
+					<img b2bNgxIcon name="discover" alt="" />
+				</li>
+			</ul>
+		</div>
+	</div>
+
+	<hr />
+
+	<b2b-invoices [invoices]="invoices$ | async"></b2b-invoices>
+</div>

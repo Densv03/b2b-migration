@@ -1,0 +1,64 @@
+@import "projects/shared/src/styles";
+
+:host {
+	.supplier-info {
+		width: 100%;
+		padding: 16px 0 12px;
+		background-color: #ffffff;
+		border-radius: 8px;
+		margin-top: 20px;
+
+		.header {
+			padding: 0 10px;
+
+			.title {
+				font-weight: 500;
+				font-size: 11px;
+				letter-spacing: 0.06em;
+				text-transform: uppercase;
+				color: #828bb4;
+			}
+
+			.supplier-name {
+				font-weight: 700;
+				font-size: 16px;
+				letter-spacing: 0.01em;
+				color: #0f0f11;
+				margin-top: 10px;
+				word-break: break-word;
+				@include breakpoint("3") {
+					font-size: 12px;
+				}
+			}
+		}
+
+		.divider {
+			height: 1px;
+			width: 100%;
+			background-color: #dfe8f5;
+			margin-top: 10px;
+		}
+
+		button {
+			display: block;
+			margin: auto;
+			padding: 10px 20px;
+			margin-top: 12px;
+		}
+	}
+
+	@include breakpoint("1") {
+		.supplier-info {
+			.header {
+				padding: 0;
+				.title {
+					font-size: 10px;
+				}
+			}
+
+			button {
+				padding: 10px 0;
+			}
+		}
+	}
+}

@@ -1,0 +1,146 @@
+@import "projects/shared/src/styles";
+
+:host {
+	.component {
+		padding: 0 100px 50px 100px;
+		background-color: #FFFFFF;
+		@include breakpoint('5') {
+			padding: 0 60px 50px 60px;
+		}
+		@include breakpoint('3') {
+			padding: 0 2% 50px;
+		}
+		@include breakpoint('2') {
+			padding-left: 17px;
+			padding-top: 0;
+		}
+		@include breakpoint('1') {
+			padding-right: 0;
+			padding-top: 20px;
+			padding-bottom: 20px;
+		}
+	}
+
+	.title {
+		font-weight: 700;
+		font-size: 32px;
+		line-height: 36px;
+		letter-spacing: .01em;
+		color: #000;
+		@include breakpoint('2') {
+			font-size: 25px;
+		}
+	}
+
+	.tabs {
+		margin-top: 30px;
+		position: relative;
+		@include breakpoint('1') {
+			margin-top: 25px;
+		}
+
+		.view-all {
+			position: absolute;
+			top: 4px;
+			right: 10px;
+			cursor: pointer;
+			padding: 5px;
+			font-size: 16px;
+			line-height: 18px;
+			text-align: right;
+			letter-spacing: 0.01em;
+			text-decoration-line: underline;
+			color: #005DFF;
+			@include breakpoint('3') {
+				display: none;
+			}
+		}
+	}
+
+}
+
+:host::ng-deep {
+	.scrollable-tabs {
+		::-webkit-scrollbar {
+			width: 0; /* Set the width of the scrollbar */
+		}
+
+		::-webkit-scrollbar-thumb {
+			background-color: transparent; /* Make the scrollbar thumb transparent */
+		}
+
+		::-webkit-scrollbar-track {
+			background-color: transparent; /* Make the scrollbar track transparent */
+		}
+	}
+
+	.scrollable-tabs .nav-tabs {
+		overflow-x: auto;
+		overflow-y: hidden;
+		white-space: nowrap;
+	}
+
+	.scrollable-tabs .nav-tabs .nav-link {
+		display: inline-block;
+		white-space: nowrap;
+	}
+
+	.nav-tabs {
+		border: none;
+		gap: 15px;
+		flex-wrap: nowrap;
+
+		&:first-child {
+			.nav-link {
+				padding-left: 0;
+			}
+		}
+
+		li:hover {
+			border: none;
+		}
+
+		.nav-link {
+			border: none;
+			color: #556274;
+			font-size: 16px;
+
+			&.active {
+				color: #0F0F11;
+				font-weight: 700;
+			}
+		}
+
+		.nav-link:hover {
+			border: none;
+		}
+
+		li {
+			.active {
+				border: none;
+			}
+		}
+	}
+
+	.tab-content {
+		margin-top: 10px;
+		@include breakpoint('1') {
+			margin-top: 10px;
+		}
+	}
+	.tab-pane {
+		&.active {
+			animation: fadeIn 1s;
+		}
+	}
+
+	@keyframes fadeIn {
+		0% {
+			opacity: 0;
+		}
+		100% {
+			opacity: 1;
+		}
+	}
+
+}

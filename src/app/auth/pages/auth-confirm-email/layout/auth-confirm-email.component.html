@@ -1,0 +1,18 @@
+<div class="pt-20 px-20 h-full flex flex-col items-center" *transloco="let t">
+	<p class="w-full text-right color-gray-2">
+		{{ t("AUTH.ALREADY_HAVE") }} <span class="underline color-blue-1">{{ t("AUTH.LOG_IN") }}</span>
+	</p>
+
+	<div class="w-2/4 pt-64">
+		<h2 class="title-2 text-center font-weight-bold color-black-1 mb-10">{{ t("AUTH.PLEASE_CONFIRM") }}</h2>
+		<p class="title-6 color-black-3 mb-5 leading-5">
+			{{ t("AUTH.CONFIRM_DESCRIPTION") }}
+		</p>
+
+		<button b2bNgxButton [theme]="B2bNgxButtonThemeEnum.BACKGROUND_BLACK" class="mb-8">{{ t("AUTH.CONFIRM") }}</button>
+
+		<p class="text-center color-gray-2">
+			{{ t("AUTH.OR_VERIFY") }} <span class="underline color-blue-1">{{ t("AUTH.LINK") }}</span>
+		</p>
+	</div>
+</div>

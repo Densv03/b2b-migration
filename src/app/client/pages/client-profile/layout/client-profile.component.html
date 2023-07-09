@@ -1,0 +1,13 @@
+<div class="client-profile">
+	<div class="client-profile-sidenav" *ngIf="authService.showSidenav">
+		<b2b-client-profile-sidenav
+			[accountOptions]="sidenavAccountOptions"
+			[workspaceOptions]="sidenavWorkspaceOptions"
+			[user]="user$ | async">
+		</b2b-client-profile-sidenav>
+	</div>
+
+	<div class="client-profile-pages">
+<!--		<router-outlet></router-outlet>-->
+	</div>
+</div>

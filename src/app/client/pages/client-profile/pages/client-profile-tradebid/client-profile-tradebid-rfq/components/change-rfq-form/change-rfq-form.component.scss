@@ -1,0 +1,155 @@
+@import "libs/shared/styles/src/lib";
+
+:host {
+	.error {
+		font-size: 14px;
+		color: #e63d3d;
+		margin-top: -10px;
+		margin-bottom: 20px;
+	}
+
+	.supplier-info-error {
+		font-size: 14px;
+		color: #e63d3d;
+		margin-bottom: 20px;
+		margin-top: 10px;
+	}
+	.rfq__form {
+		width: 70%;
+		padding: 0 6em;
+
+		@include breakpoint("3") {
+			padding: 0;
+		}
+
+		&__header {
+			height: 30vh;
+			display: flex;
+			justify-content: space-between;
+			flex-direction: row;
+
+			h1 {
+				font-size: 3em;
+				display: flex;
+				text-align: center;
+				justify-content: center;
+				align-items: center;
+			}
+
+			img {
+				height: 100%;
+				width: auto;
+
+				@include breakpoint("4") {
+					height: 70%;
+					margin: auto;
+				}
+
+				@include breakpoint("3") {
+					height: 50%;
+				}
+
+				@include breakpoint("2") {
+					display: none;
+				}
+			}
+		}
+
+		&__product-information {
+			background-color: #fff;
+			width: 100%;
+			height: auto;
+			margin-top: 30px;
+
+			@include breakpoint("4") {
+				padding: 0;
+			}
+		}
+		.title {
+			margin-bottom: 25px;
+		}
+		&__container {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+
+			@include breakpoint("3") {
+				flex-direction: column;
+			}
+		}
+
+		&__input {
+			margin-bottom: 1.5em;
+		}
+
+		&__half-space {
+			display: block;
+			width: 49%;
+
+			@include breakpoint("3") {
+				width: 100%;
+			}
+		}
+		.flex-select {
+			display: flex;
+			align-items: center;
+		}
+		.measure-select-wrapper {
+			width: 100%;
+		}
+
+		&__label-first {
+			display: block;
+			margin-top: 2.5em;
+		}
+
+		&__label {
+			margin-top: 1.5em;
+			display: block;
+		}
+
+		&__half-label {
+			display: block;
+		}
+
+		&__textarea {
+			max-width: 50%;
+			min-height: 50px;
+
+			@include breakpoint("3") {
+				max-width: 100%;
+			}
+		}
+
+		&__add-file {
+			margin-top: 1.5em;
+		}
+
+		button[type="submit"] {
+			padding: 0.5em 1em;
+
+			@include breakpoint("1") {
+				width: 100%;
+			}
+		}
+	}
+
+	.ngx-file-wrapper {
+		position: relative;
+	}
+}
+
+:host::ng-deep {
+	input {
+		margin-bottom: 15px;
+	}
+	ng-select {
+		margin-bottom: 15px;
+	}
+	textarea {
+		margin-bottom: 15px;
+	}
+	button {
+		margin-top: 20px;
+	}
+}

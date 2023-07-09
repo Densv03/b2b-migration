@@ -1,0 +1,82 @@
+<div class="ngx-offers-carousel" *transloco="let t">
+	<div class="ngx-offers-carousel-left-button-wrapper">
+		<button class="ngx-offers-carousel-left-button" (click)="moveCarousel('left')">
+			<img b2bNgxIcon name="arrow-l-blue" alt="" />
+		</button>
+	</div>
+
+	<ul class="ngx-offers-carousel-list" #carousel>
+		<li class="ngx-offers-carousel-list-item" *ngFor="let option of optionsToDisplay">
+			<a
+				(click)="processOfferClick()"
+				[routerLink]="b2bNgxLinkService.getLink('/offers/' + option._id) | async"
+				class="ngx-offers-carousel-list-item-container">
+				<div class="ngx-offers-carousel-list-item-header">
+					<span *ngIf="option.price?.discount" class="ngx-offers-carousel-list-item-header-discount"
+						>-{{ option.price?.discount }}%</span
+					>
+					<p class="ngx-offers-carousel-list-item-header-info">
+						{{ t("OFFERS.OLD_PRICE") }}
+						{{ option.price?.old }}
+						{{ t("OFFERS.PER") }}
+						{{
+							option.amount?.unit?._id === "60a784830a04b16c574e8145"
+								? "unit"
+								: option.amount?.unit?._id === "60a784830a04b16c574e8143"
+								? "ton"
+								: "m3"
+						}}
+						•
+						{{ option.amount?.count }}
+						{{ option.amount?.unit?.name }}
+						{{ t("OFFERS.AVAILABLE") }}
+					</p>
+				</div>
+				<p class="ngx-offers-carousel-list-item-main">{{ option.title }}</p>
+				<div class="ngx-offers-carousel-list-item-footer">
+					<div class="ngx-offers-carousel-list-item-footer-info">
+						<img *ngIf="!user; else withInfo" src="assets/images/blured-offer.webp" />
+						<ng-template #withInfo>
+							<p class="ngx-offers-carousel-list-item-footer-info-seller-title">{{ t("OFFERS.SELLER") }}</p>
+							<p class="ngx-offers-carousel-list-item-footer-info-seller-name">{{ option.contact?.companyName }}</p>
+							<p class="ngx-offers-carousel-list-item-footer-info-route">
+								<span class="ngx-offers-carousel-list-item-footer-info-route-from">{{ t("OFFERS.ROUTE_FROM") }}</span>
+								<img
+									b2bNgxIcon
+									group="flags/"
+									class="ngx-offers-carousel-list-item-footer-info-route-image"
+									[name]="option.destination?.from | uppercase" />
+								<span class="ngx-offers-carousel-list-item-footer-info-route-to">{{ t("OFFERS.ROUTE_TO") }}</span>
+								<img
+									b2bNgxIcon
+									group="flags/"
+									class="ngx-offers-carousel-list-item-footer-info-route-image"
+									[name]="option.destination?.to | uppercase" />
+							</p>
+						</ng-template>
+					</div>
+					<p class="ngx-offers-carousel-list-item-footer-price">
+						<span class="ngx-offers-carousel-list-item-footer-dollar-sign">$</span>
+						<span class="ngx-offers-carousel-list-item-footer-price-number">{{ option.price?.new }}</span>
+						<span class="ngx-offers-carousel-list-item-footer-available">
+							{{ t("OFFERS.PER") }}
+							{{
+								option.amount?.unit?._id === "60a784830a04b16c574e8145"
+									? "unit"
+									: option.amount?.unit?._id === "60a784830a04b16c574e8143"
+									? "ton"
+									: "m3"
+							}}</span
+						>
+					</p>
+				</div>
+			</a>
+		</li>
+	</ul>
+
+	<div class="ngx-offers-carousel-right-button-wrapper">
+		<button class="ngx-offers-carousel-right-button" (click)="moveCarousel('right')">
+			<img b2bNgxIcon name="arrow-r-blue" alt="" />
+		</button>
+	</div>
+</div>

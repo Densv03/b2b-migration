@@ -1,0 +1,116 @@
+<header class="header transparent" *transloco="let t">
+	<a b2bNgxLink [routerLink]="b2bNgxLinkService.getLink('/') | async">
+		<img b2bNgxImage class="header__logo" name="logo" />
+	</a>
+
+	<div class="header__links-block" [class.d-none]="isAuthPage$ | async">
+		<div class="header__list">
+			<div *ngFor="let option of options; let idx = index" class="header__list-item" [ngStyle]="{ order: idx }">
+				<a
+					b2bNgxLink
+					class="header__list-item-link"
+					[routerLink]="b2bNgxLinkService.getLink(option.link) | async"
+					(click)="processRouteClick(option.link)">
+          {{t(option.label)}}
+        </a>
+			</div>
+			<div class="header__list-item">
+				<div class="label">NEW</div>
+			</div>
+		</div>
+
+		<!--		<div class="service-select-wrapper">-->
+		<!--			<b2b-ngx-select [options]="headerLinks$ | async"-->
+		<!--											[placeholder]="t('HEADER.OUR_SERVICES')"-->
+		<!--											[formControl]="linkDropdown"-->
+		<!--											bindLabel="label"-->
+		<!--											bindValue="link"-->
+		<!--											id="navigation-dropdown"-->
+		<!--											(changed)="navigateLink($event)"></b2b-ngx-select>-->
+		<!--		</div>-->
+	</div>
+
+	<div class="header__buttons" [class.d-none]="isAuthPage$ | async">
+		<button
+			*ngIf="makeRfqUrl | async"
+			routerLink="/tradebid/add-rfq"
+			b2bNgxButton
+			[theme]="b2bNgxButtonThemeEnum.BACKGROUND_BLUE"
+			type="submit"
+			class="header__button">
+			Make RFQ
+		</button>
+		<button
+			*ngIf="(addProductUrl | async) && (rootRole$ | async)"
+			b2bNgxButton
+			[id]="(isAuth$ | async) ? 'add-product' : 'add-company'"
+			[routerLink]="(isAuth$ | async) === true ? '/b2bmarket/product' : '/profile/your-account/company-information'"
+			[theme]="b2bNgxButtonThemeEnum.BACKGROUND_BLUE"
+			type="submit"
+			class="header__button">
+			{{ (isAuth$ | async) ? "Add product" : "Add my company" }}
+		</button>
+		<!--		<b2b-ngx-select-->
+		<!--			[formControl]="formControl"-->
+		<!--			[options]="[-->
+		<!--				{ _id: 'en', name: 'EN' },-->
+		<!--				{ _id: 'ru', name: 'RU' }-->
+		<!--			]"-->
+		<!--			bindValue="_id"-->
+		<!--			bindLabel="name"></b2b-ngx-select>-->
+
+		<ng-container *ngIf="user; else withoutUser">
+			<div class="user-wrapper">
+				<img
+					[routerLink]="b2bNgxLinkService.getLink('/profile') | async"
+					class="user-skeleton"
+					b2bNgxIcon
+					name="user-skeleton"
+					alt="user" />
+				<a
+					b2bNgxLink
+					[routerLink]="b2bNgxLinkService.getLink('/profile') | async"
+					class="header__buttons-profile"
+					[theme]="b2bNgxLinkThemeEnum.BACKGROUND_TRANSPARENT">
+					<p class="header__buttons-profile-text">{{ user.fullName || user.email }}</p>
+					<p class="header__buttons-profile-role">{{ user.role.name }}</p>
+
+					<ng-container *ngIf="unreadMessagesCount$ | async as unreadMessagesCount">
+						<span class="unread-messages" *ngIf="unreadMessagesCount > 0">{{ unreadMessagesCount }}</span>
+					</ng-container>
+				</a>
+			</div>
+			<button
+				*ngIf="(addOfferUrl | async) && (rootRole$ | async)"
+				id="add-offer-header"
+				(click)="goTo('/offer')"
+				b2bNgxButton
+				[theme]="b2bNgxButtonThemeEnum.BACKGROUND_BLACK"
+				class="header__buttons-add-offer">
+				Add offer
+			</button>
+		</ng-container>
+		<ng-template #withoutUser>
+			<a
+				(click)="processSignInClick()"
+				b2bNgxLink
+				[routerLink]="b2bNgxLinkService.getLink('/auth/log-in') | async"
+				class="header__buttons-log-in"
+				[theme]="b2bNgxLinkThemeEnum.BACKGROUND_TRANSPARENT">
+				<img b2bNgxIcon name="user-filled" class="header__buttons-log-in-icon" />
+				<span>Sign in</span>
+			</a>
+			<a
+				(click)="processSignUpClick()"
+				b2bNgxLink
+				[routerLink]="b2bNgxLinkService.getLink('/auth/register-credentials') | async"
+				class="header__button-sign-up"
+				[theme]="b2bNgxLinkThemeEnum.BACKGROUND_BLACK"
+				>Sign up</a
+			>
+		</ng-template>
+		<button b2bNgxButton (click)="emitBurgerClick()" class="header__burger">
+			<img b2bNgxIcon name="burger" />
+		</button>
+	</div>
+</header>

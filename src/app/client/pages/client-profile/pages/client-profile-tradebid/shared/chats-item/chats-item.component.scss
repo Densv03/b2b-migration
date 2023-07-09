@@ -1,0 +1,211 @@
+@import "../../../../../../../../../../../libs/shared/styles/src/lib/index";
+
+.chats-item {
+	width: 100%;
+	min-height: 115px;
+	display: flex;
+	align-items: center;
+	box-shadow: 2px 2px 8px #e3eaf1;
+	margin-bottom: 3px;
+	margin-top: 15px;
+	cursor: pointer;
+	height: 115px;
+}
+
+.chats-profile {
+	display: flex;
+	width: 55%;
+	padding: 0 16px;
+	height: 100%;
+	gap: 10px;
+	align-items: center;
+	@include breakpoint("3") {
+		width: 65%;
+	}
+	@include breakpoint("1") {
+
+	}
+
+	.product-divider {
+		width: 1px;
+		background: #9fa4bb;
+		margin-left: auto;
+		height: 100%;
+	}
+
+	.chats-profile-item {
+		margin-left: 20px;
+	}
+
+	.name-block {
+		display: flex;
+		align-items: center;
+		margin-bottom: 5px;
+
+		.mobile-activity {
+			color: #9fa4bb;
+			font-weight: 400;
+			font-size: 12px;
+			display: none;
+			margin-left: 10px;
+			transform: translateY(-15%);
+			@include breakpoint("2") {
+				display: block;
+			}
+		}
+	}
+
+	.chats-profile-name {
+		color: #101b54;
+		font-size: 16px;
+		font-weight: 700;
+		margin-bottom: 5px;
+	}
+
+	.chats-profile-activity {
+		color: #9fa4bb;
+		font-weight: 400;
+		font-size: 12px;
+		margin-bottom: 5px;
+		@include breakpoint("2") {
+			display: none;
+		}
+	}
+
+	.chats-profile-descr {
+		color: #0f0f11;
+		font-size: 15px;
+		font-weight: 400;
+		@include breakpoint("2") {
+			display: none;
+		}
+	}
+
+	.chats-profile-mobile-descr {
+		color: #0f0f11;
+		font-size: 15px;
+		font-weight: 400;
+		display: none;
+		@include breakpoint("2") {
+			display: block;
+		}
+	}
+}
+
+.chats-product {
+	display: flex;
+	margin-left: auto;
+	gap: 30px;
+	@include breakpoint("3") {
+		width: 20%;
+	}
+	@include breakpoint("1") {
+		width: 30%;
+		padding-right: 15px;
+	}
+
+	.product-label {
+		color: #9fa4bb;
+		font-size: 12px;
+		font-weight: 500;
+	}
+
+
+	.main-product-item {
+		width: 75%;
+		@include breakpoint("3") {
+			display: none;
+		}
+	}
+
+	.chats-product-main {
+		position: relative;
+		display: flex;
+		align-items: center;
+		width: 100%;
+		margin-top: 10px;
+	}
+
+	.chats-product-descr {
+		width: 150px;
+		color: #222224;
+		font-size: 14px;
+		font-weight: 400;
+	}
+
+	.chats-profile-img {
+		width: 56px;
+		height: 56px;
+
+		img {
+			object-fit: contain;
+			width: 56px;
+			height: 56px;
+		}
+	}
+
+	.message-item {
+		width: 30%;
+		margin: auto;
+	}
+
+	.chats-message {
+		width: 35px;
+		height: 35px;
+		background-color: #d2deff;
+		border-radius: 100%;
+		text-align: center;
+		position: relative;
+		@include breakpoint("2") {
+			transform: translateX(-100%);
+		}
+		@include breakpoint("1") {
+			transform: translateX(-30%);
+		}
+	}
+
+	.chats-message-center {
+		background-color: #005dff;
+		width: 20px;
+		height: 20px;
+		border-radius: 100%;
+		color: #fff;
+		position: absolute;
+		transform: translate(40%, 35%);
+		padding-top: 1px;
+	}
+
+	.points-wrapper {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: space-between;
+		height: 19px;
+		transform: translateY(140%);
+		@include breakpoint("3") {
+			transform: translateY(40%);
+		}
+		@include breakpoint("2") {
+			transform: translate(-15px, 40%);
+		}
+		@include breakpoint("1") {
+			transform: translate(15px, 40%);
+		}
+	}
+
+	.menu-point {
+		width: 5px;
+		height: 5px;
+		border-radius: 100%;
+		background-color: #9fa4bb;
+	}
+}
+
+:host::ng-deep {
+	.ngx-dropdown-container {
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+	}
+}

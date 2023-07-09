@@ -1,0 +1,43 @@
+<div *ngIf="rfqData" class="container">
+	<a href="#" [routerLink]="'..'">
+		<svg width="14" height="13" viewBox="0 0 14 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+			<path
+				d="M0.434315 6.81569C0.121895 6.50327 0.121895 5.99673 0.434315 5.68431L5.52548 0.593146C5.8379 0.280726 6.34443 0.280726 6.65685 0.593146C6.96927 0.905565 6.96927 1.4121 6.65685 1.72452L2.13137 6.25L6.65685 10.7755C6.96927 11.0879 6.96927 11.5944 6.65685 11.9069C6.34443 12.2193 5.8379 12.2193 5.52548 11.9069L0.434315 6.81569ZM13.75 7.05L1 7.05V5.45L13.75 5.45V7.05Z"
+				fill="#556274" />
+		</svg>
+		Back
+	</a>
+	<div class="rfq-details">
+		<h1>RFQ details</h1>
+		<div class="rfq-details__container">
+			<b2b-product-information
+				[rfqInfo]="rfqData"
+				class="rfq-details__container__product-information"></b2b-product-information>
+			<b2b-buyer-information
+				[showBtn]="showButton"
+				[showBuyerInfo]="showBuyerInfo"
+				[user]="user$ | async"
+				[phoneNumber]="rfqData?.contact.phone"
+				[email]="rfqData?.contact.email"
+				class="rfq-details__container__buyer-information"></b2b-buyer-information>
+		</div>
+		<div class="quotation-btn-wrapper">
+			<button
+				b2bNgxButton
+				[theme]="b2bNgxButtonThemeEnum.BACKGROUND_BLUE"
+				(click)="quoteNow()"
+				[disabled]="showBuyerInfo">
+				Quote now
+			</button>
+		</div>
+		<button
+			*ngIf="showButton"
+			b2bNgxButton
+			class="desktop-btn"
+			[theme]="b2bNgxButtonThemeEnum.BACKGROUND_BLUE"
+			(click)="quoteNow()"
+			[disabled]="showBuyerInfo">
+			Quote now
+		</button>
+	</div>
+</div>

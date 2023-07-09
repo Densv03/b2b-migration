@@ -1,0 +1,181 @@
+<ul class="ngx-latest-offers-grid" *transloco="let t">
+	<li
+		*ngFor="let option of options"
+		[class]="'ngx-latest-offers-grid-item ' + (option.reasonForDeletion ? 'ngx-latest-offers-grid-item-deleted' : '')">
+		<a [routerLink]="b2bNgxLinkService.getLink(option?.path ? '/offers/' + option.path : '/offers/' + option._id) | async">
+			<div class="icons">
+				<img
+					b2bNgxIcon
+					*ngIf="option.verifiedTrack"
+					ngxTippy
+					data-tippy-content="Verified track"
+					[name]="'verified-2'"
+					class="ngx-saved-offers-list-item-info-icon" />
+				<img
+					b2bNgxIcon
+					*ngIf="option.highDemand && !option.reasonForDeletion"
+					ngxTippy
+					data-tippy-content="This offer is in high demand!"
+					[name]="'flame'"
+					class="ngx-saved-offers-list-item-info-icon" />
+				<img
+					b2bNgxIcon
+					*ngIf="option.priceDrop"
+					ngxTippy
+					data-tippy-content="Price Drop"
+					[name]="'price-drop'"
+					class="ngx-saved-offers-list-item-info-icon" />
+			</div>
+			<div class="ngx-latest-offers-grid-item-header">
+				<div class="ngx-latest-offers-grid-item-image-container">
+					<img b2bNgxImage [name]="option.previewPhoto" alt="" class="ngx-latest-offers-grid-item-image" />
+					<div *ngIf="option.reasonForDeletion" class="ngx-latest-offers-grid-item-image-container-overlay">
+						<p>SOLD</p>
+					</div>
+					<p *ngIf="option.price?.discount && !option.reasonForDeletion" class="ngx-latest-offers-grid-item-discount">
+						-{{ option.price?.discount }}%
+					</p>
+				</div>
+				<div class="ngx-latest-offers-grid-item-header-container">
+					<p class="ngx-latest-offers-grid-item-header-title">
+						<span class="ngx-latest-offers-grid-item-header-title-text">{{ cutString(option.title, 4) }} </span>
+						<button (click)="emitStarClick(option, $event)">
+							<img
+								b2bNgxIcon
+								[name]="option.isSaved ? 'star-filled' : 'star'"
+								alt=""
+								class="ngx-latest-offers-grid-item-header-title-icon" />
+						</button>
+					</p>
+					<p class="ngx-latest-offers-grid-item-header-price">
+						<span class="ngx-latest-offers-grid-item-header-price-dollar-sign">$</span>
+						<span class="ngx-latest-offers-grid-item-header-price-amount">{{ option.price?.new }}</span>
+						<span class="ngx-latest-offers-grid-item-header-price-unit">
+							{{ t("OFFERS.PER") }}
+
+							{{ t("UNITS." + option.amount.unit.name.toUpperCase()) }}
+							<!-- {{
+								option.amount?.unit?._id === "60a784830a04b16c574e8145"
+									? t("UNITS.QUANTITY_COUNT")
+									: option.amount?.unit?._id === "60a784830a04b16c574e8143"
+									? t("UNITS.TONS_COUNT")
+									: t("UNITS.M3_COUNT")
+							}} -->
+						</span>
+					</p>
+				</div>
+			</div>
+			<!-- <div *ngIf="!user; else fullInfo" class="ngx-latest-offers-grid-item-blured"> -->
+
+			<div *ngIf="false; else fullInfo" class="ngx-latest-offers-grid-item-blured">
+				<img class="ngx-latest-offers-grid-item-blured-img" b2bNgxImage name="offer-blur-2" />
+				<div class="ngx-latest-offers-grid-item-blured-container">
+					<p class="ngx-latest-offers-grid-item-blured-text">
+						{{ t("OFFERS.FULL_INFO") }}
+					</p>
+					<button
+						b2bNgxButton
+						[theme]="b2bNgxButtonThemeEnum.BACKGROUND_BLUE"
+						class="ngx-latest-offers-grid-item-blured-button">
+						<img b2bNgxIcon name="" alt="" />
+						{{ t("OFFERS.UPGRADE") }}
+					</button>
+				</div>
+			</div>
+			<ng-template #fullInfo>
+				<div class="ngx-latest-offers-grid-item-main" [class.blured]="!user">
+					<p class="ngx-latest-offers-grid-item-seller">
+						<!--						<img b2bNgxImage name="" class="ngx-latest-offers-grid-item-seller-logo">-->
+						<span class="ngx-latest-offers-grid-item-seller-name">{{ cutString(option.contact?.companyName, 4) }}</span>
+						<img *ngIf="false" b2bNgxIcon name="verified-2" class="ngx-latest-offers-grid-item-seller-verified" />
+					</p>
+					<p class="ngx-latest-offers-grid-item-route">
+						<img
+							b2bNgxIcon
+							group="flags/"
+							[name]="option.destination?.from | uppercase"
+							class="ngx-latest-offers-grid-item-route-first-country-icon" />
+						<span class="ngx-latest-offers-grid-item-route-first-country-name">{{ option.destination?.from }}</span>
+						<img b2bNgxIcon name="arrow-r-gray" class="ngx-latest-offers-grid-item-route-arrow-icon" />
+						<img
+							b2bNgxIcon
+							group="flags/"
+							[name]="option.destination?.to | uppercase"
+							class="ngx-latest-offers-grid-item-route-second-country-icon" />
+						<span class="ngx-latest-offers-grid-item-route-second-country-name">{{ option.destination?.to }}</span>
+					</p>
+					<p class="ngx-latest-offers-grid-item-eta">
+						{{ option.createdAt | date }}
+					</p>
+				</div>
+				<div class="ngx-latest-offers-grid-item-footer">
+					<p class="ngx-latest-offers-grid-item-footer-text" *ngIf="user">
+						<span class="ngx-latest-offers-grid-item-footer-old-price"
+							>{{ t("OFFERS.OLD_PRICE") }} {{ option.price.old }}$ {{ t("OFFERS.PER") }}
+							{{
+								option.amount?.unit?._id === "60a784830a04b16c574e8145"
+									? t("UNITS.QUANTITY_COUNT")
+									: option.amount?.unit?._id === "60a784830a04b16c574e8143"
+									? t("UNITS.TONS_COUNT")
+									: t("UNITS.M3_COUNT")
+							}}
+						</span>
+						<span class="ngx-latest-offers-grid-item-footer-available"
+							>{{ option.amount?.count }} {{ option.amount?.unit?.name }} {{ t("OFFERS.AVAILABLE") }}</span
+						>
+					</p>
+
+					<div class="ngx-latest-offers-grid-item-blured-container" *ngIf="!user">
+						<p class="ngx-latest-offers-grid-item-blured-text">
+							{{ t("OFFERS.FULL_INFO") }}
+						</p>
+						<button
+							b2bNgxButton
+							[theme]="b2bNgxButtonThemeEnum.BACKGROUND_BLUE"
+							class="ngx-latest-offers-grid-item-blured-button">
+							<img b2bNgxIcon name="" alt="" />
+							{{ t("OFFERS.UPGRADE") }}
+						</button>
+					</div>
+
+					<!--					<button-->
+					<!--						*ngIf="user && option.chatCreated === false"-->
+					<!--						b2bNgxButton-->
+					<!--						[theme]="b2bNgxButtonThemeEnum.BACKGROUND_BLACK"-->
+					<!--						[disabled]="option.reasonForDeletion"-->
+					<!--						class="ngx-latest-offers-grid-item-footer-button">-->
+					<!--						<img b2bNgxIcon name="chat" />-->
+					<!--						<span class="ngx-latest-offers-grid-item-footer-button-text">-->
+					<!--							{{ option.user === user?._id ? t("OFFERS.VIEW_MY_OFFER") : t("OFFERS.MAKE_AN_OFFER") }}</span-->
+					<!--						>-->
+					<!--					</button>-->
+
+					<!--					<a-->
+					<!--						*ngIf="user"-->
+					<!--						b2bNgxLink-->
+					<!--						(click)="openChat($event)"-->
+					<!--						[routerLink]="b2bNgxLinkService.getLink('/offers/' + option._id + '/chat') | async"-->
+					<!--						[theme]="b2bNgxLinkThemeEnum.BACKGROUND_LIGHT_BLUE"-->
+					<!--						class="ngx-latest-offers-grid-item-footer-button">-->
+					<!--						<img b2bNgxIcon name="chat-blue" />-->
+					<!--						<span class="ngx-latest-offers-grid-item-footer-button-text">-->
+					<!--							{{ option.user === user?._id ? t("OFFERS.VIEW_MY_OFFER") : 'Contact seller' }}</span-->
+					<!--						>-->
+					<!--					</a>-->
+
+					<button
+						*ngIf="user"
+						b2bNgxButton
+						id="unclaimed-cargo-listing-contact-seller"
+						[theme]="b2bNgxButtonThemeEnum.BACKGROUND_BLACK"
+						(click)="openChat($event); goTo('/offers/' + option._id + '/chat')"
+						class="ngx-latest-offers-grid-item-footer-button">
+						<span class="ngx-latest-offers-grid-item-footer-button-text">
+							{{ option.user === user?._id ? t("OFFERS.VIEW_MY_OFFER") : "Contact seller" }}</span
+						>
+					</button>
+				</div>
+			</ng-template>
+		</a>
+	</li>
+</ul>

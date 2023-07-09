@@ -1,0 +1,23 @@
+<div class="registration-complete" *transloco="let t">
+	<div class="registration-complete__body">
+		<p class="registration-complete__body-title">
+			{{ t("ACCOUNT_NOT_REGISTERED.TITLE_1") + " " + email + " " + t("ACCOUNT_NOT_REGISTERED.TITLE_2") }}
+		</p>
+		<span>
+			{{ t("ACCOUNT_NOT_REGISTERED.SUBTITLE") }}
+		</span>
+
+		<div class="auth-log-in__main">
+			<button b2bNgxButton class="auth-log-in__log-in-button" (click)="loginWithAnotherAccount()">
+				{{ t("ACCOUNT_NOT_REGISTERED.ANOTHER_ACCOUNT") }}
+			</button>
+			<button
+				(click)="createNewAccount()"
+				b2bNgxButton
+				[theme]="b2bNgxButtonThemeEnum.BACKGROUND_BLACK"
+				class="auth-log-in__log-in-button">
+				{{ t("ACCOUNT_NOT_REGISTERED.NEW_ACCOUNT") }}
+			</button>
+		</div>
+	</div>
+</div>

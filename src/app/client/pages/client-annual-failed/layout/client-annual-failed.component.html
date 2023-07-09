@@ -1,0 +1,18 @@
+<div class="payment-failed" *transloco="let t">
+	<img class="image" b2bNgxIcon name="payment-failed" />
+	<p class="title">Payment failed</p>
+	<p class="description">
+		Oops! Something went wrong! Unfortunately, the payment failed. Please check the information you entered and try
+		again.
+	</p>
+
+	<div class="buttons">
+		<a
+			b2bNgxLink
+			[routerLink]="b2bNgxLinkService.getLink('/annual-payment') | async"
+			[theme]="b2bNgxLinkThemeEnum.BACKGROUND_BLACK"
+			class="try-again"
+			>Try again</a
+		>
+	</div>
+</div>

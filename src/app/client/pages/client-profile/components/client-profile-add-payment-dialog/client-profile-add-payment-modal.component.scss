@@ -1,0 +1,80 @@
+.modal-wrapper {
+	.mat-dialog-actions {
+		height: 30px;
+		display: block;
+		position: absolute;
+		top: 4px;
+		right: 20px;
+		cursor: pointer;
+		.close-btn {
+			width: 60px;
+			height: 60px;
+			padding-left: 40px;
+			svg {
+				width: 27px;
+				height: 27px;
+			}
+		}
+	}
+	.mat-dialog-title {
+		font-size: 30px;
+		color: #303247;
+		font-weight: 600;
+		margin-top: 10px;
+		text-align: center;
+	}
+	.text {
+		color: #303247;
+		font-weight: 400;
+		font-size: 17px;
+		margin-bottom: 15px;
+	}
+	.available-amount {
+		margin-bottom: 5px;
+	}
+	.terms {
+		margin-bottom: 30px;
+	}
+
+	form {
+		.error {
+			font-size: 14px;
+			color: #e63d3d;
+			margin-top: 10px;
+		}
+		.input-container {
+			margin-top: 16px;
+		}
+
+		.inputs-container {
+			display: flex;
+			justify-content: space-between;
+			align-items: flex-end;
+			.input-container {
+				width: 49%;
+			}
+		}
+
+		.save {
+			margin-top: 24px;
+			padding: 15px 0;
+			width: 100%;
+		}
+	}
+}
+
+::ng-deep {
+	.cdk-overlay-pane {
+		width: 500px !important;
+	}
+	.mat-dialog-container {
+		position: relative !important;
+		padding: 60px;
+	}
+	.modal-wrapper {
+		width: 108%;
+	}
+	.control-error {
+		display: none;
+	}
+}

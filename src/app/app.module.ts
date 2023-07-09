@@ -10,14 +10,15 @@ import {B2bNgxCheckboxModule} from "@b2b/ngx-checkbox";
 import {MaterialExampleComponent} from "./material-example/material-example.component";
 import {B2bNgxTextareaModule} from "@b2b/ngx-textarea";
 import {NgxPasswordModule} from "@b2b/ngx-password";
+import {CoreModule} from "./core/core.module";
+import {HttpClientModule} from "@angular/common/http";
+import { TranslocoRootModule } from './transloco-root.module';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-  ],
+  declarations: [],
   imports: [
     BrowserModule,
-    AppRoutingModule,
+    CoreModule,
     FormsModule,
     ReactiveFormsModule,
     MatTreeModule,
@@ -26,7 +27,9 @@ import {NgxPasswordModule} from "@b2b/ngx-password";
     MaterialExampleComponent,
     FormsModule,
     B2bNgxTextareaModule,
-    NgxPasswordModule
+    NgxPasswordModule,
+    HttpClientModule,
+    TranslocoRootModule,
   ],
   bootstrap: [AppComponent]
 })

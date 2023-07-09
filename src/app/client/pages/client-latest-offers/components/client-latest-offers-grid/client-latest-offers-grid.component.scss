@@ -1,0 +1,277 @@
+@import "projects/shared/src/styles";
+
+.ngx-latest-offers-grid {
+	display: flex;
+	flex-wrap: wrap;
+	width: 100%;
+	margin: auto;
+	.ngx-latest-offers-grid-item {
+		position: relative;
+		background: #ffffff;
+		box-shadow: 2px 2px 8px #e3eaf1;
+		border-radius: 4px;
+		margin-top: 16px;
+		@include breakpoint("6") {
+			width: 24%;
+			margin-left: 0.6%;
+			margin-right: 0.6%;
+			&:nth-child(4n + 1) {
+				margin-left: 0;
+			}
+			&:nth-child(4n) {
+				margin-right: 0;
+			}
+		}
+		@include breakpoint("5") {
+			width: 32%;
+			margin-left: 1%;
+			margin-right: 1%;
+			&:nth-child(3n + 1) {
+				margin-left: 0;
+			}
+			&:nth-child(3n) {
+				margin-right: 0;
+			}
+		}
+		@include breakpoint("3") {
+			width: 49%;
+			margin-left: 1%;
+			margin-right: 1%;
+			&:nth-child(2n + 1) {
+				margin-left: 0;
+			}
+			&:nth-child(2n) {
+				margin-right: 0;
+			}
+		}
+		@include breakpoint("2") {
+			width: 100%;
+		}
+		.ngx-latest-offers-grid-item-header {
+			.ngx-latest-offers-grid-item-image-container {
+				position: relative;
+				&-overlay {
+					position: absolute;
+					top: 0;
+					width: 100%;
+					height: 148px;
+					background-color: rgba(255, 255, 255, 0.7);
+					display: flex;
+					justify-content: center;
+					align-items: center;
+					p {
+						color: white;
+						font-size: 44px;
+						letter-spacing: 0.2em;
+					}
+				}
+				.ngx-latest-offers-grid-item-image {
+					width: 100%;
+					height: 148px;
+					object-fit: cover;
+				}
+				.ngx-latest-offers-grid-item-discount {
+					position: absolute;
+					left: 0;
+					top: 10px;
+					background: #0f0f11;
+					box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+					border-radius: 0px 3px 3px 0px;
+					color: #ffffff;
+					text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.25);
+					padding: 4px 8px;
+				}
+			}
+			.ngx-latest-offers-grid-item-header-container {
+				padding: 0 24px;
+				.ngx-latest-offers-grid-item-header-title {
+					display: flex;
+					justify-content: space-between;
+					margin-top: 8px;
+
+					.ngx-latest-offers-grid-item-header-title-text {
+						font-weight: bold;
+						font-size: 16px;
+						color: #0f0f11;
+						height: 20px;
+						display: flex;
+						align-items: center;
+					}
+				}
+				.ngx-latest-offers-grid-item-header-price {
+					display: flex;
+					align-items: flex-end;
+					margin-top: 4px;
+					height: 24px;
+					.ngx-latest-offers-grid-item-header-price-dollar-sign {
+						font-weight: 500;
+						font-size: 20px;
+						color: #9fa4bb;
+					}
+					.ngx-latest-offers-grid-item-header-price-amount {
+						font-weight: 500;
+						font-size: 20px;
+						color: #0f0f11;
+						margin-right: 5px;
+					}
+					.ngx-latest-offers-grid-item-header-price-unit {
+						font-size: 16px;
+						color: rgba(108, 112, 119, 0.6);
+					}
+				}
+			}
+		}
+		.ngx-latest-offers-grid-item-blured {
+			position: relative;
+			margin-top: 10px;
+			.ngx-latest-offers-grid-item-blured-img {
+				height: 194px;
+				width: 100%;
+				object-fit: cover;
+			}
+			.ngx-latest-offers-grid-item-blured-container {
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				width: 100%;
+				padding: 16px 24px;
+				.ngx-latest-offers-grid-item-blured-text {
+					font-size: 14px;
+					color: #000000;
+				}
+				.ngx-latest-offers-grid-item-blured-button {
+					margin-top: 12px;
+					width: 100%;
+					padding: 11px 0;
+					// background-color: white;
+					&:hover {
+						// background-color: #f3f6f8;
+					}
+				}
+			}
+		}
+		.ngx-latest-offers-grid-item-main {
+			padding: 0 24px;
+			.ngx-latest-offers-grid-item-seller {
+				margin-top: 9px;
+				display: flex;
+				align-items: center;
+				height: 20px;
+				.ngx-latest-offers-grid-item-seller-logo {
+					height: 24px;
+					width: 24px;
+					margin-right: 8px;
+				}
+				.ngx-latest-offers-grid-item-seller-name {
+				}
+				.ngx-latest-offers-grid-item-seller-verified {
+					margin-left: 8px;
+				}
+			}
+			.ngx-latest-offers-grid-item-route {
+				display: flex;
+				align-items: center;
+				margin-top: 7.5px;
+				.ngx-latest-offers-grid-item-route-first-country-icon {
+					height: 18px;
+					width: 26px;
+					object-fit: cover;
+				}
+				.ngx-latest-offers-grid-item-route-first-country-name {
+					margin-left: 8px;
+					text-transform: uppercase;
+				}
+				.ngx-latest-offers-grid-item-route-arrow-icon {
+					margin-left: 8px;
+				}
+				.ngx-latest-offers-grid-item-route-second-country-icon {
+					margin-left: 8px;
+					height: 18px;
+					width: 26px;
+					object-fit: cover;
+				}
+				.ngx-latest-offers-grid-item-route-second-country-name {
+					margin-left: 8px;
+					text-transform: uppercase;
+				}
+			}
+			.ngx-latest-offers-grid-item-eta {
+				margin-top: 7.5px;
+				font-size: 14px;
+				color: #0f0f11;
+			}
+			&.blured {
+				-webkit-filter: blur(5px);
+				-moz-filter: blur(5px);
+				-o-filter: blur(5px);
+				-ms-filter: blur(5px);
+				filter: blur(5px);
+			}
+		}
+		.ngx-latest-offers-grid-item-footer {
+			margin-top: 8px;
+			padding: 12px 24px;
+			border-top: 1px solid #dfe8f5;
+			.ngx-latest-offers-grid-item-footer-text {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				.ngx-latest-offers-grid-item-footer-old-price {
+					font-weight: 500;
+					font-size: 12px;
+					color: #556274;
+				}
+				.ngx-latest-offers-grid-item-footer-available {
+					font-weight: 500;
+					font-size: 12px;
+					color: #0f0f11;
+					margin-left: 10px;
+				}
+			}
+			.ngx-latest-offers-grid-item-footer-button {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				padding: 10px 0;
+				width: 100%;
+				margin-top: 10px;
+				.ngx-latest-offers-grid-item-footer-button-text {
+					text-shadow: 0px 0px 0.5px rgba(0, 0, 0, 0.25);
+					margin-left: 8px;
+				}
+			}
+			.ngx-latest-offers-grid-item-blured-container {
+				.ngx-latest-offers-grid-item-blured-text {
+					font-size: 14px;
+				}
+				.ngx-latest-offers-grid-item-blured-button {
+					margin-top: 12px;
+					width: 100%;
+					padding: 11px 0;
+				}
+			}
+		}
+		&-deleted {
+			.ngx-latest-offers-grid-item-header-title-text,
+			.ngx-latest-offers-grid-item-header-price-amount {
+				color: #9fa4bb !important;
+			}
+		}
+	}
+}
+
+.icons {
+	z-index: 2;
+	position: absolute;
+	right: 5px;
+	top: 10px;
+	padding: 5px 10px;
+	border-radius: 3px;
+	img {
+		margin: 0 5px;
+		width: 25px;
+	}
+	&:empty {
+		display: none;
+	}
+}

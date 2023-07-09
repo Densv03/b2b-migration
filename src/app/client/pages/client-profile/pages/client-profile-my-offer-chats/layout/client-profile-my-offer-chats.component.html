@@ -1,0 +1,35 @@
+<div class="client-profile-chats" *transloco="let t">
+	<h3 class="client-profile-chats-title">{{ t("OFFERS.MY_OFFERS_CHATS") }}</h3>
+
+	<div class="client-profile-chats-container">
+		<ng-container *ngIf="chats$ | async as chats; else noChats">
+			<b2b-ngx-chats-list
+				*ngIf="chats.length; else noChats"
+				[options]="chats"
+				[dropdownOptions]="dropdownOptions"
+				[sellerOptions]="sellerOptions"
+				[baseUrl]="b2bNgxLinkService.getLink('/chats/') | async"
+				link="chats/"></b2b-ngx-chats-list>
+		</ng-container>
+
+		<ng-template #noChats>
+			<div class="client-profile-my-offers-no-offers" *ngIf="!loading">
+				<p class="client-profile-my-offers-no-offers-title">
+					{{ t("OFFERS.NO_OFFERS_CHATS") }}
+				</p>
+
+				<a
+					b2bNgxLink
+					[routerLink]="b2bNgxLinkService.getLink('/offer') | async"
+					class="client-profile-my-offers-no-offers-button"
+					[theme]="b2bNgxLinkThemeEnum.BACKGROUND_BLACK"
+					>+ {{ t("OFFERS.ADD_OFFER") }}</a
+				>
+			</div>
+		</ng-template>
+
+		<ng-container *ngIf="loading">
+			<b2b-ngx-skeleton [options]="chatsSkeletonOptions"></b2b-ngx-skeleton>
+		</ng-container>
+	</div>
+</div>

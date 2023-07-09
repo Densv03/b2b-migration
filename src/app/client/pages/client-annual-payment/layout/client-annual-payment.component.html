@@ -1,0 +1,127 @@
+<div class="annual-payment" *transloco="let t">
+	<div class="left">
+		<div class="breadcrumbs">
+			<span>Pricing </span>
+			<span>Payment details</span>
+		</div>
+
+		<p class="annual-payment-title">Payment details</p>
+		<p class="description">Enter & confirm the information below for invoicing</p>
+
+		<form [formGroup]="formGroup" (submit)="sendCardData(formGroup.value)">
+			<div class="input-container">
+				<input
+					b2bNgxInput
+					[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"
+					[label]="t('LABELS.CARD_NUMBER')"
+					formControlName="cardNum" />
+			</div>
+
+			<div class="input-container">
+				<input
+					b2bNgxInput
+					[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"
+					[label]="t('LABELS.EMAIL')"
+					formControlName="email" />
+			</div>
+
+			<div class="input-container">
+				<input
+					b2bNgxInput
+					[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"
+					[label]="t('LABELS.EXPIRED_DATE')"
+					formControlName="expDate" />
+			</div>
+			<div class="input-container">
+				<input
+					b2bNgxInput
+					[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"
+					[label]="t('LABELS.POST_CODE')"
+					formControlName="postCode" />
+			</div>
+
+			<button b2bNgxButton class="submit" [theme]="b2bNgxLinkThemeEnum.BACKGROUND_BLACK">Proceed to Payment</button>
+		</form>
+	</div>
+
+	<div class="right">
+		<p class="your-plan">Your plan:</p>
+		<div class="card" *ngIf="isSingleOffer">
+			<div class="card-wrapper">
+				<p class="card-header">
+					<span class="buyer">Buyer</span>
+					<span class="price">
+						<span class="currency">39$</span>
+						<span class="period">/ offer</span>
+					</span>
+				</p>
+				<p class="personal-account">Personal account to manage all you activities.</p>
+				<div class="divider"></div>
+
+				<ul class="list">
+					<li>
+						<span>You will get the opportunity to buy 1 offer for $39</span>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="card">
+			<div class="card-wrapper">
+				<p class="card-header">
+					<span class="buyer">Buyer</span>
+					<span class="price">
+						<span class="currency">588$</span>
+						<span class="period">/ year</span>
+					</span>
+				</p>
+				<p class="personal-account">Personal account to manage all you activities.</p>
+				<div class="divider"></div>
+				<ul class="list">
+					<li>
+						<img b2bNgxIcon name="check-blue" alt="" />
+						<span>Place unlimited bids for cargo sale</span>
+					</li>
+					<li>
+						<img b2bNgxIcon name="check-blue" alt="" />
+						<span>Get legal consultation on cargo sale 24/7</span>
+					</li>
+					<li>
+						<img b2bNgxIcon name="check-blue" alt="" />
+						<span>Get technical support 24/7</span>
+					</li>
+					<li>
+						<img b2bNgxIcon name="check-blue" alt="" />
+						<span>Review cargo sale offers at a discount</span>
+					</li>
+					<li>
+						<img b2bNgxIcon name="check-blue" alt="" />
+						<span
+							>Get access to all information disclosed by the seller, including seller’s phone number/email, and any
+							extra photos/documents</span
+						>
+					</li>
+					<li>
+						<img b2bNgxIcon name="check-blue" alt="" />
+						<span>Buy your preferred cargo at a discount</span>
+					</li>
+					<li>
+						<img b2bNgxIcon name="check-blue" alt="" />
+						<span>Subscribe to newsletter to receive updates on your preferred goods</span>
+					</li>
+					<li>
+						<img b2bNgxIcon name="check-blue" alt="" />
+						<span>Get legal consultation on purchase 24/7</span>
+					</li>
+				</ul>
+			</div>
+			<button
+				*ngIf="isSingleOffer"
+				b2bNgxButton
+				class="submit"
+				[theme]="b2bNgxLinkThemeEnum.BACKGROUND_BLACK"
+				(click)="getAnnualSubscriptionRoute()">
+				Buy annual subscription
+			</button>
+		</div>
+	</div>
+</div>

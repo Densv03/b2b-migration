@@ -1,0 +1,45 @@
+:host {
+	.component-wrapper {
+		width: 50%;
+		margin: auto;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		padding: 100px 0 150px;
+		img {
+			height: 100px;
+		}
+		.title {
+			font-weight: 700;
+			font-size: 32px;
+			line-height: 36px;
+			text-align: center;
+			letter-spacing: 0.01em;
+			color: #0F0F11;
+			margin-top: 15px;
+		}
+		.subtitle {
+			font-weight: 400;
+			font-size: 16px;
+			line-height: 148%;
+			text-align: center;
+			letter-spacing: 0.01em;
+			color: #556274;
+		}
+		.buttons {
+			margin-top: 25px;
+			display: flex;
+			gap: 8px;
+			button {
+				text-align: center;
+				min-width: 165px;
+				font-size: 14px;
+				line-height: 18px;
+				letter-spacing: 0.02em;
+				font-weight: 500;
+				padding: 15px 18px;
+			}
+		}
+	}
+}

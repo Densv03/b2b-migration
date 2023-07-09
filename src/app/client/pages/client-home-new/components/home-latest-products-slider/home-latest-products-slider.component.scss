@@ -1,0 +1,117 @@
+@import "projects/shared/src/styles";
+:host {
+	.slide {
+		display: block;
+		box-shadow: -4px -4px 8px #e5f2fd, 4px 4px 8px #e5f2fd;
+		border-radius: 8px;
+		overflow: hidden;
+		height: 300px;
+
+		&__header {
+			height: 130px;
+
+			img {
+				width: 100%;
+				height: 100%;
+				object-fit: contain;
+			}
+		}
+
+		&__body {
+			padding: 16px;
+			display: flex;
+			flex-direction: column;
+			height: 57%;
+
+			&-title {
+				font-weight: 700;
+				font-size: 16px;
+				line-height: 122%;
+				letter-spacing: 0.01em;
+				color: #0F0F11;
+				@include breakpoint('4') {
+					font-size: 15px;
+				}
+			}
+
+			.medium-text {
+				font-weight: 400;
+				font-size: 12px;
+				line-height: 140%;
+				margin-top: 8px;
+				letter-spacing: 0.01em;
+				color: #000000;
+			}
+
+			&-footer {
+				margin-top: auto;
+				&-companyName {
+					//margin-top: 16px;
+
+				}
+
+				&-country {
+					margin-top: auto;
+					display: flex;
+					align-items: flex-end;
+					gap: 10px;
+
+					img {
+						width: 18px;
+						height: 16px;
+					}
+
+					.name {
+						font-weight: 400;
+						font-size: 12px;
+						line-height: 140%;
+						letter-spacing: 0.01em;
+						color: #000000;
+					}
+				}
+			}
+		}
+	}
+}
+
+:host::ng-deep {
+	.carousel {
+		.swiper {
+			min-height: 200px;
+			padding-bottom: 10px;
+			display: flex;
+			@include breakpoint("1") {
+				padding-bottom: 0;
+				margin-top: 0;
+			}
+
+			.swiper-wrapper {
+				padding: 5px 0;
+				.swiper-slide {
+					border-radius: 8px;
+					overflow: hidden;
+					padding: 8px;
+					box-shadow: none;
+				}
+			}
+		}
+		.swiper-button-next, .swiper-button-prev {
+			width: 16px;
+			height: 16px;
+			color: #9FA4BB;
+			@include breakpoint('3') {
+				display: none;
+			}
+		}
+		.swiper-button-next:after,
+		.swiper-button-prev:after {
+			font-size: 15px;
+		}
+		.swiper-button-next {
+			right: -45px;
+		}
+		.swiper-button-prev {
+			left: -45px;
+		}
+	}
+}

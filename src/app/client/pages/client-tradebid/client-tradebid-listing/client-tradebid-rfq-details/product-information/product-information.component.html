@@ -1,0 +1,31 @@
+<div class="product-information">
+	<div class="product-information__container">
+		<h2>The buyer is looking for to buy:</h2>
+		<div class="product-information__container__table">
+			<div class="product-information__container__table__left">
+				<p>product name:</p>
+				<p>product category:</p>
+				<p>purpose:</p>
+				<p>delivery terms:</p>
+				<p>quantity:</p>
+				<p>destination:</p>
+				<p>payment method:</p>
+			</div>
+
+			<div class="product-information__container__table__right">
+				<h1 class="title">{{ rfqInfo.productName }}</h1>
+				<p>{{ getCategoryNameById(rfqInfo.category) | async }}</p>
+				<p>{{ rfqInfo.thePurposeOfSourcing }}</p>
+				<p>{{ rfqInfo.tradeTerms }}</p>
+				<p>{{ rfqInfo.quantity + " " + measureName }}</p>
+				<p>{{ getCountryNameByCode(rfqInfo.destination?.to) }}</p>
+				<p>{{ rfqInfo.paymentMethod }}</p>
+			</div>
+		</div>
+	</div>
+
+	<div class="product-information__message">
+		<h2>Message:</h2>
+		<p>{{ rfqInfo.moreInformation }}</p>
+	</div>
+</div>

@@ -1,0 +1,49 @@
+//@import "libs/shared/styles/src/lib";
+@import "projects/shared/src/styles";
+
+.cookies {
+	width: 570px;
+
+	padding: 25px 58px 25px 0;
+
+	@include breakpoint("3") {
+		width: 100%;
+		padding: 15px 0;
+	}
+
+	.title {
+		font-weight: bold;
+		font-size: 18px;
+		color: #0f0f11;
+	}
+
+	.description {
+		font-size: 14px;
+		letter-spacing: 0.01em;
+		color: #556274;
+
+		margin-top: 8px;
+
+		a {
+			text-decoration-line: underline;
+			color: #005dff;
+		}
+	}
+
+	.buttons {
+		margin-top: 24px;
+		display: flex;
+		justify-content: space-between;
+		@include breakpoint("3") {
+			margin-top: 10px;
+		}
+		button {
+			width: 49%;
+			padding: 15px 0;
+
+			@include breakpoint("3") {
+				padding: 5px 0;
+			}
+		}
+	}
+}

@@ -1,0 +1,39 @@
+<div class="dialog" *transloco="let t">
+	<div class="wrapper" *ngIf="!isReportSend">
+		<img b2bNgxIcon name="trash_2" class="dialog-icon" />
+		<h1>Are you sure you want to delete your account?</h1>
+		<p>
+			Once your account is deleted, all of your activity on the site, your offers, chats, and articles will be erased.
+			But within 30 days you can easily restore your account.
+		</p>
+		<p class="restore-account">Please describe the reason for deleting the account.</p>
+		<div>
+			<b2b-ngx-radio
+				class="column"
+				[options]="[
+					'I am not interested in selling and buying unclaimed goods',
+					'I get too many notifications',
+					'I sold my cargo',
+					'Other'
+				]"
+				[formControl]="formControl"></b2b-ngx-radio>
+			<textarea
+				b2bNgxTextarea
+				[formControl]="otherReasonControl"
+				[disabled]="formControl.value !== 'Other'"
+				[placeholder]="'Message'"
+				class="textarea"
+				rows="4"></textarea>
+			<p *ngIf="otherReasonControl.errors && otherReasonControl.touched" class="error">This field have to be filled</p>
+		</div>
+		<div class="actions">
+			<button type="button" b2bNgxButton [theme]="b2bNgxButtonThemeEnum.BACKGROUND_WHITE" (click)="close()">
+				Cancel
+			</button>
+			<button class="delete" type="button" b2bNgxButton (click)="deleteOffer($event)" [disabled]="!formControl.value">
+				Delete account
+			</button>
+		</div>
+	</div>
+</div>
+<!-- [theme]="b2bNgxButtonThemeEnum.BACKGROUND_RED" -->

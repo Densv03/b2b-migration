@@ -1,0 +1,165 @@
+@import "projects/shared/src/styles";
+
+:host {
+	.ngx-offers-carousel {
+		position: relative;
+		overflow: hidden;
+
+		.ngx-offers-carousel-right-button-wrapper,
+		.ngx-offers-carousel-left-button-wrapper {
+			position: absolute;
+			height: 100%;
+			top: 0;
+			z-index: 1;
+
+			display: flex;
+			align-items: center;
+			justify-content: center;
+
+			.ngx-offers-carousel-left-button,
+			.ngx-offers-carousel-right-button {
+				box-shadow: 2px 2px 32px rgba(126, 142, 167, 0.2);
+				width: 50px;
+				height: 50px;
+				background-color: white;
+				border-radius: 50%;
+
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				&:hover {
+					background-color: #f3f6f8;
+				}
+			}
+
+			&.ngx-offers-carousel-right-button-wrapper {
+				right: 24px;
+			}
+			&.ngx-offers-carousel-left-button-wrapper {
+				left: 24px;
+			}
+		}
+
+		.ngx-offers-carousel-list {
+			display: flex;
+
+			padding: 0 0 24px;
+
+			.ngx-offers-carousel-list-item {
+				margin: 0 8px;
+				@include breakpoint("3") {
+					margin: 0 24px;
+				}
+				background: #ffffff;
+				box-shadow: 4px 4px 24px rgba(126, 142, 167, 0.2);
+				border-radius: 4px;
+
+				.ngx-offers-carousel-list-item-container {
+					width: 380px;
+					@include breakpoint("3") {
+						width: 345px;
+					}
+					display: block;
+					padding: 19px 0;
+					height: 100%;
+					.ngx-offers-carousel-list-item-header {
+						display: flex;
+						align-items: center;
+
+						.ngx-offers-carousel-list-item-header-discount {
+							font-weight: bold;
+							font-size: 14px;
+							color: #ffffff;
+							background: #0f0f11;
+							box-shadow: 1px 1px 2px #dce1ed;
+							border-radius: 0 3px 3px 0;
+							padding: 4px 8px;
+						}
+						.ngx-offers-carousel-list-item-header-info {
+							height: 20px;
+							display: flex;
+							align-items: center;
+							font-size: 14px;
+							color: #b1b1b1;
+							margin-left: 24px;
+						}
+					}
+					.ngx-offers-carousel-list-item-main {
+						font-weight: bold;
+						font-size: 16px;
+						color: #0f0f11;
+						margin-top: 15px;
+						padding: 0 16px;
+						height: 20px;
+						display: flex;
+						align-items: center;
+					}
+					.ngx-offers-carousel-list-item-footer {
+						padding: 0 16px;
+						margin-top: 5px;
+						display: flex;
+						justify-content: space-between;
+						align-items: center;
+						.ngx-offers-carousel-list-item-footer-info {
+							margin-top: 7.5px;
+							img {
+								width: 270px;
+								height: 76px;
+							}
+							.ngx-offers-carousel-list-item-footer-info-seller-title {
+								color: #9fa4bb;
+								text-transform: uppercase;
+								font-size: 11px;
+								font-weight: bold;
+							}
+							.ngx-offers-carousel-list-item-footer-info-seller-name {
+								color: #0f0f11;
+								font-size: 14px;
+								margin-top: 7.5px;
+								height: 20px;
+								display: flex;
+								align-items: center;
+							}
+							.ngx-offers-carousel-list-item-footer-info-route {
+								display: flex;
+								align-items: center;
+								margin-top: 7.5px;
+								.ngx-offers-carousel-list-item-footer-info-route-from {
+									color: #9fa4bb;
+									font-size: 11px;
+								}
+								.ngx-offers-carousel-list-item-footer-info-route-to {
+									color: #9fa4bb;
+									font-size: 11px;
+								}
+								.ngx-offers-carousel-list-item-footer-info-route-image {
+									margin: 0 5px;
+									width: 26px;
+									height: 18px;
+									object-fit: cover;
+								}
+							}
+						}
+						.ngx-offers-carousel-list-item-footer-price {
+							.ngx-offers-carousel-list-item-footer-dollar-sign {
+								font-size: 24px;
+								color: rgba(108, 112, 119, 0.6);
+							}
+							.ngx-offers-carousel-list-item-footer-price-number {
+								font-size: 24px;
+								color: #0f0f11;
+							}
+							.ngx-offers-carousel-list-item-footer-available {
+								font-size: 14px;
+								color: #0f0f11;
+							}
+						}
+					}
+				}
+			}
+			&:hover {
+				animation-play-state: paused;
+			}
+		}
+	}
+}

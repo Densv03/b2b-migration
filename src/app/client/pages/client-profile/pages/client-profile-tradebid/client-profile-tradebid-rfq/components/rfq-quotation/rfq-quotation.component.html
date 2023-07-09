@@ -1,0 +1,209 @@
+<form class="quotation__wrapper__form" [formGroup]="form" (ngSubmit)="submitForm(form)">
+	<div class="quotation__wrapper__form__container" formGroupName="quotationForm">
+		<h2>Quotation form</h2>
+
+		<input
+			class="big-inp form__input"
+			b2bNgxInput
+			placeholder="Product name"
+			label="Product name"
+			[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"
+			formControlName="productName" />
+		<p
+			*ngIf="
+				this.form.get('quotationForm').get('productName').touched &&
+				this.form.get('quotationForm').get('productName').errors?.latin
+			"
+			class="error"
+			[@fadeInOut]>
+			Please use only latin letters
+		</p>
+		<p
+			*ngIf="
+				this.form.get('quotationForm').get('productName').touched &&
+				this.form.get('quotationForm').get('productName').errors?.required
+			"
+			class="error"
+			[@fadeInOut]>
+			This field is required
+		</p>
+		<input
+			class="big-inp form__input"
+			b2bNgxInput
+			placeholder="Indicate products specification"
+			label="Specifications"
+			[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"
+			formControlName="specifications" />
+		<p
+			*ngIf="
+				this.form.get('quotationForm').get('specifications').touched &&
+				this.form.get('quotationForm').get('specifications').errors?.required
+			"
+			class="error"
+			[@fadeInOut]>
+			This field is required
+		</p>
+		<p
+			*ngIf="
+				this.form.get('quotationForm').get('specifications').touched &&
+				this.form.get('quotationForm').get('specifications').errors?.latin
+			"
+			class="error"
+			[@fadeInOut]>
+			Please use only latin letters
+		</p>
+		<div class="quotation__half-space">
+			<b2b-ngx-select
+				[options]="productionYear$ | async"
+				bindValue="id"
+				bindLabel="value"
+				placeholder="Select"
+				[theme]="b2bNgxSelectThemeEnum.BACKGROUND_GRAY"
+				formControlName="productionYear">
+				{{ productionOrCropsYear$ | async }}
+			</b2b-ngx-select>
+		</div>
+
+		<div
+			[ngStyle]="
+				form.get('quotationForm').get('price').get('price').touched &&
+				form.get('quotationForm').get('price').get('price').errors?.required
+					? { marginBottom: '10px' }
+					: null
+			"
+			class="quotation__container"
+			formGroupName="price">
+			<div class="input-wrapper">
+				<input
+					class="form__input normal-inp"
+					b2bNgxInput
+					placeholder="Price Offer"
+					label="Price Offer"
+					[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"
+					formControlName="price" />
+				<p
+					*ngIf="
+						form.get('quotationForm').get('price').get('price').touched &&
+						form.get('quotationForm').get('price').get('price').errors?.required
+					"
+					class="error price-error"
+					[@fadeInOut]>
+					This field is required
+				</p>
+				<p
+					*ngIf="
+						form.get('quotationForm').get('price').get('price').touched &&
+						form.get('quotationForm').get('price').get('price').errors?.number &&
+						!form.get('quotationForm').get('price').get('price').errors?.required
+					"
+					class="error price-error"
+					[@fadeInOut]>
+					Please, use only numbers
+				</p>
+			</div>
+			<div class="quotation__half-space group-select-wrapper">
+				<b2b-ngx-select
+					[options]="tradeTerms$ | async"
+					bindValue="id"
+					bindLabel="value"
+					[theme]="b2bNgxSelectThemeEnum.BACKGROUND_GRAY"
+					formControlName="tradeTerms">
+					&nbsp;
+				</b2b-ngx-select>
+			</div>
+		</div>
+
+		<div class="quotation__container">
+			<div class="quotation__half-space">
+				<b2b-ngx-select
+					[options]="unit$ | async"
+					bindValue="displayName"
+					bindLabel="displayName"
+					[theme]="b2bNgxSelectThemeEnum.BACKGROUND_GRAY"
+					formControlName="unit"
+					style="width: 44%"
+					placeholder="Select"
+					(changed)="addValidator($event)">
+					Unit measure
+				</b2b-ngx-select>
+			</div>
+			<div class="input-wrapper">
+				<input
+					*ngIf="showCustomUnitInput$ | async"
+					b2bNgxInput
+					class="measure-input"
+					[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"
+					formControlName="otherUnit"
+					placeholder="Enter unit measure"
+					label="&nbsp;" />
+				<p
+					*ngIf="
+						form.get('quotationForm').get('otherUnit').touched &&
+						form.get('quotationForm').get('otherUnit').errors?.required
+					"
+					class="error other-unit-error"
+					[@fadeInOut]>
+					This field is required
+				</p>
+				<p
+					*ngIf="
+						form.get('quotationForm').get('otherUnit').touched &&
+						form.get('quotationForm').get('otherUnit').errors?.latin
+					"
+					class="error other-unit-error"
+					[@fadeInOut]>
+					Please, use only latin and numbers
+				</p>
+			</div>
+		</div>
+		<textarea
+			b2bNgxTextarea
+			[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"
+			placeholder="Enter at least 20 characters"
+			label="More information"
+			class="quotation__textarea quotation__half-space"
+			formControlName="moreInformation"></textarea>
+		<p
+			*ngIf="
+				form.get('quotationForm').get('moreInformation').touched &&
+				form.get('quotationForm').get('moreInformation').errors?.required
+			"
+			class="error"
+			[@fadeInOut]>
+			This field is required
+		</p>
+		<p
+			*ngIf="
+				form.get('quotationForm').get('moreInformation').touched &&
+				form.get('quotationForm').get('moreInformation').errors?.latin
+			"
+			class="error"
+			[@fadeInOut]>
+			Please, use only latin and numbers
+		</p>
+		<p
+			*ngIf="
+				form.get('quotationForm').get('moreInformation').touched &&
+				form.get('quotationForm').get('moreInformation').errors?.minlength
+			"
+			[ngStyle]="{ marginTop: '15px' }"
+			class="error"
+			[@fadeInOut]>
+			Please, put more than 20 letters, now
+			{{ form.get("quotationForm").get("moreInformation").errors?.minlength.actualLength }} letters
+		</p>
+		<div class="file-wrapper ngx-file-wrapper">
+			<b2b-ngx-file formControlName="photos" [isPhoto]="false" label="Choose file">Products picture </b2b-ngx-file>
+		</div>
+		<span class="empty-file-label" *ngIf="isFileLabelVisible">No File Chosen</span>
+		<div class="quotation__label">Please use only real photos. All photos will be checked by the moderators.</div>
+	</div>
+	<button
+		b2bNgxButton
+		[theme]="b2bNgxButtonThemeEnum.BACKGROUND_BLACK"
+		type="submit"
+		class="quotation__btn-submit"
+		[disabled]="isSubmitEnabled">
+		Submit
+	</button>
+</form>

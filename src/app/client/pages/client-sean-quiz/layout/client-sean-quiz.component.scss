@@ -1,0 +1,14 @@
+::ng-deep {
+	.marquiz__bg_open .marquiz__modal {
+		max-width: 100% !important;
+		min-height: 100% !important;
+		width: 100% !important;
+		height: 100% !important;
+	}
+	.marquiz__bg_open .marquiz__frame_open {
+		height: 100% !important;
+	}
+	#marquiz__close {
+		display: none;
+	}
+}

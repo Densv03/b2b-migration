@@ -1,0 +1,177 @@
+<div class="promo-section">
+	<div
+		#promoContent
+		class="promo-content">
+		<img class="icon-left" b2bNgxIcon name="promo-offers-icon-l" alt="icon">
+		<img class="icon-right" b2bNgxIcon name="promo-offers-icon-r" alt="icon">
+
+		<div class="promo-content-title">
+			<span>About the platform and unclaimed cargo.</span>
+		</div>
+
+		<ul [@slideInOut]="showMoreMode" class="main-text">
+			<li >
+				<p>B2B Discount is the sole newly opened resource that offers to put up for sale and
+					buy unclaimed cargo.</p>
+				<p>Unclaimed cargo is regular cargo rejected by the recipient for a variety of possible reasons. It should be
+					quickly sold at a discount for the owner to avoid all sorts of fines from logistics operators.
+					We also recommend you to put your goods on display in the “Unclaimed Cargo” section at the stage when your
+					recipient has violated the terms of payment – we call this risk management.
+					There's only one condition you have to comply with in order to place your offer: you must possess documents
+					confirming that the cargo has been cleared and shipped, so we could verify it.</p>
+			</li>
+			<li>
+				<p class="hidden-text-mobile">If you are interested in purchasing such a cargo but you don’t see any offer that might be interesting for
+					you right now, register on the platform and you will receive email notifications about new offers.</p>
+				<p class="advertise-title">Learn more about unclaimed cargo</p>
+				<div routerLink="/blog/634563e7ac8cb100263f7279" class="cargo-link">Follow the link to learn more</div>
+
+				<div class="market-promo">
+					If you are a supplier, we invite you to join our
+					<span class="market-link" routerLink="/b2bmarket">B2B Market</span>, a place for
+					promoting products and sourcing buyers. (There are more than 25,000 businesses on the platform).
+				</div>
+			</li>
+		</ul>
+
+		<div (click)="toggleShowMoreMode()" class="toggle-state-button">
+			<img
+				b2bNgxIcon
+				[ngClass]="{'rotated-img': showMoreMode === showMoreModeEnum.IN}"
+				name="arrow-top-blue"
+				alt="arrow">
+			<div class="text">{{showMoreMode === showMoreModeEnum.IN ? 'Hide' : 'Show more'}}</div>
+		</div>
+	</div>
+</div>
+
+<form [formGroup]="formGroup" class="latest-offers" *transloco="let t">
+	<div class="latest-offers-header">
+		<h3 class="latest-offers-header-title">
+			<span class="latest-offers-header-title-text">{{ t("OFFERS.ALL_OFFERS") }}</span>
+			<span class="latest-offers-header-icon"></span>
+		</h3>
+		<input
+			b2bNgxInput
+			formControlName="q"
+			[theme]="b2bNgxInputThemeEnum.BACKGROUND_WHITE"
+			class="latest-offers-header-search"
+			[placeholder]="t('PLACEHOLDERS.SEARCH')"/>
+		<div class="latest-offers-header-filters">
+			<p *ngIf="false" class="latest-offers-header-show-filter">
+				<span class="latest-offers-header-show-filter-text">SHOW</span>
+				<span class="latest-offers-header-show-filter-text">{{ t("OFFERS.SHOW") }}:</span>
+				<b2b-ngx-select
+					[theme]="b2bNgxSelectThemeEnum.BACKGROUND_TRANSPARENT"
+					[placeholder]="t('PLACEHOLDERS.SELECT_SHOW_TYPE')"></b2b-ngx-select>
+			</p>
+			<p class="latest-offers-header-sort-filter">
+				<span class="latest-offers-header-sort-filter-text">{{t('OFFERS.SORT_BY')}}</span>
+				<b2b-ngx-select
+					formControlName="sort"
+					[options]="sortTypes"
+					[theme]="b2bNgxSelectThemeEnum.BACKGROUND_TRANSPARENT"
+					[placeholder]="t('PLACEHOLDERS.SELECT_SORT_TYPE')"></b2b-ngx-select>
+			</p>
+			<div class="latest-offers-header-display-type">
+				<button b2bNgxButton (click)="changeOffersListTheme('grid')">
+					<img b2bNgxIcon name="view-grid"/>
+				</button>
+				<button b2bNgxButton (click)="changeOffersListTheme('list')">
+					<img b2bNgxIcon name="view-list"/>
+				</button>
+			</div>
+		</div>
+	</div>
+
+	<div class="latest-offers-main">
+		<div class="latest-offers-main-filters">
+			<b2b-ngx-select
+				formControlName="transportType"
+				[options]="transportTypes$ | async"
+				bindValue="_id"
+				bindLabel="displayName"
+				class="latest-offers-main-filter"
+				[placeholder]="t('PLACEHOLDERS.TRANSPORT_TYPE')"></b2b-ngx-select>
+<!--			<b2b-ngx-treeview-->
+<!--				formControlName="categories[]"-->
+<!--				[items]="categories$ | async"-->
+<!--				class="latest-offers-main-filter"-->
+<!--				[buttonName]="t('SIDENAV.SAVE')"-->
+<!--				position="right"></b2b-ngx-treeview>-->
+			<b2b-ngx-country-select
+				formControlName="destinationFrom"
+				class="latest-offers-main-filter"
+				[placeholder]="t('PLACEHOLDERS.FROM')"></b2b-ngx-country-select>
+			<b2b-ngx-country-select
+				formControlName="destinationTo"
+				class="latest-offers-main-filter"
+				[placeholder]="t('PLACEHOLDERS.TO')"></b2b-ngx-country-select>
+			<button
+				(click)="clearFilters()"
+				b2bNgxButton
+				[theme]="b2bNgxButtonThemeEnum.OUTLINE_GRAY"
+				class="latest-offers-main-clear-filters">
+				{{ t("OFFERS.CLEAR_ALL") }}
+			</button>
+		</div>
+		<div class="latest-offers-main-list">
+			<ng-container *ngIf="offers$ | async as offers; else offersSleleton">
+				<ng-container *ngIf="offers.length; else offersSleleton">
+					<b2b-client-latest-offers-list
+						*ngIf="offersListTheme === 'list'"
+						[user]="user$ | async"
+						[options]="offers"
+						link="offers/"
+						(starClicked)="toggleFavoriteOffers($event)"></b2b-client-latest-offers-list>
+					<b2b-client-latest-offers-grid
+						*ngIf="offersListTheme === 'grid'"
+						[user]="user$ | async"
+						[options]="offers"
+						link="offers/"
+						(starClicked)="toggleFavoriteOffers($event)"></b2b-client-latest-offers-grid>
+<!--					<b2b-pagination-->
+<!--						*ngIf="user$ | async; else upgradeToSeeMore"-->
+<!--						[length]="offersCount$ | async"-->
+<!--						[perPage]="12"-->
+<!--						(togglePageNumber)="getPageOffers($event)"-->
+<!--						[currentPage]="currentPage$ | async"></b2b-pagination>-->
+				</ng-container>
+			</ng-container>
+
+			<ng-template #upgradeToSeeMore>
+				<div class="laster-offes-upgrade-to-see-more">
+					<!--						[routerLink]="b2bNgxLinkService.getLink('/pricing') | async"-->
+					<!--					TODO: update routerLink below-->
+					<a
+						b2bNgxLink
+						[theme]="b2bNgxLinkThemeEnum.BACKGROUND_BLACK"
+						[routerLink]="'/auth/log-in'"
+						class="laster-offes-upgrade-to-see-more-button">
+						<img b2bNgxIcon name="upgrade" class="laster-offes-upgrade-to-see-more-icon" alt=""/>
+						<span class="laster-offes-upgrade-to-see-more-text">{{ t("OFFERS.UPGRADE_TO_SEE_MORE") }}</span>
+					</a>
+				</div>
+			</ng-template>
+
+			<ng-template #offersSleleton>
+				<ng-container *ngIf="loading; else noOffers">
+<!--					<b2b-ngx-skeleton [options]="offersSkeletonOptions"></b2b-ngx-skeleton>-->
+				</ng-container>
+			</ng-template>
+
+			<ng-template #noOffers>
+				<div class="latest-offers-no-offers">
+<!--					<p class="latest-offers-no-offers-title">{{ t("OFFERS.NO_OFFERS") }}</p>-->
+					<button
+						class="view-all-offers"
+						b2bNgxButton
+						[theme]="b2bNgxButtonThemeEnum.BACKGROUND_BLACK"
+						(click)="clearFilters()">
+						{{ t("OFFERS.VIEW_ALL_OFFERS") }}
+					</button>
+				</div>
+			</ng-template>
+		</div>
+	</div>
+</form>

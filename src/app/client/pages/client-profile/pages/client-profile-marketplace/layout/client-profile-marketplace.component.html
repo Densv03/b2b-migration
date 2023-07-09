@@ -1,0 +1,37 @@
+<div class="market-profile">
+	<div class="title">B2B market</div>
+	<mat-tab-group mat-align-tabs="start">
+		<mat-tab *ngIf="!isBuyerAccount" label="My products">
+			<b2b-client-profile-marketplace-products [products$]="manageProducts$"> </b2b-client-profile-marketplace-products>
+			<b2b-ngx-pagination
+				(togglePageNumber)="togglePageProductList($event)"
+				[length]="totalProductLength$ | async"
+				[perPage]="PRODUCTS_LIMIT"
+				class="pagination"></b2b-ngx-pagination>
+		</mat-tab>
+		<mat-tab label="Chats">
+			<b2b-client-profile-marketplace-chats
+				[chats]="chats$ | async"
+				(chatDelete)="onChatDelete()"></b2b-client-profile-marketplace-chats>
+			<b2b-ngx-pagination
+				(togglePageNumber)="togglePageChatsList($event)"
+				[length]="totalChatsLength$ | async"
+				[perPage]="PRODUCTS_LIMIT"
+				class="pagination">
+			</b2b-ngx-pagination>
+		</mat-tab>
+		<!--	<mat-tab label="Archived">-->
+		<!--		<b2b-client-profile-marketplace-archive-->
+		<!--			[archivedProducts$]="archievedProducts$"-->
+		<!--			[itemsForDropdown]="itemsForArchiveDropdown"-->
+		<!--			(delete)="deleteProduct($event)"-->
+		<!--			(restore)="restoreProduct($event)">-->
+		<!--		</b2b-client-profile-marketplace-archive>-->
+		<!--		<b2b-ngx-pagination-->
+		<!--			(togglePageNumber)="togglePageArchiveList($event)"-->
+		<!--			[length]="totalArchivedLength$ | async"-->
+		<!--			[perPage]="PRODUCTS_LIMIT"-->
+		<!--			class="pagination"></b2b-ngx-pagination>-->
+		<!--	</mat-tab>-->
+	</mat-tab-group>
+</div>

@@ -1,0 +1,74 @@
+@import "projects/shared/src/styles";
+
+.cookies-policy {
+	background-color: white;
+	border-top: 1px solid #e3eaf1;
+	padding: 60px 0;
+	@include breakpoint("3") {
+		padding: 15px;
+	}
+	.container {
+		width: 60%;
+		margin: 0 auto;
+
+		@include breakpoint("3") {
+			width: 100%;
+		}
+
+		.title-wrapper {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			flex-wrap: wrap;
+
+			.title {
+				font-weight: bold;
+				font-size: 32px;
+				line-height: 36px;
+				letter-spacing: 0.01em;
+				color: #0f0f11;
+			}
+
+			.dates {
+				@include breakpoint("3") {
+					width: 100%;
+					display: flex;
+					justify-content: space-between;
+					margin-top: 15px;
+				}
+
+				.modifed-date,
+				.effective-date {
+					display: block;
+					font-weight: 500;
+					font-size: 11px;
+					line-height: 136%;
+					text-align: right;
+					letter-spacing: 0.06em;
+					text-transform: uppercase;
+					color: #556274;
+				}
+			}
+		}
+	}
+
+	.section {
+		.section-title {
+			font-weight: bold;
+			font-size: 18px;
+			line-height: 134%;
+			color: #0f0f11;
+			margin-top: 60px;
+		}
+		.section-description {
+			font-size: 14px;
+			line-height: 200%;
+			letter-spacing: 0.01em;
+			color: #556274;
+			margin-top: 16px;
+		}
+		.section-table {
+			margin-top: 30px;
+		}
+	}
+}

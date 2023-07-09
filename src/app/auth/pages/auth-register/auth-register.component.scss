@@ -1,0 +1,56 @@
+@import "projects/shared/src/styles";
+
+.wrapper {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+	margin: 2.5rem 6rem;
+	@include breakpoint('4') {
+		//margin-top: 0;
+
+	}
+	@include breakpoint('3') {
+		padding-top: 70px;
+		margin: 0;
+	}
+
+	.back-btn {
+		position: absolute;
+		left: 0;
+		top: 0;
+		display: flex;
+		align-items: center;
+		@include breakpoint('3') {
+			left: 85px;
+			top: 20px;
+		}
+		@include breakpoint('2') {
+			left: 35px;
+			top: 10px;
+		}
+
+		span {
+			font-weight: 400;
+			font-size: 14px;
+			line-height: 140%;
+			color: #556274;
+		}
+
+		img {
+			width: 24px;
+			height: 24px;
+		}
+	}
+
+	mat-horizontal-stepper {
+		width: 50%;
+		max-width: 564px;
+		@include breakpoint('4') {
+			width: 85%;
+		}
+	}
+
+}
+
+

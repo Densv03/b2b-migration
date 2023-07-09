@@ -1,0 +1,40 @@
+.add-payment-method {
+	padding: 64px 84px;
+	.error {
+		font-size: 14px;
+		color: #e63d3d;
+		margin-top: 10px;
+	}
+	.title {
+		font-style: normal;
+		font-weight: bold;
+		font-size: 32px;
+		line-height: 36px;
+		letter-spacing: 0.01em;
+		color: #0f0f11;
+		text-align: center;
+	}
+
+	form {
+		margin-top: 32px;
+
+		.input-container {
+			margin-top: 16px;
+		}
+
+		.inputs-container {
+			display: flex;
+			justify-content: space-between;
+			align-items: flex-end;
+			.input-container {
+				width: 49%;
+			}
+		}
+
+		.save {
+			margin-top: 24px;
+			padding: 15px 0;
+			width: 100%;
+		}
+	}
+}

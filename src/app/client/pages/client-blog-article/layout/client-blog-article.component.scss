@@ -1,0 +1,207 @@
+@import "projects/shared/src/styles";
+
+::ng-deep {
+	.client-trading-wiki-article-text {
+		width: 70%;
+		line-height: 24px;
+
+		span,
+		p {
+			line-height: 24px;
+		}
+
+		ul,
+		li {
+			list-style: disc !important;
+		}
+
+		ul {
+			padding-left: 30px;
+		}
+
+		strong,
+		b {
+			font-weight: bold !important;
+		}
+
+		img {
+			width: 100%;
+		}
+
+		@include breakpoint("3") {
+			width: 100%;
+		}
+	}
+
+	.sp-element-container {
+		display: flex;
+		flex-direction: row-reverse;
+		justify-content: center;
+		gap: 20px;
+		@include breakpoint("2") {
+			display: block;
+			width: 300px;
+			margin: auto !important;
+		}
+	}
+
+	.sp-field-full-width {
+		width: 35%;
+		display: flex;
+		align-items: flex-end;
+		@include breakpoint("2") {
+			width: 100%;
+
+		}
+	}
+
+	.sp-form-outer {
+		background: white;
+		margin-top: 25px !important;
+	}
+	.sp-form {
+		margin: auto !important;
+	}
+	.email-input-wrapper {
+		display: flex;
+		gap: 10px;
+		align-items: flex-end;
+	}
+	.sp-button {
+		height: 35px;
+	}
+}
+
+.client-trading-wiki-article {
+	padding: 60px 100px;
+	.client-trading-wiki-article-container {
+		background-color: white;
+		padding: 46px 66px;
+		.client-trading-wiki-article-title {
+			font-weight: bold;
+			font-size: 32px;
+			color: #0f0f11;
+			margin-top: 40px;
+			line-height: 37px;
+		}
+		.client-trading-wiki-article-date {
+			font-size: 14px;
+			color: #9fa4bb;
+			margin-top: 10px;
+		}
+		.client-trading-wiki-article-text {
+			font-size: 16px;
+			color: #0f0f11;
+			margin-top: 57px;
+
+			white-space: normal;
+		}
+
+		@include breakpoint("3") {
+			padding: 15px;
+		}
+	}
+
+	.client-trading-wiki-article__share {
+		margin-top: 24px;
+		background-color: white;
+		border-radius: 4px;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		height: 80px;
+		.client-trading-wiki-article__share-left {
+			background: #0f0f11;
+			border-radius: 0 4px 4px 0;
+			height: 100%;
+			width: 80px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+		.client-trading-wiki-article__share-middle {
+			flex: 1;
+			.client-trading-wiki-article__share-middle-text {
+				font-style: normal;
+				font-weight: bold;
+				font-size: 18px;
+				line-height: 134%;
+				color: #0f0f11;
+				padding: 0 32px;
+			}
+		}
+		.client-trading-wiki-article__share-right {
+			.client-trading-wiki-article__share-right-social-medias {
+				display: flex;
+				padding-right: 52px;
+				.client-trading-wiki-article__share-right-social-media {
+					margin: 0 15px;
+					&:first-child {
+						margin-left: 0;
+					}
+					&:last-child {
+						margin-right: 0;
+					}
+				}
+			}
+		}
+
+		@include breakpoint("3") {
+			display: none;
+		}
+	}
+
+	.client-trading-wiki-article__comments {
+		margin-top: 24px;
+		background-color: white;
+		padding: 60px 66px;
+		border-radius: 4px;
+		.client-trading-wiki-article__comments-title {
+			font-style: normal;
+			font-weight: bold;
+			font-size: 24px;
+			line-height: 134%;
+			letter-spacing: 0.01em;
+			color: #0f0f11;
+		}
+
+		.client-trading-wiki-article__comments-textarea {
+			margin-top: 32px;
+		}
+
+		.client-trading-wiki-article__comments-button {
+			margin-top: 12px;
+			padding: 11px 24px;
+		}
+
+		.client-trading-wiki-article__comments-list {
+			padding-top: 32px;
+			border-top: 1px solid #e3eaf1;
+			margin-top: 32px;
+			.client-trading-wiki-article__comment {
+				margin-top: 25px;
+				.client-trading-wiki-article__comment-author {
+					font-weight: bold;
+					font-size: 16px;
+					color: #0f0f11;
+				}
+				.client-trading-wiki-article__comment-message {
+					margin-top: 8px;
+					font-style: normal;
+					font-weight: normal;
+					font-size: 16px;
+					letter-spacing: 0.01em;
+					color: #0f0f11;
+				}
+			}
+		}
+
+		@include breakpoint("3") {
+			padding: 15px;
+		}
+	}
+
+	@include breakpoint("3") {
+		padding: 0;
+	}
+}

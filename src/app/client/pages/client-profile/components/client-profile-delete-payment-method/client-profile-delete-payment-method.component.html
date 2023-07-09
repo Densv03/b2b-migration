@@ -1,0 +1,7 @@
+<div class="delete-payment-method" *transloco="let t">
+	<p class="title">Вы точно хотите удалить платежый метод?</p>
+	<div class="actions">
+		<button b2bNgxButton [theme]="b2bNgxButtonThemeEnum.BACKGROUND_BLACK" (click)="delete()">Да</button>
+		<button b2bNgxButton [theme]="b2bNgxButtonThemeEnum.BACKGROUND_WHITE" (click)="close()">Нет</button>
+	</div>
+</div>

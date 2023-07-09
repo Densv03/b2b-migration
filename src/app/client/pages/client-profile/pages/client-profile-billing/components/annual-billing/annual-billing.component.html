@@ -1,0 +1,68 @@
+<div class="billing" *transloco="let t">
+	<div class="container">
+		<div class="left">
+			<p class="payment-method">Payment method</p>
+
+			<ng-container *ngIf="payment && payment.cardNumber; else noPayment">
+				<div class="exist-payment">
+					<img b2bNgxIcon [name]="payment.type" alt="" />
+
+					<p>{{ payment.type }} **{{ payment.cardNumber }}</p>
+				</div>
+
+				<button class="edit" (click)="edit()">Edit</button>
+				<button class="delete" (click)="delete()">Delete</button>
+			</ng-container>
+
+			<ng-template #noPayment>
+				<p class="no-payment">No payment method added</p>
+
+				<button class="add-payment-method" (click)="addPaymentMethod()">
+					<img b2bNgxIcon name="blue-add" alt="" />
+					<span>Add payment method</span>
+				</button>
+			</ng-template>
+
+			<p class="supported-payment-types">Supported payment types</p>
+			<ul class="list-of-types">
+				<li>
+					<img b2bNgxIcon name="mastercard" alt="" />
+				</li>
+				<li>
+					<img b2bNgxIcon name="maestro" alt="" />
+				</li>
+				<li>
+					<img b2bNgxIcon name="visa" alt="" />
+				</li>
+				<li>
+					<img b2bNgxIcon name="discover" alt="" />
+				</li>
+			</ul>
+		</div>
+		<div class="right">
+			<div class="card">
+				<p class="your-plan">Your plan:</p>
+				<p class="plan-title">
+					<span class="plan-name">{{ plan.name }}</span>
+					<span class="plan-price">{{ plan.price }}</span>
+				</p>
+
+				<ng-container *ngIf="!isFree">
+					<p class="plan-description">Billed annually</p>
+					<p class="plan-ends">Ends in 260 days, March 20, 2022</p>
+				</ng-container>
+				<button
+					b2bNgxButton
+					[theme]="b2bNgxButtonThemeEnum.BACKGROUND_BLUE"
+					class="upgrade-plan"
+					(click)="upgradePlan()">
+					{{ !isFree ? "Extend subscription" : "Upgrade plan" }}
+				</button>
+			</div>
+		</div>
+	</div>
+
+	<hr />
+
+	<b2b-invoices [invoices]="invoices"></b2b-invoices>
+</div>

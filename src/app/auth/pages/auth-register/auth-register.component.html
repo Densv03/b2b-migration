@@ -1,0 +1,47 @@
+<div class="wrapper">
+	<button
+		*ngIf="stepper.selectedIndex > 0 && stepperSelectedIndex === 0"
+		b2bNgxButton
+		class="back-btn"
+		(click)="back()">
+		<img b2bNgxIcon name="arrow-l"/>
+
+		<span>Back</span>
+	</button>
+
+	<mat-horizontal-stepper
+		#stepper
+		[selectedIndex]="stepperSelectedIndex"
+		disableRipple="true"
+		[ngClass]="'last-edited-step-' + stepper.selectedIndex">
+		<mat-step>
+			<ng-template matStepLabel>
+				Basic info
+			</ng-template>
+
+			<b2b-auth-register-basic-info [userValue]="user" (basicInfo)="firstStep(stepper, $event)"></b2b-auth-register-basic-info>
+		</mat-step>
+
+		<mat-step>
+			<ng-template matStepLabel>
+				Account type
+			</ng-template>
+
+			<b2b-auth-register-account-type (userType)="secondStep(stepper, $event)"></b2b-auth-register-account-type>
+		</mat-step>
+		<mat-step>
+			<ng-template matStepLabel>
+				Company information
+			</ng-template>
+
+			<ng-container *ngIf="selectedUserType === 'buyer'; else supplier">
+				<b2b-auth-register-buyer-company-info [rootRole]="selectedUserType"
+																							(buyerCompanyInfo)="thirdStep($event)"></b2b-auth-register-buyer-company-info>
+			</ng-container>
+			<ng-template #supplier>
+				<b2b-auth-register-supplier-company-info [rootRole]="selectedUserType"
+																								 (supplierCompanyInfo)="thirdStep($event)"></b2b-auth-register-supplier-company-info>
+			</ng-template>
+		</mat-step>
+	</mat-horizontal-stepper>
+</div>

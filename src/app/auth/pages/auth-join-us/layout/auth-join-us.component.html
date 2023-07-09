@@ -1,0 +1,27 @@
+<div class="auth-join-us__wrapper" *transloco="let t">
+	<div class="auth-join-us__header">
+		<p class="auth-join-us__header-text-wrapper">
+			<span class="auth-join-us__header-text">{{ t("AUTH.ALREADY_HAVE") }}</span>
+			<a
+				b2bNgxLink
+				[routerLink]="b2bNgxLinkService.getLink('/auth/log-in') | async"
+				[theme]="b2bNgxLinkThemeEnum.TEXT_BLUE"
+				class="auth-join-us__header-link"
+				queryParamsHandling="merge"
+				>{{ t("AUTH.LOG_IN") }}</a
+			>
+		</p>
+	</div>
+
+	<div class="auth-join-us__main">
+		<h2 class="auth-join-us__main-title">{{ t("AUTH.JOIN_US") }}</h2>
+		<p class="auth-join-us__main-description">
+			{{ t("AUTH.CHOOSE_ROLE") }}
+		</p>
+
+		<b2b-auth-join-us-roles-list
+			class="auth-join-us__main-cards"
+			[roles]="roles$ | async"
+			(clicked)="updateRole($event)"></b2b-auth-join-us-roles-list>
+	</div>
+</div>

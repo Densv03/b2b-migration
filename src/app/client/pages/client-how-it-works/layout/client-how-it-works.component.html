@@ -1,0 +1,75 @@
+<div class="hot-it-works" *transloco="let t" #howItWorks (scroll)="onScroll($event)">
+	<div class="container">
+		<h2 class="title">{{ t("HOW_IT_WORKS.TITLE") }}</h2>
+		<p class="description">
+			{{ t("HOW_IT_WORKS.DESCRIPTION_1") }} <br /><br />
+			{{ t("HOW_IT_WORKS.DESCRIPTION_2") }} <br /><br />
+			{{ t("HOW_IT_WORKS.DESCRIPTION_3") }}
+		</p>
+
+		<div class="video-wrapper">
+			<video
+				(click)="processVideoClick(video)"
+				[controls]="!video.paused"
+				class="video"
+				poster="assets/images/client_home_background.png"
+				(ended)="video.load()"
+				#video>
+				<source [src]="ruVideo ? 'assets/videos/promo_eng.mp4' : 'assets/videos/how-it-works.mp4'" type="video/mp4" />
+			</video>
+
+			<button class="video-button" *ngIf="video.paused" (click)="video.play()">
+				<img b2bNgxIcon class="video-button-icon" name="play" />
+			</button>
+		</div>
+
+		<h3 class="subtitle">{{ t("HOW_IT_WORKS.SUBTITLE") }}</h3>
+		<p class="subdescription">{{ t("HOW_IT_WORKS.SUBDESCRIPTION") }}</p>
+
+		<section class="section">
+			<div class="section-info">
+				<h4 class="section-title">{{ t("HOW_IT_WORKS.SECTION_1_TITLE") }}</h4>
+				<p class="section-description">{{ t("HOW_IT_WORKS.SECTION_1_DESCRIPTION") }}</p>
+			</div>
+			<div class="section-img">
+				<img b2bNgxImage name="about-us-1" src="" alt="" />
+			</div>
+		</section>
+
+		<section class="section">
+			<div class="section-img">
+				<img b2bNgxImage name="about-us-2" src="" alt="" />
+			</div>
+			<div class="section-info">
+				<h4 class="section-title">{{ t("HOW_IT_WORKS.SECTION_2_TITLE") }}</h4>
+				<p class="section-description">{{ t("HOW_IT_WORKS.SECTION_2_DESCRIPTION") }}</p>
+			</div>
+		</section>
+
+		<section class="section">
+			<div class="section-info">
+				<h4 class="section-title">{{ t("HOW_IT_WORKS.SECTION_3_TITLE") }}</h4>
+				<p class="section-description">{{ t("HOW_IT_WORKS.SECTION_3_DESCRIPTION") }}</p>
+			</div>
+			<div class="section-img">
+				<img b2bNgxImage name="about-us-3" src="" alt="" />
+			</div>
+		</section>
+	</div>
+
+	<div class="footer">
+		<div class="footer-container">
+			<div class="footer-info">
+				<h1 class="footer-title">
+					{{ t("HOW_IT_WORKS.FOOTER_TITLE") }} <span> {{ t("HOW_IT_WORKS.FOOTER_DISCOUNT") }}</span>
+				</h1>
+				<p class="footer-description">{{ t("HOW_IT_WORKS.FOOTER_DESCRIPTION") }}</p>
+			</div>
+			<div class="footer-buttons">
+				<a [routerLink]="b2bNgxLinkService.getLink('/latest-offers') | async" class="footer-buy">{{ t("B2B.BUY") }}</a>
+				<span class="footer-and">&</span>
+				<a [routerLink]="b2bNgxLinkService.getLink('/offer') | async" class="footer-sell">{{ t("B2B.SELL") }}</a>
+			</div>
+		</div>
+	</div>
+</div>

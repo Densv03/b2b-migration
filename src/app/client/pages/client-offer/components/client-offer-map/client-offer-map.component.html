@@ -1,0 +1,44 @@
+<div class="dialog" *transloco="let t">
+	<div class="dialog-left">
+		<agm-map [latitude]="ref.data.lat" [longitude]="ref.data.lng">
+			<agm-marker [latitude]="ref.data.lat" [longitude]="ref.data.lng" iconUrl="assets/icons/location.svg"></agm-marker>
+		</agm-map>
+	</div>
+
+	<div class="dialog-right">
+		<p class="tracking-details">{{ t("TRACKING.TITLE") }}</p>
+		<p class="type" *ngIf="isAuth">
+			{{ t("TRACKING.TYPE") }}:
+			{{ t("OFFER." + (ref.data.transportType === "bulk_vessel" ? "VESSEL_NUMBER" : "CONTAINER_NUMBER")) }}:
+			{{ ref.data.container }}
+		</p>
+		<p class="type" *ngIf="!isAuth">
+			{{ t("TRACKING.TYPE") }}:
+			{{ t("OFFER." + (ref.data.transportType === "bulk_vessel" ? "VESSEL_NUMBER" : "CONTAINER_NUMBER")) }}:
+			{{ ref.data.container | slice: 0:2 }}
+			XXX XXX XXX
+			<button
+				b2bNgxButton
+				[theme]="b2bNgxButtonThemeEnum.OUTLINE_BLACK"
+				(click)="ref.close()"
+				routerLink="/auth/register-credentials"
+				class="link">
+				Show
+			</button>
+		</p>
+
+		<p class="route">
+			{{ t("TRACKING.FROM") }} {{ ref.data.destination?.from }} {{ t("TRACKING.TO") }} {{ ref.data.destination?.to }}
+		</p>
+		<p class="eta-to-destination" *ngIf="ref.data.etaToPod && ref.data.pod">
+			ЕТА to {{ ref.data.pod }}: {{ ref.data?.etaToPod | date }}
+		</p>
+		<p class="client-profile-offer-eta" *ngIf="ref.data.etaToTransitPort && ref.data.pol">
+			ЕТА to {{ ref.data.pol }}: {{ ref.data?.etaToTransitPort | date }}
+		</p>
+
+		<p class="description">
+			{{ t("TRACKING.DESCRIPTION") }}
+		</p>
+	</div>
+</div>

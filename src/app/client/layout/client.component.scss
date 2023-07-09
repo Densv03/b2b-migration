@@ -1,0 +1,12 @@
+@import "projects/shared/src/styles";
+
+.client-router-outlet-container {
+	min-height: calc(100vh - 79px - 252px);
+	background-color: #f3f6f8;
+	@include breakpoint("3") {
+		min-height: calc(100vh - 72px);
+	}
+}
+
+// 79px, 72px - Header
+// 252px, 49 - Footer

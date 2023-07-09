@@ -1,0 +1,80 @@
+@import "libs/shared/styles/src/lib";
+
+.buttons-wrapper {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	@include breakpoint("3") {
+		margin-top: 20px;
+		padding-right: 20px;
+	}
+	@include breakpoint("1") {
+		flex-direction: column-reverse;
+		align-items: flex-start;
+	}
+	.tradebid-buttons {
+		.btn {
+			padding: 0;
+			width: 150px;
+			height: 35px;
+			color: #000000;
+
+			&:active {
+				border-color: transparent;
+			}
+			@include breakpoint("1") {
+				transform: translateX(-10px);
+			}
+			svg {
+				width: 100%;
+				height: 100%;
+				path {
+					stroke: #005dff;
+				}
+			}
+			span {
+				display: block;
+				transform: translateY(-170%);
+				color: #000000;
+			}
+		}
+		button:nth-child(2) {
+			transform: translateX(-50px);
+		}
+
+		.link--active {
+			color: #ffffff;
+			svg {
+				width: 100%;
+				height: 100%;
+				path {
+					stroke: none;
+					fill: #005dff;
+				}
+			}
+			span {
+				color: #ffffff;
+			}
+		}
+	}
+	.router-buttons {
+		button {
+			height: 40px;
+			width: 130px;
+			transform: translateY(-10px);
+		}
+	}
+}
+.main-components-wrapper {
+	width: 100%;
+	min-height: 500px;
+	background-color: #fff;
+	padding: 15px 40px 40px 40px;
+	@include breakpoint("3") {
+		margin: auto;
+	}
+	@include breakpoint("1") {
+		padding: 0;
+	}
+}

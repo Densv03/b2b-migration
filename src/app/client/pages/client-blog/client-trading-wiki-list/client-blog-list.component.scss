@@ -1,0 +1,13 @@
+@import "projects/shared/src/styles";
+
+.ngx-wiki-list {
+	.ngx-wiki-list-item {
+		margin-top: 12px;
+
+	}
+}
+:host::ng-deep {
+	p {
+		margin: 0 !important;
+	}
+}

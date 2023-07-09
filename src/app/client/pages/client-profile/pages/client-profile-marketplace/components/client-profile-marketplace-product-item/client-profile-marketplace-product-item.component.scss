@@ -1,0 +1,96 @@
+@import "libs/shared/styles/src/lib";
+
+.product-item {
+	display: flex;
+	gap: 30px;
+	align-items: center;
+	background-color: #fff;
+	margin-bottom: 10px;
+	padding: 15px 24px;
+	box-shadow: 2px 2px 8px #e3eaf1;
+	border-radius: 4px;
+	@include breakpoint('1') {
+		gap: 10px;
+		padding: 15px 10px;
+	}
+
+	&__info {
+		display: flex;
+		gap: 20px;
+		&__left {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+		}
+		.product-item__image {
+			border-radius: 4px;
+		}
+	}
+
+	&__more {
+		margin-left: auto;
+	}
+
+	&__name {
+		font-size: 16px;
+		font-weight: 700;
+		margin-bottom: 5px;
+	}
+
+	&__bottom {
+		display: flex;
+		gap: 10px;
+		&__status {
+			display: flex;
+			align-items: center;
+			gap: 20px;
+
+			.title {
+				color: #9fa4bb;
+			}
+			.green {
+				background-color: #05ab83;
+				color: whitesmoke;
+			}
+			.red {
+				background-color: #b6253e;
+				color: whitesmoke;
+			}
+			.yellow {
+				background-color: #ffd81e;
+			}
+			.transparent {
+				background-color: transparent;
+				opacity: 0.5;
+			}
+
+			.status-label {
+				padding: 2px 25px;
+				border-radius: 4px;
+				@include breakpoint('1') {
+					padding: 2px 5px;
+					font-size: 13px;
+				}
+			}
+		}
+
+		@include breakpoint('1') {
+			flex-direction: column;
+			gap: 0;
+		}
+	}
+
+	&__date,
+	&__views {
+		color: #9fa4bb;
+		display: flex;
+		align-items: center;
+		gap: 3px;
+	}
+
+	@include breakpoint('1') {
+		&__views {
+			display: none;
+		}
+	}
+}

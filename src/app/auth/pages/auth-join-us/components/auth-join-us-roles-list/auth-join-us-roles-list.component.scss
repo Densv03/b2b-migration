@@ -1,0 +1,82 @@
+@import "libs/shared/styles/src/lib";
+
+:host {
+	.ngx-cards {
+		.ngx-cards__item {
+			margin-top: 0.75rem;
+
+			button,
+			a {
+				display: block;
+				width: 100%;
+			}
+
+			&:first-child {
+				margin-top: 0;
+			}
+		}
+	}
+
+	.ngx-card {
+		width: 100%;
+		border: 0.16rem solid transparent;
+		box-shadow: 0 0.125rem 0.875rem 0.16rem rgba(0, 0, 0, 0.06);
+		border-radius: 0.375rem;
+		background-color: $color-white-900;
+
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+
+		padding: 1.25rem 1.5rem;
+
+		.ngx-card__item-left {
+			.ngx-card__item-left-img-wrapper {
+				height: 3.5rem;
+				width: 3.5rem;
+				background-color: $color-gray-100;
+				border-radius: 100%;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+		}
+
+		.ngx-card__item-center {
+			flex: 1;
+			margin-left: 1rem;
+			.ngx-card__item-center-label {
+				text-align: left;
+				display: block;
+				font-weight: 500;
+				color: $color-black-800;
+				font-size: 1.125rem;
+			}
+			.ngx-card__item-center-description {
+				text-align: left;
+				display: block;
+				margin-top: 0.25rem;
+				font-size: 0.875rem;
+				color: $color-gray-500;
+				font-weight: 300;
+				width: 100%;
+				letter-spacing: 0.01rem;
+				line-height: 1rem;
+				height: 65px;
+				overflow: hidden;
+				text-overflow: ellipsis;
+			}
+		}
+
+		.ngx-card__item-right {
+			opacity: 0;
+		}
+
+		&:hover {
+			border-color: $color-blue-500;
+			.ngx-card__item-right {
+				opacity: 1;
+			}
+		}
+	}
+}

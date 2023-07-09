@@ -1,0 +1,24 @@
+<ul class="ngx-cards" *ngIf="roles.length; else rolesListSkeleton">
+	<li class="ngx-cards__item" *ngFor="let role of roles">
+		<button (click)="emitClick(role)">
+			<div class="ngx-card">
+				<div class="ngx-card__item-left">
+					<div class="ngx-card__item-left-img-wrapper">
+						<img b2bNgxIcon [name]="role.name" />
+					</div>
+				</div>
+				<div class="ngx-card__item-center">
+					<span class="ngx-card__item-center-label">{{ role.displayName }}</span>
+					<span class="ngx-card__item-center-description">{{ role.description }}</span>
+				</div>
+				<div class="ngx-card__item-right">
+					<img b2bNgxIcon name="arrow-r-blue" />
+				</div>
+			</div>
+		</button>
+	</li>
+</ul>
+
+<ng-template #rolesListSkeleton>
+	<b2b-ngx-skeleton [options]="skeletonOptions"></b2b-ngx-skeleton>
+</ng-template>

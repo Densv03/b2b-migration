@@ -1,0 +1,35 @@
+<div [ngStyle]="{'background-color': product.hidden ? 'rgba(255,255,255, 0.5)' : 'white'}" class="product-item">
+	<div [ngStyle]="{'opacity': product.hidden ? '0.5' : '1'}" class="product-item__info">
+		<img b2bNgxImage class="product-item__image" [name]="product?.photos[0]?.sm" />
+		<div class="product-item__info__left">
+			<div class="product-item__name">{{ product?.title }}</div>
+			<div class="product-item__bottom">
+				<div class="product-item__date">{{ product?.updatedAt | date }}</div>
+				<div class="product-item__views">
+					<img b2bNgxIcon name="eye" />
+					{{ product?.views }}
+				</div>
+				<div class="product-item__bottom__status">
+					<div class="title">Status: </div>
+					<ng-container *ngIf="!product.hidden">
+						<div *ngIf="product.productApproved" class="status-label green">Listed</div>
+						<div *ngIf="product.productRejected" class="status-label red">Declined {{isMobile ? '' : '- changes required'}}</div>
+						<div *ngIf="!product.productApproved && !product.productRejected" class="status-label yellow">On review</div>
+					</ng-container>
+					<div *ngIf="product.hidden" class="status-label transparent">Archival</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="product-item__more">
+		<b2b-ngx-dropdown
+			[options]="itemsForDropdown"
+			[requiredOptionToCheck]="product.paymentMethods"
+			[optionToReturn]="product._id">
+			<button b2bNgxButton class="flex items-center">
+				<img b2bNgxIcon name="more" />
+			</button>
+		</b2b-ngx-dropdown>
+	</div>
+</div>

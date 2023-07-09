@@ -1,0 +1,142 @@
+<link rel="stylesheet" href="client-how-it-works-3.component.scss" />
+<div class="hot-it-works-2">
+	<div class="banner">
+		<img b2bNgxImage name="how-it-works-2" class="banner-img desktop" />
+		<img b2bNgxImage name="how-it-works-mobile" class="banner-img mobile" />
+		<div class="info">
+			<p class="subtitle">НЕЗАТРЕБУВАНІ ВАНТАЖІ</p>
+			<p class="subsubtitle">ЦЕ ПРОБЛЕМА, ЯКУ ВИРІШУЄ</p>
+			<h1 class="title">B2B DISCOUNT</h1>
+			<p class="description">
+				Платформа допомагає продавцеві знайти нового покупця на свій вантаж, а покупцеві - придбати потрібні товари зі
+				знижкою. Ми пов'язуємо продавця з покупцем безпосередньо і не беремо комісію з угод
+			</p>
+
+			<div class="buttons">
+				<a [routerLink]="b2bNgxLinkService.getLink('/latest-offers') | async">Купити груз</a>
+				<a [routerLink]="b2bNgxLinkService.getLink('/offer') | async">Продати груз</a>
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="benefits">
+			<ul>
+				<li>Найпростіший і швидкий спосіб продати незатребуваний вантаж</li>
+				<li>Можливість купувати якісні товари зі знижкою від 5% до 90%</li>
+				<li>Юридична і технічна підтримка 24/7</li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="game">
+		<div class="container">
+			<div class="description">
+				<h2>Гра на випередження</h2>
+				<p>
+					Мета платформи не просто допомогти експортерам і трейдерам з незатребуваними вантажами, а й не допустити появи
+					таких вантажів.
+				</p>
+			</div>
+			<img b2bNgxImage name="how-it-works-2-2" />
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="risks">
+			<h2>Мінімізація ризиків</h2>
+			<p>
+				Якщо у вас є підстави сумніватися в надійності вантажоодержувача, дійте негайно. Додайте свій вантаж на B2B
+				Discount, щоб знайти інших потенційних покупців. Вони будуть вашим рятівним колом на випадок, якщо первісна
+				угода піде не так, як планувалося.
+			</p>
+		</div>
+	</div>
+
+	<div class="anonymity">
+		<div class="container">
+			<img b2bNgxImage name="how-it-works-2-4" />
+
+			<div class="description">
+				<h2>Aнонімність</h2>
+				<p>
+					Платформа надає можливість приховати свої контактні дані та інформацію про вантаж. Пропозиція буде анонімним,
+					поки власник вантажу не вирішить відкрити дані для продажу товару новому покупцеві.
+				</p>
+				<a [routerLink]="b2bNgxLinkService.getLink('/offer') | async">Розміщення вантажу</a>
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="verification">
+			<h2>Верифікація вантажу</h2>
+			<p>
+				Усі вантажі що виставляються на платформі проходять модерацію. Розміщення вантажу можливе тільки при наявності
+				відповідної супровідної документації та фотоматеріалів. Завдяки впровадженої онлайн системі відстеження
+				контейнерів і вантажів у покупця є можливість відстежити місцезнаходження цікавого вантажу.
+			</p>
+		</div>
+	</div>
+
+	<div class="profit">
+		<div class="container">
+			<div class="description">
+				<h2>Вигода для всіх</h2>
+				<p>
+					Імпортери та трейдери можуть укладати вигідні угоди зі знижкою від 5 до 90% від ринкової ціни вантажу і
+					допомогти продавцю уникнути великих фінансових втрат.
+				</p>
+				<a [routerLink]="b2bNgxLinkService.getLink('/latest-offers') | async">подивитися всі пропозиції</a>
+			</div>
+			<img b2bNgxImage name="how-it-works-2-3" />
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="mission">
+			<h2>Місія компанії</h2>
+			<p>
+				Об'єднати всіх учасників ЗЕД для створення більш комфортного та безпечного середовища для всіх сторін, задіяних
+				у міжнародній торгівлі та логістики.
+			</p>
+
+			<div class="video-wrapper">
+				<video
+					[controls]="!video.paused"
+					class="video"
+					poster="assets/images/client_home_background.png"
+					(ended)="video.load()"
+					#video>
+					<source src="assets/videos/promo_ukr.mp4" type="video/mp4" />
+				</video>
+
+				<button class="video-button" *ngIf="video.paused" (click)="video.play()">
+					<img b2bNgxIcon class="video-button-icon" name="play" />
+				</button>
+			</div>
+
+			<h3>Безкоштовна реєстрація</h3>
+			<p>
+				B2B Discount - стартап, родом з США, що вийшов на міжнародний ринок влітку 2021 року. Всі сервіси платформи
+				будуть на безкоштовній основі до 30.06.2022. Не пропустіть можливість вже зараз отримати всі вигоди нашого
+				сервісу.
+			</p>
+			<a [routerLink]="b2bNgxLinkService.getLink('/auth/register-credentials') | async"
+				>Створити безкоштовний аккаунт</a
+			>
+		</div>
+
+		<p class="feedback">
+			Ми хочемо зробити платформу ще краще. Ви можете допомогти нам в цьому, написавши свої побажання та ідеї нам на
+			пошту <a href="mailto:support@b2b.discount">support@b2b.discount</a>
+		</p>
+
+		<div class="footer">
+			<a [routerLink]="b2bNgxLinkService.getLink('/') | async">
+				<img b2bNgxIcon name="logo" alt="" />
+			</a>
+			<p>We connect buyers and sellers directly.</p>
+		</div>
+	</div>
+</div>

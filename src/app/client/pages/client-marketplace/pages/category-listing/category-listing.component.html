@@ -1,0 +1,17 @@
+<div class="listing">
+	<ul class="links-list">
+		<ng-container *ngFor="let item of headerLinks">
+			<li [ngClass]="{ 'active-link': activeRoute === item.link }" [routerLink]="item.link">
+				<span class="label">{{ item.label }}</span>
+				<span class="divider">/</span>
+			</li>
+		</ng-container>
+	</ul>
+	<div class="title">B2B sectors</div>
+
+	<div class="categories-list">
+		<div *ngFor="let category of categories$ | async" class="category-wrapper">
+			<b2b-category-item (categoryItemClicked)="goToListing($event)" [category]="category"> </b2b-category-item>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,20 @@
+@import "libs/shared/styles/src/lib";
+
+:host {
+	display: block;
+	height: 100%;
+}
+::ng-deep {
+	.client-offer-document {
+		height: 100%;
+		b2b-ngx-images-carousel {
+			display: block;
+			height: 100%;
+			width: 100%;
+			.client-profile-offer-images {
+				height: 100%;
+				width: 100%;
+			}
+		}
+	}
+}

@@ -1,0 +1,269 @@
+@import "projects/shared/src/styles";
+
+.client-profile-chat-wrapper {
+	padding: 30px 100px;
+	@include breakpoint("3") {
+		padding: 0;
+	}
+	.client-profile-chat {
+		display: flex;
+		background-color: white;
+		padding-bottom: 32px;
+		@include breakpoint("3") {
+			flex-direction: column-reverse;
+		}
+
+		.client-profile-chat-container {
+			width: 70%;
+			padding: 0 24px 0 76px;
+
+			@include breakpoint("3") {
+				width: 100%;
+				padding: 0;
+			}
+
+			.client-profile-chat-breadcrumbs {
+				font-weight: 500;
+				font-size: 11px;
+				text-transform: uppercase;
+				color: #9fa4bb;
+				margin-top: 40px;
+
+				@include breakpoint("3") {
+					display: none;
+				}
+
+				a {
+					font-weight: 500;
+					font-size: 11px;
+					text-transform: uppercase;
+					color: #9fa4bb;
+				}
+			}
+
+			.client-profile-chat-title {
+				font-weight: bold;
+				font-size: 32px;
+				color: #0f0f11;
+				margin-top: 32px;
+			}
+
+			.client-profile-chat-started {
+				font-size: 14px;
+				line-height: 140%;
+				color: #9fa4bb;
+				margin-top: 11px;
+			}
+
+			.client-profile-chat-messages {
+				margin-top: 24px;
+
+				.client-profile-chat-messages-list {
+					position: relative;
+					height: 300px;
+					overflow: auto;
+					box-shadow: 0 20px 10px -25px rgb(0 0 0) inset, 0 -20px 10px -25px rgb(0 0 0) inset;
+
+					.client-profile-chat-messages-list-item {
+						padding: 17px 16px;
+						border-bottom: 1px solid #dfe8f5;
+
+						.client-profile-chat-messages-list-item-info {
+							display: flex;
+							align-items: center;
+
+							.client-profile-chat-messages-list-item-from {
+								font-weight: bold;
+								font-size: 16px;
+								color: #0f0f11;
+							}
+
+							.client-profile-chat-messages-list-item-date {
+								font-size: 14px;
+								color: #9fa4bb;
+								margin-left: 8px;
+							}
+						}
+
+						.client-profile-chat-messages-list-item-message {
+							font-size: 16px;
+							color: #556274;
+							margin-top: 4px;
+							line-height: 148%;
+							min-height: 24px;
+							white-space: break-spaces;
+						}
+					}
+
+					.client-profile-chat-no-messages {
+						position: absolute;
+						left: 0;
+						top: 0;
+						width: 100%;
+						height: 100%;
+						display: flex;
+						justify-content: center;
+						align-items: center;
+
+						font-weight: bold;
+						font-size: 16px;
+						color: #0f0f11;
+					}
+				}
+			}
+
+			.client-profile-chat-textarea {
+				width: 100%;
+				background: #f3f6f8;
+				border-radius: 8px;
+				border: none;
+				margin-top: 32px;
+				padding: 16px;
+			}
+
+			.client-profile-chat-actions {
+				display: flex;
+				justify-content: flex-end;
+				margin-top: 11px;
+
+				.client-profile-chat-actions-send-button {
+					display: flex;
+					align-items: center;
+					padding: 11px 24px;
+
+					.client-profile-chat-actions-send-button-icon {
+						margin-left: 5px;
+					}
+				}
+			}
+		}
+
+		.client-profile-chat-buyer-info {
+			width: 30%;
+			border-left: 1px solid #dfe8f5;
+			padding: 0 25px;
+
+			@include breakpoint("3") {
+				// display: none;
+				padding: 0;
+				width: 100%;
+			}
+
+			.go-back {
+				display: none;
+				gap: 10px;
+				cursor: pointer;
+				margin-top: 40px;
+				align-items: center;
+
+				@include breakpoint("3") {
+					display: flex;
+				}
+
+				.label {
+					color: #828bb4;
+				}
+			}
+
+			.client-profile-chat-buyer-info-container {
+				.client-profile-chat-buyer-info-text {
+					font-weight: 500;
+					font-size: 11px;
+					text-transform: uppercase;
+					color: #828bb4;
+					margin-top: 15px;
+				}
+
+				.client-profile-chat-buyer-info-title {
+					font-weight: bold;
+					font-size: 24px;
+					color: #0f0f11;
+					margin-top: 28px;
+				}
+
+				.client-profile-chat-buyer-info-from {
+					font-weight: normal;
+					font-size: 14px;
+					line-height: 16px;
+					color: #556274;
+					margin-top: 8px;
+				}
+
+				.client-profile-chat-buyer-email-title {
+					margin-top: 24px;
+					font-weight: normal;
+					font-size: 14px;
+					color: #9fa4bb;
+				}
+
+				.client-profile-chat-buyer-email {
+					font-weight: normal;
+					font-size: 14px;
+					color: #0f0f11;
+					margin-top: 5px;
+				}
+
+				.client-profile-chat-buyer-phone-title {
+					margin-top: 12px;
+					font-weight: normal;
+					font-size: 14px;
+					color: #9fa4bb;
+				}
+
+				.client-profile-chat-buyer-phone {
+					font-weight: normal;
+					font-size: 14px;
+					color: #0f0f11;
+					margin-top: 5px;
+				}
+
+				.client-profile-chat-buyer-web-title {
+					margin-top: 12px;
+					font-weight: normal;
+					font-size: 14px;
+					color: #9fa4bb;
+				}
+
+				.client-profile-chat-buyer-web {
+					font-weight: normal;
+					font-size: 14px;
+					color: #0f0f11;
+					margin-top: 5px;
+				}
+			}
+
+			.client-profile-chat-buyer-info-media {
+				border-top: 1px solid #dfe8f5;
+				margin-top: 56px;
+			}
+		}
+	}
+}
+
+.user-deleted {
+	font-size: 24px;
+	font-weight: bold;
+	color: $color-gray-500;
+	margin-top: 35px;
+	text-align: center;
+}
+
+.my-btn {
+	margin: 15px auto 0;
+	font-family: Helvetica Neue;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 500;
+	line-height: 18px;
+	letter-spacing: 0.02em;
+	text-align: center;
+	background-color: #005dff;
+	color: #ffffff;
+	border-radius: 4px;
+	width: 100%;
+	padding: 15px 0;
+
+	&.requested {
+		width: 100%;
+	}
+}

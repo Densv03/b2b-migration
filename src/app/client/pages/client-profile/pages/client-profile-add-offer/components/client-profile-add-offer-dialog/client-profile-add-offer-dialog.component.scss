@@ -1,0 +1,55 @@
+form {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	text-align: center;
+	max-height: 80vh;
+	padding: 50px 56px;
+	height: 100%;
+	h6 {
+		font-weight: bold;
+		font-size: 32px;
+		line-height: 36px;
+		color: #0f0f11;
+	}
+	p {
+		font-family: Helvetica Neue;
+		font-size: 14px;
+		color: #556274;
+	}
+
+	ul {
+		flex: 1;
+		overflow: auto;
+		margin-top: 40px;
+		li {
+			padding: 10px 16px;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			border-radius: 4px;
+			span {
+				font-size: 16px;
+				color: #0f0f11;
+			}
+			&:nth-child(2n + 1) {
+				background: #f3f6f8;
+			}
+		}
+	}
+
+	.buttons {
+		display: flex;
+		gap: 15px;
+		button {
+			margin-top: 40px;
+			width: 100%;
+			padding: 15px 0;
+		}
+	}
+}
+::ng-deep {
+	.ngneat-dialog-backdrop {
+		z-index: 1070 !important;
+	}
+}

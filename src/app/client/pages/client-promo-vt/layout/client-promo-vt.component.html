@@ -1,0 +1,141 @@
+<div class="hot-it-works-2">
+	<div class="banner">
+		<img b2bNgxImage name="how-it-works-2" class="banner-img desktop" />
+		<img b2bNgxImage name="how-it-works-mobile" class="banner-img mobile" />
+		<div class="info">
+			<p class="subtitle">HÀNG HÓA TỒN</p>
+			<p class="subsubtitle">ĐÂY LÀ MỘT VẤN ĐỀ CÓ THỂ GIẢI QUYẾT VỚI</p>
+			<h1 class="title">B2B DISCOUNT</h1>
+			<p class="description">
+				Nền tảng giúp người bán tìm người mua hàng và giúp người mua tìm hàng cần thiết với chiết khấu. Chúng tôi liên
+				kết người bán trực tiếp với người mua và không nhận hoa hồng từ các giao dịch
+			</p>
+
+			<div class="buttons">
+				<a [routerLink]="b2bNgxLinkService.getLink('/latest-offers') | async">Mua hàng</a>
+				<a [routerLink]="b2bNgxLinkService.getLink('/offer') | async">Bán hàng</a>
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="benefits">
+			<ul>
+				<li>Cách dễ nhất và nhanh nhất để bán hàng hóa tồn</li>
+				<li>Cơ hội mua hàng chất lượng cao với mức giảm giá từ 5% đến 90%</li>
+				<li>Hỗ trợ pháp lý và kỹ thuật 24/7</li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="game">
+		<div class="container">
+			<div class="description">
+				<h2>Trò chơi dẫn trước</h2>
+				<p>
+					Mục đích của nền tảng không chỉ đễ giúp đỡ các nhà xuất khẩu và thương nhân có hàng hóa khó bán, mà còn ngăn
+					chặn hàng tồn xuất hiện.
+				</p>
+			</div>
+			<img b2bNgxImage name="how-it-works-2-2" />
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="risks">
+			<h2>Giảm thiểu rủi ro</h2>
+			<p>
+				Nếu bạn không tin tưởng người nhận hàng, hãy tiến hành ngay lập tức.Đăng hàng lên B2B Discount để tìm những
+				người mua khác. Họ sẽ là vòng tròn cứu hộ của bạn trong trường hợp kế hoạch đầu tiên bị hỏng.
+			</p>
+		</div>
+	</div>
+
+	<div class="anonymity">
+		<div class="container">
+			<img b2bNgxImage name="how-it-works-2-4" />
+
+			<div class="description">
+				<h2>Ẩn danh.</h2>
+				<p>
+					Nền tảng cung cấp khả năng ẩn chi tiết liên lạc và thông tin về hàng hóa. Ưu đãi sẽ ẩn danh cho đến khi chủ sở
+					hữu hàng hóa quyết định mở dữ liệu để bán hàng hóa cho người mua mới.
+				</p>
+				<a [routerLink]="b2bNgxLinkService.getLink('/offer') | async">ĐĂNG HÀNG</a>
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="verification">
+			<h2>Xác minh hàng hóa</h2>
+			<p>
+				Tất cả vận chuyển trên nền tảng được kiểm duyệt.Chỗ ở của hàng hóa chỉ có thể có trong sự hiện diện của tài liệu
+				tham gia và tài liệu chụp ảnh phù hợp. Nhờ hệ thống trực tuyến được triển khai để theo dõi các container và hàng
+				hóa, người mua có cơ hội theo dõi vị trí của hàng hóa.
+			</p>
+		</div>
+	</div>
+
+	<div class="profit">
+		<div class="container">
+			<div class="description">
+				<h2>Lợi ích cho tất cả</h2>
+				<p>
+					Các nhà nhập khẩu và thương nhân có thể nhập các giao dịch có lợi nhuận bằng cách giảm giá từ 5 đến 90% giá
+					thị trường hàng hóa và giúp người bán tránh tổn thất tài chính lớn.
+				</p>
+				<a [routerLink]="b2bNgxLinkService.getLink('/latest-offers') | async">XEM TẤT CẢ ƯU ĐÃI</a>
+			</div>
+			<img b2bNgxImage name="how-it-works-2-3" />
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="mission">
+			<h2>Nhiệm vụ của công ty.</h2>
+			<p>
+				Kết hợp tất cả những người tham gia VED để tạo ra một môi trường thoải mái và an toàn hơn cho tất cả các bên
+				tham gia vào thương mại và hậu cần quốc tế.
+			</p>
+
+			<div class="video-wrapper">
+				<video
+					[controls]="!video.paused"
+					class="video"
+					poster="assets/images/client_home_background.png"
+					(ended)="video.load()"
+					#video>
+					<source src="assets/videos/how_it_works_final.mp4" type="video/mp4" />
+				</video>
+
+				<button class="video-button" *ngIf="video.paused" (click)="video.play()">
+					<img b2bNgxIcon class="video-button-icon" name="play" />
+				</button>
+			</div>
+
+			<h3>Đăng ký miễn phí</h3>
+			<p>
+				Giảm giá B2B - Khởi động, ban đầu từ Hoa Kỳ đã tham gia thị trường quốc tế vào mùa hè năm 2021. Tất cả các dịch
+				vụ nền tảng sẽ miễn phí cho đến 30.06.2022. Đừng bỏ lỡ cơ hội bây giờ để có được tất cả những lợi ích của dịch
+				vụ của chúng tôi.
+			</p>
+			<a [routerLink]="b2bNgxLinkService.getLink('/auth/register-credentials') | async"
+				>TẠO TÀI KHOẢN MỚI MIỄN PHÍ</a
+			>
+		</div>
+
+		<p class="feedback">
+			Chúng tôi muốn tạo một nền tảng thậm chí còn tốt hơn và nhiều chức năng. Bạn có thể giúp chúng tôi trong việc này
+			bằng cách viết mong muốn và ý tưởng của bạn cho chúng tôi vào hòm thư điện tử
+			<a href="mailto:support@b2b.discount">support@b2b.discount</a>
+		</p>
+
+		<div class="footer">
+			<a [routerLink]="b2bNgxLinkService.getLink('/') | async">
+				<img b2bNgxIcon name="logo" alt="" />
+			</a>
+			<p>We connect buyers and sellers directly.</p>
+		</div>
+	</div>
+</div>

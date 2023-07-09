@@ -1,0 +1,31 @@
+<div class="header">
+	<button
+		class="place-product-btn"
+		b2bNgxButton
+		[theme]="b2bNgxButtonThemeEnum.BACKGROUND_BLACK"
+		routerLink="/b2bmarket/product">
+		Place new product
+	</button>
+
+	<div class="products-filter">
+		<div class="label">Show: </div>
+		<div class="select-wrapper">
+			<b2b-ngx-select
+				[theme]="b2bNgxSelectThemeEnum.BACKGROUND_WHITE"
+				[options]="sortTypes"
+				(changed)="updateSortType($event)"
+				placeholder="All"
+				bindValue="value"
+				bindLabel="label">
+			</b2b-ngx-select>
+		</div>
+	</div>
+</div>
+
+<div *ngIf="!(loading$ | async)" class="products">
+	<b2b-client-profile-marketplace-product-item
+		*ngFor="let product of products$ | async"
+		[product]="product"></b2b-client-profile-marketplace-product-item>
+</div>
+
+<b2b-ngx-skeleton *ngIf="loading$ | async" [options]="marketplaceSkeletonOptions"></b2b-ngx-skeleton>
