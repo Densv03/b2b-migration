@@ -1,19 +1,19 @@
 import { Component, OnInit } from "@angular/core";
 import { animate, style, transition, trigger } from "@angular/animations";
-import { Validators } from "@angular/forms";
+import {FormBuilder, Validators} from "@angular/forms";
 
 import { ActivatedRoute, Router } from "@angular/router";
 import { filter, Observable } from "rxjs";
 import { first, map, switchMap } from "rxjs/operators";
 
-import { FormBuilder } from "@ngneat/reactive-forms";
+// import { FormBuilder } from "@ngneat/reactive-forms";
 
 import { B2bNgxInputThemeEnum } from "@b2b/ngx-input";
 import { B2bNgxButtonThemeEnum } from "@b2b/ngx-button";
 import { UntilDestroy, untilDestroyed } from "@ngneat/until-destroy";
 import { AuthService } from "../../services/auth/auth.service";
 import { FirstStepDataModel } from "../auth-register-individual-account/shared/first-step-data.model";
-import { BrowserStorageKeysEnum } from "../../../shared/enums/browser-storage-keys.enum";
+import { BrowserStorageKeysEnum} from "../../../client/shared/enums/browser-storage-keys.enum";
 
 @UntilDestroy()
 @Component({
@@ -38,13 +38,13 @@ export class AuthRegisterIndividualAccountFirstStepComponent implements OnInit {
 	public b2bNgxInputThemeEnum = B2bNgxInputThemeEnum;
 	public b2bNgxButtonThemeEnum = B2bNgxButtonThemeEnum;
 
-	public form = this.fb.group({
+	public form: any = this.fb.group({
 		email: ["", [Validators.required, Validators.email]],
 		password: ["", [Validators.required, Validators.minLength(8)]],
 	});
 	public isNextStepDisabled$: Observable<boolean> = this.form.status$.pipe(map((data) => data === "INVALID"));
 
-	private parsingCompanyName: string;
+	private parsingCompanyName: string = '';
 
 	constructor(
 		private readonly router: Router,
@@ -67,7 +67,7 @@ export class AuthRegisterIndividualAccountFirstStepComponent implements OnInit {
 	private detectUrlParamsEmail(): void {
 		this.route.queryParams
 			.pipe(
-				map(data => data.email),
+				map((data: any) => data.email),
 				first())
 			.subscribe((email: string) => {
 				this.form.patchValue({
@@ -82,15 +82,15 @@ export class AuthRegisterIndividualAccountFirstStepComponent implements OnInit {
 			.valueChanges.pipe(
 			untilDestroyed(this),
 			filter(() => this.form.get("email").valid),
-			switchMap((email) => {
+			switchMap((email: any) => {
 				return this.authService.getPreregisteredCompanyInformation(email);
 			})
 		)
 			.pipe(
-				filter((data) => data.company !== undefined),
-				map((data) => data.company)
+				filter((data: any) => data.company !== undefined),
+				map((data: any) => data.company)
 			)
-			.subscribe(({companyName}) => (this.parsingCompanyName = companyName));
+			.subscribe(({companyName}: any) => (this.parsingCompanyName = companyName));
 	}
 
 	private saveUserData(): void {

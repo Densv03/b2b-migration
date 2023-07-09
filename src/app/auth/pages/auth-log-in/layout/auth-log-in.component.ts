@@ -1,15 +1,14 @@
 import {ChangeDetectorRef, Component} from "@angular/core";
-import {AbstractControl, Validators} from "@angular/forms";
+import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {B2bNgxButtonThemeEnum} from "@b2b/ngx-button";
 import {B2bNgxInputThemeEnum} from "@b2b/ngx-input";
 import {B2bNgxLinkService, B2bNgxLinkThemeEnum} from "@b2b/ngx-link";
-import {DialogService} from "@ngneat/dialog";
+// import {DialogService} from "@ngneat/dialog";
 import {HotToastService} from "@ngneat/hot-toast";
-import {FormBuilder, FormGroup} from "@ngneat/reactive-forms";
+// import {FormBuilder, FormGroup} from "@ngneat/reactive-forms";
 import {UntilDestroy, untilDestroyed} from "@ngneat/until-destroy";
-import {AuthService} from "apps/site/src/app/auth/services/auth/auth.service";
-import {AmplitudeService} from "apps/site/src/app/core/services/amplitude/amplitude.service";
+import {AuthService} from "../../../services/auth/auth.service";
 // import {NgxSmartModalService} from "ngx-smart-modal";
 import {of} from "rxjs";
 import {catchError, skip} from "rxjs/operators";
@@ -40,9 +39,8 @@ export class AuthLogInComponent {
 		private readonly _activatedRoute: ActivatedRoute,
 		// private readonly _ngxSmartModalService: NgxSmartModalService,
 		public readonly b2bNgxLinkService: B2bNgxLinkService,
-		private readonly _ampService: AmplitudeService,
 		private readonly _hotToastService: HotToastService,
-		private readonly _dialogService: DialogService
+		// private readonly _dialogService: DialogService
 	) {
 		this.formGroup = this.getFormGroup();
 		this.formState = this.formGroup.controls
@@ -51,29 +49,31 @@ export class AuthLogInComponent {
 		this.b2bNgxInputThemeEnum = B2bNgxInputThemeEnum;
 	}
 
-	public get emailError() {
-		const {errors, touched} = this.formGroup.getControl("email");
+public get emailError() {
+  const {errors, touched} = {errors: '', touched: false};
+  // const {errors, touched} = this.formGroup.getControl("email");
 
 		if (!errors || !touched) {
 			return "";
 		}
 
 		const errorCode = Object.keys(errors)[0];
-		const errorMessages = {
+		const errorMessages: any = {
 			1000: "Email incorrect",
 		};
 		return errorMessages[errorCode] ?? "";
 	}
 
 	public get passwordError() {
-		const {errors, touched} = this.formGroup.getControl("password");
+		const {errors, touched} = {errors: '', touched: false};
+		// const {errors, touched} = this.formGroup.getControl("password");
 
 		if (!errors || !touched) {
 			return "";
 		}
 
 		const errorCode = Object.keys(errors)[0];
-		const errorMessages = {
+		const errorMessages: any = {
 			1001: "Password incorrect",
 		};
 		return errorMessages[errorCode] ?? "";
@@ -87,12 +87,12 @@ export class AuthLogInComponent {
 	}
 
 	openResetPasswordModal() {
-		this._dialogService.open(AuthResetPasswordModalComponent)
+		// this._dialogService.open(AuthResetPasswordModalComponent)
 
 		this.formGroup.markAsUntouched();
 	}
 
-	public logInWithForm(formGroup) {
+	public logInWithForm(formGroup: FormGroup) {
 		if (formGroup.invalid) {
 			return;
 		}
@@ -113,7 +113,6 @@ export class AuthLogInComponent {
 							});
 						} else {
 							const errorType = er.error.code === 1000 ? "Incorrect email" : "Incorrect password";
-							this._ampService.logEvent("Login Fail", {type: errorType});
 							this._hotToastService.show("Incorrect email or password", {
 								dismissible: true,
 								style: {
@@ -136,10 +135,8 @@ export class AuthLogInComponent {
 			this.authService
 				.getUser()
 				.pipe(untilDestroyed(this), skip(1))
-				.subscribe(async (val) => {
-					this._ampService.logEvent("Login success", {type: "main app"});
+				.subscribe(async () => {
 					isRecovered && this.showDialog();
-					// TODO: remove code below when tradeBid will be implemented and uncomment code above
 					if (localStorage.getItem("blocked-route")?.includes("tradebid")) {
 						await this.router.navigateByUrl("/");
 					} else {
@@ -153,19 +150,18 @@ export class AuthLogInComponent {
 	}
 
 	public showDialog(): void {
-		this._dialogService
-			.open(AuthRecoverAccountComponent, {
-				width: "40vw",
-				height: "auto",
-				minHeight: "0",
-				windowClass: "report-dialog",
-			})
-			.afterClosed$.pipe(untilDestroyed(this))
-			.subscribe();
+		// this._dialogService
+		// 	.open(AuthRecoverAccountComponent, {
+		// 		width: "40vw",
+		// 		height: "auto",
+		// 		minHeight: "0",
+		// 		windowClass: "report-dialog",
+		// 	})
+		// 	.afterClosed$.pipe(untilDestroyed(this))
+		// 	.subscribe();
 	}
 
 	registrationLink() {
-		this._ampService.logEvent("Click Registration button", {source: localStorage.getItem("source")});
 	}
 
 	logInWithGoogle() {

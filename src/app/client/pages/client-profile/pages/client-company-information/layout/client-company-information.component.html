@@ -50,15 +50,17 @@
 					</p>
 				</div>
 				<div class="form-control-wrapper">
-					<b2b-ngx-select
-						[options]="employeesNumber$ | async"
-						bindValue="id"
-						bindLabel="value"
-						placeholder="Select"
-						formControlName="employeesNumber"
-						[theme]="b2bNgxSelectThemeEnum.BACKGROUND_GRAY">
-						Number of employees
-					</b2b-ngx-select>
+					<ng-container *ngIf="employeesNumber$ | async as employeesNumber">
+            <b2b-ngx-select
+              [options]="employeesNumber"
+              bindValue="id"
+              bindLabel="value"
+              placeholder="Select"
+              formControlName="employeesNumber"
+              [theme]="b2bNgxSelectThemeEnum.BACKGROUND_GRAY">
+              Number of employees
+            </b2b-ngx-select>
+          </ng-container>
 					<p
 						*ngIf="formState['employeesNumber'].touched && formState['employeesNumber'].errors?.required"
 						class="error"
@@ -67,15 +69,17 @@
 					</p>
 				</div>
 				<div class="form-control-wrapper">
-					<b2b-ngx-select
-						[options]="annualRevenue$ | async"
-						bindValue="id"
-						bindLabel="value"
-						placeholder="Select"
-						formControlName="annualRevenue"
-						[theme]="b2bNgxSelectThemeEnum.BACKGROUND_GRAY">
-						Annual revenue
-					</b2b-ngx-select>
+					<ng-container *ngIf="annualRevenue$ | async as annualRevenue">
+<!--            <b2b-ngx-select-->
+<!--              [options]="annualRevenue"-->
+<!--              bindValue="id"-->
+<!--              bindLabel="value"-->
+<!--              placeholder="Select"-->
+<!--              formControlName="annualRevenue"-->
+<!--              [theme]="b2bNgxSelectThemeEnum.BACKGROUND_GRAY">-->
+<!--              Annual revenue-->
+<!--            </b2b-ngx-select>-->
+          </ng-container>
 					<p
 						*ngIf="formState['annualRevenue'].touched && formState['annualRevenue'].errors?.required"
 						class="error"
@@ -86,23 +90,23 @@
 			</div>
 			<div class="column">
 				<div class="form-control-wrapper phone-control-wrapper">
-					<b2b-ngx-tel
-						[showErrorMessage]="false"
-						formControlName="phone"
-						[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY">
-						Phone number
-					</b2b-ngx-tel>
+<!--					<b2b-ngx-tel-->
+<!--						[showErrorMessage]="false"-->
+<!--						formControlName="phone"-->
+<!--						[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY">-->
+<!--						Phone number-->
+<!--					</b2b-ngx-tel>-->
 					<p *ngIf="formState['phone'].touched && formState['phone'].errors?.required" class="error" [@fadeInOut]>
 						Phone number is required
 					</p>
 				</div>
 				<div class="form-control-wrapper">
-					<input
-						b2bNgxInput
-						label="Office address"
-						placeholder="Address"
-						formControlName="address"
-						[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"/>
+<!--					<input-->
+<!--						b2bNgxInput-->
+<!--						label="Office address"-->
+<!--						placeholder="Address"-->
+<!--						formControlName="address"-->
+<!--						[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"/>-->
 					<p *ngIf="formState['address'].touched && formState['address'].errors?.required" class="error" [@fadeInOut]>
 						Office address is required
 					</p>
@@ -119,13 +123,13 @@
 					</p>
 				</div>
 				<div class="form-control-wrapper textarea-wrapper">
-					<textarea
-						b2bNgxTextarea
-						[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"
-						placeholder="Describe more about your company"
-						label="Company's description"
-						formControlName="companyDescription"
-						class="quotation__textarea quotation__middle-space"></textarea>
+<!--					<textarea-->
+<!--						b2bNgxTextarea-->
+<!--						[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"-->
+<!--						placeholder="Describe more about your company"-->
+<!--						label="Company's description"-->
+<!--						formControlName="companyDescription"-->
+<!--						class="quotation__textarea quotation__middle-space"></textarea>-->
 					<p
 						[@fadeInOut]
 						class="error"
@@ -146,15 +150,17 @@
 					</p>
 				</div>
 				<div class="form-control-wrapper">
-					<b2b-ngx-select
-						[options]="position$ | async"
-						bindValue="id"
-						bindLabel="value"
-						placeholder="Select"
-						formControlName="position"
-						[theme]="b2bNgxSelectThemeEnum.BACKGROUND_GRAY">
-						Your position
-					</b2b-ngx-select>
+					<ng-container *ngIf="position$ | async as position">
+<!--            <b2b-ngx-select-->
+<!--              [options]="position"-->
+<!--              bindValue="id"-->
+<!--              bindLabel="value"-->
+<!--              placeholder="Select"-->
+<!--              formControlName="position"-->
+<!--              [theme]="b2bNgxSelectThemeEnum.BACKGROUND_GRAY">-->
+<!--              Your position-->
+<!--            </b2b-ngx-select>-->
+          </ng-container>
 					<p *ngIf="formState['position'].touched && formState['position'].errors?.required" class="error" [@fadeInOut]>
 						Your position is required
 					</p>
@@ -163,29 +169,31 @@
 		</div>
 		<div class="account-type">
 			<div class="title">Account type</div>
-			<b2b-ngx-radio [options]="isAdmin ? ['Admin'] : ['Supplier', 'Buyer']" class="ngx-radio"
-										 formControlName="rootRole"></b2b-ngx-radio>
+<!--			<b2b-ngx-radio [options]="isAdmin ? ['Admin'] : ['Supplier', 'Buyer']" class="ngx-radio"-->
+<!--										 formControlName="rootRole"></b2b-ngx-radio>-->
 			<div class="form-control-wrapper">
-				<b2b-ngx-select
-					*ngIf="!isAdmin"
-					[options]="availableRoles$ | async"
-					bindValue="id"
-					bindLabel="displayName"
-					placeholder="Select"
-					formControlName="businessType"
-					[theme]="b2bNgxSelectThemeEnum.BACKGROUND_GRAY">
-					Business type
-				</b2b-ngx-select>
-				<b2b-ngx-select
-					*ngIf="isAdmin"
-					[options]="availableRoles$ | async"
-					bindValue="_id"
-					bindLabel="displayName"
-					placeholder="Select"
-					formControlName="businessType"
-					[theme]="b2bNgxSelectThemeEnum.BACKGROUND_GRAY">
-					Business type
-				</b2b-ngx-select>
+        <ng-container *ngIf="availableRoles$ | async as availableRoles">
+<!--          <b2b-ngx-select-->
+<!--            *ngIf="!isAdmin"-->
+<!--            [options]="availableRoles"-->
+<!--            bindValue="id"-->
+<!--            bindLabel="displayName"-->
+<!--            placeholder="Select"-->
+<!--            formControlName="businessType"-->
+<!--            [theme]="b2bNgxSelectThemeEnum.BACKGROUND_GRAY">-->
+<!--            Business type-->
+<!--          </b2b-ngx-select>-->
+<!--          <b2b-ngx-select-->
+<!--            *ngIf="isAdmin"-->
+<!--            [options]="availableRoles"-->
+<!--            bindValue="_id"-->
+<!--            bindLabel="displayName"-->
+<!--            placeholder="Select"-->
+<!--            formControlName="businessType"-->
+<!--            [theme]="b2bNgxSelectThemeEnum.BACKGROUND_GRAY">-->
+<!--            Business type-->
+<!--          </b2b-ngx-select>-->
+        </ng-container>
 				<p
 					*ngIf="formState['businessType'].touched && formState['businessType'].errors?.required"
 					class="error"
@@ -211,11 +219,11 @@
 						<div class="control-header-name">{{ control.placeholder }}</div>
 					</div>
 					<div class="control-body">
-						<input
-							b2bNgxInput
-							[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"
-							[placeholder]="control.placeholder"
-							[formControlName]="control.name"/>
+<!--						<input-->
+<!--							b2bNgxInput-->
+<!--							[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"-->
+<!--							[placeholder]="control.placeholder"-->
+<!--							[formControlName]="control.name"/>-->
 						<img (click)="removeSocialControl(control.name)" class="cancel-btn" b2bNgxIcon name="cancel" alt="cancel"/>
 					</div>
 
@@ -237,38 +245,38 @@
 					<img (click)="removeCategory(category.value)" class="cancel-btn" b2bNgxIcon name="cancel" alt="cancel"/>
 				</div>
 			</div>
-			<button
-				b2bNgxButton
-				[theme]="b2bNgxButtonThemeEnum.BACKGROUND_BLACK"
-				(click)="addCategory()"
-				class="categories-button">
-				Select the product
-			</button>
+<!--			<button-->
+<!--				b2bNgxButton-->
+<!--				[theme]="b2bNgxButtonThemeEnum.BACKGROUND_BLACK"-->
+<!--				(click)="addCategory()"-->
+<!--				class="categories-button">-->
+<!--				Select the product-->
+<!--			</button>-->
 		</div>
 
 		<div class="company-logo">
 			<div class="title">Company logo</div>
 			<div class="file-wrapper">
-				<b2b-ngx-logo formControlName="logo"></b2b-ngx-logo>
+<!--				<b2b-ngx-logo formControlName="logo"></b2b-ngx-logo>-->
 			</div>
 			<div class="conditional">Supported file types: SVG, PNG and JPG files. Maximum size: 5 MB</div>
 		</div>
 		<div *ngIf="formState?.documents" class="company-documents">
 			<div class="title">Documents</div>
 			<div class="file-wrapper">
-				<b2b-ngx-file label="Choose file" (clicked)="openDocument($event)" formControlName="documents"></b2b-ngx-file>
+<!--				<b2b-ngx-file label="Choose file" (clicked)="openDocument($event)" formControlName="documents"></b2b-ngx-file>-->
 			</div>
 			<div class="conditional">
 				Supported file types: PDF, XLS, TXT, DOCX and JPG files. Maximum size: 50 MB (total)
 			</div>
 		</div>
 		<div class="form-buttons">
-			<button (click)="onCancel()" [theme]="b2bNgxButtonThemeEnum.OUTLINE_GRAY" b2bNgxButton>Cancel</button>
-			<button (click)="onSave(form)" [theme]="b2bNgxButtonThemeEnum.BACKGROUND_BLUE" b2bNgxButton>Save changes</button>
+<!--			<button (click)="onCancel()" b2bNgxButton [theme]="b2bNgxButtonThemeEnum.OUTLINE_GRAY">Cancel</button>-->
+<!--			<button (click)="onSave(form)" b2bNgxButton [theme]="b2bNgxButtonThemeEnum.BACKGROUND_BLUE">Save changes</button>-->
 		</div>
 	</form>
 	<div class="mobile-buttons">
-		<button (click)="onCancel()" [theme]="b2bNgxButtonThemeEnum.OUTLINE_GRAY" b2bNgxButton>Cancel</button>
-		<button (click)="onSave(form)" [theme]="b2bNgxButtonThemeEnum.BACKGROUND_BLUE" b2bNgxButton>Save changes</button>
+<!--		<button (click)="onCancel()" b2bNgxButton [theme]="b2bNgxButtonThemeEnum.OUTLINE_GRAY">Cancel</button>-->
+<!--		<button (click)="onSave(form)" b2bNgxButton [theme]="b2bNgxButtonThemeEnum.BACKGROUND_BLUE">Save changes</button>-->
 	</div>
 </div>

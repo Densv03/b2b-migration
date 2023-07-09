@@ -5,7 +5,7 @@ import {
 	HostListener,
 	Output
 } from '@angular/core';
-import {B2bNgxButtonThemeEnum} from "../../../../../../../../../libs/ngx-button/src";
+import {B2bNgxButtonThemeEnum} from "@b2b/ngx-button";
 import {animate, state, style, transition, trigger} from "@angular/animations";
 
 @Component({
@@ -32,7 +32,7 @@ export class AuthRegisterAccountTypeComponent {
 	@Output() public userType = new EventEmitter<'buyer' | 'supplier'>();
 
 	public readonly b2bNgxButtonThemeEnum = B2bNgxButtonThemeEnum;
-	public selectedBlock: 'buyer' | 'supplier';
+	public selectedBlock: 'buyer' | 'supplier' = 'buyer';
 	public deviceIsMobile = window.innerWidth <= 768;
 
 	constructor() {
@@ -41,7 +41,7 @@ export class AuthRegisterAccountTypeComponent {
 
 
 	@HostListener('window:resize', ['$event'])
-	public selectBlockIfMobile(event) {
+	public selectBlockIfMobile(event: any) {
 		event.target.innerWidth <= 768 && !this.selectedBlock ? this.selectedBlock = 'supplier' : null;
 		this.deviceIsMobile = event.target.innerWidth <= 768;
 	}

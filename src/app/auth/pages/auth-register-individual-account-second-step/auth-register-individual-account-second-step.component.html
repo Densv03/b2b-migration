@@ -61,21 +61,20 @@
 		formControlName="roleId"
 		>Type of business
 	</b2b-ngx-select>
-	<b2b-categories-dialog
-		class="auth-register-individual-account__main-input"
-		formControlName="categories"
-		[theme]="b2bNgxSelectThemeEnum.BACKGROUND_GRAY"
-		placeholder="What product do you deal with?">
-		Category
-	</b2b-categories-dialog>
+<!--	<b2b-categories-dialog-->
+<!--		class="auth-register-individual-account__main-input"-->
+<!--		formControlName="categories"-->
+<!--		[theme]="b2bNgxSelectThemeEnum.BACKGROUND_GRAY"-->
+<!--		placeholder="What product do you deal with?">-->
+<!--		Category-->
+<!--	</b2b-categories-dialog>-->
 
 	<ng-template let-error let-text="text" #tpl>
 		<label class="control-error">{{ t("ERRORS.TERMS_CONDITIONS") }}</label>
 	</ng-template>
 	<b2b-ngx-checkbox
 		class="auth-register-individual-account__main-checkbox"
-		[errors]="form.get('termsAndConditions').errors"
-		[controlErrorsTpl]="tpl"
+		[errors]="form.get('termsAndConditions')?.errors"
 		formControlName="termsAndConditions"
 		>{{ t("AUTH.AGREE") }}
 		<a

@@ -1,9 +1,9 @@
 import {ChangeDetectionStrategy, ChangeDetectorRef, Component} from "@angular/core";
-import { Validators } from "@angular/forms";
+import {FormBuilder, FormControl, Validators} from "@angular/forms";
 import { B2bNgxButtonThemeEnum } from "@b2b/ngx-button";
 import { B2bNgxInputThemeEnum } from "@b2b/ngx-input";
 import { HotToastService } from "@ngneat/hot-toast";
-import { FormBuilder, FormControl } from "@ngneat/reactive-forms";
+// import { FormBuilder, FormControl } from "@ngneat/reactive-forms";
 import { TranslocoService } from "@ngneat/transloco";
 import { UntilDestroy, untilDestroyed } from "@ngneat/until-destroy";
 // import { NgxSmartModalService } from "ngx-smart-modal";

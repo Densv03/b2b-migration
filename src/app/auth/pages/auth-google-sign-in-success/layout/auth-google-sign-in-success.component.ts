@@ -1,7 +1,6 @@
 import { animate, style, transition, trigger } from "@angular/animations";
 import { Component } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
-import { DialogService } from "@ngneat/dialog";
 import { UntilDestroy, untilDestroyed } from "@ngneat/until-destroy";
 import { AuthService } from "../../../services/auth/auth.service";
 import { AuthRecoverAccountComponent } from "../../auth-recover-account/auth-recover-account.component";
@@ -23,7 +22,7 @@ export class AuthGoogleSignInSuccessComponent {
 		private readonly _activatedRoute: ActivatedRoute,
 		private readonly _authService: AuthService,
 		private readonly _router: Router,
-		private readonly _dialogService: DialogService
+		// private readonly _dialogService: DialogService
 	) {
 		this._activatedRoute.queryParams.pipe(untilDestroyed(this)).subscribe((params) => {
 			const { token, recovered } = params;
@@ -34,15 +33,15 @@ export class AuthGoogleSignInSuccessComponent {
 				.pipe(untilDestroyed(this))
 				.subscribe((user) => {
 					if (recovered) {
-						this._dialogService
-							.open(AuthRecoverAccountComponent, {
-								width: "40vw",
-								height: "auto",
-								minHeight: "0",
-								windowClass: "report-dialog",
-							})
-							.afterClosed$.pipe(untilDestroyed(this))
-							.subscribe();
+						// this._dialogService
+						// 	.open(AuthRecoverAccountComponent, {
+						// 		width: "40vw",
+						// 		height: "auto",
+						// 		minHeight: "0",
+						// 		windowClass: "report-dialog",
+						// 	})
+						// 	.afterClosed$.pipe(untilDestroyed(this))
+						// 	.subscribe();
 					}
 					this._authService.updateToken(token);
 					this._authService.updateRole(user?.role);
