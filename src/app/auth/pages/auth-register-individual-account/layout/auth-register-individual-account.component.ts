@@ -74,4 +74,8 @@ export class AuthRegisterIndividualAccountComponent implements OnInit {
 			)
 			.subscribe();
 	}
+
+  processSignInClick() {
+
+  }
 }

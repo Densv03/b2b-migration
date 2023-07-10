@@ -14,25 +14,27 @@ import { TranslocoModule } from "@ngneat/transloco";
 import { B2bNgxImageModule } from "@b2b/ngx-image";
 import { AuthRecoverAccountModule } from "../auth-recover-account/auth-recover-account.module";
 import {B2bNgxIconModule} from "@b2b/ngx-icon";
+import {NgxPasswordModule} from "@b2b/ngx-password";
 // import {NgxPasswordModule} from "@b2b/ngx-password";
 
 @NgModule({
 	declarations: [AuthLogInComponent, AuthResetPasswordModalComponent],
-    imports: [
-        CommonModule,
-        AuthLogInRoutingModule,
-        FormsModule,
-        ReactiveFormsModule,
-        // ErrorTailorModule,
-        B2bNgxInputModule,
-        B2bNgxButtonModule,
-        // B2bNgxDividerModule,
-        B2bNgxLinkModule,
-        B2bNgxImageModule,
-        TranslocoModule,
-        AuthRecoverAccountModule,
-        B2bNgxIconModule,
-        // NgxPasswordModule,
-    ],
+  imports: [
+    CommonModule,
+    AuthLogInRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    // ErrorTailorModule,
+    B2bNgxInputModule,
+    B2bNgxButtonModule,
+    // B2bNgxDividerModule,
+    B2bNgxLinkModule,
+    B2bNgxImageModule,
+    TranslocoModule,
+    AuthRecoverAccountModule,
+    B2bNgxIconModule,
+    NgxPasswordModule,
+    // NgxPasswordModule,
+  ],
 })
 export class AuthLogInModule {}

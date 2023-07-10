@@ -38,7 +38,7 @@ export class B2bNgxCheckboxComponent implements ControlValueAccessor, OnInit, On
 	@Input() public  placeholder: string = '';
 	@Input() public checked: boolean = false;
 	@Input() public customClass: string = ''
-	@Input() public errors: ValidationErrors = {};
+	@Input() public errors: ValidationErrors | null = {};
 
 	@Output() change: EventEmitter<Event> = new EventEmitter<Event>();
 

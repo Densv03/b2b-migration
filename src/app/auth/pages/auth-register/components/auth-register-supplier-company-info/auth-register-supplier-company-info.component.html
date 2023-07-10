@@ -16,27 +16,31 @@
 		</b2b-ngx-category-dropdowns>
 
 		<div class="form-control-wrapper">
-			<b2b-ngx-select
-				[options]="foundationYear$ | async"
-				bindValue="id"
-				bindLabel="value"
-				placeholder="Select"
-				formControlName="yearOfFoundation"
-				[theme]="b2bNgxSelectThemeEnum.BACKGROUND_GRAY">
-				Year of foundation
-			</b2b-ngx-select>
+			<ng-container *ngIf="foundationYear$ | async as foundationYear">
+        <b2b-ngx-select
+          [options]="foundationYear"
+          bindValue="id"
+          bindLabel="value"
+          placeholder="Select"
+          formControlName="yearOfFoundation"
+          [theme]="b2bNgxSelectThemeEnum.BACKGROUND_GRAY">
+          Year of foundation
+        </b2b-ngx-select>
+      </ng-container>
 		</div>
 
 		<div class="form-control-wrapper">
-			<b2b-ngx-select
-				[options]="employeesNumber$ | async"
-				bindValue="id"
-				bindLabel="value"
-				placeholder="Select"
-				formControlName="employeesNumber"
-				[theme]="b2bNgxSelectThemeEnum.BACKGROUND_GRAY">
-				Number of employees
-			</b2b-ngx-select>
+			<ng-container *ngIf="employeesNumber$ | async as employeeNumber">
+        <b2b-ngx-select
+          [options]="employeeNumber"
+          bindValue="id"
+          bindLabel="value"
+          placeholder="Select"
+          formControlName="employeesNumber"
+          [theme]="b2bNgxSelectThemeEnum.BACKGROUND_GRAY">
+          Number of employees
+        </b2b-ngx-select>
+      </ng-container>
 		</div>
 
 		<button

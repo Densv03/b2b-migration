@@ -12,24 +12,24 @@
 	<p
 		[@fadeInOut]
 		class="auth-register-individual-account__main-input-error"
-		*ngIf="form.get('fullName').errors?.fullName">
+		*ngIf="form.get('fullName')?.errors?.['fullName']">
 		{{ t("ERRORS.USER_ENGLISH_NAME") }}
 	</p>
 	<p
 		[@fadeInOut]
 		class="auth-register-individual-account__main-input-error"
-		*ngIf="form.get('fullName').errors?.latin && !form.get('fullName').errors?.fullName">
+		*ngIf="form.get('fullName')?.errors?.['latin'] && !form.get('fullName')?.errors?.['fullName']">
 		{{ t("ERRORS.USER_ENGLISH_LETTERS") }}
 	</p>
 
-	<b2b-ngx-tel
-		[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"
-		class="auth-register-individual-account__main-input"
-		[placeholder]="t('PLACEHOLDERS.YOUR_PHONE_NUMBER')"
-		[errors]="form.get('phone').errors"
-		formControlName="phone"
-		>{{ t("LABELS.PHONE") }}</b2b-ngx-tel
-	>
+<!--	<b2b-ngx-tel-->
+<!--		[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"-->
+<!--		class="auth-register-individual-account__main-input"-->
+<!--		[placeholder]="t('PLACEHOLDERS.YOUR_PHONE_NUMBER')"-->
+<!--		[errors]="form.get('phone').errors"-->
+<!--		formControlName="phone"-->
+<!--		>{{ t("LABELS.PHONE") }}</b2b-ngx-tel-->
+<!--	>-->
 	<input
 		type="company"
 		id="company"
@@ -40,7 +40,7 @@
 		labelClass="auth-register-individual-account__main-input"
 		[placeholder]="t('PLACEHOLDERS.COMPANY_NAME')"
 		formControlName="company" />
-	<p [@fadeInOut] class="auth-register-individual-account__main-input-error" *ngIf="form.get('company').errors?.latin">
+	<p [@fadeInOut] class="auth-register-individual-account__main-input-error" *ngIf="form.get('company')?.errors?.['latin']">
 		{{ t("ERRORS.USER_ENGLISH_LETTERS") }}
 	</p>
 
@@ -51,16 +51,18 @@
 		formControlName="country"
 		>Company’s country
 	</b2b-ngx-country-select>
-	<b2b-ngx-select
-		[options]="roles$ | async"
-		bindValue="_id"
-		bindLabel="displayName"
-		class="auth-register-individual-account__main-input"
-		placeholder="Select"
-		[theme]="b2bNgxSelectThemeEnum.BACKGROUND_GRAY"
-		formControlName="roleId"
-		>Type of business
-	</b2b-ngx-select>
+	<ng-container *ngIf="roles$ | async as roles">
+    <b2b-ngx-select
+      [options]="roles"
+      bindValue="_id"
+      bindLabel="displayName"
+      class="auth-register-individual-account__main-input"
+      placeholder="Select"
+      [theme]="b2bNgxSelectThemeEnum.BACKGROUND_GRAY"
+      formControlName="roleId"
+    >Type of business
+    </b2b-ngx-select>
+  </ng-container>
 <!--	<b2b-categories-dialog-->
 <!--		class="auth-register-individual-account__main-input"-->
 <!--		formControlName="categories"-->
@@ -74,7 +76,7 @@
 	</ng-template>
 	<b2b-ngx-checkbox
 		class="auth-register-individual-account__main-checkbox"
-		[errors]="form.get('termsAndConditions')?.errors"
+		[errors]="form.controls['termsAndConditions']!.errors "
 		formControlName="termsAndConditions"
 		>{{ t("AUTH.AGREE") }}
 		<a

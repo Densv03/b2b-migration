@@ -1,14 +1,14 @@
 <form [formGroup]="form">
-	<b2b-ngx-treeview [label]="parentCategoryLabel" [items]="categories$ | async"
-										[config]="config"
-										[theme]="'gray'"
-										formControlName="categoryLevel1"></b2b-ngx-treeview>
+<!--	<b2b-ngx-treeview [label]="parentCategoryLabel" [items]="categories$ | async"-->
+<!--										[config]="config"-->
+<!--										[theme]="'gray'"-->
+<!--										formControlName="categoryLevel1"></b2b-ngx-treeview>-->
 
 
 	<div class="subcategory">
 		<p>Select subcategory</p>
 
-		<div (click)="toggleDropdown()" [class.disabled]="(categoriesLevel2$ | async).length === 0" #subcategory>
+		<div (click)="toggleDropdown()" [class.disabled]="(categoriesLevel2$ | async)?.length === 0" #subcategory>
 			<div class="input">
 				<p *ngIf="selectedSubcategories.length === 0; else showCategories">{{ childCategoryLabel }}</p>
 

@@ -15,22 +15,22 @@
 		formControlName="fullName" />
 
 	<p class="auth-register-individual-account__main-input-error"
-		 *ngIf="form.get('fullName').errors?.fullName">
+		 *ngIf="form.get('fullName')?.errors?.['fullName']">
 		{{ t("ERRORS.USER_ENGLISH_NAME") }}
 	</p>
 
 	<p class="auth-register-individual-account__main-input-error"
-		 *ngIf="form.get('fullName').errors?.latin && !form.get('fullName').errors?.fullName">
+		 *ngIf="form.get('fullName')?.errors?.['latin'] && !form.get('fullName')?.errors?.['fullName']">
 		{{ t("ERRORS.USER_ENGLISH_LETTERS") }}
 	</p>
 
-	<b2b-ngx-tel
-		[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"
-		class="auth-register-individual-account__main-input"
-		[errors]="form.get('phone').errors"
-		formControlName="phone">
-		{{ t("LABELS.PHONE") }}
-	</b2b-ngx-tel>
+<!--	<b2b-ngx-tel-->
+<!--		[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"-->
+<!--		class="auth-register-individual-account__main-input"-->
+<!--		[errors]="form.get('phone').errors"-->
+<!--		formControlName="phone">-->
+<!--		{{ t("LABELS.PHONE") }}-->
+<!--	</b2b-ngx-tel>-->
 
 	<input
 		type="company"
@@ -44,7 +44,8 @@
 		formControlName="company" />
 
 
-	<p class="auth-register-individual-account__main-input-error" *ngIf="form.get('company').errors?.latin">
+	<p class="auth-register-individual-account__main-input-error"
+     *ngIf="form.get('company')?.errors?.['latin']">
 		{{ t("ERRORS.USER_ENGLISH_LETTERS") }}
 	</p>
 

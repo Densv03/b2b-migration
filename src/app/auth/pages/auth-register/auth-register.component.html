@@ -12,7 +12,7 @@
 	<mat-horizontal-stepper
 		#stepper
 		[selectedIndex]="stepperSelectedIndex"
-		disableRipple="true"
+		[disableRipple]="true"
 		[ngClass]="'last-edited-step-' + stepper.selectedIndex">
 		<mat-step>
 			<ng-template matStepLabel>

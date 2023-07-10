@@ -3,7 +3,7 @@
 	<span>Select all</span>
 
 	<b2b-ngx-toggle [emptyLabel]="true"
-									subcategories="true"
+									[subcategories]="true"
 									[toggled]="category.selectAll"
 									(change)="updateToggle($event, category._id)"></b2b-ngx-toggle>
 </div>

@@ -7,7 +7,6 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatTreeModule} from "@angular/material/tree";
 import {MatIconModule} from "@angular/material/icon";
 import {B2bNgxCheckboxModule} from "@b2b/ngx-checkbox";
-import {MaterialExampleComponent} from "./material-example/material-example.component";
 import {B2bNgxTextareaModule} from "@b2b/ngx-textarea";
 import {NgxPasswordModule} from "@b2b/ngx-password";
 import {CoreModule} from "./core/core.module";
@@ -24,7 +23,6 @@ import { TranslocoRootModule } from './transloco-root.module';
     MatTreeModule,
     MatIconModule,
     B2bNgxCheckboxModule,
-    MaterialExampleComponent,
     FormsModule,
     B2bNgxTextareaModule,
     NgxPasswordModule,
