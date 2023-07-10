@@ -43,7 +43,7 @@ export class ClientHomeComponent implements OnInit {
 	public b2bNgxInputThemeEnum: typeof B2bNgxInputThemeEnum = B2bNgxInputThemeEnum;
 	public readonly b2bNgxLinkThemeEnum: typeof B2bNgxLinkThemeEnum;
 	public readonly b2bNgxButtonThemeEnum: typeof B2bNgxButtonThemeEnum = B2bNgxButtonThemeEnum;
-	public selectedCategory = [];
+	public selectedCategory: any[] = [];
 	private readonly aboutUsVisibleSectionType: typeof SectionInfoEnum = SectionInfoEnum;
 
 	constructor(

@@ -2,7 +2,7 @@ export const MOCK_CATEGORIES_DATA =
   [
     {
       "children": [{
-        "children": [],
+        "children": [] as any[],
         "sort": 0,
         "_id": "60a784830a04b16c574e81c0",
         "name": "Animal Feed",
