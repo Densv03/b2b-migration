@@ -152,9 +152,9 @@ export class AuthRegisterGoogleAccountComponent implements OnInit {
 		);
 	}
 
-	public get isTrader() {
+	public get isTrader(): undefined | boolean {
 		if (!this._authService.role) {
-			return;
+			return undefined;
 		}
 		return this._authService.role.name === "trader";
 	}
