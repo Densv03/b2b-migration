@@ -5,9 +5,9 @@ import {catchError, filter, first, map, tap} from "rxjs/operators";
 import { AuthService } from "../../services/auth/auth.service";
 import { TranslocoService } from "@ngneat/transloco";
 import { MatDialog } from "@angular/material/dialog";
-import { throwError } from "rxjs";
-import { FormBuilder, FormGroup } from "@ngneat/reactive-forms";
-import { Validators } from "@angular/forms";
+import {Observable, throwError} from "rxjs";
+// import { FormBuilder, FormGroup } from "@ngneat/reactive-forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import { fullName } from "../../../core/helpers/validator/full-name";
 import { onlyLatin } from "../../../core/helpers/validator/only-latin";
 import { B2bNgxLinkService, B2bNgxLinkThemeEnum } from "@b2b/ngx-link";
@@ -16,7 +16,7 @@ import { animate, style, transition, trigger } from "@angular/animations";
 import {ActivatedRoute, Router} from "@angular/router";
 import { HotToastService } from "@ngneat/hot-toast";
 import { FirstStepDataModel } from "../auth-register-individual-account/shared/first-step-data.model";
-import { BrowserStorageKeysEnum } from "../../../shared/enums/browser-storage-keys.enum";
+import { BrowserStorageKeysEnum} from "../../../client/shared/enums/browser-storage-keys.enum";
 import {onlyLatinAndNumberAndSymbols} from "../../../core/helpers/validator/only -latin-numbers-symbols";
 
 @Component({
@@ -57,16 +57,16 @@ export class AuthRegisterIndividualAccountSecondStepComponent implements OnInit 
 		private hotToastrService: HotToastService,
 		private changeDetectorRef: ChangeDetectorRef
 	) {
-		this.firstStepDataObj = JSON.parse(localStorage.getItem(BrowserStorageKeysEnum.FIRST_STEP_DATA));
+		this.firstStepDataObj = JSON.parse(localStorage.getItem(BrowserStorageKeysEnum.FIRST_STEP_DATA)!);
 	}
 
 	ngOnInit() {
 		if (this.firstStepDataObj?.companyName !== undefined && this.firstStepDataObj?.companyName !== null) {
-			this.form.get("company").setValue(this.firstStepDataObj.companyName);
+			this.form.get("company")?.setValue(this.firstStepDataObj.companyName);
 		}
 	}
 
-	public getRoles() {
+	public getRoles(): Observable<any[]> {
 		return this.authService.getRoles().pipe(
 			map((roles) =>
 				roles.map((role) => {
@@ -104,7 +104,7 @@ export class AuthRegisterIndividualAccountSecondStepComponent implements OnInit 
 				.pipe(
 					catchError((er) => {
 						this.hotToastrService.show(
-							`This email ${formGroup.get("securityData").get("email").value} is already registered.`,
+							`This email ${formGroup.get("securityData")?.get("email")?.value} is already registered.`,
 							{
 								dismissible: true,
 								style: {
@@ -121,7 +121,7 @@ export class AuthRegisterIndividualAccountSecondStepComponent implements OnInit 
 					this.authService.initUser();
 					await this.router.navigateByUrl(`/email-verify?email=${email}`);
 				});
-		} catch (err) {
+		} catch (err: any) {
 			const { code } = err.error;
 			if (code === 1002) {
 				// this.form.get('securityData').get('email').setErrors({ 1002: true });

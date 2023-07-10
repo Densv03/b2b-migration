@@ -17,12 +17,12 @@ import {TradebidService} from "../../../client/pages/client-tradebid/tradebid.se
 	styleUrls: ["./auth-register.component.scss"],
 })
 export class AuthRegisterComponent implements OnInit {
-	@ViewChild("stepper") stepper: MatStepper;
+	@ViewChild("stepper") stepper!: MatStepper;
 
-	public user: User;
-	public selectedUserType: "buyer" | "supplier";
+	public user!: User;
+	public selectedUserType: "buyer" | "supplier" = 'buyer';
 	public stepperSelectedIndex = 0;
-	private basicInfo: BasicInfoInterface;
+	private basicInfo!: BasicInfoInterface;
 
 	constructor(
 		private readonly authService: AuthService,
@@ -121,9 +121,10 @@ export class AuthRegisterComponent implements OnInit {
 					([rootRoles, roles]) => {
 						const rootRoleObject = rootRoles.find((rootRole) => rootRole._id === rootRoleId);
 						const roleObject = roles.find((role) => role._id === roleId);
-						this.authService.updateUser({...this.userService.getUser(), role: roleObject, rootRole: rootRoleObject});
+						// @ts-ignore
+            this.authService.updateUser({...this.userService.getUser(), role: roleObject, rootRole: rootRoleObject});
 
-						if (rootRoleObject.name === 'supplier') {
+						if (rootRoleObject?.name === 'supplier') {
 							this.router.navigateByUrl('/profile/your-account/company-information', {state: {showPopUp: true}});
 						} else {
 							this.router.navigate(["/"]);

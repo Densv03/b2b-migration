@@ -1,21 +1,19 @@
 import { ChangeDetectorRef, Component, HostListener, OnInit } from "@angular/core";
 import { animate, style, transition, trigger } from "@angular/animations";
-import { Validators } from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 
 import { Observable } from "rxjs";
 import { map, tap } from "rxjs/operators";
 import { TranslocoService } from "@ngneat/transloco";
 import { UntilDestroy, untilDestroyed } from "@ngneat/until-destroy";
-import { FormBuilder, FormGroup } from "@ngneat/reactive-forms";
 
 import { B2bNgxButtonThemeEnum } from "@b2b/ngx-button";
 import { B2bNgxInputThemeEnum } from "@b2b/ngx-input";
 import { B2bNgxLinkService, B2bNgxLinkThemeEnum } from "@b2b/ngx-link";
 import { B2bNgxSelectThemeEnum } from "@b2b/ngx-select";
 
-import { UserService } from "apps/site/src/app/client/pages/client-profile/services/user/user.service";
-import { AmplitudeService } from "apps/site/src/app/core/services/amplitude/amplitude.service";
+import { UserService} from "../../../../client/pages/client-profile/services/user/user.service";
 import { CategoriesService } from "../../../../client/services/categories/categories.service";
 import { AuthService } from "../../../services/auth/auth.service";
 import { AuthStore } from "../../../state/auth/auth.store";
@@ -23,6 +21,7 @@ import { onlyLatinAndNumber } from "../../../../core/helpers/validator/only-lati
 import { fullName } from "../../../../core/helpers/validator/full-name";
 import { onlyLatin } from "../../../../core/helpers/validator/only-latin";
 import { capitalizeFirstLetter } from "../../../../core/helpers/function/capitalize-first-letter";
+import {User} from "../../../../core/models/user/user.model";
 
 function setValuesToFormData(formData: FormData, values: any, prefix?: string) {
 	Object.entries(values).forEach(([key, value]: any) => {
@@ -72,13 +71,13 @@ export class AuthRegisterGoogleAccountComponent implements OnInit {
 	public readonly b2bNgxSelectThemeEnum: typeof B2bNgxSelectThemeEnum;
 
 	public readonly categories$: Observable<any>;
-	public user;
-	public token;
+	public user!: User;
+	public token: string = '';
 	public isComplete = false;
 	public readonly roles$: Observable<any>;
-	public availableRoles: any[];
+	public availableRoles: any[] = [];
 
-	public registrationSystem;
+	public registrationSystem: any;
 	constructor(
 		private readonly formBuilder: FormBuilder,
 		private readonly router: Router,
@@ -90,7 +89,6 @@ export class AuthRegisterGoogleAccountComponent implements OnInit {
 		public readonly b2bNgxLinkService: B2bNgxLinkService,
 		private readonly _userService: UserService,
 		private readonly _authStore: AuthStore,
-		private readonly _ampService: AmplitudeService,
 	) {
 		this.b2bNgxLinkThemeEnum = B2bNgxLinkThemeEnum;
 		this.b2bNgxButtonThemeEnum = B2bNgxButtonThemeEnum;
@@ -99,11 +97,10 @@ export class AuthRegisterGoogleAccountComponent implements OnInit {
 
 		this.categories$ = this.getCategories();
 		this.roles$ = this.getRoles();
-		this._ampService.logEvent("View registration page 2", { source: localStorage.getItem("source") });
 	}
 
 	@HostListener("window:popstate", ["$event"])
-	onPopState(event) {
+	onPopState(event: any) {
 		this.redirectFrom();
 	}
 
@@ -139,12 +136,12 @@ export class AuthRegisterGoogleAccountComponent implements OnInit {
 	public getCategories() {
 		return this._categoriesService.getCategories().pipe(
 			map(({ categories }) =>
-				categories.map((category) => ({
+				categories.map((category: any) => ({
 					text: category.name + "hide",
 					value: category._id,
 					collapsed: true,
 					checked: false,
-					children: category.children.map((level2Category) => ({
+					children: category.children.map((level2Category: any) => ({
 						text: level2Category.name,
 						value: level2Category._id,
 						collapsed: true,
@@ -163,7 +160,7 @@ export class AuthRegisterGoogleAccountComponent implements OnInit {
 	}
 
 	public get emailError() {
-		const { errors, touched } = this.formGroup.getControl("email");
+		const { errors, touched } = this.formGroup.controls['email'];
 
 		if (!errors || !touched) {
 			return "";

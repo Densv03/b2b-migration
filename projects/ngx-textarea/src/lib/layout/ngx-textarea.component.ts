@@ -35,7 +35,7 @@ export class B2bNgxTextareaComponent implements ControlValueAccessor, OnInit, On
 	public readonly formControl: FormControl<string | null>;
 	public readonly id: string;
 
-	private onChange: (value: string | null) => void;
+	private onChange: (value: string) => void;
 	private onTouched: () => void;
 
 	constructor() {
@@ -75,12 +75,12 @@ export class B2bNgxTextareaComponent implements ControlValueAccessor, OnInit, On
 	}
 
 	private subscribeOnValueChanges(): void {
-		this.formControl.valueChanges.pipe(untilDestroyed(this)).subscribe((value: string | null) => {
+		this.formControl.valueChanges.pipe(untilDestroyed(this)).subscribe((value: string) => {
 			this.onChange(value);
 		});
 	}
 
-	public registerOnChange(fn: (value: string | null) => void): void {
+	public registerOnChange(fn: (value: string) => void): void {
 		this.onChange = fn;
 	}
 

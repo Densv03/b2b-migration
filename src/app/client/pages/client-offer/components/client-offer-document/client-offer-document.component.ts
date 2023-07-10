@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit} from "@angular/core";
+import {Component, Inject} from "@angular/core";
 import {DocumentPreviewModel} from "../../../../../core/models/document-preview.model";
 import {DIALOG_DATA, DialogRef} from "@angular/cdk/dialog";
 

@@ -1,11 +1,10 @@
 import { Component, EventEmitter, Input, Output } from "@angular/core";
 import { Observable, of } from "rxjs";
-import { B2bNgxSelectThemeEnum } from "../../../../../../../../../libs/ngx-select/src";
-import { B2bNgxButtonThemeEnum } from "../../../../../../../../../libs/ngx-button/src";
-import { FormBuilder, FormGroup } from "@ngneat/reactive-forms";
+import { B2bNgxSelectThemeEnum} from "@b2b/ngx-select";
+import { B2bNgxButtonThemeEnum} from "@b2b/ngx-button";
 import { AuthService } from "../../../../services/auth/auth.service";
 import { TranslocoService } from "@ngneat/transloco";
-import { Validators } from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import { filter, map, tap } from "rxjs/operators";
 import { SelectItem } from "../../../../../client/pages/client-profile/pages/client-company-information/layout/client-company-information.component";
 import { UntilDestroy, untilDestroyed } from "@ngneat/until-destroy";
@@ -18,7 +17,7 @@ import { UntilDestroy, untilDestroyed } from "@ngneat/until-destroy";
 })
 export class AuthRegisterSupplierCompanyInfoComponent {
 	@Output() public supplierCompanyInfo = new EventEmitter<any>();
-	@Input() public rootRole: string;
+	@Input() public rootRole: string = '';
 
 	public readonly b2bNgxSelectThemeEnum = B2bNgxSelectThemeEnum;
 	public readonly b2bNgxButtonThemeEnum = B2bNgxButtonThemeEnum;
@@ -47,7 +46,7 @@ export class AuthRegisterSupplierCompanyInfoComponent {
 
 				const model = {
 					...this.form.value,
-					rootRoleId: rootRoles.find((el) => el.name === this.rootRole)._id,
+					rootRoleId: rootRoles.find((el) => el.name === this.rootRole)!._id,
 				};
 				this.supplierCompanyInfo.emit(model);
 			});

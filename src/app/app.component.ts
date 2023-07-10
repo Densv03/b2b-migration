@@ -3,6 +3,7 @@ import { MatTreeNestedDataSource } from '@angular/material/tree';
 import { NestedTreeControl } from '@angular/cdk/tree';
 import { MOCK_CATEGORIES_DATA } from './categories-mock';
 import { FormControl, FormGroup } from '@angular/forms';
+import {B2bNgxInputThemeEnum} from "@b2b/ngx-input";
 
 interface ParentCategory {
   children: ChildCategory[];
@@ -28,6 +29,7 @@ interface ChildCategory {
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
+  public theme = B2bNgxInputThemeEnum
   public treeControl = new NestedTreeControl<ParentCategory | ChildCategory>(
     (node) => node.children
   );

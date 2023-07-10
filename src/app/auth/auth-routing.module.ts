@@ -1,7 +1,7 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { AuthComponent } from "apps/site/src/app/auth/layout/auth.component";
-import { SelectedRoleGuard } from "apps/site/src/app/auth/guards/selectedRole/selectedRole.guard";
+import { AuthComponent} from "./layout/auth.component";
+// import { SelectedRoleGuard } from "apps/site/src/app/auth/guards/selectedRole/selectedRole.guard";
 
 const routes: Routes = [
 	{

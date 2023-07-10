@@ -1,6 +1,6 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { AuthConfirmEmailComponent } from "apps/site/src/app/auth/pages/auth-confirm-email/layout/auth-confirm-email.component";
+import { AuthConfirmEmailComponent} from "./layout/auth-confirm-email.component";
 
 const routes: Routes = [
 	{

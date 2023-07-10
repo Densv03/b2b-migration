@@ -1,35 +1,33 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, Renderer2 } from "@angular/core";
 import { B2bNgxLinkThemeEnum } from "@b2b/ngx-link";
-import { B2bNgxButtonThemeEnum } from "@b2b/ngx-button";
 import { B2bNgxInputThemeEnum } from "@b2b/ngx-input";
 import { B2bNgxSelectThemeEnum } from "@b2b/ngx-select";
 import { BehaviorSubject, combineLatest, Observable, of, tap } from "rxjs";
-import { AbstractControl, FormBuilder, FormGroup } from "@ngneat/reactive-forms";
 import { TradebidService } from "../../../../client-tradebid/tradebid.service";
 import { filter, first, map } from "rxjs/operators";
-import { Validators } from "@angular/forms";
+import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import { HotToastService } from "@ngneat/hot-toast";
 import { AuthService } from "../../../../../../auth/services/auth/auth.service";
 import { TranslocoService } from "@ngneat/transloco";
 import { UserService } from "../../../services/user/user.service";
 import { ApiService } from "../../../../../../core/services/api/api.service";
-import { User } from "../../../../../../core/models/user/user.model";
 import { SocialMediaEnum } from "../social-media.enum";
 import { MatDialog } from "@angular/material/dialog";
 import { CategoriesService } from "../../../../../services/categories/categories.service";
-import { CategoriesPopupComponent } from "../../../../../../../../../../libs/shared/components/categories-dialog/categories-popup-component/categories-popup.component";
-import { SelectCategoryModel } from "../../../../../../../../../../libs/shared/components/categories-dialog/select-category.model";
+// import { CategoriesPopupComponent } from "../../../../../../../../../../libs/shared/components/categories-dialog/categories-popup-component/categories-popup.component";
+// import { SelectCategoryModel } from "../../../../../../../../../../libs/shared/components/categories-dialog/select-category.model";
 import { getFormData } from "../../../../../../core/helpers/function/get-form-data";
 import { PublicCompanyInfoModel, SocialMedia } from "../../../../../../core/models/public-company-info.model";
 import { ClientOfferDocumentComponent } from "../../../../client-offer/components/client-offer-document/client-offer-document.component";
-import { DialogService } from "@ngneat/dialog";
+// import { DialogService } from "@ngneat/dialog";
 import { socialLink } from "../../../../../../core/helpers/validator/social-link";
 import { siteLink } from "../../../../../../core/helpers/validator/site-link";
 import { animate, style, transition, trigger } from "@angular/animations";
 import { b2bNgxTel } from "../../../../../../core/helpers/validator/b2b-ngx-tel";
 import { UntilDestroy, untilDestroyed } from "@ngneat/until-destroy";
-import { B2bAuthRootRoleInterface } from "libs/shared/interfaces/src/lib/b2b-auth-root-role.interface";
+import { B2bAuthRootRoleInterface} from "../../../../../../../../projects/shared/src/interfaces/b2b-auth-root-role.interface";
 import { Router } from "@angular/router";
+import {B2bNgxButtonThemeEnum} from "@b2b/ngx-button";
 
 export interface SelectItem {
 	id: string;
@@ -76,21 +74,20 @@ export class ClientCompanyInformationComponent implements OnInit {
 
 	public readonly isAdmin = this.userService.getUser().role.name === "admin";
 
-	public businessType$: Observable<SelectItem[]>;
-	public foundationYear$: Observable<SelectItem[]>;
+	public foundationYear$: Observable<any>;
 	public employeesNumber$: Observable<SelectItem[]>;
 	public annualRevenue$: Observable<SelectItem[]>;
 	public position$: Observable<SelectItem[]>;
 	public categories$: Observable<any>;
 	public form: FormGroup;
 	public formState: { [key: string]: AbstractControl };
-	public initialCompanyData: PublicCompanyInfoModel = null;
+	public initialCompanyData!: PublicCompanyInfoModel;
 	public userRole: string = "";
 	public socialMediaArr: SocialMediaControl[];
 	public presentSocialControls: SocialMediaControl[];
 	public socialButtons: SocialMediaButton[];
-	public chips: SelectCategoryModel[] = [];
-	public rootRoles: B2bAuthRootRoleInterface[];
+	public chips: any[] = [];
+	public rootRoles!: B2bAuthRootRoleInterface[];
 	public isBuyerAccount = this.userService.getUser()?.rootRole?.displayName === "Buyer" || this.isAdmin;
 
 	private employeesNumberArr: string[] = ["1-5", "5-10", "10-50", "50-100", "> 100"];
@@ -114,14 +111,14 @@ export class ClientCompanyInformationComponent implements OnInit {
 		private readonly userService: UserService,
 		private readonly apiService: ApiService,
 		private readonly dialog: MatDialog,
-		private readonly dialogService: DialogService,
+		// private readonly dialogService: DialogService,
 		private readonly categoriesService: CategoriesService,
 		private readonly changeDetectorRef: ChangeDetectorRef,
 		private readonly renderer2: Renderer2,
 		private readonly router: Router,
 		private readonly hotToastrService: HotToastService
 	) {
-		if (router.getCurrentNavigation().extras.state?.showPopUp) {
+		if (router.getCurrentNavigation()?.extras.state?.['showPopUp']) {
 			hotToastrService.info(
 				"Fill up empty fields to make a complete your company’s profile page. These information will be displayed on your profile.",
 				{
@@ -182,15 +179,15 @@ export class ClientCompanyInformationComponent implements OnInit {
 	}
 
 	public get availableRoles$(): Observable<any[]> {
-		return this.availableRolesSource.asObservable();
+		return this.availableRolesSource.asObservable() as any;
 	}
 
-	public openDocument(document) {
-		this.dialogService.open(ClientOfferDocumentComponent, {
-			data: document,
-			width: "80vw",
-			height: "80vh",
-		});
+	public openDocument(document: any) {
+		// this.dialogService.open(ClientOfferDocumentComponent, {
+		// 	data: document,
+		// 	width: "80vw",
+		// 	height: "80vh",
+		// });
 	}
 
 	public onCancel() {
@@ -203,8 +200,8 @@ export class ClientCompanyInformationComponent implements OnInit {
 			this.scrollToTop();
 			return;
 		}
-		const documents = form.value.documents?.filter((document) => document instanceof File);
-		const uploadedDocs = form.value.documents?.filter((document) => !(document instanceof File));
+		const documents = form.value.documents?.filter((document: any) => document instanceof File);
+		const uploadedDocs = form.value.documents?.filter((document: any) => !(document instanceof File));
 
 		const companyInfo = getFormData({
 			...form.value,
@@ -230,7 +227,7 @@ export class ClientCompanyInformationComponent implements OnInit {
 		if (!this.isAdmin) {
 			const roleId = this.availableRolesSource.getValue().find((role) => role.id === form.value.businessType)?.id;
 
-			const rootRoleId: string = this.rootRoles.find((rootRole) => rootRole.displayName === form.value.rootRole)._id;
+			const rootRoleId: string = this.rootRoles.find((rootRole) => rootRole.displayName === form.value.rootRole)!._id;
 
 			this.userService
 				.changeRole(this.userService.getToken(), roleId, rootRoleId)
@@ -278,7 +275,7 @@ export class ClientCompanyInformationComponent implements OnInit {
 		const controlAlreadyExist: number = this.presentSocialControls.findIndex(({ name }) => name === type);
 		if (!this.presentSocialControls.length || controlAlreadyExist < 0) {
 			this.form.addControl(type, this.fb.control("", [socialLink(), Validators.required]));
-			const control: SocialMediaControl = this.socialMediaArr.find(({ name }) => name === type);
+			const control: any = this.socialMediaArr.find(({ name }) => name === type);
 			this.presentSocialControls.push(control);
 		} else {
 			this.removeSocialControl(type);
@@ -296,24 +293,24 @@ export class ClientCompanyInformationComponent implements OnInit {
 			selectedCategories = this.chips.map((item) => item.value);
 		}
 
-		this.dialog
-			.open(CategoriesPopupComponent, {
-				data: {
-					selectedCategories,
-				},
-			})
-			.afterClosed()
-			.pipe(filter((el) => !!el))
-			.subscribe(({ categories }) => {
-				this.chips = categories;
-				this.formState["categories"].setValue(this.chips.map((item) => item.value));
-				this.changeDetectorRef.detectChanges();
-			});
+		// this.dialog
+		// 	.open(CategoriesPopupComponent, {
+		// 		data: {
+		// 			selectedCategories,
+		// 		},
+		// 	})
+		// 	.afterClosed()
+		// 	.pipe(filter((el) => !!el))
+		// 	.subscribe(({ categories }) => {
+		// 		this.chips = categories;
+		// 		this.formState["categories"].setValue(this.chips.map((item) => item.value));
+		// 		this.changeDetectorRef.detectChanges();
+		// 	});
 	}
 
 	public removeCategory(id: string): void {
 		this.chips = this.chips.filter(({ value }) => value !== id);
-		this.form.get("categories").setValue(this.form.get("categories").value.filter((item) => item !== id));
+		this.form.get("categories")?.setValue(this.form.get("categories")?.value.filter((item: any) => item !== id));
 	}
 
 	private createCompanyInformationGroup(): FormGroup {
@@ -362,7 +359,7 @@ export class ClientCompanyInformationComponent implements OnInit {
 			address,
 			position,
 			businessType: this.userService.getUser().role._id || businessType,
-			rootRole: this.isAdmin ? "Admin" : this.userService.getUser().rootRole.displayName,
+			rootRole: this.isAdmin ? "Admin" : this.userService.getUser().rootRole?.displayName,
 			companyDescription,
 			phone: this.userService.getUser().phone,
 			employeesNumber,
@@ -373,15 +370,15 @@ export class ClientCompanyInformationComponent implements OnInit {
 		});
 
 		if (website?.length) {
-			this.form.get("website").markAsTouched();
+			this.form.get("website")?.markAsTouched();
 		}
 	}
 
-	private patchSocialMediaControls(socialMedia: SocialMedia): void {
+	private patchSocialMediaControls(socialMedia: any): void {
 		for (const key in socialMedia) {
 			if (Boolean(socialMedia[key])) {
 				this.form.addControl(key, this.fb.control(socialMedia[key], [socialLink(), Validators.required]));
-				const control: SocialMediaControl = this.socialMediaArr.find(({ name }) => name === key);
+				const control: any = this.socialMediaArr.find(({ name }) => name === key);
 				this.presentSocialControls.push(control);
 			}
 		}
@@ -398,7 +395,7 @@ export class ClientCompanyInformationComponent implements OnInit {
 		);
 	}
 
-	private getFoundationYear(): Observable<SelectItem[]> {
+	private getFoundationYear(): Observable<any> {
 		const yearsArr: string[] = [];
 		const currentYear: number = new Date(Date.now()).getFullYear();
 		for (let i = currentYear; i > currentYear - 50; i--) yearsArr.push(i.toString());
@@ -409,8 +406,8 @@ export class ClientCompanyInformationComponent implements OnInit {
 		combineLatest([of(chips), this.categories$])
 			.pipe(
 				map(([tempCategories, categories]) => {
-					return categories.reduce((acc, val) => {
-						val.children.forEach((item) => {
+					return categories.reduce((acc: any[], val: any) => {
+						val.children.forEach((item: any) => {
 							if (tempCategories.includes(item.value)) {
 								acc.push(item);
 							}
@@ -429,12 +426,12 @@ export class ClientCompanyInformationComponent implements OnInit {
 	private getCategories(): Observable<any> {
 		return this.categoriesService.getCategories().pipe(
 			map(({ categories }) =>
-				categories.map((category) => ({
+				categories.map((category: any) => ({
 					text: category.name,
 					value: category._id,
 					collapsed: true,
 					checked: false,
-					children: category.children.map((level2Category) => ({
+					children: category.children.map((level2Category: any) => ({
 						text: level2Category.name,
 						value: level2Category._id,
 						collapsed: true,
@@ -479,15 +476,15 @@ export class ClientCompanyInformationComponent implements OnInit {
 			this.availableRolesSource.next([this.userService.getUser().role]);
 			return;
 		}
-		const accountTypeSubscription = this.form.get("rootRole").valueChanges;
+		const accountTypeSubscription = this.form.get("rootRole")?.valueChanges;
 		const rootRolesObservable = this.authService.getRootRoles();
 		combineLatest([accountTypeSubscription, rootRolesObservable])
-			.pipe(filter((data: [string, B2bAuthRootRoleInterface[]]) => !!(data[0] && data[1]?.length)))
+			.pipe(filter((data: any) => !!(data[0] && data[1]?.length)))
 			.subscribe(([accountType, rootRoles]: [string, B2bAuthRootRoleInterface[]]) => {
-				const availableRoles = rootRoles.find((rootRole) => rootRole.displayName === accountType)?.subRoles;
+				const availableRoles = rootRoles.find((rootRole) => rootRole.displayName === accountType)!.subRoles;
 				this.availableRolesSource.next(availableRoles);
 				if (!this.availableRolesSource.getValue().some((role) => this.form.value.businessType === role.id)) {
-					this.form.get("businessType").reset();
+					this.form.get("businessType")?.reset();
 				}
 				if (this.form.get("documents") && accountType === "Buyer") {
 					this.form.removeControl("documents");

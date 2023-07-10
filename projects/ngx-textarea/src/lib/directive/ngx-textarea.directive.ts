@@ -1,6 +1,6 @@
-import { Directive, ElementRef, Input, OnChanges, Renderer2 } from "@angular/core";
+import {Directive, ElementRef, Input, OnChanges, Renderer2} from "@angular/core";
+import {NgxChanges} from "projects/shared/src/interfaces/on-changes.interface";
 import {B2bNgxInputThemeEnum} from "@b2b/ngx-input";
-import { NgxChanges } from '../../../../shared/src/interfaces/on-changes.interface';
 
 function isValueInEnum(value: string, enumArray: any): boolean {
 	return Object.values(enumArray).includes(value);

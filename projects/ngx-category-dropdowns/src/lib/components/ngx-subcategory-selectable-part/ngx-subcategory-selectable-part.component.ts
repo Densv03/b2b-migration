@@ -22,7 +22,7 @@ export class NgxSubcategorySelectablePartComponent {
 		this.selectSubcategory.emit({childCategoryId, parentCategoryId});
 	}
 
-	public updateToggle(e: Event, id: string): void {
+	public updateToggle(e: any, id: string): void {
 		e.preventDefault();
 		this.selectAll.emit(id);
 	}

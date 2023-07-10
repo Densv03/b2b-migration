@@ -26,7 +26,8 @@ export class AuthGoogleComponent implements OnInit {
 				untilDestroyed(this)
 			)
 			.subscribe((id) => {
-				this._authService.updateToken(id);
+        if (id)
+				  this._authService.updateToken(id);
 
 				this._router.navigateByUrl(this.b2bNgxLinkService.getStaticLink("/"));
 			});

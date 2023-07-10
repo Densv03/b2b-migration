@@ -1,9 +1,8 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {FormBuilder, FormGroup} from "@ngneat/reactive-forms";
-import {B2bNgxInputThemeEnum} from "../../../../../../../../../libs/ngx-input/src/lib/enums/ngx-input-theme.enum";
-import {B2bNgxSelectThemeEnum} from "../../../../../../../../../libs/ngx-select/src";
-import {B2bNgxButtonThemeEnum} from "../../../../../../../../../libs/ngx-button/src";
-import {Validators} from "@angular/forms";
+import {B2bNgxInputThemeEnum} from "@b2b/ngx-input";
+import {B2bNgxSelectThemeEnum} from "@b2b/ngx-select";
+import {B2bNgxButtonThemeEnum} from "@b2b/ngx-button";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {onlyLatin} from "../../../../../core/helpers/validator/only-latin";
 import {onlyLatinAndNumberAndSymbols} from "../../../../../core/helpers/validator/only -latin-numbers-symbols";
 import {fullName} from "../../../../../core/helpers/validator/full-name";
@@ -27,9 +26,9 @@ export class AuthRegisterBasicInfoComponent {
 	public readonly b2bNgxInputThemeEnum = B2bNgxInputThemeEnum;
 	public readonly b2bNgxSelectThemeEnum = B2bNgxSelectThemeEnum;
 	public readonly b2bNgxButtonThemeEnum = B2bNgxButtonThemeEnum;
-	public form: FormGroup<BasicInfoInterface>;
+	public form!: FormGroup;
 
-	private user: User;
+	private user?: User;
 
 	constructor(private readonly fb: FormBuilder) {
 	}
@@ -39,7 +38,7 @@ export class AuthRegisterBasicInfoComponent {
 	}
 
 	private getFormGroup(): void {
-		this.form = this.fb.group<BasicInfoInterface>({
+		this.form = this.fb.group({
 			fullName: [this.user?.fullName || "", [Validators.required, fullName(), onlyLatin()]],
 			phone: [this.user?.phone || null, Validators.required],
 			company: [this.user?.company || "", [onlyLatinAndNumberAndSymbols(), Validators.required]],

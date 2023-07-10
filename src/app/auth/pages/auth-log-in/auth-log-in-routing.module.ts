@@ -1,6 +1,6 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { AuthLogInComponent } from "apps/site/src/app/auth/pages/auth-log-in/layout/auth-log-in.component";
+import { AuthLogInComponent} from "./layout/auth-log-in.component";
 
 const routes: Routes = [
 	{

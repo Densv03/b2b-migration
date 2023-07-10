@@ -5,10 +5,9 @@ import { B2bNgxLinkService, B2bNgxLinkThemeEnum } from "@b2b/ngx-link";
 import { BehaviorSubject, Observable } from "rxjs";
 import { filter, tap } from "rxjs/operators";
 import { TranslocoService } from "@ngneat/transloco";
-import { AmplitudeService } from "apps/site/src/app/core/services/amplitude/amplitude.service";
-import { environment } from "apps/site/src/environments/environment.prod";
 import { animate, style, transition, trigger } from "@angular/animations";
 import { B2bNgxButtonThemeEnum } from "@b2b/ngx-button";
+import {environment} from "../../../../../environments/environment";
 
 @UntilDestroy()
 @Component({
@@ -40,15 +39,10 @@ export class AuthRegisterIndividualAccountComponent implements OnInit {
 		private readonly router: Router,
 		private readonly _translocoService: TranslocoService,
 		public readonly b2bNgxLinkService: B2bNgxLinkService,
-		private readonly _ampService: AmplitudeService
 	) {
 		this.b2bNgxLinkThemeEnum = B2bNgxLinkThemeEnum;
 		this.b2bNgxButtonThemeEnum = B2bNgxButtonThemeEnum;
 
-		this._ampService.logEvent("View registration page 1", {
-			type: "Sign up",
-			source: localStorage.getItem("source"),
-		});
 	}
 
 	public get isSocialAuthButtonsVisible$(): Observable<boolean> {
@@ -65,9 +59,6 @@ export class AuthRegisterIndividualAccountComponent implements OnInit {
 	}
 
 	registerWithGoogle() {
-		this._ampService.logEvent("Click Google registration button", { source: localStorage.getItem("source") });
-		this._ampService.logEvent("Registration startes", { type: "google", source: localStorage.getItem("source") });
-
 		document.location.href = `${environment.apiUrl}auth/google`;
 	}
 
@@ -75,20 +66,16 @@ export class AuthRegisterIndividualAccountComponent implements OnInit {
 		document.location.href = `${environment.apiUrl}auth/linkedin`;
 	}
 
-	processSignInClick() {
-		this._ampService.logEvent("Click Log in button");
-		this._ampService.logEvent("View login page", {
-			type: "Log in",
-			source: localStorage.getItem("source"),
-		});
-	}
-
 	private initSocialAuthButtons(): void {
 		this.router.events
 			.pipe(
-				filter((event) => event instanceof NavigationStart),
+				filter((event: any) => event instanceof NavigationStart),
 				tap((event: NavigationStart) => this.isSocialAuthButtonsVisibleSource.next(event.url.includes("first-step")))
 			)
 			.subscribe();
 	}
+
+  processSignInClick() {
+
+  }
 }
