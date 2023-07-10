@@ -1,12 +1,10 @@
 import { ChangeDetectionStrategy, Component, HostListener, OnDestroy, OnInit } from "@angular/core";
-import { Validators } from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 
 import { BehaviorSubject, delay, filter, Observable, of, timer } from "rxjs";
 import { catchError, first, map, tap } from "rxjs/operators";
 
-import { DialogService } from "@ngneat/dialog";
-import { FormBuilder, FormGroup } from "@ngneat/reactive-forms";
 import { TranslocoService } from "@ngneat/transloco";
 import { HotToastService } from "@ngneat/hot-toast";
 
@@ -30,6 +28,7 @@ import { UserService } from "../../client-profile/services/user/user.service";
 import { onlyLatinAndNumberAndSymbols } from "../../../../core/helpers/validator/only -latin-numbers-symbols";
 import { onlyLatinAndSymbols } from "../../../../core/helpers/validator/only-latin-symbols";
 import { onlyNumberandSymbols } from "../../../../core/helpers/validator/only-number-symbols";
+import {Dialog} from "@angular/cdk/dialog";
 
 interface SelectItem {
 	id: string;
@@ -67,8 +66,6 @@ export class ClientTradeBidAddRfqComponent implements OnInit, OnDestroy {
 	public shippingMethod$: Observable<SelectItem[]>;
 	public paymentMethod$: Observable<SelectItem[]>;
 
-	// public isSubmitButtonActive$: Observable<boolean>;
-
 	public b2bNgxInputThemeEnum = B2bNgxInputThemeEnum;
 	public b2bNgxButtonThemeEnum = B2bNgxButtonThemeEnum;
 	public b2bNgxSelectThemeEnum = B2bNgxSelectThemeEnum;
@@ -82,7 +79,7 @@ export class ClientTradeBidAddRfqComponent implements OnInit, OnDestroy {
 		private categoriesService: CategoriesService,
 		private unitsService: UnitsService,
 		private translocoService: TranslocoService,
-		private dialogService: DialogService,
+    private dialog: Dialog,
 		private hotToastService: HotToastService,
 		private router: Router,
 		private activatedRoute: ActivatedRoute,
@@ -159,9 +156,9 @@ export class ClientTradeBidAddRfqComponent implements OnInit, OnDestroy {
 	ngOnInit(): void {
 		this.onResize();
 		this.activatedRoute.params.subscribe((data) => {
-			if (data.id) {
+			if (data["id"]) {
 				this.isAdminPage = true;
-				this.tradeBidService.getRfqById(data.id).subscribe((rfq) => this.updateForm(rfq));
+				this.tradeBidService.getRfqById(data["id"]).subscribe((rfq) => this.updateForm(rfq));
 			}
 		});
 	}
@@ -191,8 +188,8 @@ export class ClientTradeBidAddRfqComponent implements OnInit, OnDestroy {
 		});
 	}
 
-	public openDocument(ev): void {
-		const document = this.form.value.documents.find((el) => el._id === ev.name);
+	public openDocument(ev: { name: any; }): void {
+		const document = this.form.value.documents.find((el: { _id: any; }) => el._id === ev.name);
 
 		const data = {
 			fullPath: environment.apiUrl + document.path,
@@ -201,7 +198,7 @@ export class ClientTradeBidAddRfqComponent implements OnInit, OnDestroy {
 			isDocument: DocumentExtensions.includes(GetUrlExtension(document.path)),
 		};
 
-		this.dialogService.open(ClientOfferDocumentComponent, {
+		this.dialog.open(ClientOfferDocumentComponent, {
 			data,
 			width: "80vw",
 			height: "80vh",
@@ -217,7 +214,7 @@ export class ClientTradeBidAddRfqComponent implements OnInit, OnDestroy {
 			return;
 		}
 		const rfqId = this.route.snapshot.paramMap.get("id");
-		const body = this.isAdminPage
+		const body = this.isAdminPage && rfqId
 			? this.getFormData(this.getBodyRequest(form, rfqId))
 			: this.getFormData(this.getBodyRequest(form));
 		if (this.isAdminPage) {
@@ -315,6 +312,7 @@ export class ClientTradeBidAddRfqComponent implements OnInit, OnDestroy {
 			shippingMethod: paymentShipping.shippingMethod,
 			paymentMethod: paymentShipping.paymentMethod,
 			destination: paymentShipping.destination,
+      rfqId: paymentShipping.rfqId
 		};
 
 		if (this.isAdminPage) {
@@ -327,7 +325,7 @@ export class ClientTradeBidAddRfqComponent implements OnInit, OnDestroy {
 	private getUnit(): Observable<any> {
 		return this.unitsService.getUnits().pipe(
 			map((units) =>
-				units.map((unit) => ({
+				units.map((unit: { name: string; }) => ({
 					...unit,
 					displayName: this.translocoService.translate(`UNITS.${unit.name.toUpperCase()}`),
 				}))
@@ -402,7 +400,7 @@ export class ClientTradeBidAddRfqComponent implements OnInit, OnDestroy {
 	private getCategories(): Observable<any> {
 		return this.categoriesService
 			.getCategories()
-			.pipe(map(({ categories }) => categories.map((category) => ({ id: category._id, value: category.name }))));
+			.pipe(map(({ categories }) => categories.map((category: { _id: any; name: any; }) => ({ id: category._id, value: category.name }))));
 	}
 
 	@HostListener("window:resize", ["$event"])

@@ -117,7 +117,7 @@
 				</div>
 				<div class="column">
 					<div class="form-control-wrapper">
-						<b2b-ngx-tel formControlName="phone" [theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"> Phone</b2b-ngx-tel>
+<!--						<b2b-ngx-tel formControlName="phone" [theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"> Phone</b2b-ngx-tel>-->
 					</div>
 					<div class="form-control-wrapper">
 						<input
@@ -157,11 +157,11 @@
 							class="quotation__textarea quotation__middle-space"></textarea>
 
 						<p [@fadeInOut] class="form-error"
-							 *ngIf="formState.companyDescription.errors?.minlength && formState.companyDescription.touched">
+							 *ngIf="formState['companyDescription'].errors?.['minlength'] && formState['companyDescription'].touched">
 							Company description should contain more than 20 symbols
 						</p>
 						<p [@fadeInOut] class="form-error"
-							 *ngIf="formState.companyDescription?.errors?.maxlength && formState.companyDescription.touched">
+							 *ngIf="formState['companyDescription']?.errors?.['maxlength'] && formState['companyDescription'].touched">
 							Company description should contain less than 500 symbols
 						</p>
 

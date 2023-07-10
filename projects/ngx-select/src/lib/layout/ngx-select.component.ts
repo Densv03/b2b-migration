@@ -37,7 +37,7 @@ export class B2bNgxSelectComponent implements ControlValueAccessor, OnInit, OnCh
   @Output() public changed: EventEmitter<any>;
 
   @Input() public label: string = '';
-  @Input() public options: any[] = [];
+  @Input() public options: any = [];
   @Input() public theme: B2bNgxSelectThemeEnum = B2bNgxSelectThemeEnum.BACKGROUND_TRANSPARENT;
   @Input() public className: string = '';
   @Input() public placeholder!: string;

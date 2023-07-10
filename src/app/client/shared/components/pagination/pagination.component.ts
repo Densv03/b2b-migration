@@ -8,7 +8,7 @@ import { Component, Input, EventEmitter, Output } from '@angular/core';
 export class PaginationComponent {
 
 	@Input() length!: number;
-	@Input() perPage!: number;
+	@Input() perPage: number;
 	@Output() togglePageNumber: EventEmitter<number>;
 	@Input() currentPage: number = 1;
 
@@ -67,7 +67,7 @@ export class PaginationComponent {
 	private fillEmptyArray(
 		currentPage: number,
 		totalPaginationLength: number
-	): any[] {
+	): any {
 		let arr = [];
 		if (isNaN(+currentPage)) {
 			return;

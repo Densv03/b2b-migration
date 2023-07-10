@@ -1,10 +1,8 @@
 import { Component, HostListener, OnInit } from "@angular/core";
-import { AbstractControl, FormBuilder, FormGroup } from "@ngneat/reactive-forms";
 import { B2bNgxInputThemeEnum } from "@b2b/ngx-input";
 import { B2bNgxSelectThemeEnum } from "@b2b/ngx-select";
 import { B2bNgxButtonThemeEnum } from "@b2b/ngx-button";
-import { DialogService } from "@ngneat/dialog";
-import { Validators } from "@angular/forms";
+import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import { onlyNumber } from "../../../../../core/helpers/validator/only-number";
 import { ClientMarketplaceService } from "../../client-marketplace.service";
 import { TradebidService } from "../../../client-tradebid/tradebid.service";
@@ -57,10 +55,9 @@ export class ClientMarketplaceAddProductComponent implements OnInit {
 
 	private hideLabelSource: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-	private productId?: string = this.activatedRoute.snapshot.params.id;
+	private productId?: string = this.activatedRoute.snapshot.params["id"];
 
 	constructor(
-		private dialogService: DialogService,
 		private unitsService: UnitsService,
 		private userService: UserService,
 		private translocoService: TranslocoService,
@@ -173,7 +170,7 @@ export class ClientMarketplaceAddProductComponent implements OnInit {
 	private getUnit(): Observable<any> {
 		return this.unitsService.getUnits().pipe(
 			map((units) =>
-				units.map((unit) => ({
+				units.map((unit: { name: string; }) => ({
 					...unit,
 					displayName: this.translocoService.translate(`UNITS.${unit.name.toUpperCase()}`),
 				}))

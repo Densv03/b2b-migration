@@ -4,6 +4,7 @@ import { B2bNgxButtonThemeEnum } from "@b2b/ngx-button";
 
 import { UserService } from "../../../../client-profile/services/user/user.service";
 import { User } from "../../../../../../core/models/user/user.model";
+// @ts-ignore
 import { getName } from "country-list";
 import { UnitsService } from "../../../../../services/units/units.service";
 import { filter, first, map } from "rxjs/operators";
@@ -70,7 +71,7 @@ export class RfqItemComponent implements OnInit {
 					filter((data) => !!data?.length),
 					first(),
 					map((res) => {
-						this.measureName = res.find((item) => item._id === this.rfqItem.measure).displayName;
+						this.measureName = res.find((item: { _id: any; }) => item._id === this.rfqItem.measure).displayName;
 					})
 				)
 				.subscribe(() => {

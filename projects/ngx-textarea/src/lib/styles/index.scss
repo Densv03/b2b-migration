@@ -1,0 +1,39 @@
+@import "libs/shared/styles/src/lib/colors";
+
+.b2b-ngx-textarea-label {
+	display: block;
+	font-size: 14px;
+	color: #9fa4bb;
+	margin-bottom: 6px;
+}
+.b2b-ngx-textarea {
+	display: block;
+	width: 100%;
+	background: #f3f6f8;
+	border-radius: 4px;
+	font-size: 14px;
+	color: #556274;
+	padding: 14px 16px;
+	border: 2px solid transparent;
+	resize: none;
+	&.ng-invalid.ng-touched {
+		background-color: $color-red-50;
+		border-color: $color-red-500;
+	}
+}
+
+.form-submitted {
+	.b2b-ngx-textarea {
+		&.ng-invalid {
+			background-color: $color-red-50;
+			border-color: $color-red-500;
+		}
+	}
+}
+
+.control-error {
+	display: block;
+	font-size: 14px;
+	color: rgba(108, 112, 119, 0.6);
+	margin-top: 4px;
+}

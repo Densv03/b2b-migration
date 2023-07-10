@@ -2,14 +2,10 @@ import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 
 import { Observable } from "rxjs";
-import { map } from "rxjs/operators";
-
-import { DialogService } from "@ngneat/dialog";
-
 import { B2bNgxButtonThemeEnum } from "@b2b/ngx-button";
-
-import { AdminBillingService } from "../../../../../../admin/pages/admin-billing/services/admin-billing.service";
 import { GetPaymentPlanResponse } from "../../../../../../core/models/admin-billing/responses/get-payment-plan-response.model";
+import {DialogRef} from "@angular/cdk/dialog";
+import {AdminBillingService} from "../../../../../../admin/services/admin-billing.service";
 
 @Component({
 	selector: "b2b-quote-purchasing-dialog",
@@ -23,7 +19,7 @@ export class QuotePurchasingDialogComponent implements OnInit {
 		this.adminBillingService.getQuotesPaymentPlansToDisplay();
 
 	constructor(
-		private readonly dialogService: DialogService,
+    private readonly dialogRef: DialogRef,
 		private readonly router: Router,
 		private adminBillingService: AdminBillingService
 	) {}
@@ -31,7 +27,7 @@ export class QuotePurchasingDialogComponent implements OnInit {
 	ngOnInit(): void {}
 
 	public closeDialog(): void {
-		this.dialogService.closeAll();
+		this.dialogRef.close();
 		this.router.navigate(["/profile/billing"]);
 	}
 }

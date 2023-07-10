@@ -4,12 +4,11 @@ import {B2bNgxButtonThemeEnum} from "@b2b/ngx-button";
 import {B2bNgxInputThemeEnum} from "@b2b/ngx-input";
 import {B2bNgxSelectThemeEnum} from "@b2b/ngx-select";
 import {Observable, of} from "rxjs";
-import {AbstractControl, FormBuilder, FormGroup} from "@ngneat/reactive-forms";
 import {HotToastService} from "@ngneat/hot-toast";
 import {TradebidService} from "../tradebid.service";
 import {filter, first, map} from "rxjs/operators";
 import {onlyLatinAndNumberAndSymbols} from "../../../../core/helpers/validator/only -latin-numbers-symbols";
-import {Validators} from "@angular/forms";
+import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute, Router} from "@angular/router";
 import {AuthService} from "../../../../auth/services/auth/auth.service";
 import {UserService} from "../../client-profile/services/user/user.service";
@@ -17,7 +16,7 @@ import {User} from "../../../../core/models/user/user.model";
 import {ApiService} from "../../../../core/services/api/api.service";
 import {siteLink} from "../../../../core/helpers/validator/site-link";
 import {animate, style, transition, trigger} from "@angular/animations";
-import {B2bAuthRoleInterface} from "../../../../../../../../libs/shared/interfaces/src/lib/b2b-auth-role.interface";
+// import {B2bAuthRoleInterface} from "../../../../../../../../libs/shared/interfaces/src/lib/b2b-auth-role.interface";
 
 interface SelectItem {
 	id: string;
@@ -56,7 +55,7 @@ export class CompanyInformationComponent implements OnInit {
 	public form: FormGroup;
 	public initialCompanyData: any = null;
 	public formType: "add-rfq" | "quotation" | "unclaimed-cargo" | "b2bmarket";
-	public navigationUrl: string;
+	public navigationUrl!: string;
 	public formState: { [key: string]: AbstractControl };
 	public userRole: string = "";
 
@@ -71,7 +70,7 @@ export class CompanyInformationComponent implements OnInit {
 		" CEO ",
 		"Company owner",
 	];
-	public avaliableRoles: Array<{ id: string; name: string }>;
+	public avaliableRoles!: Array<{ id: string; name: string }>;
 
 	constructor(
 		private fb: FormBuilder,
@@ -102,7 +101,7 @@ export class CompanyInformationComponent implements OnInit {
 		this.position$ = this.getObservableForSelect(this.positions);
 		this.employeesNumber$ = this.getObservableForSelect(this.employeesNumberArr);
 		this.annualRevenue$ = this.getObservableForSelect(this.annualRevenueArr);
-		this.formType = this.route.snapshot.queryParams.url;
+		this.formType = this.route.snapshot.queryParams["url"];
 		this.getNavigationLink();
 
 		this.userRole = this.userService.getUser().role.name;
@@ -164,7 +163,8 @@ export class CompanyInformationComponent implements OnInit {
 			)
 			.subscribe({
 				complete: () => {
-					this.apiService.get("user/").subscribe((data: User) => {
+					this.apiService.get("user/")
+            .subscribe((data: any) => {
 						const fullName = data.fullName;
 						const preferences = data.preferences;
 						const roleId =

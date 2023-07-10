@@ -20,7 +20,7 @@
 						formControlName="title"
 						placeholder="Enter the product name"
 						label="Product name"/>
-					<p *ngIf="formState['title'].touched && formState['title'].errors?.required" class="error" [@fadeInOut]>
+					<p *ngIf="formState['title']?.touched && formState['title']?.errors?.required" class="error" [@fadeInOut]>
 						Product name is required
 					</p>
 				</div>
@@ -63,10 +63,10 @@
 						formControlName="price"
 						placeholder="$"
 						label="Price, USD"/>
-					<p *ngIf="formState['price'].touched && formState['price'].errors?.required" class="error" [@fadeInOut]>
+					<p *ngIf="formState['price']?.touched && formState['price']?.errors?.required" class="error" [@fadeInOut]>
 						Price is required
 					</p>
-					<p *ngIf="formState['price'].touched && formState['price'].errors?.number && !formState['price'].errors?.required" class="error" [@fadeInOut]>
+					<p *ngIf="formState['price']?.touched && formState['price']?.errors?.number && !formState['price']?.errors?.required" class="error" [@fadeInOut]>
 						Price must be only number
 					</p>
 				</div>
@@ -81,7 +81,7 @@
 						[label]="'Choose photos'"
 					>{{ t("LABELS.PHOTOS") }}</b2b-ngx-file>
 				</div>
-				<p *ngIf="formState['photos'].touched && formState['photos'].errors?.required" class="error" [@fadeInOut]>
+				<p *ngIf="formState['photos']?.touched && formState['photos']?.errors?.required" class="error" [@fadeInOut]>
 					Photo is required
 				</p>
 				<div class="tip">Please use only real photos of the cargo. All photos will be checked by the moderators.</div>

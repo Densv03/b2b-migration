@@ -17,8 +17,8 @@
 				class="rfq__input" />
 			<p
 				*ngIf="
-					this.form.get('productInformation').get('productName').touched &&
-					this.form.get('productInformation').get('productName').errors?.latin
+					this.form?.get('productInformation')?.get('productName')?.touched &&
+					this.form?.get('productInformation')?.get('productName')?.errors?.['latin']
 				"
 				class="error"
 				[@fadeInOut]>
@@ -26,8 +26,8 @@
 			</p>
 			<p
 				*ngIf="
-					this.form.get('productInformation').get('productName').touched &&
-					this.form.get('productInformation').get('productName').errors?.required
+					this.form?.get('productInformation')?.get('productName')?.touched &&
+					this.form?.get('productInformation')?.get('productName')?.errors?.['required']
 				"
 				class="error"
 				[@fadeInOut]>
@@ -69,9 +69,9 @@
 						class="rfq__input" />
 					<p
 						*ngIf="
-							this.form.get('productInformation').get('quantity').get('quantity').touched &&
-							this.form.get('productInformation').get('quantity').get('quantity').errors?.required &&
-							!this.form.get('productInformation').get('budget').get('maxBudget').errors?.required
+							this.form.get('productInformation')?.get('quantity')?.get('quantity')?.touched &&
+							this.form.get('productInformation')?.get('quantity')?.get('quantity')?.errors?.['required'] &&
+							!this.form.get('productInformation')?.get('budget')?.get('maxBudget')?.errors?.['required']
 						"
 						class="error"
 						[@fadeInOut]>
@@ -79,8 +79,8 @@
 					</p>
 					<p
 						*ngIf="
-							this.form.get('productInformation').get('quantity').get('quantity').touched &&
-							this.form.get('productInformation').get('quantity').get('quantity').errors?.number
+							this.form.get('productInformation')?.get('quantity')?.get('quantity')?.touched &&
+							this.form.get('productInformation')?.get('quantity')?.get('quantity')?.errors?.['number']
 						"
 						class="error"
 						[@fadeInOut]>
@@ -126,9 +126,9 @@
 						class="rfq__input" />
 					<p
 						*ngIf="
-							this.form.get('productInformation').get('budget').get('maxBudget').touched &&
-							this.form.get('productInformation').get('budget').get('maxBudget').errors?.number &&
-							!this.form.get('productInformation').get('budget').get('maxBudget').errors?.required
+							this.form.get('productInformation')?.get('budget')?.get('maxBudget')?.touched &&
+							this.form.get('productInformation')?.get('budget')?.get('maxBudget')?.errors?.['number'] &&
+							!this.form.get('productInformation')?.get('budget')?.get('maxBudget')?.errors?.['required']
 						"
 						class="error"
 						[@fadeInOut]>
@@ -136,8 +136,8 @@
 					</p>
 					<p
 						*ngIf="
-							this.form.get('productInformation').get('budget').get('maxBudget').touched &&
-							this.form.get('productInformation').get('budget').get('maxBudget').errors?.required
+							this.form.get('productInformation')?.get('budget')?.get('maxBudget')?.touched &&
+							this.form.get('productInformation')?.get('budget')?.get('maxBudget')?.errors?.['required']
 						"
 						class="error"
 						[@fadeInOut]>
@@ -169,8 +169,8 @@
 				class="rfq__textarea rfq__half-space"></textarea>
 			<p
 				*ngIf="
-					this.form.get('productInformation').get('moreInformation').touched &&
-					this.form.get('productInformation').get('moreInformation').errors?.latin
+					this.form.get('productInformation')?.get('moreInformation')?.touched &&
+					this.form.get('productInformation')?.get('moreInformation')?.errors?.['latin']
 				"
 				[ngStyle]="{ marginTop: '15px' }"
 				class="error"
@@ -179,14 +179,14 @@
 			</p>
 			<p
 				*ngIf="
-					this.form.get('productInformation').get('moreInformation').touched &&
-					this.form.get('productInformation').get('moreInformation').errors?.minlength
+					this.form.get('productInformation')?.get('moreInformation')?.touched &&
+					this.form.get('productInformation')?.get('moreInformation')?.errors?.['minlength']
 				"
 				[ngStyle]="{ marginTop: '15px' }"
 				class="error"
 				[@fadeInOut]>
 				Please, put more than 20 letters, now
-				{{ form.get("productInformation").get("moreInformation").errors?.minlength.actualLength }} letters
+				{{ form.get("productInformation")?.get("moreInformation")?.errors?.['minlength'].actualLength }} letters
 			</p>
 		</div>
 

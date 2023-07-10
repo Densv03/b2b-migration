@@ -1,10 +1,8 @@
 import { Component, OnInit } from "@angular/core";
-import { FormGroup } from "@angular/forms";
+import {FormBuilder, FormGroup} from "@angular/forms";
 
 import {BehaviorSubject, Observable, of} from "rxjs";
 import { map } from "rxjs/operators";
-
-import { FormBuilder } from "@ngneat/reactive-forms";
 
 import { B2bNgxInputThemeEnum } from "@b2b/ngx-input";
 import { B2bNgxSelectThemeEnum } from "@b2b/ngx-select";
@@ -15,7 +13,7 @@ import { TradebidService } from "../tradebid.service";
 import { UserService } from "../../client-profile/services/user/user.service";
 import {ActivatedRoute, Router} from "@angular/router";
 
-function generateQueryString(obj) {
+function generateQueryString(obj: ArrayLike<unknown> | { [s: string]: unknown; }) {
 	return Object.entries(obj)
 		.filter(([, value]: any) => !!value)
 		.reduce((queryString: string, [key, value]: any) => {
@@ -107,13 +105,13 @@ export class ClientTradebidListingComponent implements OnInit {
 		const params: any = {};
 		let emptyObject: boolean = true;
 		const formValue = form.value;
-		Object.entries(formValue).forEach(([key, value]: [string, string | string[]]) => {
+		Object.entries(formValue).forEach(([key, value]) => {
 			if (value) {
 				if (key === "searchText") {
 					params["q"] = value;
 					emptyObject = false;
 				} else if (key === "categories[]") {
-					if (value.length) {
+					if (value instanceof Object) {
 						params["categories[]"] = value;
 						emptyObject = false;
 					}
@@ -142,11 +140,11 @@ export class ClientTradebidListingComponent implements OnInit {
 	private getCategories(): Observable<any> {
 		return this.categoriesService
 			.getCategories()
-			.pipe(map(({ categories }) => categories.map((category) => ({ id: category._id, value: category.name }))));
+			.pipe(map(({ categories }) => categories.map((category: { _id: any; name: any; }) => ({ id: category._id, value: category.name }))));
 	}
 
 	private tradeBidPageInit(): void {
-		let page = this.route.snapshot.queryParams.page;
+		let page = this.route.snapshot.queryParams["page"];
 		if (!page) {
 			this.router.navigate([], {
 				relativeTo: this.route,

@@ -14,8 +14,8 @@
 					formControlName="productName" />
 				<p
 					*ngIf="
-						this.form.get('quotationForm').get('productName').touched &&
-						this.form.get('quotationForm').get('productName').errors?.latin
+						this.form.get('quotationForm')?.get('productName')?.touched &&
+						this.form.get('quotationForm')?.get('productName')?.errors?.['latin']
 					"
 					class="error"
 					[@fadeInOut]>
@@ -23,8 +23,8 @@
 				</p>
 				<p
 					*ngIf="
-						this.form.get('quotationForm').get('productName').touched &&
-						this.form.get('quotationForm').get('productName').errors?.required
+						this.form.get('quotationForm')?.get('productName')?.touched &&
+						this.form.get('quotationForm')?.get('productName')?.errors?.['required']
 					"
 					class="error"
 					[@fadeInOut]>
@@ -39,8 +39,8 @@
 					formControlName="specifications" />
 				<p
 					*ngIf="
-						this.form.get('quotationForm').get('specifications').touched &&
-						this.form.get('quotationForm').get('specifications').errors?.required
+						this.form.get('quotationForm')?.get('specifications')?.touched &&
+						this.form.get('quotationForm')?.get('specifications')?.errors?.['required']
 					"
 					class="error"
 					[@fadeInOut]>
@@ -48,8 +48,8 @@
 				</p>
 				<p
 					*ngIf="
-						this.form.get('quotationForm').get('specifications').touched &&
-						this.form.get('quotationForm').get('specifications').errors?.cyrillic
+						this.form.get('quotationForm')?.get('specifications')?.touched &&
+						this.form.get('quotationForm')?.get('specifications')?.errors?.['cyrillic']
 					"
 					class="error"
 					[@fadeInOut]>
@@ -69,8 +69,8 @@
 
 				<div
 					[ngStyle]="
-						form.get('quotationForm').get('price').get('price').touched &&
-						form.get('quotationForm').get('price').get('price').errors?.required
+							form.controls['quotationForm']?.get('price')?.get('price')?.touched &&
+							form.controls['quotationForm']?.get('price')?.get('price')?.errors?.['required']
 							? { marginBottom: '10px' }
 							: null
 					"
@@ -86,8 +86,8 @@
 							formControlName="price" />
 						<p
 							*ngIf="
-								form.get('quotationForm').get('price').get('price').touched &&
-								form.get('quotationForm').get('price').get('price').errors?.required
+								form.controls['quotationForm']?.get('price')?.get('price')?.touched &&
+							form.controls['quotationForm']?.get('price')?.get('price')?.errors?.['required']
 							"
 							class="error price-error"
 							[@fadeInOut]>
@@ -95,9 +95,9 @@
 						</p>
 						<p
 							*ngIf="
-								form.get('quotationForm').get('price').get('price').touched &&
-								form.get('quotationForm').get('price').get('price').errors?.number &&
-								!form.get('quotationForm').get('price').get('price').errors?.required
+							form.controls['quotationForm']?.get('price')?.get('price')?.touched &&
+							form.controls['quotationForm']?.get('price')?.get('price')?.errors?.['number'] &&
+							!form.controls['quotationForm']?.get('price')?.get('price')?.errors?.['required']
 							"
 							class="error price-error"
 							[@fadeInOut]>
@@ -141,17 +141,16 @@
 							label="&nbsp;" />
 						<p
 							*ngIf="
-								form.get('quotationForm').get('otherUnit').touched &&
-								form.get('quotationForm').get('otherUnit').errors?.required
-							"
+								form.controls['quotationForm'].get('otherUnit')?.touched &&
+								form.controls['quotationForm'].get('otherUnit')?.errors?.['required']"
 							class="error other-unit-error"
 							[@fadeInOut]>
 							This field is required
 						</p>
 						<p
 							*ngIf="
-								form.get('quotationForm').get('otherUnit').touched &&
-								form.get('quotationForm').get('otherUnit').errors?.latin
+							form.controls['quotationForm'].get('otherUnit')?.touched &&
+							form.controls['quotationForm'].get('otherUnit')?.errors?.['latin']
 							"
 							class="error other-unit-error"
 							[@fadeInOut]>
@@ -168,8 +167,8 @@
 					formControlName="moreInformation"></textarea>
 				<p
 					*ngIf="
-						form.get('quotationForm').get('moreInformation').touched &&
-						form.get('quotationForm').get('moreInformation').errors?.required
+					form.controls['quotationForm'].get('moreInformation')?.touched &&
+						form.controls['quotationForm'].get('moreInformation')?.errors?.['required']
 					"
 					class="error"
 					[@fadeInOut]>
@@ -177,8 +176,8 @@
 				</p>
 				<p
 					*ngIf="
-						form.get('quotationForm').get('moreInformation').touched &&
-						form.get('quotationForm').get('moreInformation').errors?.cyrillic
+						form.controls['quotationForm'].get('moreInformation')?.touched &&
+						form.controls['quotationForm'].get('moreInformation')?.errors?.['cyrillic']
 					"
 					class="error"
 					[@fadeInOut]>
@@ -186,15 +185,15 @@
 				</p>
 				<p
 					*ngIf="
-						form.get('quotationForm').get('moreInformation').touched &&
-						form.get('quotationForm').get('moreInformation').errors?.minlength &&
-						!form.get('quotationForm').get('moreInformation').errors?.cyrillic
+						form.controls['quotationForm'].get('moreInformation')?.touched &&
+						form.controls['quotationForm'].get('moreInformation')?.errors?.['minlength'] &&
+						!form.controls['quotationForm'].get('moreInformation')?.errors?.['cyrillic']
 					"
 					[ngStyle]="{ marginTop: '15px' }"
 					class="error"
 					[@fadeInOut]>
 					Please, put more than 20 letters, now
-					{{ form.get("quotationForm").get("moreInformation").errors?.minlength.actualLength }} letters
+					{{ form.controls['quotationForm'].get('moreInformation')?.errors?.['minlength'].actualLength }} letters
 				</p>
 				<div class="file-wrapper ngx-file-wrapper">
 					<b2b-ngx-file formControlName="photos" [isPhoto]="false" label="Choose file">Products picture </b2b-ngx-file>
