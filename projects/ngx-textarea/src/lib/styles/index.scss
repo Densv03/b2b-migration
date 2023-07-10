@@ -1,4 +1,4 @@
-@import "libs/shared/styles/src/lib/colors";
+@import "projects/shared/src/styles/colors";
 
 .b2b-ngx-textarea-label {
 	display: block;
@@ -11,6 +11,7 @@
 	width: 100%;
 	background: #f3f6f8;
 	border-radius: 4px;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
 	font-size: 14px;
 	color: #556274;
 	padding: 14px 16px;

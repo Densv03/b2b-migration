@@ -91,8 +91,8 @@ export class B2bNgxFileComponent implements ControlValueAccessor, OnInit, OnChan
 
   public uploadFiles(event: Event): void {
 
-    if (this.findTotalSize(Array.from(event.target.files)) <= this.maxAllowedSizeBytes) {
-      this.files = [...this.files, ...Array.from(event.target.files)];
+    if (this.findTotalSize(Array.from((event.target as HTMLInputElement).files)) <= this.maxAllowedSizeBytes) {
+      this.files = [...this.files, ...Array.from((event.target as HTMLInputElement).files)];
       this.onChange(this.files);
       this.files.length ? this.label = '' : null;
     } else {

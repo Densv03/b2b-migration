@@ -129,7 +129,7 @@ export class ClientHomeComponent implements OnInit {
 		return n + 1;
 	}
 
-	public selectedCategories(event: Event, id: never = '' as never): void {
+	public selectedCategories(event: Event, id: any): void {
 		if ((event.target as HTMLInputElement).checked && !this.selectedCategory.includes(id)) {
 			this.selectedCategory.push(id);
 		} else if (!(event.target as HTMLInputElement).checked && this.selectedCategory.includes(id)) {
