@@ -10,16 +10,15 @@ function isValueInEnum(value: string, enumArray: any): boolean {
 	selector: "[b2bNgxTextarea]",
 })
 export class B2bNgxTextareaDirective implements OnChanges {
-	@Input() theme: B2bNgxInputThemeEnum = B2bNgxInputThemeEnum.BACKGROUND_WHITE;
-	@Input() label: string = '';
-	@Input() labelClass: string = '';
+	@Input() theme: B2bNgxInputThemeEnum;
+	@Input() label: string;
+	@Input() labelClass: string;
 
 	constructor(private readonly _renderer2: Renderer2, private readonly _elementRef: ElementRef) {
 		this._renderer2.addClass(this._elementRef.nativeElement, `b2b-ngx-textarea`);
 	}
 
 	ngOnChanges(changes: NgxChanges<B2bNgxTextareaDirective>) {
-    console.log(changes.theme)
 		if (changes.theme && isValueInEnum(changes.theme.currentValue, B2bNgxInputThemeEnum)) {
 			const { currentValue } = changes.theme;
 			const category = currentValue.split("-")[0];

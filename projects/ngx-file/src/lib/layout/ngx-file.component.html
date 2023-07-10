@@ -1,0 +1,38 @@
+<div class="ngx-file">
+	<label class="ngx-file-label" for="file">
+		<ng-content></ng-content>
+	</label>
+
+	<div class="control">
+		<ul class="ngx-files-list">
+			<button
+				b2bNgxButton
+				[theme]="b2bNgxButtonThemeEnum.OUTLINE_BLACK"
+				class="ngx-file-button"
+				[class.ng-invalid]="formControl.invalid"
+				[class.ng-touched]="formControl.touched">
+				<img b2bNgxIcon [name]="isPhoto ? 'photo' : 'attach'" alt="" />
+				<span class="ngx-file-button-text">{{ label }}</span>
+				<input
+					#fileInput
+					multiple
+					[accept]="isPhoto ? 'image/png, image/jpeg' : '*'"
+					[formControl]="formControl"
+					(change)="uploadFiles($event)"
+					class="ngx-file-input"
+					type="file"
+					id="file" />
+			</button>
+
+			<div *ngIf="!files?.length" class="empty-file-label">No File Chosen</div>
+
+			<li *ngFor="let file of files" (click)="handleClick(file)" class="ngx-files-list-item">
+				<img b2bNgxIcon name="document" class="ngx-files-list-item-icon" alt="" />
+				<span class="ngx-files-list-item-name">{{ file.name }}</span>
+				<img (click)="removeFile(file.name)" b2bNgxIcon name="cancel" class="cancel" alt="cancel" />
+			</li>
+		</ul>
+	</div>
+
+
+</div>

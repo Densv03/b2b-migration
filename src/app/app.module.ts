@@ -12,6 +12,7 @@ import {NgxPasswordModule} from "@b2b/ngx-password";
 import {CoreModule} from "./core/core.module";
 import {HttpClientModule} from "@angular/common/http";
 import { TranslocoRootModule } from './transloco-root.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [],
@@ -28,6 +29,7 @@ import { TranslocoRootModule } from './transloco-root.module';
     NgxPasswordModule,
     HttpClientModule,
     TranslocoRootModule,
+    BrowserAnimationsModule,
   ],
   bootstrap: [AppComponent]
 })

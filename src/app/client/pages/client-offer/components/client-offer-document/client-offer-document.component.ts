@@ -1,19 +1,15 @@
-import { Component, OnInit } from "@angular/core";
-// import { DialogRef } from "@ngneat/dialog";
+import {Component, Inject} from "@angular/core";
 import {DocumentPreviewModel} from "../../../../../core/models/document-preview.model";
-import {DialogRef} from "@angular/cdk/dialog";
+import {DIALOG_DATA, DialogRef} from "@angular/cdk/dialog";
 
 @Component({
 	selector: "b2b-client-offer-document",
 	templateUrl: "./client-offer-document.component.html",
 	styleUrls: ["./client-offer-document.component.scss"],
 })
-export class ClientOfferDocumentComponent implements OnInit {
-	public document?: DocumentPreviewModel;
+export class ClientOfferDocumentComponent {
 
-	constructor(public ref: DialogRef) {}
+	constructor(public ref: DialogRef,
+              @Inject(DIALOG_DATA) public data: {document: DocumentPreviewModel}) {}
 
-	ngOnInit(): void {
-		// this.document = this.ref.data;
-	}
 }

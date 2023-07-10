@@ -1,11 +1,12 @@
 import { ChangeDetectorRef, Component, Input, OnInit } from "@angular/core";
 import { B2bNgxButtonThemeEnum } from "@b2b/ngx-button";
-import { DialogService } from "@ngneat/dialog";
 import { CategoriesService } from "../../../../../services/categories/categories.service";
 import { Observable } from "rxjs";
+// @ts-ignore
 import { getName } from "country-list";
 import { filter, first, map } from "rxjs/operators";
 import { UnitsService } from "../../../../../services/units/units.service";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
 	selector: "b2b-product-information",
@@ -19,7 +20,7 @@ export class ProductInformationComponent implements OnInit {
 	public measureName: string = "";
 
 	constructor(
-		private dialogService: DialogService,
+		private dialog: MatDialog,
 		private categoriesService: CategoriesService,
 		private changeDetectionRef: ChangeDetectorRef,
 		private unitService: UnitsService
@@ -32,7 +33,7 @@ export class ProductInformationComponent implements OnInit {
 				filter((data) => !!data?.length),
 				first(),
 				map((res) => {
-					this.measureName = res.find((item) => item._id === this.rfqInfo.measure).displayName;
+					this.measureName = res.find((item: { _id: any; }) => item._id === this.rfqInfo.measure).displayName;
 				})
 			)
 			.subscribe(() => {

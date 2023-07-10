@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, forwardRef, Input, OnChanges, OnInit, SimpleChanges } from "@angular/core";
 import {ControlValueAccessor, FormControl, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors} from "@angular/forms";
-// import { UntilDestroy, untilDestroyed } from "@ngneat/until-destroy";
+import { UntilDestroy, untilDestroyed } from "@ngneat/until-destroy";
 import { idGenerator } from "@b2b/id-generator";
 
-// @UntilDestroy()
+@UntilDestroy()
 @Component({
 	selector: "b2b-ngx-textarea",
 	templateUrl: "./ngx-textarea.component.html",
@@ -23,14 +23,14 @@ import { idGenerator } from "@b2b/id-generator";
 	],
 })
 export class B2bNgxTextareaComponent implements ControlValueAccessor, OnInit, OnChanges {
-	@Input() public placeholder: string;
-	@Input() public label: string = '';
-	@Input() public name: string = '';
-	@Input() public cols: number;
-	@Input() public rows: number;
-	@Input() public theme?: string;
+	@Input() public readonly placeholder: string;
+	@Input() public readonly label: string;
+	@Input() public readonly name: string;
+	@Input() public readonly cols: number;
+	@Input() public readonly rows: number;
+	@Input() public readonly theme: string;
 
-	@Input() errors?: ValidationErrors;
+	@Input() errors: ValidationErrors;
 
 	public readonly formControl: FormControl<string | null>;
 	public readonly id: string;
@@ -65,8 +65,8 @@ export class B2bNgxTextareaComponent implements ControlValueAccessor, OnInit, On
 	}
 
 	ngOnChanges(changes: SimpleChanges): void {
-		if (changes['errors']) {
-			this.formControl.setErrors(changes['errors'].currentValue);
+		if (changes["errors"]) {
+			this.formControl.setErrors(changes["errors"].currentValue);
 		}
 	}
 
@@ -75,7 +75,7 @@ export class B2bNgxTextareaComponent implements ControlValueAccessor, OnInit, On
 	}
 
 	private subscribeOnValueChanges(): void {
-		this.formControl.valueChanges.pipe().subscribe((value: any) => {
+		this.formControl.valueChanges.pipe(untilDestroyed(this)).subscribe((value: string) => {
 			this.onChange(value);
 		});
 	}

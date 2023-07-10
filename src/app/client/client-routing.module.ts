@@ -497,18 +497,18 @@ const routes: Routes = [
 			// 		},
 			// 	},
 			// },
-			// {
-			// 	path: "tradebid",
-			// 	canActivate: [],
-			// 	loadChildren: () =>
-			// 		import("./pages/client-tradebid/client-tradebid.module").then((m) => m.ClientTradebidModule),
-			// 	data: {
-			// 		meta: {
-			// 			title: "B2B Discount - Buy and Sell B2B Cargo with Discount!",
-			// 			description: "B2B Discount - TradeBid",
-			// 		},
-			// 	},
-			// },
+			{
+				path: "tradebid",
+				canActivate: [],
+				loadChildren: () =>
+					import("./pages/client-tradebid/client-tradebid.module").then((m) => m.ClientTradebidModule),
+				data: {
+					meta: {
+						title: "B2B Discount - Buy and Sell B2B Cargo with Discount!",
+						description: "B2B Discount - TradeBid",
+					},
+				},
+			},
 			// {
 			// 	path: "b2bmarket",
 			// 	canActivate: [],

@@ -35,7 +35,7 @@
 
 <b2b-pagination
 	(togglePageNumber)="togglePageNumber($event)"
-	[length]="totalLength$ | async"
+	[length]="(totalLength$ | async)!"
 	[perPage]="10"
-	[currentPage]="currentPage$ | async"
+	[currentPage]="(currentPage$ | async)!"
 	class="pagination"></b2b-pagination>

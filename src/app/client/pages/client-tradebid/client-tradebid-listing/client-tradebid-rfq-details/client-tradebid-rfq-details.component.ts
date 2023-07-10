@@ -1,13 +1,13 @@
 import { ChangeDetectorRef, Component, OnInit } from "@angular/core";
-import { DialogService } from "@ngneat/dialog";
 import { MakeQuoteDialogComponent } from "../dialogs/make-quote-dialog/make-quote-dialog.component";
 import { TradebidService } from "../../tradebid.service";
 import { ActivatedRoute, Router } from "@angular/router";
-import { filter, first } from "rxjs/operators";
+import {  first } from "rxjs/operators";
 import { B2bNgxButtonThemeEnum } from "@b2b/ngx-button";
 import { Observable } from "rxjs";
 import { User } from "../../../../../core/models/user/user.model";
 import { UserService } from "../../../client-profile/services/user/user.service";
+import {MatDialog} from "@angular/material/dialog";
 
 enum UserActions {
 	SHOW_DIALOG,
@@ -25,20 +25,20 @@ export class ClientTradebidRfqDetailsComponent implements OnInit {
 	public showButton: boolean = true;
 
 	public showBuyerInfo: boolean = true;
-	public user$: Observable<User>;
+	public user$!: Observable<User>;
 
 	private readonly rfqId: string;
 	private userAction: UserActions = UserActions.SHOW_DIALOG;
 
 	constructor(
-		private dialogService: DialogService,
+		private dialog: MatDialog,
 		private tradeBidService: TradebidService,
 		private route: ActivatedRoute,
 		private router: Router,
 		private changeDetectionRef: ChangeDetectorRef,
 		private userService: UserService
 	) {
-		this.rfqId = this.route.snapshot.params.id;
+		this.rfqId = this.route.snapshot.params["id"];
 	}
 
 	public ngOnInit(): void {
@@ -68,10 +68,10 @@ export class ClientTradebidRfqDetailsComponent implements OnInit {
 	}
 
 	private openDialog(): void {
-		this.dialogService.open(MakeQuoteDialogComponent, {
-			width: 560,
-			height: 280,
-		});
+    this.dialog.open(MakeQuoteDialogComponent, {
+      width: '560px',
+      height: '280px'
+    });
 	}
 
 	private isContactsOpen(rfq: any, userId: string): boolean {

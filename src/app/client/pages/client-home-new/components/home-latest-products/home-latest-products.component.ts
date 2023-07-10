@@ -11,7 +11,7 @@ import {HomepageService} from "../../../../shared/services/homepage/homepage.ser
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HomeLatestProductsComponent {
-	public data = [];
+	public data: any[] = [];
 
 	constructor(private readonly homePageService: HomepageService,
 							private readonly cdr: ChangeDetectorRef) {

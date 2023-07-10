@@ -1,11 +1,12 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from "@angular/core";
 
 import { User } from "../../../../../../core/models/user/user.model";
-import { getName } from "country-list";
-import { DialogService } from "@ngneat/dialog";
+// @ts-ignore
+import * as countryList from 'country-list';
 import { QuotePurchasingDialogComponent } from "../../dialogs/quote-purchasing-dialog/quote-purchasing-dialog.component";
 import { ActivatedRoute, Router } from "@angular/router";
 import { UserService } from "../../../../client-profile/services/user/user.service";
+import {Dialog} from "@angular/cdk/dialog";
 
 @Component({
 	selector: "b2b-buyer-information",
@@ -17,11 +18,11 @@ export class BuyerInformationComponent implements OnInit, OnChanges {
 	@Input() showBuyerInfo: boolean = true;
 	@Input() phoneNumber: any = {};
 	@Input() email: string = "";
-	@Input() showBtn: boolean;
+	@Input() showBtn!: boolean;
 
 	constructor(
-		private readonly _dialogService: DialogService,
 		private readonly router: Router,
+    private readonly dialog: Dialog,
 		private activeRoute: ActivatedRoute,
 		private userService: UserService
 	) {}
@@ -29,16 +30,16 @@ export class BuyerInformationComponent implements OnInit, OnChanges {
 	public ngOnInit(): void {}
 
 	public ngOnChanges(changes: SimpleChanges): void {
-		if (changes.user.currentValue && !changes.user.firstChange) {
-			this.user = changes.user.currentValue;
+		if (changes["user"].currentValue && !changes["user"].firstChange) {
+			this.user = changes["user"].currentValue;
 		}
 	}
 
 	public showDetails(): void {
 		if (this.user.rfqQuotes <= 0) {
-			this._dialogService.open(QuotePurchasingDialogComponent);
+			this.dialog.open(QuotePurchasingDialogComponent);
 		} else {
-			this.router.navigate(["tradebid", "quotation", this.activeRoute.snapshot.params.id]);
+			this.router.navigate(["tradebid", "quotation", this.activeRoute.snapshot.params["id"]]);
 		}
 	}
 	public getPhoneNumber(): string {
@@ -58,7 +59,7 @@ export class BuyerInformationComponent implements OnInit, OnChanges {
 	}
 
 	public getCountryNameByCode(countryCode: string): string {
-		return countryCode ? getName(countryCode.toUpperCase()) : "";
+		return countryCode ? countryList.getName(countryCode.toUpperCase()) : "";
 	}
 
 	public getUserImage(): string {

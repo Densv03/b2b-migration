@@ -7,11 +7,13 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "strict": true,
+    "strictNullChecks": false,
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
+    "strictPropertyInitialization": false,
     "paths": {
       "@b2b/ngx-button": [
         "projects/ngx-button/src/public-api"
