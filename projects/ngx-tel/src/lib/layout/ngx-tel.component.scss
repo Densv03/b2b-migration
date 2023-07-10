@@ -1,129 +1,129 @@
-@import "projects/shared/src/styles";
+@import "projects/shared/src/styles/colors";
 
 .ngx-tel-label {
-	display: block;
-	font-size: 14px;
-	color: #9fa4bb;
-	margin-bottom: 6px;
+  display: block;
+  font-size: 14px;
+  color: #9fa4bb;
+  margin-bottom: 6px;
 
-	&:empty {
-		display: none;
-	}
+  &:empty {
+    display: none;
+  }
 }
 
 .error {
-	display: block;
-	font-size: 14px;
-	color: hsla(218, 5%, 45%, 0.6);
-	margin-top: 4px;
+  display: block;
+  font-size: 14px;
+  color: hsla(218, 5%, 45%, 0.6);
+  margin-top: 4px;
 }
 
 .ngx-tel-input {
-	&.ng-invalid {
-		border-color: $color-red-500;
-		background-color: $color-red-50;
-	}
+  &.ng-invalid {
+    border-color: $color-red-500;
+    background-color: $color-red-50;
+  }
 }
 
 ::ng-deep {
-	.ngx-tel-wrapper {
-		//color: #556274;
-		//background-color: $color-gray-100;
-		//border: 2px solid transparent;
-		//border-radius: 0.25rem;
-		//max-height: 49px;
+  .ngx-tel-wrapper {
+    //color: #556274;
+    //background-color: $color-gray-100;
+    //border: 2px solid transparent;
+    //border-radius: 0.25rem;
+    //max-height: 49px;
 
-		//&.invalid.touched {
-		//	border-color: $color-red-500;
-		//	.ngx-tel-input {
-		//		background-color: $color-red-50;
-		//	}
-		//}
+    //&.invalid.touched {
+    //	border-color: $color-red-500;
+    //	.ngx-tel-input {
+    //		background-color: $color-red-50;
+    //	}
+    //}
 
-		//input {
-		//	height: 100%;
-		//	width: 100%;
-		//	padding: 12px 16px;
-		//	background-color: transparent;
-		//	box-shadow: none;
-		//	font-size: 14px;
-		//	margin-left: -10px;
-		//	border: 2px solid transparent;
-		//	border-radius: 0.25rem;
-		//
-		//	&.disabled {
-		//		cursor: not-allowed;
-		//	}
-		//}
-	}
-	ngx-intl-tel-input {
-		.iti {
-			width: 100%;
-			.ngx-tel {
-				width: 100%;
-				color: #556274;
-				background-color: #f3f6f8;
-				border-radius: 0.25rem;
-				padding: 15px 0;
-				outline: none;
-				border: none;
-			}
-			.iti__flag-container {
-				padding: 2px;
-				&.disabled {
-					cursor: not-allowed !important;
-					.iti__selected-flag {
-						background-color: #fff;
-						&:hover {
-							background-color: #fff;
-						}
-					}
-				}
-				.iti__selected-flag {
-					background-color: white;
-					border-radius: 3px 0 0 3px;
-				}
-			}
-			.selected-dial-code {
-				font-size: 14px;
-				color: #556274;
-			}
-			.dropdown-menu {
-				border-radius: 4px;
-				background: #ffffff;
-				border: none;
-				.iti__country-list {
-					background: #ffffff;
-					.iti__country {
-						padding: 10px 16px;
-						.iti__country-name {
-							font-size: 14px;
-							color: #0f0f11;
-						}
-						.iti__dial-code {
-							font-size: 14px;
-							color: #556274;
-						}
-						&:hover {
-							background-color: #f3f6f8;
-						}
-					}
-				}
-			}
-		}
+    //input {
+    //	height: 100%;
+    //	width: 100%;
+    //	padding: 12px 16px;
+    //	background-color: transparent;
+    //	box-shadow: none;
+    //	font-size: 14px;
+    //	margin-left: -10px;
+    //	border: 2px solid transparent;
+    //	border-radius: 0.25rem;
+    //
+    //	&.disabled {
+    //		cursor: not-allowed;
+    //	}
+    //}
+  }
+  ngx-intl-tel-input {
+    .iti {
+      width: 100%;
+      .ngx-tel {
+        width: 100%;
+        color: #556274;
+        background-color: #f3f6f8;
+        border-radius: 0.25rem;
+        padding: 15px 0;
+        outline: none;
+        border: none;
+      }
+      .iti__flag-container {
+        padding: 2px;
+        &.disabled {
+          cursor: not-allowed !important;
+          .iti__selected-flag {
+            background-color: #fff;
+            &:hover {
+              background-color: #fff;
+            }
+          }
+        }
+        .iti__selected-flag {
+          background-color: white;
+          border-radius: 3px 0 0 3px;
+        }
+      }
+      .selected-dial-code {
+        font-size: 14px;
+        color: #556274;
+      }
+      .dropdown-menu {
+        border-radius: 4px;
+        background: #ffffff;
+        border: none;
+        .iti__country-list {
+          background: #ffffff;
+          .iti__country {
+            padding: 10px 16px;
+            .iti__country-name {
+              font-size: 14px;
+              color: #0f0f11;
+            }
+            .iti__dial-code {
+              font-size: 14px;
+              color: #556274;
+            }
+            &:hover {
+              background-color: #f3f6f8;
+            }
+          }
+        }
+      }
+    }
 
-		&.ng-invalid.ng-touched input {
-			//border: 2px solid $color-red-500;
-			//background-color: $color-red-50;
-		}
-	}
+    &.ng-invalid.ng-touched .iti input {
+      border: 2px solid $color-red-500;
+      background-color: $color-red-50;
+    }
+  }
 
-	.form-submitted {
-		.ngx-tel-wrapper.invalid {
-			border-color: $color-red-500;
-			//.ngx-tel-input {
-			//	background-color: $color-red-50;
-			//}
-		}
-	}
+  .form-submitted {
+    .ngx-tel-wrapper.invalid {
+      border-color: $color-red-500;
+      //.ngx-tel-input {
+      //	background-color: $color-red-50;
+      //}
+    }
+  }
 }

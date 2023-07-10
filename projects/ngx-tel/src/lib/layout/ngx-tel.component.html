@@ -1,27 +1,27 @@
 <label class="ngx-tel-label">
-	<ng-content></ng-content>
+  <ng-content></ng-content>
 </label>
 
 <div class="ngx-tel-wrapper" [class.touched]="touched" [class.invalid]="invalid">
-	<ngx-intl-tel-input
-		cssClass="ngx-tel"
-		[formControl]="selectFormControl"
-		(countryChange)="changeMask($event)"
-		[enableAutoCountrySelect]="enableAutoCountrySelect"
-		[enablePlaceholder]="enablePlaceholder"
-		[separateDialCode]="separateDialCode"
-		[phoneValidation]="true"
-		[searchCountryFlag]="true"
-		[numberFormat]="phoneNumberFormat.National"
-		[selectedCountryISO]="selectedCountryISO"
-		#phoneField></ngx-intl-tel-input>
-<!--	<input-->
-<!--		pattern="\d*"-->
-<!--		class="ngx-tel-input"-->
-<!--		[ngStyle]="customInputStyles"-->
-<!--		[placeholder]="placeholder"-->
-<!--		[formControl]="inputFormControl"-->
-<!--		[attr.disabled]="disabled ? '' : null"-->
-<!--		type="text" />-->
+  <ngx-intl-tel-input
+    cssClass="ngx-tel"
+    [formControl]="selectFormControl"
+    (countryChange)="changeMask($event)"
+    [enableAutoCountrySelect]="enableAutoCountrySelect"
+    [enablePlaceholder]="enablePlaceholder"
+    [separateDialCode]="separateDialCode"
+    [phoneValidation]="true"
+    [searchCountryFlag]="true"
+    [numberFormat]="phoneNumberFormat.National"
+    [selectedCountryISO]="selectedCountryISO"
+    #phoneField></ngx-intl-tel-input>
+  <!--	<input-->
+  <!--		pattern="\d*"-->
+  <!--		class="ngx-tel-input"-->
+  <!--		[ngStyle]="customInputStyles"-->
+  <!--		[placeholder]="placeholder"-->
+  <!--		[formControl]="inputFormControl"-->
+  <!--		[attr.disabled]="disabled ? '' : null"-->
+  <!--		type="text" />-->
 </div>
 <!--<p [@fadeInOut] class="error" *ngIf="inputFormControl?.errors?.phone && showErrorMessage">Please, use numbers</p>-->

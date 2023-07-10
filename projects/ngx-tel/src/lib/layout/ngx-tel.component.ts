@@ -1,14 +1,14 @@
 import {
-	AfterViewInit,
-	ChangeDetectionStrategy,
-	ChangeDetectorRef,
-	Component,
-	forwardRef,
-	Input,
-	OnChanges,
-	OnInit,
-	SimpleChanges,
-	ViewChild,
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component, ElementRef,
+  forwardRef,
+  Input,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+  ViewChild,
 } from "@angular/core";
 import {
   ControlValueAccessor,
@@ -22,160 +22,157 @@ import { UntilDestroy, untilDestroyed } from "@ngneat/until-destroy";
 // import { FormControl } from "@ngneat/reactive-forms";
 
 import { B2bNgxInputThemeEnum} from "@b2b/ngx-input";
-import {CountryISO, NgxIntlTelInputComponent, PhoneNumberFormat} from "ngx-intl-tel-input";
-// import { onlyNumber } from "../../../../../apps/site/src/app/core/helpers/validator/only-number";
+import { CountryISO, PhoneNumberFormat } from "ngx-intl-tel-input";
 import { animate, style, transition, trigger } from "@angular/animations";
-// import {b2bNgxTel} from "../../../../../apps/site/src/app/core/helpers/validator/b2b-ngx-tel";
 
 const placeholders: any = {
-	"Bangladesh (বাংলাদেশ)": "0000-000000",
-	"Peru (Perú)": "00-000000",
+  "Bangladesh (বাংলাদেশ)": "0000-000000",
+  "Peru (Perú)": "00-000000",
 };
 
 @UntilDestroy()
 @Component({
-	selector: "b2b-ngx-tel",
-	templateUrl: "./ngx-tel.component.html",
-	styleUrls: ["./ngx-tel.component.scss"],
-	providers: [
-		{
-			provide: NG_VALUE_ACCESSOR,
-			useExisting: forwardRef(() => B2bNgxTelComponent),
-			multi: true,
-		},
-		{
-			provide: NG_VALIDATORS,
-			useExisting: forwardRef(() => B2bNgxTelComponent),
-			multi: true,
-		},
-	],
-	animations: [
-		trigger("fadeInOut", [
-			transition(":enter", [
-				// :enter is alias to 'void => *'
-				style({ opacity: 0 }),
-				animate(500, style({ opacity: 1 })),
-			]),
-			transition(":leave", [
-				// :leave is alias to '* => void'
-				animate(500, style({ opacity: 0 })),
-			]),
-		]),
-	],
-	changeDetection: ChangeDetectionStrategy.OnPush,
+  selector: "b2b-ngx-tel",
+  templateUrl: "./ngx-tel.component.html",
+  styleUrls: ["./ngx-tel.component.scss"],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => B2bNgxTelComponent),
+      multi: true,
+    },
+    {
+      provide: NG_VALIDATORS,
+      useExisting: forwardRef(() => B2bNgxTelComponent),
+      multi: true,
+    },
+  ],
+  animations: [
+    trigger("fadeInOut", [
+      transition(":enter", [
+        // :enter is alias to 'void => *'
+        style({ opacity: 0 }),
+        animate(500, style({ opacity: 1 })),
+      ]),
+      transition(":leave", [
+        // :leave is alias to '* => void'
+        animate(500, style({ opacity: 0 })),
+      ]),
+    ]),
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class B2bNgxTelComponent implements ControlValueAccessor, OnInit, OnChanges, AfterViewInit {
-	@Input() errors?: ValidationErrors;
-	@Input() theme: string = '';
-	@Input() customInputStyles: string = '';
+  @Input() errors: ValidationErrors = {};
+  @Input() theme: string = B2bNgxInputThemeEnum.BACKGROUND_GRAY;
+  @Input() customInputStyles: string = '';
 
-	@Input() showErrorMessage: boolean = true;
+  @Input() showErrorMessage: boolean = true;
 
-	@Input() enableAutoCountrySelect: boolean = false;
-	@Input() enablePlaceholder: boolean = true;
-	@Input() searchCountryFlag: boolean = true;
-	@Input() separateDialCode: boolean = true;
-	@Input() phoneValidation: boolean = true;
-	@Input() selectedCountryISO: CountryISO = CountryISO.UnitedStates;
+  @Input() enableAutoCountrySelect: boolean = false;
+  @Input() enablePlaceholder: boolean = true;
+  @Input() searchCountryFlag: boolean = true;
+  @Input() separateDialCode: boolean = true;
+  @Input() phoneValidation: boolean = true;
+  @Input() selectedCountryISO: CountryISO = CountryISO.UnitedStates;
 
-	@Input() defaultNumber: string = "";
+  @Input() defaultNumber: string = "";
 
-	@Input() disabled: boolean = false;
+  @Input() disabled: boolean = false;
 
-	public readonly type: string = "tel";
-	public phoneNumberFormat = PhoneNumberFormat;
-	public placeholder: string = "";
-	public readonly selectFormControl: FormControl<string | null> = new FormControl<string>("", Validators.required);
-	// public readonly inputFormControl: FormControl<string> = new FormControl<string>("", [b2bNgxTel()]);
-	public readonly options: any[] = [];
+  public readonly type: string = "tel";
+  public phoneNumberFormat = PhoneNumberFormat;
+  public placeholder: string = "";
+  public readonly selectFormControl: FormControl<string | null> = new FormControl<string>("", Validators.required);
+  // public readonly inputFormControl: FormControl<string> = new FormControl<string>("", [b2bNgxTel()]);
+  public readonly options: any[] = [];
 
-	public readonly b2bNgxInputThemeEnum: typeof B2bNgxInputThemeEnum = B2bNgxInputThemeEnum;
+  public readonly b2bNgxInputThemeEnum: typeof B2bNgxInputThemeEnum = B2bNgxInputThemeEnum;
 
-	public mask: string = "";
-	public invalid: boolean = false;
-	public touched: boolean = false;
+  public mask: string = "";
+  public invalid: boolean = false;
+  public touched: boolean = false;
 
-	private onChange: (value: string | null) => void = () => null;
-	private onTouched: () => void = () => null;
+  private onChange: (value: string | null) => void = () => null;
+  private onTouched: () => void = () => null;
 
-	constructor(private readonly changeDetectorRef: ChangeDetectorRef) {}
+  constructor(private readonly changeDetectorRef: ChangeDetectorRef) {}
 
-	@ViewChild("phoneField")
-	private phoneField!: NgxIntlTelInputComponent;
+  @ViewChild("phoneField") private phoneField!: any;
 
-	ngAfterViewInit() {
-		this.phoneField.disabled = this.disabled;
-	}
+  ngAfterViewInit() {
+    this.phoneField.disabled = this.disabled;
+  }
 
-	ngOnChanges(changes: SimpleChanges): void {
-		// this.touched = this.inputFormControl.touched || this.selectFormControl.touched;
-		this.invalid = changes['errors'] && changes['errors'].currentValue;
-	}
+  ngOnChanges(changes: SimpleChanges): void {
+    // this.touched = this.inputFormControl.touched || this.selectFormControl.touched;
+    this.invalid = changes['errors'] && changes['errors'].currentValue;
+  }
 
-	ngOnInit(): void {
-		this.subscribeOnValueChanges();
-		// this.inputFormControl.setValue(this.defaultNumber, { emitEvent: false });
-	}
+  ngOnInit(): void {
+    this.subscribeOnValueChanges();
+    // this.inputFormControl.setValue(this.defaultNumber, { emitEvent: false });
+  }
 
-	public validate(): ValidationErrors | null {
-		return null;
-	}
+  public validate(): ValidationErrors | null{
+    return null;
+  }
 
-	private subscribeOnValueChanges(): void {
-		const selectValue$ = this.selectFormControl.valueChanges;
-		// const inputValue$ = this.inputFormControl.valueChanges;
+  private subscribeOnValueChanges(): void {
+    const selectValue$ = this.selectFormControl.valueChanges;
+    // const inputValue$ = this.inputFormControl.valueChanges;
 
-		selectValue$.pipe(untilDestroyed(this)).subscribe((selectValue) => {
-			this.onChange(selectValue);
-			this.onTouched();
-		});
+    selectValue$.pipe(untilDestroyed(this)).subscribe((selectValue) => {
+      this.onChange(selectValue);
+      this.onTouched();
+    });
 
-		// inputValue$.pipe(untilDestroyed(this)).subscribe((inputValue) => {
-		// 	this.selectFormControl.setValue(inputValue);
-		// });
-	}
+    // inputValue$.pipe(untilDestroyed(this)).subscribe((inputValue) => {
+    // 	this.selectFormControl.setValue(inputValue);
+    // });
+  }
 
-	public changeMask(country: any): void {
-		if (!country) {
-			return;
-		}
+  public changeMask(country: any): void {
+    if (!country) {
+      return;
+    }
 
-		const { name, dialCode } = country;
+    const { name, dialCode } = country;
 
-		const placeHolder = placeholders[name] || country.placeHolder;
+    const placeHolder = placeholders[name] || country.placeHolder;
 
-		// this.placeholder = placeHolder.replace(`+${dialCode} `, "").replace(/[0-9]/g, "0");
-		this.mask = this.placeholder;
+    // this.placeholder = placeHolder.replace(`+${dialCode} `, "").replace(/[0-9]/g, "0");
+    this.mask = this.placeholder;
 
-		// this.selectFormControl.setValue(this.inputFormControl.value);
-	}
+    // this.selectFormControl.setValue(this.inputFormControl.value);
+  }
 
-	public registerOnChange(fn: (value: string | null) => void): void {
-		this.onChange = fn;
-	}
+  public registerOnChange(fn: (value: string| null) => void): void {
+    this.onChange = fn;
+  }
 
-	public registerOnTouched(fn: () => void): void {
-		this.onTouched = fn;
-	}
+  public registerOnTouched(fn: () => void): void {
+    this.onTouched = fn;
+  }
 
-	public writeValue(value: any): void {
-		if (!value) {
-			return;
-		}
+  public writeValue(value: any): void {
+    if (!value) {
+      return;
+    }
 
-		this.selectedCountryISO = value.countryCode;
+    this.selectedCountryISO = value.countryCode;
 
-		// this.inputFormControl.setValue(value.number, { emitEvent: false });
-		this.selectFormControl.setValue(value.number, { emitEvent: false });
+    // this.inputFormControl.setValue(value.number, { emitEvent: false });
+    this.selectFormControl.setValue(value.number, { emitEvent: false });
 
-		this.changeDetectorRef.detectChanges();
-	}
+    this.changeDetectorRef.detectChanges();
+  }
 
-	public setDisabledState(isDisabled: boolean): void {
-		if (isDisabled) {
-			// this.inputFormControl.disable();
-		} else {
-			// this.inputFormControl.enable();
-		}
-	}
+  public setDisabledState(isDisabled: boolean): void {
+    if (isDisabled) {
+      // this.inputFormControl.disable();
+    } else {
+      // this.inputFormControl.enable();
+    }
+  }
 }
