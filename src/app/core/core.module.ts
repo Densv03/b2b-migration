@@ -13,6 +13,8 @@ import {B2bNgxButtonModule} from "@b2b/ngx-button";
 import {B2bNgxImageModule} from "@b2b/ngx-image";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {TranslocoModule} from "@ngneat/transloco";
+import {AuthInterceptor} from "../auth/interceptors/auth/auth.interceptor";
+import {HTTP_INTERCEPTORS} from "@angular/common/http";
 
 
 @NgModule({
@@ -31,6 +33,13 @@ import {TranslocoModule} from "@ngneat/transloco";
         TranslocoModule
     ],
 	exports: [AppComponent],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    }
+  ]
 })
 export class CoreModule {
   constructor() {
