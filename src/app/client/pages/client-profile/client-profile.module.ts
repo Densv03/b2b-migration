@@ -1,7 +1,7 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
-import { ClientProfileRoutingModule } from "apps/site/src/app/client/pages/client-profile/client-profile-routing.module";
-import { ClientProfileComponent } from "apps/site/src/app/client/pages/client-profile/layout/client-profile.component";
+import { ClientProfileRoutingModule} from 'src/app/client/pages/client-profile/client-profile-routing.module'
+import {ClientProfileComponent} from 'src/app/client/pages/client-profile/layout/client-profile.component'
 import { RouterModule } from "@angular/router";
 import { ClientProfileSidenavComponent } from "./components/client-profile-sidenav/client-profile-sidenav.component";
 import { B2bNgxImageModule } from "@b2b/ngx-image";
@@ -12,9 +12,8 @@ import { B2bNgxInputModule } from "@b2b/ngx-input";
 import { B2bNgxButtonModule } from "@b2b/ngx-button";
 import { B2bNgxLinkModule } from "@b2b/ngx-link";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-// import { ErrorTailorModule } from "@ngneat/error-tailor";
 import { ClientProfileDeleteAccountComponent } from "./components/client-profile-delete-account/client-profile-delete-account.component";
-import { B2bNgxRadioModule } from "@b2b/ngx-radio";
+import { B2bNgxRadioModule } from "@b2b/ngx";
 import { ClientCreatePaymnetInfoModalComponent } from "./components/client-create-paymnet-info-modal/client-create-paymnet-info-modal.component";
 import { B2bNgxCountrySelectModule } from "@b2b/ngx-country-select";
 import { ClientProfileBillingDialogComponent } from "./components/client-profile-billing-dialog/client-profile-billing-dialog.component";
@@ -45,7 +44,6 @@ import { ClientProfileDeletePaymentMethodDialogComponent } from "./components/cl
 		B2bNgxButtonModule,
 		B2bNgxLinkModule,
 		TranslocoModule,
-		// ErrorTailorModule,
 		B2bNgxRadioModule,
 		B2bNgxCountrySelectModule,
 		MatDialogModule,

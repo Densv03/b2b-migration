@@ -6,7 +6,6 @@ import { ClientProfileTradebidRfqComponent } from "./client-profile-tradebid-rfq
 import { ClientProfileTradebidRfqModule } from "./client-profile-tradebid-rfq/client-profile-tradebid-rfq.module";
 import { MatTabsModule } from "@angular/material/tabs";
 import { ClientProfileTradebidQuotationModule } from "./client-profile-tradebid-quotation/client-profile-tradebid-quotation.module";
-import { B2bNgxPaginationModule } from "@b2b/ngx-pagination";
 import { B2bNgxButtonModule } from "@b2b/ngx-button";
 
 @NgModule({
@@ -18,7 +17,6 @@ import { B2bNgxButtonModule } from "@b2b/ngx-button";
 		ClientProfileTradebidRfqModule,
 		ClientProfileTradebidQuotationModule,
 		MatTabsModule,
-		B2bNgxPaginationModule,
 		B2bNgxButtonModule,
 	],
 })
