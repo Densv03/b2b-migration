@@ -3,11 +3,11 @@ import {ClientMarketplaceService} from "../../client-marketplace.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {TradebidService} from "../../../client-tradebid/tradebid.service";
 import {BehaviorSubject, combineLatest, exhaustMap, mergeMap, Observable, Subject} from "rxjs";
+// @ts-ignore
 import {getName} from "country-list";
 import {
 	ClientOfferReportComponent
 } from "../../../client-offer/components/client-offer-report/client-offer-report.component";
-import {DialogService} from "@ngneat/dialog";
 import {
 	ClientOfferImagesComponent
 } from "../../../client-offer/components/client-offer-images/client-offer-images.component";
@@ -22,6 +22,7 @@ import {AuthService} from "../../../../../auth/services/auth/auth.service";
 import {MarketProductModel} from "../../models/market-product.model";
 import {Meta, Title} from "@angular/platform-browser";
 import {PublicCompanyInfoModel} from "../../../../../core/models/public-company-info.model";
+import {Dialog} from "@angular/cdk/dialog";
 
 @Component({
 	selector: "b2b-client-marketplace-product-details",
@@ -49,14 +50,14 @@ export class ClientMarketplaceProductDetailsComponent implements OnInit, OnDestr
 		private readonly marketService: ClientMarketplaceService,
 		private readonly changeDetectionRef: ChangeDetectorRef,
 		private readonly tradebidService: TradebidService,
-		private readonly dialogService: DialogService,
 		private readonly userService: UserService,
 		private readonly router: Router,
 		private readonly activatedRoute: ActivatedRoute,
 		public readonly b2bNgxLinkService: B2bNgxLinkService,
 		private readonly authService: AuthService,
 		private readonly title: Title,
-		private readonly meta: Meta
+		private readonly meta: Meta,
+    private readonly dialog: Dialog
 	) {
 		this.b2bNgxButtonThemeEnum = B2bNgxButtonThemeEnum;
 		this.user = this.userService.getUser();
@@ -83,7 +84,7 @@ export class ClientMarketplaceProductDetailsComponent implements OnInit, OnDestr
 		});
 
 		this.marketService
-			.getProductById(this.activatedRoute.snapshot.params.id)
+			.getProductById(this.activatedRoute.snapshot.params['id'])
 			.pipe(
 				first(),
 				mergeMap(({product, otherProducts, company})=> {
@@ -116,19 +117,19 @@ export class ClientMarketplaceProductDetailsComponent implements OnInit, OnDestr
 	}
 
 	public openReportPopover() {
-		this.dialogService.open(ClientOfferReportComponent, {
+		this.dialog.open(ClientOfferReportComponent, {
 			data: {
 				...this.productSource,
 			},
 			width: "40vw",
 			height: "auto",
-			minHeight: "0",
-			windowClass: "report-dialog",
+      minHeight: "0",
+      panelClass: "report-dialog",
 		});
 	}
 
 	public openImages() {
-		this.dialogService.open(ClientOfferImagesComponent, {
+		this.dialog.open(ClientOfferImagesComponent, {
 			data: {
 				...this.productSource,
 			},
@@ -161,7 +162,7 @@ export class ClientMarketplaceProductDetailsComponent implements OnInit, OnDestr
 				typeRoom: "product",
 			});
 
-			this.socket.on("chat_info", (data) => {
+			this.socket.on("chat_info", (data: any) => {
 				this.goTo("profile/your-workspace/b2bmarket/chat/" + data._id);
 			});
 		}
@@ -169,7 +170,7 @@ export class ClientMarketplaceProductDetailsComponent implements OnInit, OnDestr
 
 
 
-	private openConnection(token): void {
+	private openConnection(token: string): void {
 		if (this.socket) {
 			this.socket.disconnect();
 		}

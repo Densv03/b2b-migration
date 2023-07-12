@@ -38,11 +38,11 @@ export class ClientMarketplaceListingGridComponent implements OnInit {
 		return getName(countryCode);
 	}
 
-	public openChat(event): void {
+	public openChat(event: Event): void {
 		event.stopImmediatePropagation();
 	}
 
-	public emitStarClick(id, event): void {
+	public emitStarClick(id: string, event: Event): void {
 		event.preventDefault();
 		event.stopImmediatePropagation();
 		this.starClicked.emit(id);

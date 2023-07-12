@@ -14,19 +14,18 @@ import {B2bNgxButtonThemeEnum} from "@b2b/ngx-button";
 import {B2bNgxSelectThemeEnum} from "@b2b/ngx-select";
 import {B2bNgxLinkThemeEnum} from "@b2b/ngx-link";
 import {FormGroup} from "@angular/forms";
-import {FormBuilder} from "@ngneat/reactive-forms";
 import {AuthService} from "../../../../auth/services/auth/auth.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {BehaviorSubject, Observable, Subject, tap} from "rxjs";
 import {PaginationParamsModel} from "../../../../core/models/pagination-params.model";
-import {filter, map, skip, switchMap, takeUntil} from "rxjs/operators";
+import {map, skip, switchMap, takeUntil} from "rxjs/operators";
 import {CategoriesService} from "../../../services/categories/categories.service";
 import {InitialCategoryState} from "../shared/models/initial-category-state.model";
 import {SlideInOutAnimation} from "../shared/animations/slide-in-out.animation";
 import {UntilDestroy, untilDestroyed} from "@ngneat/until-destroy";
 import {SortType} from "../../../../core/models/sort-type.model";
 
-function generateQueryString(obj, initialValue: string = "?") {
+function generateQueryString(obj: any, initialValue: string = "?") {
 	const filteredState = obj;
 	for (const filteredStateKey in filteredState) {
 		if (!filteredState[filteredStateKey]) {
@@ -62,13 +61,13 @@ export class ClientMarketplaceComponent implements OnInit, AfterViewInit, OnDest
 	public readonly user$: any;
 
 	public readonly formGroup: FormGroup = this.getFormGroup();
-	public readonly desktopFilters: FormGroup = this.fb.group({
-		filters: [],
-	});
+  public readonly desktopFilters: FormGroup = new FormGroup<any>({
+    filters: [],
+  });
 
-	public readonly mobileFilters: FormGroup = this.fb.group({
-		filters: [],
-	});
+  public readonly mobileFilters: FormGroup = new FormGroup<any>({
+    filters: [],
+  });
 
 	public categoriesInitialState$: Observable<InitialCategoryState> = this.getObservableForCategories();
 
@@ -93,7 +92,6 @@ export class ClientMarketplaceComponent implements OnInit, AfterViewInit, OnDest
 	constructor(
 		private clientMarketplaceService: ClientMarketplaceService,
 		private authService: AuthService,
-		private fb: FormBuilder,
 		private route: ActivatedRoute,
 		private categoriesService: CategoriesService,
 		private changeDetectorRef: ChangeDetectorRef,
@@ -217,18 +215,18 @@ export class ClientMarketplaceComponent implements OnInit, AfterViewInit, OnDest
 	}
 
 	private getFormGroup(): FormGroup {
-		return this.fb.group({
-			"transportType": null,
-			"categories[]": null,
-			"sort": null,
-			"q": null,
-			"offset": 0,
-			"limit": 12,
-		});
+    return new FormGroup<any>({
+      "transportType": null,
+      "categories[]": null,
+      "sort": null,
+      "q": null,
+      "offset": 0,
+      "limit": 12,
+    });
 	}
 	private initQueryParams(): void {
 		if (this.queryParams.q) {
-			this.listingState.q = this.queryParams.q;
+			this.listingState['q'] = this.queryParams.q;
 			this.formGroup.patchValue({q: this.queryParams.q});
 		}
 
@@ -236,7 +234,7 @@ export class ClientMarketplaceComponent implements OnInit, AfterViewInit, OnDest
 			.get("q")
 			.valueChanges.pipe(
 			takeUntil(this.componentIsDestroyed),
-			tap((res) => (this.listingState.q = res)),
+			tap((res) => (this.listingState['q'] = res)),
 			switchMap(() => {
 				return this.clientMarketplaceService.getMarketplaceProducts(generateQueryString(this.listingState));
 			})
@@ -251,12 +249,12 @@ export class ClientMarketplaceComponent implements OnInit, AfterViewInit, OnDest
 			map((categories) => categories.categories),
 			map((categories) => {
 				const ans = {name: "", _id: ""};
-				categories.forEach((parentCategory) => {
+				categories.forEach((parentCategory: any) => {
 					if (parentCategory._id === this.queryParams.categories) {
 						ans._id = parentCategory._id;
 						ans.name = parentCategory.name;
 					} else {
-						parentCategory.children.forEach((childCategories) => {
+						parentCategory.children.forEach((childCategories: any) => {
 							if (childCategories._id === this.queryParams.categories) {
 								ans._id = childCategories._id;
 								ans.name = childCategories.name;
@@ -286,7 +284,7 @@ export class ClientMarketplaceComponent implements OnInit, AfterViewInit, OnDest
 			// FIXME: remove this if it's not needed
 			if (Object.values(filters).length) {
 				this.clientMarketplaceService.updateMarketplaceProducts(generateQueryString(this.listingState),
-					(this.listingState.page - 1) * this.PRODUCTS_LIMIT );
+					(this.listingState['page'] - 1) * this.PRODUCTS_LIMIT );
 			} else {
 				this.listingState = {
 					...this.listingState,
@@ -302,7 +300,7 @@ export class ClientMarketplaceComponent implements OnInit, AfterViewInit, OnDest
 	}
 
 	private initPagination(): void {
-		const page = this.route.snapshot.queryParams.page;
+		const page = this.route.snapshot.queryParams['page'];
 		if (page) {
 			this.togglePage(page);
 		}
@@ -313,7 +311,7 @@ export class ClientMarketplaceComponent implements OnInit, AfterViewInit, OnDest
 			.pipe(skip(1), untilDestroyed(this))
 			.subscribe(data => {
 				this.clientMarketplaceService.updateMarketplaceProducts(generateQueryString(this.listingState),
-					(this.listingState.page - 1) * this.PRODUCTS_LIMIT );
+					(this.listingState['page'] - 1) * this.PRODUCTS_LIMIT );
 			})
 	}
 

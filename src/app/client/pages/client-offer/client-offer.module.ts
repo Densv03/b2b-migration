@@ -1,7 +1,6 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 
-import { B2bNgxButtonModule } from "@b2b/ngx-button";
 // import { B2bNgxImagesCarouselModule } from "@b2b/ngx-images-carousel";
 import { B2bNgxLinkModule } from "@b2b/ngx-link";
 // import { B2bNgxTooltipModule } from "@b2b/ngx-tooltip";
@@ -21,36 +20,43 @@ import { TranslocoModule } from "@ngneat/transloco";
 import { ClientOfferReportComponent } from "./components/client-offer-report/client-offer-report.component";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { ClientOfferContactSupplierComponent } from "./components/client-offer-contact-supplier/client-offer-contact-supplier.component";
-import {Meta} from "@angular/platform-browser";
+import {BrowserModule, Meta} from "@angular/platform-browser";
 import {NgxIntlTelInputModule} from "ngx-intl-tel-input";
+import {B2bNgxButtonModule} from "@b2b/ngx-button";
+import {
+  B2bNgxImagesCarouselModule
+} from "../../../../../projects/ngx-images-carousel/src/lib/ngx-images-carousel.module";
 @NgModule({
 	declarations: [
 		ClientOfferComponent,
 		ClientOfferMapComponent,
 		ClientOfferDocumentComponent,
 		ClientOfferImagesComponent,
-		ClientOfferReportComponent,
 		ClientOfferContactSupplierComponent,
 	],
-	imports: [
-		CommonModule,
-		FormsModule,
-		ReactiveFormsModule,
-		ClientOfferRoutingModule,
-		// B2bNgxImagesCarouselModule,
-		B2bNgxButtonModule,
-		B2bNgxLinkModule,
-		// B2bNgxTooltipModule,
-		B2bNgxIconModule,
-		// B2bNgxDividerModule,
-		// B2bNgxSkeletonModule,
-		B2bNgxImageModule,
-		// AgmCoreModule,
-		NgxDocViewerModule,
-		// NgxTippyModule,
-		TranslocoModule,
-    NgxIntlTelInputModule
-	],
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    BrowserModule,
+    ClientOfferRoutingModule,
+    ClientOfferReportComponent,
+    // B2bNgxImagesCarouselModule,
+    // B2bNgxButtonModule,
+    B2bNgxLinkModule,
+    // B2bNgxTooltipModule,
+    B2bNgxIconModule,
+    // B2bNgxDividerModule,
+    // B2bNgxSkeletonModule,
+    B2bNgxImageModule,
+    // AgmCoreModule,
+    NgxDocViewerModule,
+    // NgxTippyModule,
+    TranslocoModule,
+    NgxIntlTelInputModule,
+    B2bNgxButtonModule,
+    B2bNgxImagesCarouselModule
+  ],
 	providers: [Meta]
 })
 export class ClientOfferModule {}

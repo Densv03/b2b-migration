@@ -612,6 +612,161 @@
           }
         }
       }
+    },
+    "ngx-radio": {
+      "projectType": "library",
+      "root": "projects/ngx-radio",
+      "sourceRoot": "projects/ngx-radio/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/ngx-radio/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ngx-radio/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/ngx-radio/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ngx-radio/src/test.ts",
+            "tsConfig": "projects/ngx-radio/tsconfig.spec.json",
+            "karmaConfig": "projects/ngx-radio/karma.conf.js"
+          }
+        }
+      }
+    },
+    "ngx-images-carousel": {
+      "projectType": "library",
+      "root": "projects/ngx-images-carousel",
+      "sourceRoot": "projects/ngx-images-carousel/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/ngx-images-carousel/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ngx-images-carousel/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/ngx-images-carousel/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ngx-images-carousel/src/test.ts",
+            "tsConfig": "projects/ngx-images-carousel/tsconfig.spec.json",
+            "karmaConfig": "projects/ngx-images-carousel/karma.conf.js"
+          }
+        }
+      }
+    },
+    "ngx-skeleton": {
+      "projectType": "library",
+      "root": "projects/ngx-skeleton",
+      "sourceRoot": "projects/ngx-skeleton/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/ngx-skeleton/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ngx-skeleton/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/ngx-skeleton/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ngx-skeleton/src/test.ts",
+            "tsConfig": "projects/ngx-skeleton/tsconfig.spec.json",
+            "karmaConfig": "projects/ngx-skeleton/karma.conf.js"
+          }
+        }
+      }
+    },
+    "ngx-pagination": {
+      "projectType": "library",
+      "root": "projects/ngx-pagination",
+      "sourceRoot": "projects/ngx-pagination/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/ngx-pagination/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ngx-pagination/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/ngx-pagination/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ngx-pagination/src/test.ts",
+            "tsConfig": "projects/ngx-pagination/tsconfig.spec.json",
+            "karmaConfig": "projects/ngx-pagination/karma.conf.js"
+          }
+        }
+      }
+    },
+    "ngx-multiselect": {
+      "projectType": "library",
+      "root": "projects/ngx-multiselect",
+      "sourceRoot": "projects/ngx-multiselect/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/ngx-multiselect/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ngx-multiselect/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/ngx-multiselect/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ngx-multiselect/src/test.ts",
+            "tsConfig": "projects/ngx-multiselect/tsconfig.spec.json",
+            "karmaConfig": "projects/ngx-multiselect/karma.conf.js"
+          }
+        }
+      }
     }
   },
   "cli": {

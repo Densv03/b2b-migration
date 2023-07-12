@@ -11,14 +11,11 @@ import {
 	SimpleChanges,
 	ViewChild,
 } from "@angular/core";
-import {ControlValueAccessor, FormBuilder} from "@ngneat/reactive-forms";
 import { BehaviorSubject, Observable } from "rxjs";
-import { CategoriesDialogComponent } from "../../../../../../../../../libs/shared/components/categories-dialog/layout/categories-dialog.component";
-import { MatDialog } from "@angular/material/dialog";
 import { SlideInOutAnimation } from "../../shared/animations/slide-in-out.animation";
 import { B2bNgxButtonThemeEnum } from "@b2b/ngx-button";
 import { InitialCategoryState } from "../../shared/models/initial-category-state.model";
-import {NG_VALUE_ACCESSOR} from "@angular/forms";
+import {ControlValueAccessor, FormBuilder, FormGroup, NG_VALUE_ACCESSOR} from "@angular/forms";
 
 @Component({
 	selector: "b2b-client-marketplace-filters-mobile",
@@ -44,7 +41,7 @@ export class ClientMarketplaceFiltersMobileComponent implements OnChanges, After
 
 	@ViewChild("backdrop", { static: true }) backdrop?: ElementRef;
 
-	public form = this.formBuilder.group({
+	public form: FormGroup<any> = this.formBuilder.group({
 		"categories[]": [[]],
 		"country": [null],
 		"type": [null],
@@ -63,7 +60,7 @@ export class ClientMarketplaceFiltersMobileComponent implements OnChanges, After
 	) {}
 
 	public ngOnChanges(changes: SimpleChanges): void {
-		if (changes?.initialCategoryState?.currentValue?.name) {
+		if (changes?.['initialCategoryState']?.currentValue?.name) {
 			this.form.patchValue({ "categories[]": this.initialCategoryState._id });
 			this.updateFiltersPlaceholder(this.form.value);
 		}

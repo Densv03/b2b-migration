@@ -50,14 +50,14 @@ import {DomSanitizer} from "@angular/platform-browser";
 })
 export class B2bNgxFileComponent implements ControlValueAccessor, OnInit, OnChanges {
   @ViewChild('fileInput') fileInput!: ElementRef;
-  @Input() public readonly type: string;
-  @Input() public readonly placeholder: string;
-  @Input() public readonly theme: B2bNgxInputThemeEnum;
-  @Input() public readonly className!: string;
-  @Input() public readonly isClickable!: boolean;
-  @Input() public readonly maxAllowedSize: number = 50; //50mb
+  @Input() public type: string;
+  @Input() public placeholder: string;
+  @Input() public theme: B2bNgxInputThemeEnum;
+  @Input() public className!: string;
+  @Input() public isClickable!: boolean;
+  @Input() public maxAllowedSize: number = 50; //50mb
   @Input() public isPhoto!: boolean;
-  @Input() errors!: ValidationErrors;
+  @Input() public errors!: ValidationErrors;
   @Input() public label!: string;
 
   @Output() clicked = new EventEmitter<any>();

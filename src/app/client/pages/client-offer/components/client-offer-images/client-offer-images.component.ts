@@ -1,5 +1,5 @@
-import { Component, OnInit } from "@angular/core";
-import { DialogRef } from "@ngneat/dialog";
+import {Component, Inject, OnInit} from "@angular/core";
+import {DIALOG_DATA} from "@angular/cdk/dialog";
 
 @Component({
 	selector: "b2b-client-offer-images",
@@ -8,9 +8,9 @@ import { DialogRef } from "@ngneat/dialog";
 })
 export class ClientOfferImagesComponent implements OnInit {
 	public images: any[];
-	constructor(public ref: DialogRef) {}
+	constructor(@Inject(DIALOG_DATA) public data: any) {}
 
 	ngOnInit(): void {
-		this.images = this.ref.data.photos;
+		this.images = this.data.photos;
 	}
 }
