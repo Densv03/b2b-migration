@@ -1,11 +1,10 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnInit, Renderer2 } from "@angular/core";
-import { FormBuilder, FormGroup } from "@ngneat/reactive-forms";
 import { B2bNgxInputThemeEnum } from "@b2b/ngx-input";
 import { ActivatedRoute, Router } from "@angular/router";
 import { ClientMarketplaceService } from "../../client-marketplace.service";
 import { Observable } from "rxjs";
 import { UserService } from "../../../client-profile/services/user/user.service";
-import SwiperCore, { Navigation, Pagination, Swiper } from "swiper";
+// import SwiperCore, { Navigation, Pagination, Swiper } from "swiper";
 import { CategoriesService } from "../../../../services/categories/categories.service";
 import { B2bNgxButtonThemeEnum } from "@b2b/ngx-button";
 import { AuthService } from "../../../../../auth/services/auth/auth.service";
@@ -14,8 +13,9 @@ import { CategoryListingService } from "../../pages/category-listing/category-li
 import { Category } from "../../shared/models/category.model";
 import { animate, style, transition, trigger } from "@angular/animations";
 import { UntilDestroy, untilDestroyed } from "@ngneat/until-destroy";
+import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 
-SwiperCore.use([Pagination, Navigation]);
+// SwiperCore.use([Pagination, Navigation]);
 
 const breakpoints = {
 	320: {
@@ -55,11 +55,11 @@ const breakpoints = {
 	],
 })
 export class ClientMarketplaceMainComponent implements OnInit {
-	public formGroup: FormGroup = this.fb.group({
-		q: [null],
-		'categories[]': [null],
-		level1Category: [null],
-		level2Category: [null],
+	public formGroup: FormGroup = new FormGroup<any>({
+		q: new FormControl(null),
+		'categories[]': new FormControl(null),
+		level1Category: new FormControl(null),
+		level2Category: new FormControl(null),
 	});
 	public b2bNgxInputThemeEnum = B2bNgxInputThemeEnum;
 	public readonly b2bNgxButtonThemeEnum: typeof B2bNgxButtonThemeEnum;
@@ -74,7 +74,7 @@ export class ClientMarketplaceMainComponent implements OnInit {
 
 	public isAuth$: Observable<boolean>;
 
-	private swiper: Swiper;
+	// private swiper: Swiper;
 	constructor(
 		private readonly fb: FormBuilder,
 		private readonly router: Router,
@@ -100,7 +100,7 @@ export class ClientMarketplaceMainComponent implements OnInit {
 	}
 
 	public onSubmit(): void {
-		const queryParams = {
+		const queryParams: any = {
 			page: 1
 		};
 		if (this.formGroup.value.level1Category || this.formGroup.value.level2Category) {
@@ -140,18 +140,18 @@ export class ClientMarketplaceMainComponent implements OnInit {
 				filter((data) => data.length !== 0)
 			)
 			.subscribe(() => {
-				this.swiper = new Swiper(".swiper", {
-					navigation: {
-						nextEl: ".swiper-button-next",
-						prevEl: ".swiper-button-prev",
-					},
-					pagination: {
-						el: ".swiper-pagination",
-						dynamicBullets: true,
-						clickable: true,
-					},
-					breakpoints,
-				});
+				// this.swiper = new Swiper(".swiper", {
+				// 	navigation: {
+				// 		nextEl: ".swiper-button-next",
+				// 		prevEl: ".swiper-button-prev",
+				// 	},
+				// 	pagination: {
+				// 		el: ".swiper-pagination",
+				// 		dynamicBullets: true,
+				// 		clickable: true,
+				// 	},
+				// 	breakpoints,
+				// });
 			});
 	}
 
@@ -162,15 +162,15 @@ export class ClientMarketplaceMainComponent implements OnInit {
 	private getLevel1Categories$() {
 		return this.categoriesService
 			.getCategories()
-			.pipe(map(({ categories }) => categories.filter((category) => category.children.length)));
+			.pipe(map(({ categories }) => categories.filter((category: any) => category.children.length)));
 	}
 
 	private getLevel2Categories$() {
-		return this.formGroup.getControl("level1Category").valueChanges.pipe(
+		return this.formGroup.get("level1Category").valueChanges.pipe(
 			switchMap((id) => {
 				return this.categoriesService
 					.getCategories()
-					.pipe(map(({ categories }) => categories.find((foundCategory) => foundCategory._id === id)?.children));
+					.pipe(map(({ categories }) => categories.find((foundCategory: any) => foundCategory._id === id)?.children));
 			})
 		);
 	}

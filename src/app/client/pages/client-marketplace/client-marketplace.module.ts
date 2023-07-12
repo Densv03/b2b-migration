@@ -8,7 +8,7 @@ import { ClientMarketplaceAddProductComponent } from "./components/client-market
 import { ClientMarketplaceSupplierListingComponent } from "./components/client-marketplace-supplier-listing/client-marketplace-supplier-listing.component";
 import { ClientMarketplaceSupplierFiltersComponent } from "./components/client-marketplace-supplier-filters/client-marketplace-supplier-filters.component";
 import { B2bNgxSelectModule } from "@b2b/ngx-select";
-import { CategoriesDialogModule } from "../../../../../../../libs/shared/components/categories-dialog/categories-dialog.module";
+// import { CategoriesDialogModule } from "../../../../../../../libs/shared/components/categories-dialog/categories-dialog.module";
 import { B2bNgxCountrySelectModule } from "@b2b/ngx-country-select";
 import { ReactiveFormsModule } from "@angular/forms";
 import { B2bNgxButtonModule } from "@b2b/ngx-button";
@@ -22,14 +22,13 @@ import { TranslocoModule } from "@ngneat/transloco";
 // import { ErrorTailorModule } from "@ngneat/error-tailor";
 import { B2bNgxToggleModule } from "@b2b/ngx-toggle";
 import { B2bNgxTextareaModule } from "@b2b/ngx-textarea";
-import { B2bNgxFileModule } from "@b2b/ngx-file";
+// import { B2bNgxFileModule } from "@b2b/ngx-file";
 import { ClientProfileAddOfferModule } from "../client-profile/pages/client-profile-add-offer/client-profile-add-offer.module";
-import { B2bNgxTreeviewModule } from "@b2b/ngx-treeview";
+// import { B2bNgxTreeviewModule } from "@b2b/ngx-treeview";
 import { B2bNgxMultiselectModule } from "@b2b/ngx-multiselect";
 import { ClientMarketplaceProductDetailsComponent } from "./components/client-marketplace-product-details/client-marketplace-product-details.component";
-import { NgxTippyModule } from "ngx-tippy-wrapper";
+// import { NgxTippyModule } from "ngx-tippy-wrapper";
 import { B2bNgxImagesCarouselModule } from "@b2b/ngx-images-carousel";
-import { B2bNgxPaginationModule } from "@b2b/ngx-pagination";
 import { B2bNgxSkeletonModule } from "@b2b/ngx-skeleton";
 import { LoadMorePaginatorModule } from "./components/load-more-paginator/load-more-paginator.module";
 import { MarketplaceCarouselComponent } from "./components/marketplace-carousel/marketplace-carousel.component";
@@ -44,7 +43,10 @@ import { ClientMarketCompanyPageModule } from "./pages/client-market-company-pag
 import {
     ClientMarketplaceProductItemModule
 } from "./components/client-marketplace-product-item/client-marketplace-product-item.module";
-import {PaginationModule} from "../../../shared/components/pagination/pagination.module";
+import {B2bNgxPaginationModule} from "@b2b/ngx-pagination"
+import {B2bNgxFileModule} from "../../../../../projects/ngx-file/src";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {PaginationModule} from "../../shared/components/pagination/pagination.module";
 
 @NgModule({
 	declarations: [
@@ -59,38 +61,39 @@ import {PaginationModule} from "../../../shared/components/pagination/pagination
 		MarketplaceCarouselComponent,
 		ClientMarketplaceFiltersMobileComponent,
 	],
-    imports: [
-        CommonModule,
-        ClientMarketplaceRoutingModule,
-        B2bNgxSelectModule,
-        CategoriesDialogModule,
-        B2bNgxCountrySelectModule,
-        ReactiveFormsModule,
-        B2bNgxButtonModule,
-        B2bNgxInputModule,
-        B2bNgxIconModule,
-        B2bNgxLinkModule,
-        B2bNgxImageModule,
-        TranslocoModule,
-        // ErrorTailorModule,
-        B2bNgxToggleModule,
-        B2bNgxTextareaModule,
-        B2bNgxFileModule,
-        ClientProfileAddOfferModule,
-        B2bNgxTreeviewModule,
-        B2bNgxMultiselectModule,
-        NgxTippyModule,
-        B2bNgxImagesCarouselModule,
-        B2bNgxPaginationModule,
-        B2bNgxSkeletonModule,
-        LoadMorePaginatorModule,
-        MatExpansionModule,
-        B2bNgxCheckboxModule,
-        ClientMarketplaceListingGridModule,
-        ClientMarketCompanyPageModule,
-        ClientMarketplaceProductItemModule,
-        PaginationModule
-    ],
+  imports: [
+    CommonModule,
+    ClientMarketplaceRoutingModule,
+    B2bNgxSelectModule,
+    // CategoriesDialogModule,
+    B2bNgxCountrySelectModule,
+    ReactiveFormsModule,
+    B2bNgxButtonModule,
+    B2bNgxInputModule,
+    B2bNgxIconModule,
+    B2bNgxLinkModule,
+    B2bNgxImageModule,
+    TranslocoModule,
+    // ErrorTailorModule,
+    B2bNgxToggleModule,
+    B2bNgxTextareaModule,
+    B2bNgxFileModule,
+    ClientProfileAddOfferModule,
+    // B2bNgxTreeviewModule,
+    B2bNgxMultiselectModule,
+    // NgxTippyModule,
+    B2bNgxImagesCarouselModule,
+    B2bNgxPaginationModule,
+    B2bNgxSkeletonModule,
+    LoadMorePaginatorModule,
+    MatExpansionModule,
+    B2bNgxCheckboxModule,
+    ClientMarketplaceListingGridModule,
+    ClientMarketCompanyPageModule,
+    ClientMarketplaceProductItemModule,
+    B2bNgxPaginationModule,
+    PaginationModule,
+  ],
 	providers: [
 		Meta
 	]

@@ -1,0 +1,12 @@
+:host {
+	::ng-deep {
+		gallery-core[thumbPosition="bottom"] gallery-thumbs .g-slider,
+		gallery-core[thumbPosition="top"] gallery-thumbs .g-slider {
+			left: 0;
+			transform: none !important;
+		}
+		.client-profile-offer-images {
+			cursor: zoom-in;
+		}
+	}
+}

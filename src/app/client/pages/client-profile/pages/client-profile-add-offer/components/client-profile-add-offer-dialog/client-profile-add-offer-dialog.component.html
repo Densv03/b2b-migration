@@ -34,7 +34,7 @@
 	</ul>
 
 	<div class="buttons">
-		<button type="button" (click)="closeDialog(false)" b2bNgxButton [theme]="b2bNgxButtonThemEnum.BACKGROUND_BLACK">Close</button>
-		<button type="button" (click)="closeDialog(true)" b2bNgxButton [theme]="b2bNgxButtonThemEnum.BACKGROUND_BLACK">{{ t("BUTTONS.POST_THIS_LOT") }}</button>
+		<button b2bNgxButton type="button" (click)="closeDialog(false)" [theme]="b2bNgxButtonThemEnum.BACKGROUND_BLACK">Close</button>
+		<button b2bNgxButton type="button" (click)="closeDialog(true)" [theme]="b2bNgxButtonThemEnum.BACKGROUND_BLACK">{{ t("BUTTONS.POST_THIS_LOT") }}</button>
 	</div>
 </form>

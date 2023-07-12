@@ -54,13 +54,13 @@ export class ClientMarketplaceSupplierInfoComponent implements OnInit {
 				typeRoom: "users",
 			});
 
-			this.socket.on("users_chat_info", (data) => {
+			this.socket.on("users_chat_info", (data: any) => {
 				this.goTo("profile/your-workspace/b2bmarket/chat/" + data._id);
 			});
 		}
 	}
 
-	private openConnection(token): void {
+	private openConnection(token: string): void {
 		if (this.socket) {
 			this.socket.disconnect();
 		}

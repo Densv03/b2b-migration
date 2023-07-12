@@ -60,6 +60,24 @@
       "@b2b/ngx-password": [
         "projects/ngx-password/src/public-api"
       ],
+      "@b2b/ngx-tel": [
+        "projects/ngx-tel/src/public-api"
+      ],
+      "@b2b/ngx-radio": [
+        "projects/ngx-radio/src/public-api"
+      ],
+      "@b2b/ngx-images-carousel": [
+        "projects/ngx-images-carousel/src/public-api"
+      ],
+      "@b2b/ngx-pagination": [
+        "projects/ngx-pagination/src/public-api"
+      ],
+      "@b2b/ngx-skeleton": [
+        "projects/ngx-skeleton/src/public-api"
+      ],
+      "@b2b/ngx-multiselect": [
+        "projects/ngx-multiselect/src/public-api"
+      ]
     },
     "declaration": false,
     "downlevelIteration": true,

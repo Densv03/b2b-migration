@@ -1,0 +1,54 @@
+ul {
+	display: flex;
+	align-items: center;
+	li {
+		display: flex;
+		align-items: center;
+		margin-left: 15px;
+		input {
+			display: none;
+			&:checked ~ label {
+				.circle {
+					background-color: black;
+				}
+			}
+		}
+		label {
+			display: flex;
+			align-items: center;
+			.circle {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				width: 20px;
+				height: 20px;
+				border: 1px solid #556274;
+				border-radius: 24px;
+			}
+			.title {
+				display: block;
+				margin-left: 10px;
+				font-size: 14px;
+				color: #556274;
+			}
+		}
+	}
+}
+
+:host-context(.column) {
+	ul {
+		flex-direction: column;
+		gap: 12px;
+		li {
+			width: 100%;
+			margin-left: 0;
+			font-family: Helvetica Neue;
+			font-size: 16px;
+			font-style: normal;
+			font-weight: 400;
+			line-height: 24px;
+			letter-spacing: 0.01em;
+			text-align: left;
+		}
+	}
+}

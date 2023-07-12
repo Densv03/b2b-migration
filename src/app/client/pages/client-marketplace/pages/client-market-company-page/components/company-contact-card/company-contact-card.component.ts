@@ -1,13 +1,14 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { B2bNgxButtonThemeEnum } from "@b2b/ngx-button";
 import { PublicCompanyInfoModel } from "../../../../../../../core/models/public-company-info.model";
+// @ts-ignore
 import { getName } from "country-list";
 import { UserService } from "../../../../../client-profile/services/user/user.service";
 import { User } from "../../../../../../../core/models/user/user.model";
 import { Router } from "@angular/router";
 import { io } from "socket.io-client";
 import { environment } from "../../../../../../../../environments/environment";
-import {websiteProtocolRegex, websiteRegex} from "../../../../../../../core/helpers/validator/site-link";
+import {websiteProtocolRegex} from "../../../../../../../core/helpers/validator/site-link";
 import {MatDialog} from "@angular/material/dialog";
 import {
 	ClientMarketCompanyPagePhoneDialogComponent
@@ -64,7 +65,7 @@ export class CompanyContactCardComponent implements OnInit {
 				typeRoom: "users",
 			});
 
-			this.socket.on("users_chat_info", (data) => {
+			this.socket.on("users_chat_info", (data: any) => {
 				this.goTo("profile/your-workspace/b2bmarket/chat/" + data._id);
 			});
 		}
@@ -74,7 +75,7 @@ export class CompanyContactCardComponent implements OnInit {
 		this.router.navigate([link]);
 	}
 
-	private openConnection(token): void {
+	private openConnection(token: string): void {
 		if (this.socket) {
 			this.socket.disconnect();
 		}

@@ -11,11 +11,11 @@ import {
 import { PublicCompanyInfoModel } from "../../../../../../../core/models/public-company-info.model";
 import { B2bNgxLinkThemeEnum } from "@b2b/ngx-link";
 import { CompanyKeyInfoModel } from "./models/company-key-info.model";
+// @ts-ignore
 import { getName } from "country-list";
 import { CategoryListingService } from "../../../category-listing/category-listing.service";
 import { Observable, combineLatest, from, BehaviorSubject, lastValueFrom, firstValueFrom } from "rxjs";
 import { ClientOfferDocumentComponent } from "../../../../../client-offer/components/client-offer-document/client-offer-document.component";
-import { DialogService } from "@ngneat/dialog";
 import { environment } from "../../../../../../../../environments/environment";
 import { GetUrlExtension } from "../../../../../../../core/helpers/function/get-url-extension";
 import { ImageExtensions } from "../../../../../../../core/add-offer/image-extensions";
@@ -28,6 +28,7 @@ import { map } from "rxjs/operators";
 import { DOCUMENT } from "@angular/common";
 import { websiteProtocolRegex, websiteRegex } from "../../../../../../../core/helpers/validator/site-link";
 import { UntilDestroy, untilDestroyed } from "@ngneat/until-destroy";
+import {Dialog} from "@angular/cdk/dialog";
 
 @UntilDestroy()
 @Component({
@@ -53,7 +54,7 @@ export class MarketCompanyInformationComponent implements OnInit {
 
 	constructor(
 		private categoryService: CategoryListingService,
-		private dialogService: DialogService,
+		private dialog: Dialog,
 		private changeDetectorRef: ChangeDetectorRef,
 		private authService: AuthService,
 		@Inject(DOCUMENT) private document: any
@@ -84,7 +85,7 @@ export class MarketCompanyInformationComponent implements OnInit {
 	}
 
 	public openDocument(document: DocumentModel) {
-		this.dialogService.open(ClientOfferDocumentComponent, {
+		this.dialog.open(ClientOfferDocumentComponent, {
 			data: document,
 			width: "80vw",
 			height: "80vh",

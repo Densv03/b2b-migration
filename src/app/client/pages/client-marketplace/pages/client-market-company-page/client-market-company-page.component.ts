@@ -1,20 +1,23 @@
-import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
-import { TradebidService } from "../../../client-tradebid/tradebid.service";
-import { ActivatedRoute, Router } from "@angular/router";
-import { BehaviorSubject, combineLatest, Observable } from "rxjs";
-import { map, tap } from "rxjs/operators";
-import { getName } from "country-list";
-import { PublicCompanyInfoModel } from "../../../../../core/models/public-company-info.model";
-import { B2bNgxButtonThemeEnum } from "@b2b/ngx-button";
-import { UserService } from "../../../client-profile/services/user/user.service";
-import { User } from "../../../../../core/models/user/user.model";
-import { io } from "socket.io-client";
-import { environment } from "../../../../../../environments/environment";
-import { ClientMarketCompanyPagePhoneDialogComponent } from "./components/client-market-company-page-phone-dialog/client-market-company-page-phone-dialog.component";
-import { MatDialog } from "@angular/material/dialog";
-import { websiteProtocolRegex } from "../../../../../core/helpers/validator/site-link";
-import { AuthService } from "apps/site/src/app/auth/services/auth/auth.service";
-import { UntilDestroy, untilDestroyed } from "@ngneat/until-destroy";
+import {ChangeDetectionStrategy, Component, OnInit} from "@angular/core";
+import {TradebidService} from "../../../client-tradebid/tradebid.service";
+import {ActivatedRoute, Router} from "@angular/router";
+import {BehaviorSubject, combineLatest, Observable} from "rxjs";
+// @ts-ignore
+import {getName} from "country-list";
+import {PublicCompanyInfoModel} from "../../../../../core/models/public-company-info.model";
+import {B2bNgxButtonThemeEnum} from "@b2b/ngx-button";
+import {UserService} from "../../../client-profile/services/user/user.service";
+import {User} from "../../../../../core/models/user/user.model";
+import {io} from "socket.io-client";
+import {environment} from "../../../../../../environments/environment";
+import {
+  ClientMarketCompanyPagePhoneDialogComponent
+} from "./components/client-market-company-page-phone-dialog/client-market-company-page-phone-dialog.component";
+import {MatDialog} from "@angular/material/dialog";
+import {websiteProtocolRegex} from "../../../../../core/helpers/validator/site-link";
+import {AuthService} from "../../../../../auth/services/auth/auth.service";
+import {UntilDestroy, untilDestroyed} from "@ngneat/until-destroy";
+import {NgxSkeletonLoaderConfig} from "ngx-skeleton-loader/lib/ngx-skeleton-loader-config.types";
 
 @UntilDestroy()
 @Component({
@@ -46,7 +49,7 @@ export class ClientMarketCompanyPageComponent implements OnInit {
 	) {
 		this.user = this.userService.getUser();
 		this.userIsAuth = this.userService.isAuth();
-		this.companyInfo$ = this.tradebidService.getCompanyInfoById(this.route.snapshot.params.id);
+		this.companyInfo$ = this.tradebidService.getCompanyInfoById(this.route.snapshot.params['id']);
 	}
 
 	public ngOnInit() {
@@ -62,7 +65,7 @@ export class ClientMarketCompanyPageComponent implements OnInit {
 	}
 
 	public checkCompanySiteForValid(site: string): string {
-		if (!site) return;
+		if (!site) return '';
 		if (!site.match(websiteProtocolRegex)) {
 			return site.replace(site, "https://" + site);
 		}
@@ -93,16 +96,14 @@ export class ClientMarketCompanyPageComponent implements OnInit {
 		return getName(countryCode);
 	}
 
-	public getSkeletonOptions() {
-		return [
-			{
-				count: 10,
-				animation: "progress",
-				theme: {
-					height: window.innerHeight / 3,
-				},
-			},
-		];
+	public getSkeletonOptions(): Partial<NgxSkeletonLoaderConfig> {
+    return {
+      count: 10,
+      animation: 'progress',
+      theme: {
+        height: window.innerHeight / 3
+      }
+    };
 	}
 
 	public goTo(link: string): void {
@@ -121,13 +122,13 @@ export class ClientMarketCompanyPageComponent implements OnInit {
 				typeRoom: "users",
 			});
 
-			this.socket.on("users_chat_info", (data) => {
+			this.socket.on("users_chat_info", (data: any) => {
 				this.goTo("profile/your-workspace/b2bmarket/chat/" + data._id);
 			});
 		}
 	}
 
-	private openConnection(token): void {
+	private openConnection(token: string): void {
 		if (this.socket) {
 			this.socket.disconnect();
 		}
@@ -144,14 +145,13 @@ export class ClientMarketCompanyPageComponent implements OnInit {
 		combineLatest([this.companyInfo$, this.authService.getRoles()])
 			.pipe(untilDestroyed(this))
 			.subscribe(([companyInfo, roles]) => {
-				const foundRoleById = roles.find((role) => role._id === companyInfo.businessType);
+				const foundRoleById = roles.find((role: any) => role._id === companyInfo.businessType);
 				if (foundRoleById) {
 					this.businessTypeSource.next(foundRoleById?.displayName);
-					return;
 				} else {
 					this.businessTypeSource.next(companyInfo.businessType);
-					return;
 				}
+        return;
 			});
 	}
 }
