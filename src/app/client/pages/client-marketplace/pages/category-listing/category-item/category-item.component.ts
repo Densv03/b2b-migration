@@ -2,12 +2,19 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output
 import { BehaviorSubject, Observable } from "rxjs";
 import { ActivatedRoute } from "@angular/router";
 import { Category } from "../../../shared/models/category.model";
+import {animate, style, transition, trigger} from "@angular/animations";
 
 @Component({
 	selector: "b2b-category-item",
 	templateUrl: "./category-item.component.html",
 	styleUrls: ["./category-item.component.scss"],
 	changeDetection: ChangeDetectionStrategy.OnPush,
+  animations: [
+    trigger("fadeAnimation", [
+      transition(":enter", [style({ height: 0, opacity: 0 }), animate("300ms", style({ height: 20, opacity: 1 }))]),
+      transition(":leave", [style({ height: 1, opacity: 1 }), animate("300ms", style({ height: 0, opacity: 0 }))]),
+    ]),
+  ],
 })
 export class CategoryItemComponent implements OnInit {
 	@Input() category: Category;

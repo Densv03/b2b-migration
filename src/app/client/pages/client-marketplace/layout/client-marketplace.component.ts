@@ -13,7 +13,7 @@ import {B2bNgxInputThemeEnum} from "@b2b/ngx-input";
 import {B2bNgxButtonThemeEnum} from "@b2b/ngx-button";
 import {B2bNgxSelectThemeEnum} from "@b2b/ngx-select";
 import {B2bNgxLinkThemeEnum} from "@b2b/ngx-link";
-import {FormGroup} from "@angular/forms";
+import {FormControl, FormGroup} from "@angular/forms";
 import {AuthService} from "../../../../auth/services/auth/auth.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {BehaviorSubject, Observable, Subject, tap} from "rxjs";
@@ -62,11 +62,11 @@ export class ClientMarketplaceComponent implements OnInit, AfterViewInit, OnDest
 
 	public readonly formGroup: FormGroup = this.getFormGroup();
   public readonly desktopFilters: FormGroup = new FormGroup<any>({
-    filters: [],
+    filters: new FormControl([]),
   });
 
   public readonly mobileFilters: FormGroup = new FormGroup<any>({
-    filters: [],
+    filters: new FormControl([]),
   });
 
 	public categoriesInitialState$: Observable<InitialCategoryState> = this.getObservableForCategories();
@@ -216,12 +216,12 @@ export class ClientMarketplaceComponent implements OnInit, AfterViewInit, OnDest
 
 	private getFormGroup(): FormGroup {
     return new FormGroup<any>({
-      "transportType": null,
-      "categories[]": null,
-      "sort": null,
-      "q": null,
-      "offset": 0,
-      "limit": 12,
+      "transportType": new FormControl(null),
+      "categories[]": new FormControl(null),
+      "sort": new FormControl(null),
+      "q": new FormControl(null),
+      "offset": new FormControl(0),
+      "limit": new FormControl(12),
     });
 	}
 	private initQueryParams(): void {

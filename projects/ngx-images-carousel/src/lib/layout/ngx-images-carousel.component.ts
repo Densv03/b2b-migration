@@ -10,7 +10,7 @@ import { environment} from "../../../../../src/environments/environment";
 })
 export class B2bNgxImagesCarouselComponent implements OnChanges {
 	@Input() public options: any[];
-	@Input() public className: "";
+	@Input() public className: string = '';
 	public images: ImageItem[] = null;
 
 	public get imagesCarouselClassName() {

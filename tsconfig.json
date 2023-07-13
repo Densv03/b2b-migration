@@ -67,7 +67,7 @@
         "projects/ngx-radio/src/public-api"
       ],
       "@b2b/ngx-images-carousel": [
-        "projects/ngx-carousel/public-api"
+        "projects/ngx-images-carousel/src/public-api"
       ],
       "@b2b/ngx-pagination": [
         "projects/ngx-pagination/src/public-api"

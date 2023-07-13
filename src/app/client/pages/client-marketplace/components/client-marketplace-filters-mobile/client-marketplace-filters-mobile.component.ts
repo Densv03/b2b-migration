@@ -13,7 +13,7 @@ import {
 } from "@angular/core";
 import { BehaviorSubject, Observable } from "rxjs";
 import { SlideInOutAnimation } from "../../shared/animations/slide-in-out.animation";
-import { B2bNgxButtonThemeEnum } from "@b2b/ngx-button";
+import {B2bNgxButtonModule, B2bNgxButtonThemeEnum} from "@b2b/ngx-button";
 import { InitialCategoryState } from "../../shared/models/initial-category-state.model";
 import {ControlValueAccessor, FormBuilder, FormGroup, NG_VALUE_ACCESSOR} from "@angular/forms";
 

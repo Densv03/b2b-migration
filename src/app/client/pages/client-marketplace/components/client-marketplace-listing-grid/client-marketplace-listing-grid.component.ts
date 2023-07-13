@@ -14,7 +14,7 @@ export class ClientMarketplaceListingGridComponent implements OnInit {
 	@Output() public readonly starClicked: EventEmitter<string> = new EventEmitter<string>();
 
 	@Input() marketplaceProducts: any[];
-	@Input() public readonly user: any;
+	@Input() public user: any;
 
 	public readonly b2bNgxButtonThemeEnum: typeof B2bNgxButtonThemeEnum = B2bNgxButtonThemeEnum;
 	public readonly b2bNgxLinkThemeEnum: typeof B2bNgxLinkThemeEnum = B2bNgxLinkThemeEnum;
