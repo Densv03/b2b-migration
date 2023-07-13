@@ -163,7 +163,7 @@
 		<p
 			*ngIf="
 				this.form.get('productInformation').get('moreInformation').touched &&
-				this.form.get('productInformation').get('moreInformation').errors?.latin
+				this.form.get('productInformation').get('moreInformation').errors?.['latin']
 			"
 			[ngStyle]="{ marginTop: '15px' }"
 			class="error"
@@ -173,7 +173,7 @@
 		<p
 			*ngIf="
 				this.form.get('productInformation').get('moreInformation').touched &&
-				this.form.get('productInformation').get('moreInformation').errors?.required
+				this.form.get('productInformation').get('moreInformation').errors?.['required']
 			"
 			[ngStyle]="{ marginTop: '15px' }"
 			class="error"
@@ -183,13 +183,13 @@
 		<p
 			*ngIf="
 				this.form.get('productInformation').get('moreInformation').touched &&
-				this.form.get('productInformation').get('moreInformation').errors?.minlength
+				this.form.get('productInformation').get('moreInformation').errors?.['minlength']
 			"
 			[ngStyle]="{ marginTop: '15px' }"
 			class="error"
 			[@fadeInOut]>
 			Please, put more than 20 letters, now
-			{{ form.get("productInformation").get("moreInformation").errors?.minlength.actualLength }} letters
+			{{ form.get("productInformation").get("moreInformation").errors?.['minlength'].actualLength }} letters
 		</p>
 		<div class="ngx-file-wrapper">
 			<b2b-ngx-file formControlName="photos" class="rfq__label" label="Choose file" [isPhoto]="true"

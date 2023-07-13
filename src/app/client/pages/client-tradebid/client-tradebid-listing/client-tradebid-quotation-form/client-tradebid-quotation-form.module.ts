@@ -10,15 +10,12 @@ import { RouterModule } from "@angular/router";
 import { B2bNgxInputModule } from "@b2b/ngx-input";
 import { ReactiveFormsModule } from "@angular/forms";
 import { B2bNgxSelectModule } from "@b2b/ngx-select";
-// import { B2bNgxTextareaModule } from "@b2b/ngx-textarea";
-// import { B2bNgxFileModule } from "@b2b/ngx-file";
 import { B2bNgxCountrySelectModule } from "@b2b/ngx-country-select";
 import { B2bNgxCheckboxModule } from "@b2b/ngx-checkbox";
 // import { B2bNgxPaginationModule } from "@b2b/ngx-pagination";
 import { B2bNgxIconModule } from "@b2b/ngx-icon";
-import {B2bNgxFileModule} from "../../../../../../../projects/ngx-file/src";
-import {B2bNgxTextareaModule} from "../../../../../../../projects/ngx-textarea/src";
-// import { B2bNgxTelModule } from "@b2b/ngx-tel";
+import {B2bNgxFileModule} from "@b2b/ngx-file";
+import {B2bNgxTextareaModule} from "@b2b/ngx-textarea";
 
 @NgModule({
 	declarations: [ClientTradebidQuotationFormComponent],

@@ -13,8 +13,6 @@ import { B2bNgxTextareaModule } from "@b2b/ngx-textarea";
 import { ReactiveFormsModule } from "@angular/forms";
 import { B2bNgxTelModule } from "@b2b/ngx-tel";
 import { B2bNgxCountrySelectModule } from "@b2b/ngx-country-select";
-// import { ErrorTailorModule } from "@ngneat/error-tailor";
-// import { DialogModule } from "@ngneat/dialog";
 import { ClientProfileAddOfferDialogComponent } from "./components/client-profile-add-offer-dialog/client-profile-add-offer-dialog.component";
 import { B2bNgxRadioModule } from "@b2b/ngx-radio";
 import { B2bScrollToInvalidControl } from "../../../../../core/directives/scroll-to-invalid-control.directive";
@@ -27,7 +25,6 @@ import { B2bNgxIconModule } from "@b2b/ngx-icon";
 		CommonModule,
 		ClientProfileAddOfferRoutingModule,
 		ReactiveFormsModule,
-		// ErrorTailorModule,
 		B2bNgxInputModule,
 		B2bNgxToggleModule,
 		B2bNgxSelectModule,
@@ -38,9 +35,8 @@ import { B2bNgxIconModule } from "@b2b/ngx-icon";
 		B2bNgxTelModule,
 		B2bNgxCountrySelectModule,
 		B2bNgxIconModule,
-		// DialogModule,
 		B2bNgxRadioModule,
-		TranslocoModule,
-	],
+		TranslocoModule
+	]
 })
 export class ClientProfileAddOfferModule {}

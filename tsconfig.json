@@ -60,6 +60,9 @@
       "@b2b/ngx-password": [
         "projects/ngx-password/src/public-api"
       ],
+      "@b2b/ngx-file": [
+        "projects/ngx-file/src/public-api"
+      ],
     },
     "declaration": false,
     "downlevelIteration": true,

@@ -25,7 +25,7 @@ import { HotToastService } from "@ngneat/hot-toast";
 import { B2bNgxLinkService } from "@b2b/ngx-link";
 import { TranslocoService } from "@ngneat/transloco";
 import { AmplitudeService } from "../../../../../../../../../core/services/amplitude/amplitude.service";
-import { getName } from "country-list";
+import * as countryList from 'country-list';
 import { TradebidService } from "../../../../../../../client-tradebid/tradebid.service";
 
 @UntilDestroy()
@@ -151,7 +151,7 @@ export class ClientChatComponent implements OnInit, OnDestroy {
 						}, 0);
 					}),
 					map((messages) =>
-						messages.map((message) => {
+						messages.map((message: { author: any; }) => {
 							const dispayInfoOf =
 								chat.seller?._id === message?.author
 									? this._translocoService.translate("CHAT.SELLER")
@@ -174,12 +174,12 @@ export class ClientChatComponent implements OnInit, OnDestroy {
 		);
 	}
 
-	public enterPressed(event) {
+	public enterPressed(event: { preventDefault: () => void; }) {
 		this.sendMessage(this.formGroup.get("message").value);
 		event.preventDefault();
 	}
 
-	public async sendMessage(body) {
+	public async sendMessage(body: any) {
 		if (!body) {
 			return;
 		}
@@ -201,26 +201,26 @@ export class ClientChatComponent implements OnInit, OnDestroy {
 	}
 
 	public subscribeOnMessage() {
-		return this._socket.on("message", (message) => {
+		return this._socket.on("message", (message: any) => {
 			const history = this._messagesHistoryBehaviourSubject.getValue();
 			this._messagesHistoryBehaviourSubject.next([...history, message]);
 		});
 	}
 
 	public subscribeOnChatInfo() {
-		return this._socket.on("chat_info", (chatInfo) => {
+		return this._socket.on("chat_info", (chatInfo: { unreadMessagesCount: number; }) => {
 			this._socketService.readMessages(chatInfo.unreadMessagesCount);
 			this._chatInfoBehaviourSubject.next(chatInfo);
 		});
 	}
 
 	public subscribeOnMessageHistory() {
-		return this._socket.on("message_history", (message_history) => {
+		return this._socket.on("message_history", (message_history: any) => {
 			this._messagesHistoryBehaviourSubject.next(message_history);
 		});
 	}
 
-	openConnection(token) {
+	openConnection(token: any) {
 		if (this._socket) {
 			this._socket.disconnect();
 		}
@@ -275,7 +275,7 @@ export class ClientChatComponent implements OnInit, OnDestroy {
 	}
 
 	public getDestination(): string {
-		return this.rfqInfo?.rfq?.destination?.to ? getName(this.rfqInfo?.rfq?.destination?.to) : "";
+		return this.rfqInfo?.rfq?.destination?.to ? countryList.getName(this.rfqInfo?.rfq?.destination?.to) : "";
 	}
 
 	public ngOnDestroy() {

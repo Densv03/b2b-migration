@@ -1,6 +1,6 @@
 import {Component, Inject} from "@angular/core";
 import {DocumentPreviewModel} from "../../../../../core/models/document-preview.model";
-import {DIALOG_DATA, DialogRef} from "@angular/cdk/dialog";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 
 @Component({
 	selector: "b2b-client-offer-document",
@@ -9,7 +9,7 @@ import {DIALOG_DATA, DialogRef} from "@angular/cdk/dialog";
 })
 export class ClientOfferDocumentComponent {
 
-	constructor(public ref: DialogRef,
-              @Inject(DIALOG_DATA) public data: {document: DocumentPreviewModel}) {}
+	constructor(public matDialogRef: MatDialogRef<ClientOfferDocumentComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: {document: DocumentPreviewModel}) {}
 
 }
