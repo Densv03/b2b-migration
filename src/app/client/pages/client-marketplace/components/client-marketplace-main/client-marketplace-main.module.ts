@@ -3,7 +3,7 @@ import {ClientMarketplaceMainComponent} from "./client-marketplace-main.componen
 import {RouterModule, Routes} from "@angular/router";
 import {CommonModule} from "@angular/common";
 import {CategoryItemModule} from "../../pages/category-listing/category-item/category-item.module";
-import {SwiperModule} from "swiper/angular";
+// import {SwiperModule} from "swiper/angular";
 import { CompaniesCounterComponent } from './components/companies-counter/companies-counter.component';
 import {B2bNgxButtonModule} from "@b2b/ngx-button";
 import {MatTabsModule} from "@angular/material/tabs";
@@ -18,7 +18,7 @@ const routes: Routes = [{path: '', component: ClientMarketplaceMainComponent}]
 		CommonModule,
 		RouterModule.forChild(routes),
 		CategoryItemModule,
-		SwiperModule,
+		// SwiperModule,
 		B2bNgxButtonModule,
 		MatTabsModule,
 		B2bNgxSelectModule,

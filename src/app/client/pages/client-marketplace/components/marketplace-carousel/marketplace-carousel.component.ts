@@ -1,6 +1,5 @@
 import { AfterViewInit, Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from "@angular/core";
 import { B2bNgxLinkService } from "@b2b/ngx-link";
-import { AmplitudeService } from "../../../../../core/services/amplitude/amplitude.service";
 
 @Component({
 	selector: "b2b-marketplace-carousel",
@@ -17,7 +16,7 @@ export class MarketplaceCarouselComponent implements OnChanges, AfterViewInit {
 
 	public readonly optionsToDisplay: any[];
 
-	constructor(public readonly b2bNgxLinkService: B2bNgxLinkService, private readonly _ampService: AmplitudeService) {
+	constructor(public readonly b2bNgxLinkService: B2bNgxLinkService) {
 		this.optionsToDisplay = [];
 	}
 
@@ -27,13 +26,13 @@ export class MarketplaceCarouselComponent implements OnChanges, AfterViewInit {
 	}
 
 	ngOnChanges(changes: SimpleChanges) {
-		if (!changes.options) {
+		if (!changes['options']) {
 			return;
 		}
 
 		this.optionsToDisplay.splice(0, this.optionsToDisplay.length);
 
-		const { currentValue } = changes.options;
+		const { currentValue } = changes['options'];
 
 		// shuffle(currentValue);
 		const updatedValue = [...currentValue.slice(7, 10), ...currentValue.slice(0, 7)];
@@ -79,6 +78,5 @@ export class MarketplaceCarouselComponent implements OnChanges, AfterViewInit {
 	}
 
 	processOfferClick() {
-		this._ampService.logEvent("Click on offers", { source: localStorage.getItem("source") });
 	}
 }

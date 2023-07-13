@@ -34,11 +34,11 @@ import {B2bNgxInputThemeEnum} from "../enum/ngx-input-theme.enum";
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class B2bNgxInputComponent implements ControlValueAccessor, OnInit, OnChanges {
-	@Input() public readonly type: string;
-	@Input() public readonly placeholder: string;
-	@Input() public readonly theme: B2bNgxInputThemeEnum;
-	@Input() public readonly label: string = '';
-	@Input() public readonly errors: string = '';
+	@Input() public type: string;
+	@Input() public placeholder: string;
+	@Input() public theme: B2bNgxInputThemeEnum;
+	@Input() public label: string = '';
+	@Input() public errors: string | ValidationErrors= '';
 
 	public readonly formControl: FormControl<string | null>;
 	public readonly id: string;

@@ -1,6 +1,7 @@
 import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output} from "@angular/core";
 import {B2bNgxButtonThemeEnum} from "@b2b/ngx-button";
 import {B2bNgxLinkService, B2bNgxLinkThemeEnum} from "@b2b/ngx-link";
+// @ts-ignore
 import {getName} from "country-list";
 import {ClientMarketplaceService} from "../../client-marketplace.service";
 import {Observable} from "rxjs";
@@ -39,7 +40,7 @@ export class ClientMarketplaceListingListComponent {
 		} return name
 	}
 
-	public emitStarClick(id, event): void {
+	public emitStarClick(id: string, event: Event): void {
 		event.preventDefault();
 		event.stopImmediatePropagation();
 		this.starClicked.emit(id);

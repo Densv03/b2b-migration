@@ -1,7 +1,6 @@
 import { Component, OnInit } from "@angular/core";
-import { Observable, of } from "rxjs";
+import { Observable } from "rxjs";
 import { FormGroup } from "@angular/forms";
-import { FormBuilder } from "@ngneat/reactive-forms";
 import { ClientMarketplaceService } from "../../client-marketplace.service";
 import { B2bNgxInputThemeEnum } from "@b2b/ngx-input";
 import { ActivatedRoute } from "@angular/router";
@@ -17,7 +16,7 @@ import { PublicUserInfo } from "../../../../../core/models/shared/public-user-in
 export class ClientMarketplaceSupplierListingComponent implements OnInit {
 	public readonly PRODUCTS_LIMIT = this.clientMarketplaceService.PRODUCTS_LIMIT;
 
-	public supplierId: string = this.route.snapshot.params.id;
+	public supplierId: string = this.route.snapshot.params['id'];
 	public supplierProducts$: Observable<any> = this.clientMarketplaceService.supplierListing$;
 	public totalSupplierProductsLength$: Observable<number> = this.clientMarketplaceService.supplierListingLength$;
 
@@ -36,7 +35,6 @@ export class ClientMarketplaceSupplierListingComponent implements OnInit {
 	public loading$: Observable<boolean>;
 
 	constructor(
-		private readonly fb: FormBuilder,
 		private readonly clientMarketplaceService: ClientMarketplaceService,
 		private route: ActivatedRoute,
 		private userService: UserService
@@ -77,15 +75,15 @@ export class ClientMarketplaceSupplierListingComponent implements OnInit {
 	}
 
 	private getFormGroup(): FormGroup {
-		return this.fb.group({
-			"transportType": null,
-			"categories[]": null,
-			"destinationFrom": null,
-			"destinationTo": null,
-			"sort": null,
-			"q": null,
-			"offset": 0,
-			"limit": 12,
-		});
+    return new FormGroup<any>({
+      "transportType": null,
+      "categories[]": null,
+      "destinationFrom": null,
+      "destinationTo": null,
+      "sort": null,
+      "q": null,
+      "offset": 0,
+      "limit": 12,
+    });
 	}
 }

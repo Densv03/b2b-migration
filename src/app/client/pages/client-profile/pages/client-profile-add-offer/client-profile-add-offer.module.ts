@@ -1,8 +1,8 @@
 import { NgModule } from "@angular/core";
 import { CommonModule } from "@angular/common";
 
-import { ClientProfileAddOfferRoutingModule } from "apps/site/src/app/client/pages/client-profile/pages/client-profile-add-offer/client-profile-add-offer-routing.module";
-import { ClientProfileAddOfferComponent } from "apps/site/src/app/client/pages/client-profile/pages/client-profile-add-offer/layout/client-profile-add-offer.component";
+import { ClientProfileAddOfferRoutingModule} from "./client-profile-add-offer-routing.module";
+import { ClientProfileAddOfferComponent} from "./layout/client-profile-add-offer.component";
 import { B2bNgxInputModule } from "@b2b/ngx-input";
 import { B2bNgxToggleModule } from "@b2b/ngx-toggle";
 import { B2bNgxSelectModule } from "@b2b/ngx-select";

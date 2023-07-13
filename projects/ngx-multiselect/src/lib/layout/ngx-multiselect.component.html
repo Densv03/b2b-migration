@@ -1,0 +1,11 @@
+<span class="block w-full mb-2 text-sm text-gray-400 label"><ng-content></ng-content></span>
+<ng-select
+	[searchable]="false"
+	[clearable]="false"
+	[items]="options"
+	[multiple]="true"
+	[class.ng-touched]="touched"
+	[bindLabel]="bindLabel"
+	[bindValue]="bindValue"
+	[formControl]="formControl"
+	[placeholder]="placeholder"></ng-select>

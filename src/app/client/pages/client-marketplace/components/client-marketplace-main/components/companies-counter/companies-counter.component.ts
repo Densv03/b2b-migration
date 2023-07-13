@@ -21,7 +21,7 @@ export class CompaniesCounterComponent implements AfterViewInit {
 	}
 
 	ngAfterViewInit(): void {
-		const ready = (selector, callback) => {
+		const ready = (selector: any, callback: any) => {
 			const elems = [document.querySelector(selector)];
 			if (elems.length) {
 				for (const elem of elems) {
@@ -31,7 +31,7 @@ export class CompaniesCounterComponent implements AfterViewInit {
 		};
 
 		this.totalUsersCount$.subscribe(() => {
-			ready('.counter', (stat) => {
+			ready('.counter', (stat: any) => {
 				setTimeout(() => {
 					const patt = /(\D+)?(\d+)(\D+)?(\d+)?(\D+)?/;
 					const time = 500;

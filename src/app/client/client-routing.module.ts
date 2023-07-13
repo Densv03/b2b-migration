@@ -509,18 +509,18 @@ const routes: Routes = [
 					},
 				},
 			},
-			// {
-			// 	path: "b2bmarket",
-			// 	canActivate: [],
-			// 	loadChildren: () =>
-			// 		import("./pages/client-marketplace/client-marketplace.module").then((m) => m.ClientMarketplaceModule),
-			// 	data: {
-			// 		meta: {
-			// 			title: "B2B Discount - Buy and Sell B2B Cargo with Discount!",
-			// 			description: "B2B Discount - Marketplace",
-			// 		},
-			// 	},
-			// },
+			{
+				path: "b2bmarket",
+				canActivate: [],
+				loadChildren: () =>
+					import("./pages/client-marketplace/client-marketplace.module").then((m) => m.ClientMarketplaceModule),
+				data: {
+					meta: {
+						title: "B2B Discount - Buy and Sell B2B Cargo with Discount!",
+						description: "B2B Discount - Marketplace",
+					},
+				},
+			},
 			// {
 			// 	path: "about-us",
 			// 	canActivate: [],

@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { B2bNgxLinkService } from "@b2b/ngx-link";
+// @ts-ignore
 import { getName } from "country-list";
 import { B2bNgxButtonThemeEnum } from "@b2b/ngx-button";
 import { UserService } from "../../../client-profile/services/user/user.service";
@@ -90,7 +91,7 @@ export class ClientMarketplaceProductItemComponent implements OnInit {
 			typeRoom: "product",
 		});
 
-		this._socket.on("chat_info", (data) => {
+		this._socket.on("chat_info", (data: any) => {
 			this.goTo("profile/your-workspace/b2bmarket/chat/" + data._id);
 		});
 	}
@@ -103,7 +104,7 @@ export class ClientMarketplaceProductItemComponent implements OnInit {
 		});
 	}
 
-	private openConnection(token): void {
+	private openConnection(token: string): void {
 		if (this._socket) {
 			this._socket.disconnect();
 		}

@@ -5,9 +5,9 @@
 		<p
 			class="badge"
 			[class.invalid]="
-				formGroup.get('title').errors?.latin ||
-				formGroup.get('contactCompanyName').errors?.latin ||
-				formGroup.get('contactPersonName').errors?.latin
+				formGroup.get('title').errors?.['latin'] ||
+				formGroup.get('contactCompanyName').errors?.['latin'] ||
+				formGroup.get('contactPersonName').errors?.['latin']
 			">
 			<img b2bNgxIcon name="info-1" />
 
@@ -27,7 +27,7 @@
 								labelClass="client-profile-add-offer-company-name"
 								formControlName="contactCompanyName"
 								[placeholder]="t('PLACEHOLDERS.ENTER_COMPANY_NAME')" />
-							<p [@fadeInOut] class="error" *ngIf="formGroup.controls['contactCompanyName'].errors?.latin">
+							<p [@fadeInOut] class="error" *ngIf="formGroup.controls['contactCompanyName'].errors?.['latin']">
 								{{ t("ERRORS.USER_ENGLISH_LETTERS") }}
 							</p>
 							<b2b-ngx-toggle
@@ -44,7 +44,7 @@
 								labelClass="client-profile-add-offer-name"
 								formControlName="contactPersonName"
 								[placeholder]="t('PLACEHOLDERS.ENTER_NAME')" />
-							<p [@fadeInOut] class="error" *ngIf="formGroup.controls['contactPersonName'].errors?.latin">
+							<p [@fadeInOut] class="error" *ngIf="formGroup.controls['contactPersonName'].errors?.['latin']">
 								{{ t("ERRORS.USER_ENGLISH_LETTERS") }}
 							</p>
 							<b2b-ngx-toggle
@@ -57,7 +57,7 @@
 						<div class="client-profile-add-offer-left-phone-number-container">
 							<b2b-ngx-tel
 								formControlName="contactPhone"
-								[errors]="formGroup.getControl('contactPhone').errors"
+								[errors]="formGroup.get('contactPhone').errors"
 								[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"
 								class="client-profile-add-offer-tel"
 								>{{ t("LABELS.PHONE") }}</b2b-ngx-tel
@@ -87,7 +87,7 @@
 						labelClass="client-profile-add-offer-lot-name"
 						formControlName="title"
 						[placeholder]="t('PLACEHOLDERS.ENTER_LOT_NAME')" />
-					<p [@fadeInOut] class="error" *ngIf="formGroup.controls['title'].errors?.latin">
+					<p [@fadeInOut] class="error" *ngIf="formGroup.controls['title'].errors?.['latin']">
 						{{ t("ERRORS.USER_ENGLISH_LETTERS") }}
 					</p>
 					<div class="client-profile-add-offer-cargo">
@@ -121,7 +121,7 @@
 						labelClass="client-profile-add-offer-description"
 						formControlName="description"
 						[placeholder]="t('PLACEHOLDERS.ENTER_DESCRIPTION')"></textarea>
-					<p [@fadeInOut] class="error" *ngIf="formState['description'].errors?.latin">
+					<p [@fadeInOut] class="error" *ngIf="formState['description'].errors?.['latin']">
 						{{ t("ERRORS.USER_ENGLISH_LETTERS") }}
 					</p>
 
@@ -168,7 +168,7 @@
 							<p
 								[@fadeInOut]
 								class="error"
-								*ngIf="formState['amount'].errors?.number && formState['amount'].dirty">
+								*ngIf="formState['amount'].errors?.['number'] && formState['amount'].dirty">
 								Please, use numbers
 							</p>
 						</div>
@@ -205,19 +205,19 @@
 							<b2b-ngx-input
 								formControlName="container"
 								[placeholder]="t('PLACEHOLDERS.CONTAINER_VESSEL')"
-								[errors]="formGroup.getControl('container').errors"></b2b-ngx-input>
+								[errors]="formGroup.get('container').errors"></b2b-ngx-input>
 							<p
 								class="client-profile-add-offer-right-container-no__error"
 								*ngIf="
-									formGroup.getControl('container').errors?.bulkVesselFormat && formGroup.getControl('container').dirty
+									formGroup.get('container').errors?.['bulkVesselFormat'] && formGroup.get('container').dirty
 								">
 								There should be only numbers
 							</p>
 							<p
 								class="client-profile-add-offer-right-container-no__error"
 								*ngIf="
-									formGroup.getControl('container').errors?.containerNumberType &&
-									formGroup.getControl('container').dirty
+									formGroup.get('container').errors?.['containerNumberType'] &&
+									formGroup.get('container').dirty
 								">
 								Please, check your “container number”
 							</p>
@@ -227,7 +227,7 @@
 							<b2b-ngx-radio
 								[options]="['IMO', 'MMSI']"
 								formControlName="containerNumberType"
-								[errors]="formGroup.getControl('containerNumberType').errors"></b2b-ngx-radio>
+								[errors]="formGroup.get('containerNumberType').errors"></b2b-ngx-radio>
 						</div>
 					</div>
 
@@ -272,12 +272,12 @@
 					<b2b-ngx-file
 						formControlName="photos"
 						class="client-profile-add-offer-right-photos"
-						[errors]="formGroup.getControl('photos').errors"
+						[errors]="formGroup.get('photos').errors"
 						[label]="t('LABELS.CHOOSE_PHOTOS')"
 						[isPhoto]="true"
 						>{{ t("LABELS.PHOTOS") }}</b2b-ngx-file>
 
-					<p *ngIf="formState['photos'].touched && formState['photos'].errors?.required" class="error" [@fadeInOut]>
+					<p *ngIf="formState['photos'].touched && formState['photos'].errors?.['required']" class="error" [@fadeInOut]>
 						Please load at least 1 photo
 					</p>
 
@@ -294,12 +294,12 @@
 						[isClickable]="true"
 						formControlName="documents"
 						class="client-profile-add-offer-right-documents"
-						[errors]="formGroup.getControl('documents').errors"
+						[errors]="formGroup.get('documents').errors"
 						[label]="t('LABELS.CHOOSE_DOCUMENTS')"
 						(clicked)="openDocument($event)"
 						>{{ t("LABELS.DOCUMENTS") }}</b2b-ngx-file>
 
-					<p *ngIf="formState['documents'].touched && formState['documents'].errors?.required" class="error" [@fadeInOut]>
+					<p *ngIf="formState['documents'].touched && formState['documents'].errors?.['required']" class="error" [@fadeInOut]>
 						Please load at least 1 document
 					</p>
 
@@ -339,8 +339,8 @@
 		</button>
 		<button
 			*ngIf="editMode"
-			(click)="reviewAndPost(formGroup)"
 			b2bNgxButton
+			(click)="reviewAndPost(formGroup)"
 			[disabled]="loading"
 			[theme]="b2bNgxButtonThemeEnum.BACKGROUND_BLACK"
 			class="client-profile-add-offer-form-review-and-post-button">

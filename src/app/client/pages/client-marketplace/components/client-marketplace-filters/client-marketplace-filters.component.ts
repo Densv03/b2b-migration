@@ -9,15 +9,14 @@ import {
 } from "@angular/core";
 import {MatDialog} from "@angular/material/dialog";
 
-import { map, takeUntil} from "rxjs/operators";
+import { map } from "rxjs/operators";
 import {filter, Observable, Subject, tap} from "rxjs";
-import {ControlValueAccessor, FormBuilder} from "@ngneat/reactive-forms";
 import {TranslocoService} from "@ngneat/transloco";
 
 import {B2bNgxButtonThemeEnum} from "@b2b/ngx-button";
 import {AuthService} from "../../../../../auth/services/auth/auth.service";
 import {InitialCategoryState} from "../../shared/models/initial-category-state.model";
-import {NG_VALUE_ACCESSOR} from "@angular/forms";
+import {ControlValueAccessor, FormBuilder, NG_VALUE_ACCESSOR} from "@angular/forms";
 
 @Component({
 	selector: "b2b-client-marketplace-filters",
@@ -66,7 +65,7 @@ export class ClientMarketplaceFiltersComponent implements OnInit, OnDestroy, Con
 		this.form.valueChanges.pipe(
 			filter(data => !this.areObjectEqual(data, previousValue)),
 			tap(data => previousValue = data),
-		).subscribe(value => {
+		).subscribe((value: any) => {
 			this.onChange(value);
 		});
 	}

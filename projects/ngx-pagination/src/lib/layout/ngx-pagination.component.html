@@ -1,0 +1,9 @@
+<ul class="ngx-pagination">
+	<li
+		*ngFor="let option of options"
+		class="ngx-pagination-item"
+		[class.active]="currentPage === option.label"
+		(click)="togglePage(option.value)">
+		{{ option.label }}
+	</li>
+</ul>

@@ -1,6 +1,6 @@
 import {capitalizeFirstLetter} from "../../../../../core/helpers/function/capitalize-first-letter";
 
-export function getOfferFormData(offerToCreate) {
+export function getOfferFormData(offerToCreate: any) {
 	const formData = new FormData();
 
 	Object.entries(offerToCreate)
