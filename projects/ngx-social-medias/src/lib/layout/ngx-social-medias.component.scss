@@ -1,0 +1,51 @@
+.ngx-social-medias-label {
+	display: block;
+	font-size: 14px;
+	color: #9fa4bb;
+	margin-bottom: 6px;
+
+	&:empty {
+		display: none;
+	}
+}
+
+.ngx-social-medias-icons-list {
+	display: flex;
+	margin-top: 12px;
+	.ngx-social-medias-icons-list-item {
+		margin: 0 6px;
+
+		.ngx-social-medias-icons-list-item-button {
+			width: 32px;
+			height: 32px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			border-radius: 50%;
+			&:first-child {
+				margin-left: 0;
+			}
+			&:last-child {
+				margin-right: 0;
+			}
+			&.active {
+				background-color: #f3f4f6;
+				box-shadow: inset 0px 2px 2px #dfe8f5;
+			}
+		}
+	}
+}
+.ngx-social-medias-tel-form {
+	.ngx-social-medias-tel-list-item {
+		margin-top: 24px;
+		.ngx-social-medias-tel-list-label {
+			display: flex;
+			align-items: center;
+			.ngx-social-medias-tel-list-label-text {
+				font-size: 14px;
+				color: #9fa4bb;
+				margin-left: 4px;
+			}
+		}
+	}
+}

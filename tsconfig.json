@@ -80,6 +80,9 @@
       ],
       "@b2b/ngx-multiselect": [
         "projects/ngx-multiselect/src/public-api"
+      ],
+      "@b2b/ngx-social-medias": [
+        "projects/ngx-social-medias/src/public-api"
       ]
     },
     "declaration": false,
