@@ -4,7 +4,6 @@ import { B2bNgxButtonThemeEnum } from "@b2b/ngx-button";
 import { HotToastService } from "@ngneat/hot-toast";
 import { FormBuilder, FormGroup } from "@ngneat/reactive-forms";
 import { AuthService } from "apps/site/src/app/auth/services/auth/auth.service";
-import { AmplitudeService } from "apps/site/src/app/core/services/amplitude/amplitude.service";
 import { combineLatest, Observable, Subject } from "rxjs";
 import { map, startWith, switchMap } from "rxjs/operators";
 import { WikiService } from "../../../services/wiki/wiki.service";
@@ -34,7 +33,6 @@ export class ClientTradingWikiArticleComponent {
 		private readonly wikiService: WikiService,
 		private readonly _formBuilder: FormBuilder,
 		private readonly _hotToastService: HotToastService,
-		private readonly _ampService: AmplitudeService,
 		private readonly _authService: AuthService,
 		private readonly _router: Router
 	) {

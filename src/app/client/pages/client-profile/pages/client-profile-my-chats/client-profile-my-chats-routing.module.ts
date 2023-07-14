@@ -1,6 +1,6 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { ClientProfileMyChatsComponent } from "apps/site/src/app/client/pages/client-profile/pages/client-profile-my-chats/layout/client-profile-my-chats.component";
+import {ClientProfileMyChatsComponent} from "./layout/client-profile-my-chats.component";
 
 const routes: Routes = [
 	{

@@ -1,6 +1,6 @@
 <div class="add-payment-method" *transloco="let t">
-	<p class="title" *ngIf="!ref.data">Add payment method</p>
-	<p class="title" *ngIf="ref.data">Edit payment method</p>
+	<p class="title" *ngIf="!data">Add payment method</p>
+	<p class="title" *ngIf="data">Edit payment method</p>
 
 	<form errorTailor (ngSubmit)="submit()" [formGroup]="formGroup">
 		<div class="input-container">
@@ -11,7 +11,7 @@
 				formControlName="cardNum" />
 		</div>
 		<div class="inputs-container">
-			<div class="input-container" *ngIf="!ref.data">
+			<div class="input-container" *ngIf="!data">
 				<input
 					b2bNgxInput
 					[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"

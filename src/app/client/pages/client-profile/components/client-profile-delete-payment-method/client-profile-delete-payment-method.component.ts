@@ -1,13 +1,10 @@
-import { Component, OnInit } from "@angular/core";
-import { Validators } from "@angular/forms";
+import { Component } from "@angular/core";
 import { B2bNgxButtonThemeEnum } from "@b2b/ngx-button";
-import { B2bNgxInputThemeEnum } from "@b2b/ngx-input";
-import { DialogRef } from "@ngneat/dialog";
 import { HotToastService } from "@ngneat/hot-toast";
-import { FormBuilder } from "@ngneat/reactive-forms";
 import { TranslocoService } from "@ngneat/transloco";
 import { UntilDestroy } from "@ngneat/until-destroy";
 import { ApiService } from "../../../../../core/services/api/api.service";
+import {MatDialogRef} from "@angular/material/dialog";
 
 @UntilDestroy()
 @Component({
@@ -19,18 +16,18 @@ export class ClientProfileDeletePaymentMethodComponent {
 	public readonly b2bNgxButtonThemeEnum = B2bNgxButtonThemeEnum;
 
 	constructor(
-		public ref: DialogRef,
+		public dialogRef: MatDialogRef<ClientProfileDeletePaymentMethodComponent>,
 		private readonly _apiService: ApiService,
 		private readonly _hotToastService: HotToastService,
 		private readonly _translocoService: TranslocoService
 	) {}
 
 	delete() {
-		this.ref.close(true);
+		this.dialogRef.close(true);
 	}
 
 	close() {
-		this.ref.close();
+		this.dialogRef.close();
 	}
 
 	// ngOnInit(): void {

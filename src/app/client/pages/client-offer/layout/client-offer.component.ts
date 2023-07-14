@@ -6,7 +6,6 @@ import { combineLatest, of } from "rxjs";
 import { catchError, filter, map, switchMap, tap } from "rxjs/operators";
 
 import { OffersService } from "apps/site/src/app/client/services/offers/offers.service";
-import { AmplitudeService } from "apps/site/src/app/core/services/amplitude/amplitude.service";
 import { getName } from "country-list";
 import { B2bNgxButtonThemeEnum } from "libs/ngx-button/src";
 import { B2bNgxLinkService, B2bNgxLinkThemeEnum } from "libs/ngx-link/src";
@@ -54,7 +53,6 @@ export class ClientOfferComponent implements OnInit {
 		private readonly _changeDetectorRef: ChangeDetectorRef,
 		private readonly _dialogService: DialogService,
 		public readonly b2bNgxLinkService: B2bNgxLinkService,
-		private readonly _ampService: AmplitudeService,
 		private readonly _router: Router,
 		private readonly userService: UserService,
 		private readonly title: Title,

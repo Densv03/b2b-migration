@@ -1,10 +1,12 @@
 import {Component, Input, OnInit} from "@angular/core";
-import { MarketProductModel } from "../../../../../client-marketplace/models/market-product.model";
-import {dropdownLabels} from "../../../../../../../../../../../libs/ngx-dropdown/src/lib/dropdown-labels.enum";
 import {EditMode} from "../client-profile-marketplace-edit-product/client-profile-marketplace-edit-product.component";
 import {Router} from "@angular/router";
 import {HotToastService} from "@ngneat/hot-toast";
-import {ClientMarketplaceService} from "../../../../../client-marketplace/client-marketplace.service";
+import {MarketProductModel} from "../../../../../../../core/models/client-marketplace/market-product.model";
+import {
+  ClientMarketplaceService
+} from "../../../../../../shared/services/client-marketplace-service/client-marketplace.service";
+import {dropdownLabels} from "@b2b/ngx-dropdown";
 
 @Component({
 	selector: "b2b-client-profile-marketplace-product-item",
@@ -13,10 +15,10 @@ import {ClientMarketplaceService} from "../../../../../client-marketplace/client
 })
 export class ClientProfileMarketplaceProductItemComponent implements OnInit{
 	@Input() product: MarketProductModel;
+  @Input()	public itemsForDropdown: any[] = [];
 
 	public readonly isMobile = window.innerWidth < 576;
 
-	public itemsForDropdown: any[] = [];
 
 	constructor(private clientMarketplaceService: ClientMarketplaceService,
 							private router: Router,
@@ -39,7 +41,7 @@ export class ClientProfileMarketplaceProductItemComponent implements OnInit{
 			{
 				label: dropdownLabels.RESTORE,
 				icon: "edit",
-				onClick: (productId, paymentMethods) => {
+				onClick: (productId: string, paymentMethods: string | any[]) => {
 					if (!paymentMethods.length) {
 						this.router.navigate(["/profile/your-workspace/b2bmarket/edit", productId],
 							{queryParams: {mode: EditMode.ARCHIVE}})
@@ -63,14 +65,14 @@ export class ClientProfileMarketplaceProductItemComponent implements OnInit{
 			{
 				label: dropdownLabels.DELETE,
 				icon: "delete-red",
-				onClick: (productId) => {
+				onClick: (productId: string) => {
 					this.deleteProduct(productId);
 				},
 			},
 			{
 				label: dropdownLabels.EDIT,
 				icon: "edit",
-				onClick: (productId) => {
+				onClick: (productId: any) => {
 					this.router.navigate(["profile", "your-workspace", "b2bmarket", "edit", productId], {
 						queryParams: { mode: EditMode.ARCHIVE },
 					});
@@ -99,7 +101,7 @@ export class ClientProfileMarketplaceProductItemComponent implements OnInit{
 			{
 				label: dropdownLabels.EDIT,
 				icon: "edit",
-				onClick: (productId) => {
+				onClick: (productId: any) => {
 					this.router.navigate(["profile", "your-workspace", "b2bmarket", "edit", productId], {
 						queryParams: { mode: EditMode.EDIT },
 					});
@@ -108,7 +110,7 @@ export class ClientProfileMarketplaceProductItemComponent implements OnInit{
 			{
 				label: dropdownLabels.ARCHIVE,
 				icon: "archive-red",
-				onClick: (productId) => {
+				onClick: (productId: any) => {
 					this.clientMarketplaceService
 						.archiveProduct(productId)
 						.pipe(

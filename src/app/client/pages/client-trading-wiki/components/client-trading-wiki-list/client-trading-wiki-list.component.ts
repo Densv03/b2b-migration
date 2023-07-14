@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from "@angular/core";
 import { B2bNgxLinkService } from "@b2b/ngx-link";
-import { AmplitudeService } from "apps/site/src/app/core/services/amplitude/amplitude.service";
 import { B2bNgxButtonThemeEnum } from "libs/ngx-button/src";
 
 @Component({
@@ -14,7 +13,7 @@ export class ClientTradingWikiListComponent {
 
 	public readonly b2bNgxButtonThemeEnum: typeof B2bNgxButtonThemeEnum;
 
-	constructor(public readonly b2bNgxLinkService: B2bNgxLinkService, private readonly _ampService: AmplitudeService) {
+	constructor(public readonly b2bNgxLinkService: B2bNgxLinkService) {
 		this.b2bNgxButtonThemeEnum = B2bNgxButtonThemeEnum;
 	}
 

@@ -2,10 +2,11 @@ import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { B2bNgxButtonThemeEnum } from "@b2b/ngx-button";
 import { Observable, of } from "rxjs";
 import { RfqButtonTypeEnum } from "../../../client-profile-tradebid/client-profile-tradebid-rfq/shared/enums/RfqButtonType.enum";
-import { Router } from "@angular/router";
-import { ClientMarketplaceService } from "../../../../../client-marketplace/client-marketplace.service";
 import {SortType} from "../../../../../../../core/models/sort-type.model";
 import {B2bNgxSelectThemeEnum} from "@b2b/ngx-select";
+import {
+  ClientMarketplaceService
+} from "../../../../../../shared/services/client-marketplace-service/client-marketplace.service";
 
 @Component({
 	selector: "b2b-client-profile-marketplace-products",

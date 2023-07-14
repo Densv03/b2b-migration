@@ -1,0 +1,9 @@
+<b2b-ngx-select
+	(click)="openCategoriesDialog()"
+	[isOpen]="false"
+	[placeholder]="categoriesPlaceholder$ | async"
+	[theme]="theme"
+	[touched]="touched"
+	[errors]="errors">
+	<ng-content></ng-content>
+</b2b-ngx-select>

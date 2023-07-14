@@ -24,7 +24,7 @@ export class B2bNgxDropdownComponent {
 		this.toggleOptionClick = new EventEmitter<{}>();
 	}
 
-	public callOptionFunc(event: MouseEvent, option) {
+	public callOptionFunc(event: MouseEvent, option: { onClick: (arg0: any, arg1: any[]) => void; }) {
 		this.isMenuShow = false;
 
 		event.preventDefault();
@@ -39,7 +39,7 @@ export class B2bNgxDropdownComponent {
 		return `${this.className} ${defaultStyles}`;
 	}
 
-	public subscribeOnClickOutside(container) {
+	public subscribeOnClickOutside(container: { contains: (arg0: EventTarget) => any; }) {
 		const subscription = fromEvent(document, "click")
 			.pipe(
 				skip(1),
@@ -53,7 +53,7 @@ export class B2bNgxDropdownComponent {
 			});
 	}
 
-	public showMenu(event: MouseEvent, container) {
+	public showMenu(event: MouseEvent, container: any) {
 		this.isMenuShow = !this.isMenuShow;
 
 		event.stopImmediatePropagation();

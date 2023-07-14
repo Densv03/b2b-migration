@@ -24,7 +24,6 @@ import { ChatsService } from "../../../../../../../../services/chats/chats.servi
 import { HotToastService } from "@ngneat/hot-toast";
 import { B2bNgxLinkService } from "@b2b/ngx-link";
 import { TranslocoService } from "@ngneat/transloco";
-import { AmplitudeService } from "../../../../../../../../../core/services/amplitude/amplitude.service";
 import * as countryList from 'country-list';
 import { TradebidService } from "../../../../../../../client-tradebid/tradebid.service";
 
@@ -78,7 +77,6 @@ export class ClientChatComponent implements OnInit, OnDestroy {
 		public changeDetectorRef: ChangeDetectorRef,
 		public readonly b2bNgxLinkService: B2bNgxLinkService,
 		private readonly _translocoService: TranslocoService,
-		private readonly _ampService: AmplitudeService,
 		private readonly tradebidService: TradebidService
 	) {
 		this.b2bNgxButtonThemeEnum = B2bNgxButtonThemeEnum;
@@ -187,7 +185,6 @@ export class ClientChatComponent implements OnInit, OnDestroy {
 		this.chatInfo$.pipe(untilDestroyed(this)).subscribe((chatInfo) => {
 			const user = this._usersService.getUser();
 			const rfqId = typeof chatInfo.rfq === "string" ? chatInfo.rfq : chatInfo.rfq._id;
-			this._ampService.logEvent("Message sent");
 			this._socket.emit("message", {
 				type: "text",
 				body,

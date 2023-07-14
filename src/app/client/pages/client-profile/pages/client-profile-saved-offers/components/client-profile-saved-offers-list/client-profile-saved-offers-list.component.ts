@@ -8,9 +8,9 @@ import { B2bNgxLinkService } from "@b2b/ngx-link";
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ClientProfileSavedOffersListComponent {
-	@Input() public readonly options: any[];
-	@Input() public readonly link: string;
-	@Input() public readonly menuOptions: any[];
+	@Input() public options: any[];
+	@Input() public link: string;
+	@Input() public menuOptions: any[];
 
 	constructor(public readonly b2bNgxLinkService: B2bNgxLinkService) {}
 }

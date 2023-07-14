@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
-import { ClientMarketplaceService } from "../../../../../client-marketplace/client-marketplace.service";
 import { Observable } from "rxjs";
+import {
+  ClientMarketplaceService
+} from "../../../../../../shared/services/client-marketplace-service/client-marketplace.service";
 
 @Component({
 	selector: "b2b-client-profile-marketplace-chats",

@@ -8,9 +8,8 @@ import {
 	ViewChild,
 } from "@angular/core";
 import { B2bNgxLinkService } from "@b2b/ngx-link";
-import { AmplitudeService } from "apps/site/src/app/core/services/amplitude/amplitude.service";
 
-function shuffle(array) {
+function shuffle(array: any[]) {
 	array.sort(() => Math.random() - 0.5);
 }
 

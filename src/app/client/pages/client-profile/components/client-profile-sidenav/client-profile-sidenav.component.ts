@@ -10,9 +10,9 @@ import { UserService } from "../../services/user/user.service";
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ClientProfileSidenavComponent {
-	@Input() public readonly accountOptions: any[];
-	@Input() public readonly workspaceOptions: any[];
-	@Input() public readonly user: any;
+	@Input() public accountOptions: any[];
+	@Input() public workspaceOptions: any[];
+	@Input() public user: any;
 
 	constructor(private readonly _socketService: SocketService, public readonly b2bNgxLinkService: B2bNgxLinkService) {}
 

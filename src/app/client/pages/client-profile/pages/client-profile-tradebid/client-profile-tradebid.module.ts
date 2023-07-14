@@ -7,17 +7,19 @@ import { ClientProfileTradebidRfqModule } from "./client-profile-tradebid-rfq/cl
 import { MatTabsModule } from "@angular/material/tabs";
 import { ClientProfileTradebidQuotationModule } from "./client-profile-tradebid-quotation/client-profile-tradebid-quotation.module";
 import { B2bNgxButtonModule } from "@b2b/ngx-button";
+import {B2bNgxPaginationModule} from "@b2b/ngx-pagination";
 
 @NgModule({
 	declarations: [ClientProfileTradebidComponent, ClientProfileTradebidRfqComponent],
 	exports: [],
-	imports: [
-		CommonModule,
-		ClientProfileTradebidRoutingModule,
-		ClientProfileTradebidRfqModule,
-		ClientProfileTradebidQuotationModule,
-		MatTabsModule,
-		B2bNgxButtonModule,
-	],
+  imports: [
+    CommonModule,
+    ClientProfileTradebidRoutingModule,
+    ClientProfileTradebidRfqModule,
+    ClientProfileTradebidQuotationModule,
+    MatTabsModule,
+    B2bNgxButtonModule,
+    B2bNgxPaginationModule,
+  ],
 })
 export class ClientProfileTradebidModule {}

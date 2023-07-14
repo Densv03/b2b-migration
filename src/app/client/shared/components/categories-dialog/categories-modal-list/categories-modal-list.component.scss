@@ -1,0 +1,29 @@
+.categories-list {
+	height: 405px;
+	margin-top: 25px;
+	.list-item,
+	.select-all {
+		width: 100%;
+		height: 44px;
+		border-radius: 5px;
+		background-color: #f3f6f8;
+		.item-content {
+			width: 95%;
+			height: 100%;
+			margin: auto;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+		}
+	}
+	.list-item:nth-child(even) {
+		background-color: #ffffff;
+	}
+}
+:host::ng-deep {
+	.ngx-checkbox__icon {
+		top: 3px !important;
+		width: 1.15rem !important;
+		height: 80% !important;
+	}
+}

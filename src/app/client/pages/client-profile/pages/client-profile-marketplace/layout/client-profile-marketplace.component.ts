@@ -1,10 +1,12 @@
 import {Component, OnInit} from "@angular/core";
 import {Observable} from "rxjs";
-import {ClientMarketplaceService} from "../../../../client-marketplace/client-marketplace.service";
 import {Router} from "@angular/router";
 import {HotToastService} from "@ngneat/hot-toast";
 import {MatDialog} from "@angular/material/dialog";
 import {UserService} from "../../../services/user/user.service";
+import {
+  ClientMarketplaceService
+} from "../../../../../shared/services/client-marketplace-service/client-marketplace.service";
 
 @Component({
 	selector: "b2b-client-profile-marketplace",

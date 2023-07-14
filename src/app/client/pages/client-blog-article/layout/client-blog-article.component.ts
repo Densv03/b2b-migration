@@ -13,7 +13,6 @@ import {B2bNgxButtonThemeEnum} from "@b2b/ngx-button";
 import {HotToastService} from "@ngneat/hot-toast";
 import {FormBuilder, FormGroup} from "@ngneat/reactive-forms";
 import {AuthService} from "apps/site/src/app/auth/services/auth/auth.service";
-import {AmplitudeService} from "apps/site/src/app/core/services/amplitude/amplitude.service";
 import {Observable, Subject} from "rxjs";
 import {first, map, switchMap} from "rxjs/operators";
 import {BlogService} from "../../../services/blog/blog.service";
@@ -46,7 +45,6 @@ export class ClientBlogArticleComponent implements AfterViewInit, OnDestroy {
 		private readonly _blogService: BlogService,
 		private readonly _formBuilder: FormBuilder,
 		private readonly _hotToastService: HotToastService,
-		private readonly _ampService: AmplitudeService,
 		private readonly _authService: AuthService,
 		private readonly _router: Router,
 		private readonly changeDetectorRef: ChangeDetectorRef,

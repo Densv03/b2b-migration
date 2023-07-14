@@ -1,13 +1,12 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from "@angular/core";
-import { AuthService } from "apps/site/src/app/auth/services/auth/auth.service";
 import { Router } from "@angular/router";
 import { Observable } from "rxjs";
-import { AmplitudeService } from "apps/site/src/app/core/services/amplitude/amplitude.service";
 import { io } from "socket.io-client";
-import { environment } from "apps/site/src/environments/environment.prod";
 import { UserService } from "../services/user/user.service";
 import { UntilDestroy, untilDestroyed } from "@ngneat/until-destroy";
 import {User} from "../../../../core/models/user/user.model";
+import {AuthService} from "../../../../auth/services/auth/auth.service";
+import {environment} from "../../../../../environments/environment";
 
 interface SidenavOption {
 	label: string;
@@ -32,7 +31,6 @@ export class ClientProfileComponent implements OnInit, OnDestroy {
 	constructor(
 		public authService: AuthService,
 		private readonly router: Router,
-		private readonly _ampService: AmplitudeService,
 		private readonly _userService: UserService
 	) {
 		this.user$ = this.authService.user$;

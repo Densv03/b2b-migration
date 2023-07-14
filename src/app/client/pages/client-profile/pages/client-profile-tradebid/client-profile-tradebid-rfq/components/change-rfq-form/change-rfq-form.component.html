@@ -13,7 +13,7 @@
 		<p
 			*ngIf="
 				this.form.get('productInformation').get('productName').touched &&
-				this.form.get('productInformation').get('productName').errors?.latin
+				this.form.get('productInformation').get('productName').errors?.['latin']
 			"
 			class="error"
 			[@fadeInOut]>
@@ -22,7 +22,7 @@
 		<p
 			*ngIf="
 				this.form.get('productInformation').get('productName').touched &&
-				this.form.get('productInformation').get('productName').errors?.required
+				this.form.get('productInformation').get('productName').errors?.['required']
 			"
 			class="error"
 			[@fadeInOut]>
@@ -65,8 +65,8 @@
 				<p
 					*ngIf="
 						this.form.get('productInformation').get('quantity').get('quantity').touched &&
-						this.form.get('productInformation').get('quantity').get('quantity').errors?.required &&
-						!this.form.get('productInformation').get('budget').get('maxBudget').errors?.required
+						this.form.get('productInformation').get('quantity').get('quantity').errors?.['required'] &&
+						!this.form.get('productInformation').get('budget').get('maxBudget').errors?.['required']
 					"
 					class="error"
 					[@fadeInOut]>
@@ -75,7 +75,7 @@
 				<p
 					*ngIf="
 						this.form.get('productInformation').get('quantity').get('quantity').touched &&
-						this.form.get('productInformation').get('quantity').get('quantity').errors?.number
+						this.form.get('productInformation').get('quantity').get('quantity').errors?.['number']
 					"
 					class="error"
 					[@fadeInOut]>
@@ -121,8 +121,8 @@
 				<p
 					*ngIf="
 						this.form.get('productInformation').get('budget').get('maxBudget').touched &&
-						this.form.get('productInformation').get('budget').get('maxBudget').errors?.number &&
-						!this.form.get('productInformation').get('budget').get('maxBudget').errors?.required
+						this.form.get('productInformation').get('budget').get('maxBudget').errors?.['number'] &&
+						!this.form.get('productInformation').get('budget').get('maxBudget').errors?.['required']
 					"
 					class="error"
 					[@fadeInOut]>
@@ -131,7 +131,7 @@
 				<p
 					*ngIf="
 						this.form.get('productInformation').get('budget').get('maxBudget').touched &&
-						this.form.get('productInformation').get('budget').get('maxBudget').errors?.required
+						this.form.get('productInformation').get('budget').get('maxBudget').errors?.['required']
 					"
 					class="error"
 					[@fadeInOut]>

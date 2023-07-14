@@ -16,9 +16,9 @@ import { B2bNgxLinkService } from "@b2b/ngx-link";
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ClientProfileMyOffersListComponent implements OnInit, OnChanges {
-	@Input() public readonly options: any[];
-	@Input() public readonly link: string;
-	@Input() public readonly menuOptions: any;
+	@Input() public options: any[];
+	@Input() public link: string;
+	@Input() public menuOptions: any;
 
 	public parsedOptions: any[];
 	constructor(public readonly b2bNgxLinkService: B2bNgxLinkService) {}
@@ -34,7 +34,7 @@ export class ClientProfileMyOffersListComponent implements OnInit, OnChanges {
 	computeOptions() {
 		this.parsedOptions = this.options.map((option) => {
 			const updatedOptions = [
-				...this.menuOptions.filter((el) => (option.hidden ? el.label !== "Hide" : el.label !== "Unhide")),
+				...this.menuOptions.filter((el: { label: string; }) => (option.hidden ? el.label !== "Hide" : el.label !== "Unhide")),
 			];
 			return {
 				...option,

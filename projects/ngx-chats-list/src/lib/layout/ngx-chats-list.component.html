@@ -1,0 +1,36 @@
+<ul class="ngx-chats-list" *transloco="let t">
+	<li class="ngx-chats-list-item" *ngFor="let chat of options">
+		<a b2bNgxLink [routerLink]="baseUrl + chat._id" class="ngx-chats-list-item-link">
+			<div class="ngx-chats-list-item-info">
+				<img class="ngx-chats-list-item-info-img" [src]="getImgSrc(chat)" />
+				<div class="ngx-chats-list-item-info-container">
+					<p class="ngx-chats-list-item-info-name">{{ getFullName(chat) }}</p>
+					<p class="ngx-chats-list-item-info-last-active">
+						{{
+							chat.lastMessage?.author?.online
+								? "Online"
+								: "Last Activity" + (chat.lastMessage?.author?.lastActivity | date: "mediumTime")
+						}}
+					</p>
+					<p class="ngx-chats-list-item-info-last-message">{{ chat.lastMessage?.body }}</p>
+				</div>
+			</div>
+			<div class="ngx-chats-list-item-unread-messages">
+				<p class="ngx-chats-list-item-unread-messages-count">{{ chat.unreadMessagesCount }}</p>
+			</div>
+			<div class="ngx-chats-list-item-user-info">
+				<p class="ngx-chats-list-item-user-info-added">Added: {{ chat.offer?.createdAt | date }}</p>
+				<p class="ngx-chats-list-item-user-info-email">{{ chat.offer?.contact?.email }}</p>
+				<p class="ngx-chats-list-item-user-info-phone">{{ chat.offer?.contact?.phone?.e164Number }}</p>
+				<p class="ngx-chats-list-item-user-info-site"></p>
+			</div>
+			<b2b-ngx-dropdown
+				[options]="chat.iAm === t('CHAT.SELLER') ? sellerOptions : buyerOptions"
+				[optionToReturn]="chat">
+				<button b2bNgxButton class="flex items-center">
+					<img b2bNgxIcon name="more" />
+				</button>
+			</b2b-ngx-dropdown>
+		</a>
+	</li>
+</ul>

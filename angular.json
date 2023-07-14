@@ -798,6 +798,130 @@
           }
         }
       }
+    },
+    "ngx-social-medias": {
+      "projectType": "library",
+      "root": "projects/ngx-social-medias",
+      "sourceRoot": "projects/ngx-social-medias/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/ngx-social-medias/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ngx-social-medias/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/ngx-social-medias/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ngx-social-medias/src/test.ts",
+            "tsConfig": "projects/ngx-social-medias/tsconfig.spec.json",
+            "karmaConfig": "projects/ngx-social-medias/karma.conf.js"
+          }
+        }
+      }
+    },
+    "ngx-chips": {
+      "projectType": "library",
+      "root": "projects/ngx-chips",
+      "sourceRoot": "projects/ngx-chips/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/ngx-chips/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ngx-chips/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/ngx-chips/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ngx-chips/src/test.ts",
+            "tsConfig": "projects/ngx-chips/tsconfig.spec.json",
+            "karmaConfig": "projects/ngx-chips/karma.conf.js"
+          }
+        }
+      }
+    },
+    "ngx-dropdown": {
+      "projectType": "library",
+      "root": "projects/ngx-dropdown",
+      "sourceRoot": "projects/ngx-dropdown/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/ngx-dropdown/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ngx-dropdown/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/ngx-dropdown/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ngx-dropdown/src/test.ts",
+            "tsConfig": "projects/ngx-dropdown/tsconfig.spec.json",
+            "karmaConfig": "projects/ngx-dropdown/karma.conf.js"
+          }
+        }
+      }
+    },
+    "ngx-chats-list": {
+      "projectType": "library",
+      "root": "projects/ngx-chats-list",
+      "sourceRoot": "projects/ngx-chats-list/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/ngx-chats-list/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ngx-chats-list/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/ngx-chats-list/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ngx-chats-list/src/test.ts",
+            "tsConfig": "projects/ngx-chats-list/tsconfig.spec.json",
+            "karmaConfig": "projects/ngx-chats-list/karma.conf.js"
+          }
+        }
+      }
     }
   },
   "cli": {

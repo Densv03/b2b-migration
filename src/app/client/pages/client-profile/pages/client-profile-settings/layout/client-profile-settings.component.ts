@@ -1,13 +1,11 @@
 import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnInit, Renderer2, ViewChild } from "@angular/core";
-import {AbstractControl, Validators} from "@angular/forms";
+import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
 
 import { BehaviorSubject, Observable, of, Subscription, tap } from "rxjs";
 import { catchError, map, switchMap } from "rxjs/operators";
 
-import { DialogService } from "@ngneat/dialog";
 import { HotToastService } from "@ngneat/hot-toast";
-import { FormBuilder, FormGroup } from "@ngneat/reactive-forms";
 import { TranslocoService } from "@ngneat/transloco";
 import { UntilDestroy, untilDestroyed } from "@ngneat/until-destroy";
 
@@ -15,8 +13,8 @@ import { B2bNgxButtonThemeEnum } from "@b2b/ngx-button";
 import { B2bNgxInputThemeEnum } from "@b2b/ngx-input";
 import { B2bNgxLinkThemeEnum } from "@b2b/ngx-link";
 import { B2bNgxSelectThemeEnum } from "@b2b/ngx-select";
-import { AuthService } from "apps/site/src/app/auth/services/auth/auth.service";
-import { AuthStore } from "apps/site/src/app/auth/state/auth/auth.store";
+// import { AuthService } from "apps/site/src/app/auth/services/auth/auth.service";
+// import { AuthStore } from "apps/site/src/app/auth/state/auth/auth.store";
 import { CategoriesService } from "../../../../../services/categories/categories.service";
 import { ClientProfileDeleteAccountComponent } from "../../../components/client-profile-delete-account/client-profile-delete-account.component";
 import { UserService } from "../../../services/user/user.service";
@@ -26,6 +24,9 @@ import { ADMIN_ID } from "../../../../../../core/helpers/constant/role-ids";
 import {fullName} from "../../../../../../core/helpers/validator/full-name";
 import {onlyLatin} from "../../../../../../core/helpers/validator/only-latin";
 import {animate, style, transition, trigger} from "@angular/animations";
+import {AuthStore} from "../../../../../../auth/state/auth/auth.store";
+import {AuthService} from "../../../../../../auth/services/auth/auth.service";
+import {MatDialog} from "@angular/material/dialog";
 
 @UntilDestroy()
 @Component({
@@ -62,7 +63,7 @@ export class ClientProfileSettingsComponent implements OnInit {
 	@ViewChild("form") form: ElementRef;
 
 	private displayRoleSelectorSource: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-	private activeUser;
+	private activeUser: { phone: { number: any; }; role: { _id: any; name: string; }; };
 
 	constructor(
 		private readonly _authStore: AuthStore,
@@ -74,7 +75,7 @@ export class ClientProfileSettingsComponent implements OnInit {
 		private readonly categoriesService: CategoriesService,
 		private readonly _translocoService: TranslocoService,
 		private readonly authService: AuthService,
-		private readonly dialogService: DialogService,
+		private readonly dialog: MatDialog,
 		private readonly renderer2: Renderer2,
 		private readonly tradebidService: TradebidService
 	) {
@@ -96,7 +97,7 @@ export class ClientProfileSettingsComponent implements OnInit {
 			this.tradebidService.getCompanyData().subscribe((companyData) => {
 				if (companyData.businessType) {
 					this.roles$.subscribe((roles) => {
-						const roleId = roles.find((role) => role.displayName === companyData.businessType)?.id;
+						const roleId = roles.find((role: { displayName: string; }) => role.displayName === companyData.businessType)?.id;
 						if (roleId) {
 							const preferences = this.userService.getUser().preferences;
 							const fullName = this.userService.getUser().fullName;
@@ -106,7 +107,7 @@ export class ClientProfileSettingsComponent implements OnInit {
 				}
 			});
 		}
-		this.displayRoleSelectorSource.next(!!this.activatedRoute.snapshot.params.id);
+		this.displayRoleSelectorSource.next(!!this.activatedRoute.snapshot.params["id"]);
 	}
 
 	public get displayRoleSelector$(): Observable<boolean> {
@@ -118,7 +119,7 @@ export class ClientProfileSettingsComponent implements OnInit {
 	}
 
 	public getRoles(): Observable<any> {
-		const activeUserId = this.activatedRoute.snapshot.params.id ?? this.user.role._id;
+		const activeUserId = this.activatedRoute.snapshot.params["id"] ?? this.user.role._id;
 		if (activeUserId === ADMIN_ID) {
 			return of([
 				{
@@ -171,7 +172,7 @@ export class ClientProfileSettingsComponent implements OnInit {
 		];
 	}
 
-	public getCountries() {
+	public getCountries(): any[] {
 		return [];
 	}
 
@@ -207,7 +208,7 @@ export class ClientProfileSettingsComponent implements OnInit {
 					}),
 					catchError((error) => {
 						const { message } = error.error;
-						const phoneControl = this.baseFormGroup.getControl("phone");
+						const phoneControl = this.baseFormGroup.get("phone");
 
 						if (message === "Invalid phone number") {
 							phoneControl.setErrors({ "Invalid phone number": true });
@@ -237,7 +238,7 @@ export class ClientProfileSettingsComponent implements OnInit {
 					}),
 					catchError((error) => {
 						const { message } = error.error;
-						const phoneControl = this.baseFormGroup.getControl("phone");
+						const phoneControl = this.baseFormGroup.get("phone");
 
 						if (message === "Invalid phone number") {
 							phoneControl.setErrors({ "Invalid phone number": true });
@@ -272,7 +273,7 @@ export class ClientProfileSettingsComponent implements OnInit {
 				error: (err) => {
 					const { code } = err.error;
 
-					const password = this.passwordFormGroup.getControl("password");
+					const password = this.passwordFormGroup.get("password");
 
 					password.setErrors({ [code]: true });
 
@@ -287,14 +288,14 @@ export class ClientProfileSettingsComponent implements OnInit {
 	public deleteAccount(): void {
 		if (this.activeUser.role.name === "admin") return;
 
-		this.dialogService
-			.open(ClientProfileDeleteAccountComponent, {
-				width: "40vw",
-				height: "700px",
-				minHeight: "0",
-				windowClass: "report-dialog",
-			})
-			.afterClosed$.pipe(untilDestroyed(this))
+	const dialog= this.dialog.open(ClientProfileDeleteAccountComponent, {
+        width: '40vw',
+        height: '700px',
+        minHeight: '0',
+        backdropClass: 'report-dialog'
+			});
+
+			dialog.afterClosed().pipe(untilDestroyed(this))
 			.subscribe(() => {
 				this.userService.deleteUser().subscribe();
 			});

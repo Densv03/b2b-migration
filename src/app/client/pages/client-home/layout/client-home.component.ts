@@ -2,7 +2,6 @@ import { ChangeDetectionStrategy, Component, ElementRef, ViewChild } from "@angu
 import { TranslocoService } from "@ngneat/transloco";
 import { AuthService } from "apps/site/src/app/auth/services/auth/auth.service";
 import { OffersService } from "apps/site/src/app/client/services/offers/offers.service";
-import { AmplitudeService } from "apps/site/src/app/core/services/amplitude/amplitude.service";
 import { B2bNgxLinkService, B2bNgxLinkThemeEnum } from "libs/ngx-link/src";
 import { Observable } from "rxjs";
 import { map, tap } from "rxjs/operators";
@@ -27,7 +26,6 @@ export class ClientHomeOldComponent {
 		private readonly _usersService: UserService,
 		public readonly b2bNgxLinkService: B2bNgxLinkService,
 		private readonly _translocoService: TranslocoService,
-		private readonly _ampService: AmplitudeService,
 		private readonly _authService: AuthService
 	) {
 		this.offers$ = this.getOffers();

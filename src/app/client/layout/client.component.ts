@@ -7,7 +7,7 @@ import {combineLatest, Observable} from "rxjs";
 import {first} from "rxjs/operators";
 import {TradebidService} from "../pages/client-tradebid/tradebid.service";
 import {SeoService} from "../../core/services/seo/seo.service";
-import {ClientMarketplaceService} from "../pages/client-marketplace/client-marketplace.service";
+import {ClientMarketplaceService} from "../shared/services/client-marketplace-service/client-marketplace.service";
 
 @UntilDestroy()
 @Component({

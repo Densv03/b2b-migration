@@ -1,12 +1,16 @@
-import { NgModule } from "@angular/core";
-import { CommonModule } from "@angular/common";
-import { B2bNgxDropdownComponent } from "./layout/ngx-dropdown.component";
-import { B2bNgxIconModule } from "@b2b/ngx-icon";
-import { B2bNgxButtonModule } from "@b2b/ngx-button";
+import { NgModule } from '@angular/core';
+import { B2bNgxDropdownComponent } from './layout/ngx-dropdown.component';
+
+
 
 @NgModule({
-	imports: [CommonModule, B2bNgxIconModule, B2bNgxButtonModule],
-	declarations: [B2bNgxDropdownComponent],
-	exports: [B2bNgxDropdownComponent],
+  declarations: [
+    B2bNgxDropdownComponent
+  ],
+  imports: [
+  ],
+  exports: [
+    B2bNgxDropdownComponent
+  ]
 })
-export class B2bNgxDropdownModule {}
+export class B2bNgxDropdownModule { }

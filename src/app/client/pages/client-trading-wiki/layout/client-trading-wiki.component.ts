@@ -3,7 +3,6 @@ import { B2bNgxSelectThemeEnum } from "@b2b/ngx-select";
 import { FormBuilder, FormControl, FormGroup } from "@ngneat/reactive-forms";
 import { untilDestroyed } from "@ngneat/until-destroy";
 import { WikiService } from "apps/site/src/app/client/services/wiki/wiki.service";
-import { AmplitudeService } from "apps/site/src/app/core/services/amplitude/amplitude.service";
 import { B2bNgxButtonThemeEnum } from "libs/ngx-button/src";
 import { B2bNgxInputThemeEnum } from "libs/ngx-input/src";
 import { BehaviorSubject, Observable, Subject } from "rxjs";
@@ -64,7 +63,6 @@ export class ClientTradingWikiComponent {
 		private readonly _wikiService: WikiService,
 		private readonly _categoriesService: CategoriesService,
 		private readonly _formBuilder: FormBuilder,
-		private readonly _ampService: AmplitudeService
 	) {
 		this._ampService.logEvent("View trade wiki");
 		this.b2bNgxInputThemeEnum = B2bNgxInputThemeEnum;

@@ -23,6 +23,10 @@ import { ChatsItemModule } from "../client-profile-tradebid/shared/chats-item/ch
 // import { B2bNgxSkeletonModule } from "@b2b/ngx-skeleton";
 import { ClientProfileMarketplaceEditProductModule } from "./components/client-profile-marketplace-edit-product/client-profile-marketplace-edit-product.module";
 import {B2bNgxSelectModule} from "@b2b/ngx-select";
+import {B2bNgxPaginationModule} from "@b2b/ngx-pagination";
+import {B2bNgxSkeletonModule} from "@b2b/ngx-skeleton";
+import {B2bNgxRadioModule} from "@b2b/ngx-radio";
+import {B2bNgxDropdownModule} from "@b2b/ngx-dropdown";
 
 @NgModule({
 	declarations: [
@@ -33,23 +37,27 @@ import {B2bNgxSelectModule} from "@b2b/ngx-select";
 		ClientProfileMarketplaceProductItemComponent,
 		DeleteProductModalComponent,
 	],
-    imports: [
-        CommonModule,
-        ClientProfileMarketplaceRoutingModule,
-        MatTabsModule,
-        // B2bNgxPaginationModule,
-        B2bNgxButtonModule,
-        ClientProfileTradebidRfqModule,
-        B2bNgxImageModule,
-        B2bNgxIconModule,
-        // B2bNgxDropdownModule,
-        // B2bNgxRadioModule,
-        ReactiveFormsModule,
-        MatDialogModule,
-        ChatsItemModule,
-        // B2bNgxSkeletonModule,
-        ClientProfileMarketplaceEditProductModule,
-        B2bNgxSelectModule,
-    ],
+  imports: [
+    CommonModule,
+    ClientProfileMarketplaceRoutingModule,
+    MatTabsModule,
+    // B2bNgxPaginationModule,
+    B2bNgxButtonModule,
+    ClientProfileTradebidRfqModule,
+    B2bNgxImageModule,
+    B2bNgxIconModule,
+    // B2bNgxDropdownModule,
+    // B2bNgxRadioModule,
+    ReactiveFormsModule,
+    MatDialogModule,
+    ChatsItemModule,
+    // B2bNgxSkeletonModule,
+    ClientProfileMarketplaceEditProductModule,
+    B2bNgxSelectModule,
+    B2bNgxPaginationModule,
+    B2bNgxSkeletonModule,
+    B2bNgxRadioModule,
+    B2bNgxDropdownModule,
+  ],
 })
 export class ClientProfileMarketplaceModule {}
