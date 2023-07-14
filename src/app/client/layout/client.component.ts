@@ -8,6 +8,7 @@ import {first} from "rxjs/operators";
 import {TradebidService} from "../pages/client-tradebid/tradebid.service";
 import {SeoService} from "../../core/services/seo/seo.service";
 import {ClientMarketplaceService} from "../pages/client-marketplace/client-marketplace.service";
+import {AuthService} from "../../auth/services/auth/auth.service";
 
 @UntilDestroy()
 @Component({
@@ -19,7 +20,7 @@ import {ClientMarketplaceService} from "../pages/client-marketplace/client-marke
 export class ClientComponent implements OnInit {
 	public readonly options: any[];
 	public readonly socialMedias: any[];
-	// public readonly user$: Observable<any>;
+	public readonly user$: Observable<any>;
 	public readonly b2bNgxLinkThemeEnum = B2bNgxLinkThemeEnum;
 
 	constructor(
@@ -29,6 +30,7 @@ export class ClientComponent implements OnInit {
 		private router: Router,
 		private seoService: SeoService,
 		private marketService: ClientMarketplaceService,
+    private authService: AuthService
 	) {
 		this.route.queryParams.pipe(untilDestroyed(this)).subscribe((data) => {
 			if (data["ref"]) {
@@ -38,7 +40,7 @@ export class ClientComponent implements OnInit {
 		});
 		this.options = this.getOptions();
 		this.socialMedias = this.getSocialMedias();
-		// this.user$ = this.authService.user$;
+		this.user$ = this.authService.user$;
 	}
 
 	ngOnInit() {
@@ -52,33 +54,33 @@ export class ClientComponent implements OnInit {
 		if (!this.userService.getUser()) {
 			return;
 		}
-		// try {
-		// 	combineLatest([this.user$, this.tradebidService.getCompanyData()]).subscribe(([user, companyInfo]) => {
-		// 		const refId = parseInt(localStorage.getItem("ref") as string);
-		// 		if (user?.firstLogin && !isNaN(refId)) {
-		// 			this.userService
-		// 				.addUserStatistics({
-		// 					userId: user._id,
-		// 					email: user.email,
-		// 					refId,
-		// 					typeRegistration: user.socialAuth ? "socials" : "standard",
-		// 				})
-		// 				.pipe(untilDestroyed(this))
-		// 				.subscribe();
-		// 		}
-		// 	});
-		// } catch (_) {
-		// 	const {company, role, preferences, _id} = this.userService.getUser();
-		// 	this.tradebidService
-		// 		.createCompanyInfo({
-		// 			companyName: company,
-		// 			businessType: role.displayName,
-		// 			categories: preferences,
-		// 			userId: _id,
-		// 		})
-		// 		.pipe(first())
-		// 		.subscribe();
-		// }
+		try {
+			combineLatest([this.user$, this.tradebidService.getCompanyData()]).subscribe(([user, companyInfo]) => {
+				const refId = parseInt(localStorage.getItem("ref") as string);
+				if (user?.firstLogin && !isNaN(refId)) {
+					this.userService
+						.addUserStatistics({
+							userId: user._id,
+							email: user.email,
+							refId,
+							typeRegistration: user.socialAuth ? "socials" : "standard",
+						})
+						.pipe(untilDestroyed(this))
+						.subscribe();
+				}
+			});
+		} catch (_) {
+			const {company, role, preferences, _id} = this.userService.getUser();
+			this.tradebidService
+				.createCompanyInfo({
+					companyName: company,
+					businessType: role.displayName,
+					categories: preferences,
+					userId: _id,
+				})
+				.pipe(first())
+				.subscribe();
+		}
 	}
 
 	public onActivate() {

@@ -521,11 +521,11 @@ const routes: Routes = [
 					},
 				},
 			},
-			// {
-			// 	path: "about-us",
-			// 	canActivate: [],
-			// 	loadChildren: () => import("./pages/client-about-us/client-about-us.module").then((m) => m.ClientAboutUsModule),
-			// },
+			{
+				path: "about-us",
+				canActivate: [],
+				loadChildren: () => import("./pages/client-about-us/client-about-us.module").then((m) => m.ClientAboutUsModule),
+			},
 			{
 				path: "**",
 				loadChildren: () =>

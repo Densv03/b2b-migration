@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from "@angular/core";
 import { B2bNgxLinkService, B2bNgxLinkThemeEnum } from "@b2b/ngx-link";
+import {User} from "../../../core/models/user/user.model";
 
 @Component({
 	selector: "b2b-client-footer",
@@ -8,10 +9,10 @@ import { B2bNgxLinkService, B2bNgxLinkThemeEnum } from "@b2b/ngx-link";
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ClientFooterComponent {
-	@Input() public readonly options!: any[];
-	@Input() public readonly icons!: any[];
-	@Input() public readonly socialMedias!: any[];
-	@Input() public readonly user: any;
+	@Input() public options: any[];
+	@Input() public icons: any[];
+	@Input() public socialMedias: any[];
+	@Input() public user: User;
 
 	public readonly currentYear = new Date(Date.now()).getFullYear()
 	public readonly sidenavOptions: any[];
