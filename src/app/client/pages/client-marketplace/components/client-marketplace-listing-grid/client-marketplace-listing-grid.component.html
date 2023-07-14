@@ -1,5 +1,5 @@
 <div *ngIf="(loading$ | async) === false">
-	<ul *ngIf="marketplaceProducts.length; else noMarketplaceProducts" class="marketplace-grid">
+	<ul *ngIf="marketplaceProducts?.length; else noMarketplaceProducts" class="marketplace-grid">
 		<div *ngFor="let product of marketplaceProducts" class="grid-item">
 			<b2b-client-marketplace-product-item [product]="product"> </b2b-client-marketplace-product-item>
 		</div>

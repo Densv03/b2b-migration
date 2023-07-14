@@ -25,7 +25,7 @@ module.exports = function (config) {
       suppressAll: true // removes the duplicated traces
     },
     coverageReporter: {
-      dir: require('path').join(__dirname, '../../coverage/pidor'),
+      dir: require('path').join(__dirname, '../../coverage/categories-modal'),
       subdir: '.',
       reporters: [
         { type: 'html' },
