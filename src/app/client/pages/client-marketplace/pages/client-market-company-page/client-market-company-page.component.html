@@ -1,0 +1,69 @@
+<ng-container *ngIf="companyInfo$ | async as companyInfo; else skeleton">
+	<div class="company">
+		<div class="main">
+			<div class="header">
+				<div class="logo">
+					<img *ngIf="companyInfo?.logo?.path" b2bNgxImage [name]="companyInfo?.logo?.path" alt="logo" />
+				</div>
+				<div class="description">
+					<div class="title">{{ companyInfo.companyName }}</div>
+					<div class="location">
+						<div class="country-image">
+							<img b2bNgxIcon group="flags/" [name]="companyInfo.country | uppercase" class="country-icon" />
+						</div>
+						<div class="country">{{ getCountryName(companyInfo.country) }}</div>
+						<div class="divider">.</div>
+						<div class="type">{{ businessType$ | async }}</div>
+					</div>
+				</div>
+			</div>
+			<div class="tabs">
+				<mat-tab-group mat-align-tabs="start">
+					<mat-tab label="Information">
+						<b2b-market-company-information [companyInfo]="companyInfo"></b2b-market-company-information>
+					</mat-tab>
+					<mat-tab label="Products">
+						<b2b-company-products [userId]="companyInfo.user"></b2b-company-products>
+					</mat-tab>
+				</mat-tab-group>
+
+				<div class="mobile-contact">
+					<a
+						(click)="openPhoneModal(companyInfo)"
+						class="phone-button"
+						b2bNgxButton
+						[theme]="b2bNgxButtonThemeEnum.OUTLINE_BLACK"
+						>Phone</a
+					>
+
+					<a
+						*ngIf="companyInfo.website"
+						target="_blank"
+						[href]="checkCompanySiteForValid(companyInfo.website)"
+						class="website-button"
+						b2bNgxButton
+						[theme]="b2bNgxButtonThemeEnum.OUTLINE_BLACK"
+						>Website</a
+					>
+
+					<button
+						*ngIf="companyInfo.user !== user?._id"
+						(click)="openChat($event, companyInfo.user)"
+						class="contact-button"
+						b2bNgxButton
+						[theme]="b2bNgxButtonThemeEnum.BACKGROUND_BLACK">
+						<img b2bNgxIcon name="chat-white" />
+						<span>Contact Supplier</span>
+					</button>
+				</div>
+			</div>
+		</div>
+		<div class="contact">
+			<b2b-company-contact-card [companyInfo]="companyInfo"></b2b-company-contact-card>
+		</div>
+	</div>
+</ng-container>
+
+<ng-template #skeleton>
+	<b2b-ngx-skeleton [option]="getSkeletonOptions()"></b2b-ngx-skeleton>
+</ng-template>

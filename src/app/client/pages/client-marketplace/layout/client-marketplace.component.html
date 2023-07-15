@@ -1,0 +1,108 @@
+<form [formGroup]="mobileFilters">
+	<b2b-client-marketplace-filters-mobile
+		[animationState]="animationState$ | async"
+		(closePopUp)="closePopUp()"
+		[initialCategoryState]="categoriesInitialState$ | async"
+		(filtersPlaceholder)="updateMobileFiltersPlaceholder($event)"
+		formControlName="filters"
+		class="mobile-filters-pop-up"></b2b-client-marketplace-filters-mobile>
+</form>
+
+<form [formGroup]="formGroup">
+	<div class="latest-offers-header">
+		<h3 class="latest-offers-header-title">
+			<span class="latest-offers-header-title-text">All offers</span>
+			<span class="latest-offers-header-icon"></span>
+		</h3>
+		<div class="search-wrapper">
+			<input
+				b2bNgxInput
+				formControlName="q"
+				[theme]="b2bNgxInputThemeEnum.BACKGROUND_WHITE"
+				class="latest-offers-header-search"
+				placeholder="Search" />
+			<img b2bNgxIcon name="search" />
+		</div>
+		<div class="latest-offers-header-filters">
+			<p *ngIf="false" class="latest-offers-header-show-filter">
+				<span class="latest-offers-header-show-filter-text">Show:</span>
+				<b2b-ngx-select [theme]="b2bNgxSelectThemeEnum.BACKGROUND_TRANSPARENT" placeholder="show by"></b2b-ngx-select>
+			</p>
+			<p class="latest-offers-header-sort-filter">
+				<span class="latest-offers-header-sort-filter-text">Sort by:</span>
+				<b2b-ngx-select
+					[theme]="b2bNgxSelectThemeEnum.BACKGROUND_TRANSPARENT"
+					[options]="sortTypes"
+					(changed)="updateSortType($event)"
+					formControlName="sort"
+					placeholder="Recent"
+					bindValue="value"
+					bindLabel="label">
+				</b2b-ngx-select>
+			</p>
+			<div class="latest-offers-header-display-type">
+				<button b2bNgxButton (click)="changeOffersListTheme('grid')">
+					<img b2bNgxIcon name="view-grid" />
+				</button>
+				<button b2bNgxButton (click)="changeOffersListTheme('list')">
+					<img b2bNgxIcon name="view-list" />
+				</button>
+			</div>
+		</div>
+
+		<div class="latest-offers-header-filters__mobile">
+			<div (click)="openPopUp()" class="latest-offers-header-filters__mobile__left">
+				<div class="latest-offers-header-filters__mobile__left__title">Filters:</div>
+				<div class="latest-offers-header-filters__mobile__left__content">
+					{{ mobileFiltersPlaceholder$ | async }}
+					<img b2bNgxIcon name="arrow-down-2" class="d-block ml-1" />
+				</div>
+			</div>
+			<div class="latest-offers-header-filters__mobile__divider"></div>
+			<div class="latest-offers-header-filters__mobile__right">
+				<div class="latest-offers-header-filters__mobile__right__title">Sort by:</div>
+				<div class="latest-offers-header-filters__mobile__right__content">
+					<b2b-ngx-select
+						[theme]="b2bNgxSelectThemeEnum.BACKGROUND_TRANSPARENT"
+						[options]="sortTypes"
+						(changed)="updateSortType($event)"
+						formControlName="sort"
+						placeholder="Recent"
+						bindValue="value"
+						bindLabel="label">
+					</b2b-ngx-select>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>
+
+<div class="main-content">
+	<div class="filters">
+		<form [formGroup]="desktopFilters">
+			<b2b-client-marketplace-filters
+				formControlName="filters"
+				class="marketplace-filters-component"
+				></b2b-client-marketplace-filters>
+		</form>
+	</div>
+	<div class="listing">
+		<b2b-client-marketplace-listing-grid
+			*ngIf="offersListTheme === 'grid'"
+			[marketplaceProducts]="marketplaceProducts$ | async"
+			[user]="user$ | async"></b2b-client-marketplace-listing-grid>
+
+		<b2b-client-marketplace-listing-list
+			*ngIf="offersListTheme === 'list'"
+			[marketplaceProducts]="marketplaceProducts$ | async"
+			[user]="user$ | async"></b2b-client-marketplace-listing-list>
+
+
+		<b2b-pagination
+			(togglePageNumber)="togglePage($event)"
+			[length]="totalMarketplaceProductsLength$ | async"
+			[perPage]="PRODUCTS_LIMIT"
+			[currentPage]="currentPage$ | async"
+		></b2b-pagination>
+	</div>
+</div>

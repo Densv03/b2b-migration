@@ -1,0 +1,29 @@
+<div
+	*ngIf="childrenCategoryObject$ | async as childrenCategory"
+	[ngClass]="{ 'opened-card': childrenCategory.isSelected }"
+	class="category-item">
+	<div class="category-photo">
+		<img b2bNgxImage [name]="category.image" alt="category-photo" />
+	</div>
+	<div class="category-content">
+		<div class="category-title" (click)="categoryItemClicked.emit(category._id)">{{ category?.name }}</div>
+		<ul class="sub-category-list">
+			<li class="list-item">
+				<div
+					[@fadeAnimation]
+					*ngFor="let category of childrenCategory.children"
+					(click)="categoryItemClicked.emit(category._id)">
+					{{ category.name }} {{category.productsCount > 0 ? '(' + category.productsCount + ')' : ''}}
+				</div>
+			</li>
+		</ul>
+	</div>
+
+	<div class="divider"></div>
+	<div
+		(click)="childrenCategory.isSelected === true ? hideCardCategories(category) : showCardCategories(category)"
+		class="view-all-block">
+		<img b2bNgxIcon [name]="childrenCategory.isSelected === true ? 'arrow-down-blue' : 'arrow-top-blue'" alt="arrow" />
+		<div class="text">{{ childrenCategory.isSelected === true ? "Show less" : "View all" }}</div>
+	</div>
+</div>

@@ -1,14 +1,13 @@
 import { Injectable } from "@angular/core";
 import {BehaviorSubject, filter, Observable, of, share} from "rxjs";
+import { ApiService } from "../../../core/services/api/api.service";
 import {first, map} from "rxjs/operators";
-
+import { PaginationParamsModel } from "../../../core/models/pagination-params.model";
+import { ProductDetailsModel } from "./models/product-details.model";
+import { MarketProductModel } from "./models/market-product.model";
 import {HttpParams} from "@angular/common/http";
 import {NgxSkeletonLoaderConfig} from "ngx-skeleton-loader/lib/ngx-skeleton-loader-config.types";
-import {MarketProductModel} from "../../../pages/client-marketplace/models/market-product.model";
-import {ApiService} from "../../../../core/services/api/api.service";
-import {environment} from "../../../../../environments/environment";
-import {ProductDetailsModel} from "../../../pages/client-marketplace/models/product-details.model";
-import {PaginationParamsModel} from "../../../../core/models/pagination-params.model";
+import {environment} from "../../../../environments/environment";
 
 @Injectable({
 	providedIn: "root",

@@ -1,0 +1,41 @@
+<div *ngIf="!(loading$ | async)">
+	<ul class="market-list" *transloco="let t">
+		<li
+			*ngFor="let product of marketplaceProducts"
+			[routerLink]="b2bNgxLinkService.getLink(product?.path ? '/b2bmarket/products/' + product.path : '/b2bmarket/products/' + product._id) | async"
+			class="list-item">
+			<div class="photo"><img b2bNgxImage [name]="product.photos[0]?.lg" /></div>
+			<div class="item-description">
+				<div class="title">{{ cutString(product.title, 9) }}</div>
+				<div class="info">
+					<div class="supplier-info">
+						<div class="supplier-title">Supplier</div>
+						<div class="supplier-descr">
+							<img b2bNgxIcon [name]="'tag'" alt="" />
+							<div class="text">{{ cutString(product.contact.companyName) }}</div>
+						</div>
+					</div>
+					<div class="supplier-info">
+						<div class="supplier-title">Country of origin</div>
+						<div class="supplier-descr">
+							<img b2bNgxIcon group="flags/" [name]="product.country | uppercase" alt="" />
+							<div class="text">{{ getCountryName(product.country) }}</div>
+						</div>
+					</div>
+					<div class="supplier-info">
+						<div class="supplier-title">Supplier type</div>
+						<div class="supplier-descr">
+							<img b2bNgxIcon [name]="'tag'" alt="" />
+							<div class="text">{{ product.suppliersType }}</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="contact">
+				<button b2bNgxButton [theme]="b2bNgxButtonThemeEnum.BACKGROUND_BLACK">Contact supplier</button>
+			</div>
+		</li>
+	</ul>
+</div>
+
+<b2b-ngx-skeleton *ngIf="loading$ | async" [option]="marketplaceSkeletonSettings"></b2b-ngx-skeleton>

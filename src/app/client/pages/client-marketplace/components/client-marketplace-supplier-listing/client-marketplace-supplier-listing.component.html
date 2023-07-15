@@ -1,0 +1,50 @@
+<form [formGroup]="formGroup">
+	<div class="latest-offers-header">
+		<h3 class="latest-offers-header-title">
+			<span class="latest-offers-header-title-text">All products of supplier</span>
+			<span class="latest-offers-header-icon"></span>
+		</h3>
+		<input
+			b2bNgxInput
+			formControlName="q"
+			[theme]="b2bNgxInputThemeEnum.BACKGROUND_WHITE"
+			class="latest-offers-header-search"
+			placeholder="Search" />
+		<div class="latest-offers-header-filters">
+			<div class="latest-offers-header-display-type">
+				<button b2bNgxButton (click)="changeOffersListTheme('grid')">
+					<img b2bNgxIcon name="view-grid" />
+				</button>
+				<button b2bNgxButton (click)="changeOffersListTheme('list')">
+					<img b2bNgxIcon name="view-list" />
+				</button>
+			</div>
+		</div>
+	</div>
+</form>
+
+<div class="main-content">
+	<div class="filters">
+		<b2b-client-marketplace-supplier-filters
+			(filterEvent)="updateFilter($event)"></b2b-client-marketplace-supplier-filters>
+		<b2b-client-marketplace-supplier-info
+			[supplierId]="supplierId"
+			[supplierInfo]="supplierInfo$ | async"></b2b-client-marketplace-supplier-info>
+	</div>
+	<div class="listing">
+		<b2b-client-marketplace-listing-grid
+			*ngIf="offersListTheme === 'grid'"
+			[marketplaceProducts]="supplierProducts$ | async"></b2b-client-marketplace-listing-grid>
+
+		<b2b-client-marketplace-listing-list
+			*ngIf="offersListTheme === 'list'"
+			[marketplaceProducts]="supplierProducts$ | async"></b2b-client-marketplace-listing-list>
+
+		<!--		<b2b-load-more-paginator *ngIf="(loadMorePaginatorIsVisible$ | async)" (loadMoreClicked)="loadMoreProducts($event)"></b2b-load-more-paginator>-->
+		<b2b-ngx-pagination
+			(togglePageNumber)="togglePage($event)"
+			[length]="totalSupplierProductsLength$ | async"
+			[perPage]="PRODUCTS_LIMIT"
+			class="pagination"></b2b-ngx-pagination>
+	</div>
+</div>
