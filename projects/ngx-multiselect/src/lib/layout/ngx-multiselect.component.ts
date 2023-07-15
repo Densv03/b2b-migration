@@ -15,7 +15,7 @@ import {ControlValueAccessor, FormControl, NG_VALUE_ACCESSOR, ValidationErrors} 
 	],
 })
 export class B2bNgxMultiselectComponent implements ControlValueAccessor, OnChanges, OnInit {
-	@Input() public readonly options: any[];
+	@Input() public options: any[];
 	@Input() bindValue: string = "value";
 	@Input() bindLabel: string = "label";
 	@Input() placeholder: string = "";

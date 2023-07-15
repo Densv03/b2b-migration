@@ -767,6 +767,68 @@
           }
         }
       }
+    },
+    "categories-modal": {
+      "projectType": "library",
+      "root": "projects/categories-modal",
+      "sourceRoot": "projects/categories-modal/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/categories-modal/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/categories-modal/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/categories-modal/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/categories-modal/src/test.ts",
+            "tsConfig": "projects/categories-modal/tsconfig.spec.json",
+            "karmaConfig": "projects/categories-modal/karma.conf.js"
+          }
+        }
+      }
+    },
+    "ngx-social-medias": {
+      "projectType": "library",
+      "root": "projects/ngx-social-medias",
+      "sourceRoot": "projects/ngx-social-medias/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/ngx-social-medias/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/ngx-social-medias/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/ngx-social-medias/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ngx-social-medias/src/test.ts",
+            "tsConfig": "projects/ngx-social-medias/tsconfig.spec.json",
+            "karmaConfig": "projects/ngx-social-medias/karma.conf.js"
+          }
+        }
+      }
     }
   },
   "cli": {

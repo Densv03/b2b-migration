@@ -45,8 +45,8 @@ import {
 } from "./components/client-marketplace-product-item/client-marketplace-product-item.module";
 import {B2bNgxPaginationModule} from "@b2b/ngx-pagination"
 import {B2bNgxFileModule} from "../../../../../projects/ngx-file/src";
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {PaginationModule} from "../../shared/components/pagination/pagination.module";
+import {CategoriesDialogModule} from "@b2b/categories-modal";
 
 @NgModule({
 	declarations: [
@@ -65,7 +65,7 @@ import {PaginationModule} from "../../shared/components/pagination/pagination.mo
     CommonModule,
     ClientMarketplaceRoutingModule,
     B2bNgxSelectModule,
-    // CategoriesDialogModule,
+    CategoriesDialogModule,
     B2bNgxCountrySelectModule,
     ReactiveFormsModule,
     B2bNgxButtonModule,

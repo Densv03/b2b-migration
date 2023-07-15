@@ -350,29 +350,29 @@ const routes: Routes = [
 			// // 		},
 			// // 	},
 			// // },
-			// {
-			// 	path: "blog",
-			// 	canActivate: [DefaultRoleGuard],
-			// 	loadChildren: () => import("./pages/client-blog/client-blog.module").then((m) => m.ClientBlogModule),
-			// 	data: {
-			// 		meta: {
-			// 			title: "B2B Discount - Buy and Sell B2B Cargo with Discount!",
-			// 			description: "B2B Discount - Trading Wiki",
-			// 		},
-			// 	},
-			// },
-			// {
-			// 	path: "blog/:id",
-			// 	canActivate: [DefaultRoleGuard],
-			// 	loadChildren: () =>
-			// 		import("./pages/client-blog-article/client-blog-article.module").then((m) => m.ClientBlogWikiArticleModule),
-			// 	data: {
-			// 		meta: {
-			// 			title: "B2B Discount - Buy and Sell B2B Cargo with Discount!",
-			// 			description: "B2B Discount - Trading Wiki",
-			// 		},
-			// 	},
-			// },
+			{
+				path: "blog",
+				canActivate: [DefaultRoleGuard],
+				loadChildren: () => import("./pages/client-blog/client-blog.module").then((m) => m.ClientBlogModule),
+				data: {
+					meta: {
+						title: "B2B Discount - Buy and Sell B2B Cargo with Discount!",
+						description: "B2B Discount - Trading Wiki",
+					},
+				},
+			},
+			{
+				path: "blog/:id",
+				canActivate: [DefaultRoleGuard],
+				loadChildren: () =>
+					import("./pages/client-blog-article/client-blog-article.module").then((m) => m.ClientBlogWikiArticleModule),
+				data: {
+					meta: {
+						title: "B2B Discount - Buy and Sell B2B Cargo with Discount!",
+						description: "B2B Discount - Trading Wiki",
+					},
+				},
+			},
 			// {
 			// 	path: "profile",
 			// 	canActivate: [AuthGuard],
@@ -521,11 +521,11 @@ const routes: Routes = [
 					},
 				},
 			},
-			// {
-			// 	path: "about-us",
-			// 	canActivate: [],
-			// 	loadChildren: () => import("./pages/client-about-us/client-about-us.module").then((m) => m.ClientAboutUsModule),
-			// },
+			{
+				path: "about-us",
+				canActivate: [],
+				loadChildren: () => import("./pages/client-about-us/client-about-us.module").then((m) => m.ClientAboutUsModule),
+			},
 			{
 				path: "**",
 				loadChildren: () =>

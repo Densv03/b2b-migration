@@ -6,6 +6,8 @@ import { PaginationParamsModel } from "../../../core/models/pagination-params.mo
 import { ProductDetailsModel } from "./models/product-details.model";
 import { MarketProductModel } from "./models/market-product.model";
 import {HttpParams} from "@angular/common/http";
+import {NgxSkeletonLoaderConfig} from "ngx-skeleton-loader/lib/ngx-skeleton-loader-config.types";
+import {environment} from "../../../../environments/environment";
 
 @Injectable({
 	providedIn: "root",
@@ -96,8 +98,9 @@ export class ClientMarketplaceService {
 
 	public updateMarketplaceProductsOnSearch(data: any): void {
 		this.completeLoading();
-		this.marketplaceProductsLengthSource.next(data.totalCount);
-		this.marketplaceProductsSource.next(data.products);
+    // TODO: remove this condition before deploy
+		this.marketplaceProductsLengthSource.next(environment.apiUrl.includes('api-dev') ? data.result.totalCount: data.totalCount);
+		this.marketplaceProductsSource.next(environment.apiUrl.includes('api-dev') ? data.result.products : data.products);
 	}
 
 	public updateMarketplaceProducts(filters?: any, offset: number = 0): void {
@@ -108,8 +111,9 @@ export class ClientMarketplaceService {
 			)
 			.subscribe((data: any) => {
 				this.completeLoading();
-				this.marketplaceProductsLengthSource.next(data.totalCount);
-				this.marketplaceProductsSource.next(data.products);
+        // TODO: remove this condition before deploy
+				this.marketplaceProductsLengthSource.next(environment.apiUrl.includes('api-dev') ? data.result.totalCount : data.totalCount);
+				this.marketplaceProductsSource.next(environment.apiUrl.includes('api-dev') ? data.result.products : data.products);
 			});
 	}
 
@@ -277,16 +281,15 @@ export class ClientMarketplaceService {
 		this.loadingSource.next(true);
 	}
 
-	public getMarketplaceSkeletonOptions() {
-		return [
-			{
-				count: 5,
-				animation: "progress",
-				theme: {
-					height: "160px",
-				},
-			},
-		];
+	public getMarketplaceSkeletonOptions(): Partial<NgxSkeletonLoaderConfig> {
+    return {
+      count: 5,
+      animation: 'progress',
+      theme: {
+        height: '160px',
+      }
+    }
+
 	}
 	public getCompanyByName(name: string, paginationParams: PaginationParamsModel): Observable<{companies: any[], totalCount: number}> {
 		return this.apiService.get("products/get-company", {params: {...paginationParams, q: name}});

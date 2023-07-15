@@ -91,16 +91,16 @@
 					</div>
 					<div class="supplier-report">
 						<img b2bNgxImage name="alert"/>
+<!--							tippyClassName="tooltip"-->
+<!--							[tippyProps]="{-->
+<!--							arrow: false,-->
+<!--							placement: 'bottom',-->
+<!--							theme: 'light',-->
+<!--							allowHtml: true-->
+<!--						}"-->
+<!--							[ngxTippy]="tooltipTemplate"-->
 						<button
-							[ngxTippy]="tooltipTemplate"
-							tippyClassName="tooltip"
 							[disabled]="product.reasonForDeletion"
-							[tippyProps]="{
-							arrow: false,
-							placement: 'bottom',
-							theme: 'light',
-							allowHtml: true
-						}"
 							(click)="openReportPopover()">
 							Report this lot
 						</button>

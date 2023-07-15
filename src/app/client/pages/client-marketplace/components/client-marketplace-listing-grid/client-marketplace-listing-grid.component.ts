@@ -4,6 +4,7 @@ import { B2bNgxButtonThemeEnum } from "@b2b/ngx-button";
 import { getName } from "country-list";
 import { Observable } from "rxjs";
 import { ClientMarketplaceService } from "../../client-marketplace.service";
+import {NgxSkeletonLoaderConfig} from "ngx-skeleton-loader/lib/ngx-skeleton-loader-config.types";
 
 @Component({
 	selector: "b2b-client-marketplace-listing-grid",
@@ -18,7 +19,7 @@ export class ClientMarketplaceListingGridComponent implements OnInit {
 
 	public readonly b2bNgxButtonThemeEnum: typeof B2bNgxButtonThemeEnum = B2bNgxButtonThemeEnum;
 	public readonly b2bNgxLinkThemeEnum: typeof B2bNgxLinkThemeEnum = B2bNgxLinkThemeEnum;
-	public marketplaceSkeletonOptions: any;
+	public marketplaceSkeletonOptions: Partial<NgxSkeletonLoaderConfig>;
 	public loading$: Observable<boolean>;
 
 	constructor(
@@ -29,7 +30,8 @@ export class ClientMarketplaceListingGridComponent implements OnInit {
 		this.loading$ = this.clientMarketplaceService.loading$;
 	}
 
-	ngOnInit(): void {}
+	ngOnInit(): void {
+  }
 
 	public getCountryName(countryCode: string): string {
 		if (!countryCode) {

@@ -108,7 +108,8 @@
     "ABOUT_US": "About us",
     "OUR_SERVICES": "Our services",
     "UNCLAIMED_CARGO": "Unclaimed Cargo",
-    "B2BMARKET": "B2b market"
+    "B2BMARKET": "B2b market",
+    "CALCULATE_LOGISTICS": "Calculate Logistics"
   },
   "LINKS": {
     "BACK": "Go Back",
@@ -495,7 +496,14 @@
     "RETAILER_NAME": "Retailer",
     "SUBCONTRACTOR_NAME": "Subcontractor",
     "WHOLESALER_NAME": "Wholesaler",
-    "ASSOCIATION_NAME": "Association"
+    "ASSOCIATION_NAME": "Association",
+    "AGENT": "Agent",
+    "DISTRIBUTOR": "Distributor",
+    "MANUFACTURER": "Manufacturer",
+    "RETAILER": "Retailer",
+    "SUBCONTRACTOR": "Subcontractor",
+    "WHOLESALER": "Wholesaler",
+    "ASSOCIATION": "Association"
   },
   "TRANSPORT_TYPE": {
     "CONTAINER_VESSEL": "Container number",

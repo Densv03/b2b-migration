@@ -24,6 +24,7 @@ import {InitialCategoryState} from "../shared/models/initial-category-state.mode
 import {SlideInOutAnimation} from "../shared/animations/slide-in-out.animation";
 import {UntilDestroy, untilDestroyed} from "@ngneat/until-destroy";
 import {SortType} from "../../../../core/models/sort-type.model";
+import {User} from "../../../../core/models/user/user.model";
 
 function generateQueryString(obj: any, initialValue: string = "?") {
 	const filteredState = obj;
@@ -58,15 +59,15 @@ export class ClientMarketplaceComponent implements OnInit, AfterViewInit, OnDest
 	public sortTypes: SortType[] = this.getSortTypes();
 
 	public PRODUCTS_LIMIT: number = this.clientMarketplaceService.PRODUCTS_LIMIT;
-	public readonly user$: any;
+	public readonly user$: Observable<User>;
 
 	public readonly formGroup: FormGroup = this.getFormGroup();
-  public readonly desktopFilters: FormGroup = new FormGroup<any>({
-    filters: new FormControl([]),
+  public readonly desktopFilters: FormGroup = new FormGroup<{filters: FormControl}>({
+    filters: new FormControl(null),
   });
 
-  public readonly mobileFilters: FormGroup = new FormGroup<any>({
-    filters: new FormControl([]),
+  public readonly mobileFilters: FormGroup = new FormGroup<{ filters: FormControl }>({
+    filters: new FormControl(null),
   });
 
 	public categoriesInitialState$: Observable<InitialCategoryState> = this.getObservableForCategories();

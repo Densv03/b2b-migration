@@ -21,7 +21,7 @@ export class ClientAboutUsComponent implements OnInit, OnDestroy {
 	ngOnInit(): void {
 		this.activeRoute.queryParams
 			.pipe(
-				filter((params) => params.sectionType),
+				filter((params) => params['sectionType']),
 				takeUntil(this.unsubscribe)
 			)
 			.subscribe(({ sectionType }) => {

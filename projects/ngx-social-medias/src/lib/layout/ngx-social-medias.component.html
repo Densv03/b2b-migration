@@ -1,0 +1,29 @@
+<label class="ngx-social-medias-label">
+	<ng-content></ng-content>
+</label>
+
+<ul class="ngx-social-medias-icons-list">
+	<li *ngFor="let option of activeOptions" class="ngx-social-medias-icons-list-item">
+		<button
+			class="ngx-social-medias-icons-list-item-button"
+			[class.active]="option.active"
+			(click)="toggleSocialMedia(option)">
+			<img b2bNgxIcon [name]="option.icon" />
+		</button>
+	</li>
+</ul>
+
+<form class="ngx-social-medias-tel-form" [formGroup]="$any(formArray)">
+	<ul class="ngx-social-medias-tel-list">
+		<li *ngFor="let formControl of formArray.controls; let i = index" class="ngx-social-medias-tel-list-item">
+			<ng-container [formGroup]="$any(formControl)">
+				<b2b-ngx-tel formControlName="value" [defaultNumber]="defaultNumber">
+					<p class="ngx-social-medias-tel-list-label">
+						<img b2bNgxIcon [name]="formControl.value.icon" />
+						<span class="ngx-social-medias-tel-list-label-text">{{ formControl.value.label }}</span>
+					</p>
+				</b2b-ngx-tel>
+			</ng-container>
+		</li>
+	</ul>
+</form>

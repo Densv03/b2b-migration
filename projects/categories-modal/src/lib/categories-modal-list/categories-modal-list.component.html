@@ -1,0 +1,22 @@
+<ul class="categories-list">
+	<li *ngIf="isMultipleMode" class="select-all">
+		<div class="item-content">
+			<div class="category-name">Select all in category</div>
+			<b2b-ngx-toggle
+				[toggled]="isParentCategoryChecked"
+				(change)="selectFullCategory($event)"
+				[emptyLabel]="true"></b2b-ngx-toggle>
+		</div>
+	</li>
+	<li *ngFor="let category of categoriesList" class="list-item">
+		<div class="item-content">
+			<div class="category-name">
+				{{ category.text }}
+			</div>
+			<b2b-ngx-checkbox
+				*ngIf="category.visible"
+				(change)="selectCategory($event, category.value)"
+				[checked]="category.checked"></b2b-ngx-checkbox>
+		</div>
+	</li>
+</ul>
