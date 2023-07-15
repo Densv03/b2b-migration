@@ -70,11 +70,11 @@ export class B2bNgxSocialMediasComponent implements ControlValueAccessor {
 		return this.formBuilder.array([]);
 	}
 
-	public toggleSocialMedia(option: { label: any; icon?: any; value?: any; active?: any; }) {
-		const findedIndex = this.formArray.controls.findIndex((control) => control.value.label === option.label);
+	public toggleSocialMedia(option: any) {
+		const foundIndex = this.formArray.controls.findIndex((control) => control.value.label === option.label);
 
-		if (findedIndex !== -1) {
-			this.formArray.removeAt(findedIndex);
+		if (foundIndex !== -1) {
+			this.formArray.removeAt(foundIndex);
 		} else {
 			const formGroup = this.formBuilder.group(option);
 
@@ -111,11 +111,11 @@ export class B2bNgxSocialMediasComponent implements ControlValueAccessor {
 		const socials = Object.keys(value);
 		socials.forEach((social) => {
 			const label = social.charAt(0).toUpperCase() + social.slice(1);
-			const option = {
+			const option: any = {
 				label,
 				icon: this.options.find((option) => option.label === label).icon,
 				value: value[social],
-				active: (undefined as any)
+				active: undefined,
 			};
 			this.toggleSocialMedia(option);
 		});

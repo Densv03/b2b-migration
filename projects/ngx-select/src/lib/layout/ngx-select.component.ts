@@ -7,7 +7,7 @@ import {
   Input,
   OnChanges,
   OnInit,
-  Output,
+  Output, SimpleChanges,
   ViewChild,
 } from "@angular/core";
 import {ControlValueAccessor, FormControl, NG_VALIDATORS, NG_VALUE_ACCESSOR, ValidationErrors} from "@angular/forms";
@@ -40,17 +40,17 @@ export class B2bNgxSelectComponent implements ControlValueAccessor, OnInit, OnCh
   @Input() public options: any = [];
   @Input() public theme: B2bNgxSelectThemeEnum = B2bNgxSelectThemeEnum.BACKGROUND_TRANSPARENT;
   @Input() public className: string = '';
-  @Input() public placeholder!: string;
-  @Input() public bindValue!: string;
-  @Input() public bindLabel!: string;
-  @Input() public groupBy!: string | ((value: any) => any);
+  @Input() public placeholder: string;
+  @Input() public bindValue: string;
+  @Input() public bindLabel: string;
+  @Input() public groupBy: string | ((value: any) => any);
   @Input() public selectableGroup: boolean = false;
   @Input() public selectableGroupAsModel: boolean = true;
   @Input() public groupValue!: any;
   @Input() public virtualScroll: boolean = false;
   @Input() public multiple: boolean = false;
   @Input() public searchable: boolean = false;
-  @Input() public isOpen!: boolean;
+  @Input() public isOpen: boolean;
   @Input() public minTermLength: number = 0;
   @Input() public closeOnSelect: boolean = true;
 
@@ -97,9 +97,9 @@ export class B2bNgxSelectComponent implements ControlValueAccessor, OnInit, OnCh
     this.subscribeOnValueChanges();
   }
 
-  ngOnChanges(changes: any): void {
-    if (changes.errors) {
-      this.formControl.setErrors(changes.errors.currentValue);
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['errors']) {
+      this.formControl.setErrors(changes['errors'].currentValue);
     }
   }
 

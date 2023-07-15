@@ -1,0 +1,24 @@
+<form [formGroup]="form">
+  <div class="select">
+    <b2b-categories-dialog
+      [required]="false"
+      formControlName="categories[]">
+    </b2b-categories-dialog>
+
+  </div>
+  <div class="select">
+    <b2b-ngx-country-select
+      placeholder="Suppliers country"
+      formControlName="country">
+    </b2b-ngx-country-select>
+  </div>
+  <div class="select">
+    <b2b-ngx-select
+      placeholder="Suppliers type"
+      [options]="roles$ | async"
+      bindLabel="displayName"
+      bindValue="displayName"
+      formControlName="type"></b2b-ngx-select>
+  </div>
+  <button b2bNgxButton [theme]="b2bNgxButtonThemeEnum.OUTLINE_GRAY" (click)="resetForm()">Clear All</button>
+</form>

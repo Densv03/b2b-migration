@@ -2,14 +2,15 @@ import {ChangeDetectionStrategy, Component, OnInit} from "@angular/core";
 import {B2bNgxButtonThemeEnum} from "@b2b/ngx-button";
 import {B2bNgxInputThemeEnum} from "@b2b/ngx-input";
 import {B2bNgxSelectThemeEnum} from "@b2b/ngx-select";
-import {FormBuilder, FormGroup} from "@ngneat/reactive-forms";
 import {BehaviorSubject, Observable, Subject} from "rxjs";
 import {map, startWith, switchMap, tap} from "rxjs/operators";
 import {BlogService} from "../../../services/blog/blog.service";
 import {PaginationParamsModel} from "../../../../core/models/pagination-params.model";
 import {ActivatedRoute, Router} from "@angular/router";
+import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
+import {NgxSkeletonLoaderConfig} from "ngx-skeleton-loader/lib/ngx-skeleton-loader-config.types";
 
-function generateQueryString(obj, initialValue: string = "?") {
+function generateQueryString(obj: any, initialValue: string = "?") {
 	return Object.entries(obj)
 		.filter(([, value]: any) => !!value)
 		.reduce((queryString: string, [key, value]: any) => {
@@ -19,7 +20,7 @@ function generateQueryString(obj, initialValue: string = "?") {
 		}, initialValue);
 }
 
-function stripHtml(html) {
+function stripHtml(html: any) {
 	// Create a new div element
 	const temporalDivElement = document.createElement("div");
 	// Set the HTML content with the providen
@@ -37,7 +38,7 @@ function stripHtml(html) {
 export class ClientBlogComponent implements OnInit {
 	public readonly socialMedias: any;
 	public readonly articles$: Observable<any>;
-	public readonly articlesSkeletonOptions: any[];
+	public readonly articlesSkeletonOptions: Partial<NgxSkeletonLoaderConfig>;
 
 	// public readonly searchControl: FormControl<string>;
 
@@ -61,7 +62,6 @@ export class ClientBlogComponent implements OnInit {
 	private filteredQueryObj: PaginationParamsModel = {limit: 7, offset: 0};
 
 	constructor(private readonly _blogService: BlogService,
-							private readonly _formBuilder: FormBuilder,
 							private readonly _route: ActivatedRoute,
 							private readonly _router: Router) {
 		this.b2bNgxInputThemeEnum = B2bNgxInputThemeEnum;
@@ -91,7 +91,7 @@ export class ClientBlogComponent implements OnInit {
 		return this.currentPageSource.asObservable();
 	}
 
-	public setPage(offset) {
+	public setPage(offset: number): void {
 		this.formGroup.patchValue({
 			offset,
 		});
@@ -116,16 +116,16 @@ export class ClientBlogComponent implements OnInit {
 	// }
 
 	public getFormGroup() {
-		return this._formBuilder.group({
-			q: "",
+		return new FormGroup<{ q: FormControl<string>, offset: FormControl<number> }>({
+			q: new FormControl<string>(""),
 			// "categories[]": "",
 			// "countries[]": "",
 			// "tags[]": "",
-			offset: 0,
+			offset: new FormControl<number>(0),
 		});
 	}
 
-	public searchTags(str) {
+	public searchTags(str: string) {
 		this.searchSubject.next(str);
 	}
 
@@ -153,7 +153,7 @@ export class ClientBlogComponent implements OnInit {
 				this.loading = false;
 				this.totalCount = res.totalCount;
 
-				const posts = res.posts.map((post) => ({
+				const posts = res.posts.map((post: any) => ({
 					...post,
 					preview: stripHtml(post.description),
 				}));
@@ -163,16 +163,14 @@ export class ClientBlogComponent implements OnInit {
 		);
 	}
 
-	public getArticlesSkeletonOptions() {
-		return [
-			{
-				count: 4,
-				animation: "progress",
-				theme: {
-					height: "230px",
-				},
-			},
-		];
+	public getArticlesSkeletonOptions(): Partial<NgxSkeletonLoaderConfig> {
+		return {
+      count: 4,
+      animation: "progress",
+      theme: {
+        height: "230px",
+      }
+    }
 	}
 
 	public getSocialMedias() {
@@ -204,7 +202,7 @@ export class ClientBlogComponent implements OnInit {
 		];
 	}
 
-	public groupValueFn(value, ...args) {
+	public groupValueFn(value: any, ...args: any) {
 		return value.value;
 	}
 
@@ -229,12 +227,12 @@ export class ClientBlogComponent implements OnInit {
 	// 	);
 	// }
 
-	public getPageOffers(pageNumber) {
+	public getPageOffers(pageNumber: number): void {
 		this.formGroup.patchValue({offset: pageNumber * 10, limit: 10});
 	}
 
 	private blogPageInit(): void {
-		let page = this._route.snapshot.queryParams.page;
+		let page = this._route.snapshot.queryParams['page'];
 		if (!page) {
 			this._router.navigate([], {
 				relativeTo: this._route,

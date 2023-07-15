@@ -16,7 +16,7 @@
 <form class="ngx-social-medias-tel-form" [formGroup]="$any(formArray)">
 	<ul class="ngx-social-medias-tel-list">
 		<li *ngFor="let formControl of formArray.controls; let i = index" class="ngx-social-medias-tel-list-item">
-			<ng-container [formGroup]="formControl">
+			<ng-container [formGroup]="$any(formControl)">
 				<b2b-ngx-tel formControlName="value" [defaultNumber]="defaultNumber">
 					<p class="ngx-social-medias-tel-list-label">
 						<img b2bNgxIcon [name]="formControl.value.icon" />

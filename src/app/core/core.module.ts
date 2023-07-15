@@ -42,5 +42,6 @@ import {HTTP_INTERCEPTORS} from "@angular/common/http";
   ]
 })
 export class CoreModule {
+  constructor() {}
 
 }

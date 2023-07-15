@@ -5,19 +5,18 @@ import {
 	Component,
 	Inject,
 	OnDestroy,
-	OnInit,
 	Renderer2
 } from "@angular/core";
 import {ActivatedRoute, Router} from "@angular/router";
 import {B2bNgxButtonThemeEnum} from "@b2b/ngx-button";
 import {HotToastService} from "@ngneat/hot-toast";
-import {FormBuilder, FormGroup} from "@ngneat/reactive-forms";
-import {AuthService} from "apps/site/src/app/auth/services/auth/auth.service";
+import {AuthService} from "../../../../auth/services/auth/auth.service";
 import {Observable, Subject} from "rxjs";
 import {first, map, switchMap} from "rxjs/operators";
 import {BlogService} from "../../../services/blog/blog.service";
 import {DOCUMENT} from "@angular/common";
 import {SeoService} from "../../../../core/services/seo/seo.service";
+import {FormControl, FormGroup} from "@angular/forms";
 
 @Component({
 	selector: "b2b-client-blog-article",
@@ -43,7 +42,6 @@ export class ClientBlogArticleComponent implements AfterViewInit, OnDestroy {
 	constructor(
 		private readonly _activatedRoute: ActivatedRoute,
 		private readonly _blogService: BlogService,
-		private readonly _formBuilder: FormBuilder,
 		private readonly _hotToastService: HotToastService,
 		private readonly _authService: AuthService,
 		private readonly _router: Router,
@@ -59,8 +57,8 @@ export class ClientBlogArticleComponent implements AfterViewInit, OnDestroy {
 
 		this.article$ = this.getArticle$();
 
-		this.formGroup = this._formBuilder.group({
-			text: "",
+		this.formGroup = new FormGroup<{text: FormControl<string>}>({
+			text: new FormControl<string>(""),
 		});
 
 	}
@@ -81,7 +79,7 @@ export class ClientBlogArticleComponent implements AfterViewInit, OnDestroy {
 		return this._blogService.getComments(id)
 	}
 
-	public createComment(articleId, formGroup): void {
+	public createComment(articleId: string, formGroup: any): void {
 		if (!this._authService.getToken()) {
 			this._router.navigateByUrl("auth/register-credentials");
 			return;
@@ -127,10 +125,10 @@ export class ClientBlogArticleComponent implements AfterViewInit, OnDestroy {
 		);
 	}
 
-	public processShareBtn(shareName): void {
-		this._ampService.logEvent("Click on share button", {
-			type: shareName,
-		});
+	public processShareBtn(shareName: string): void {
+		// this._ampService.logEvent("Click on share button", {
+		// 	type: shareName,
+		// });
 	}
 
 	private addSubscriptionForm(): void {

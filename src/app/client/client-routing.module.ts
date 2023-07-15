@@ -350,40 +350,40 @@ const routes: Routes = [
 			// // 		},
 			// // 	},
 			// // },
-			// {
-			// 	path: "blog",
-			// 	canActivate: [DefaultRoleGuard],
-			// 	loadChildren: () => import("./pages/client-blog/client-blog.module").then((m) => m.ClientBlogModule),
-			// 	data: {
-			// 		meta: {
-			// 			title: "B2B Discount - Buy and Sell B2B Cargo with Discount!",
-			// 			description: "B2B Discount - Trading Wiki",
-			// 		},
-			// 	},
-			// },
-			// {
-			// 	path: "blog/:id",
-			// 	canActivate: [DefaultRoleGuard],
-			// 	loadChildren: () =>
-			// 		import("./pages/client-blog-article/client-blog-article.module").then((m) => m.ClientBlogWikiArticleModule),
-			// 	data: {
-			// 		meta: {
-			// 			title: "B2B Discount - Buy and Sell B2B Cargo with Discount!",
-			// 			description: "B2B Discount - Trading Wiki",
-			// 		},
-			// 	},
-			// },
 			{
-				path: "profile",
-				// canActivate: [AuthGuard],
-				loadChildren: () => import("./pages/client-profile/client-profile.module").then((m) => m.ClientProfileModule),
+				path: "blog",
+				canActivate: [DefaultRoleGuard],
+				loadChildren: () => import("./pages/client-blog/client-blog.module").then((m) => m.ClientBlogModule),
 				data: {
 					meta: {
 						title: "B2B Discount - Buy and Sell B2B Cargo with Discount!",
-						description: "B2B Discount - Profile",
+						description: "B2B Discount - Trading Wiki",
 					},
 				},
 			},
+			{
+				path: "blog/:id",
+				canActivate: [DefaultRoleGuard],
+				loadChildren: () =>
+					import("./pages/client-blog-article/client-blog-article.module").then((m) => m.ClientBlogWikiArticleModule),
+				data: {
+					meta: {
+						title: "B2B Discount - Buy and Sell B2B Cargo with Discount!",
+						description: "B2B Discount - Trading Wiki",
+					},
+				},
+			},
+			// {
+			// 	path: "profile",
+			// 	canActivate: [AuthGuard],
+			// 	loadChildren: () => import("./pages/client-profile/client-profile.module").then((m) => m.ClientProfileModule),
+			// 	data: {
+			// 		meta: {
+			// 			title: "B2B Discount - Buy and Sell B2B Cargo with Discount!",
+			// 			description: "B2B Discount - Profile",
+			// 		},
+			// 	},
+			// },
 			// {
 			// 	path: "offer",
 			// 	canActivate: [AuthGuard, CompanyInformationGuard, BuyerGuard],
@@ -509,23 +509,23 @@ const routes: Routes = [
 					},
 				},
 			},
-			// {
-			// 	path: "b2bmarket",
-			// 	canActivate: [],
-			// 	loadChildren: () =>
-			// 		import("./pages/client-marketplace/client-marketplace.module").then((m) => m.ClientMarketplaceModule),
-			// 	data: {
-			// 		meta: {
-			// 			title: "B2B Discount - Buy and Sell B2B Cargo with Discount!",
-			// 			description: "B2B Discount - Marketplace",
-			// 		},
-			// 	},
-			// },
-			// {
-			// 	path: "about-us",
-			// 	canActivate: [],
-			// 	loadChildren: () => import("./pages/client-about-us/client-about-us.module").then((m) => m.ClientAboutUsModule),
-			// },
+			{
+				path: "b2bmarket",
+				canActivate: [],
+				loadChildren: () =>
+					import("./pages/client-marketplace/client-marketplace.module").then((m) => m.ClientMarketplaceModule),
+				data: {
+					meta: {
+						title: "B2B Discount - Buy and Sell B2B Cargo with Discount!",
+						description: "B2B Discount - Marketplace",
+					},
+				},
+			},
+			{
+				path: "about-us",
+				canActivate: [],
+				loadChildren: () => import("./pages/client-about-us/client-about-us.module").then((m) => m.ClientAboutUsModule),
+			},
 			{
 				path: "**",
 				loadChildren: () =>

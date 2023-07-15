@@ -293,7 +293,7 @@ export class CoreComponent implements OnInit, AfterViewInit {
       },
       {
         label: "HEADER.CALCULATE_LOGISTICS",
-        link: this._router.url,
+        link: '',
         disabled: true
       },
       {
