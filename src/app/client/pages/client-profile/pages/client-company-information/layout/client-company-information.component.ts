@@ -14,12 +14,8 @@ import { ApiService } from "../../../../../../core/services/api/api.service";
 import { SocialMediaEnum } from "../social-media.enum";
 import { MatDialog } from "@angular/material/dialog";
 import { CategoriesService } from "../../../../../services/categories/categories.service";
-// import { CategoriesPopupComponent } from "../../../../../../../../../../libs/shared/components/categories-dialog/categories-popup-component/categories-popup.component";
-// import { SelectCategoryModel } from "../../../../../../../../../../libs/shared/components/categories-dialog/select-category.model";
 import { getFormData } from "../../../../../../core/helpers/function/get-form-data";
-import { PublicCompanyInfoModel, SocialMedia } from "../../../../../../core/models/public-company-info.model";
-import { ClientOfferDocumentComponent } from "../../../../client-offer/components/client-offer-document/client-offer-document.component";
-// import { DialogService } from "@ngneat/dialog";
+import { PublicCompanyInfoModel } from "../../../../../../core/models/public-company-info.model";
 import { socialLink } from "../../../../../../core/helpers/validator/social-link";
 import { siteLink } from "../../../../../../core/helpers/validator/site-link";
 import { animate, style, transition, trigger } from "@angular/animations";
@@ -72,7 +68,7 @@ export class ClientCompanyInformationComponent implements OnInit {
 	public readonly b2bNgxInputThemeEnum: typeof B2bNgxInputThemeEnum = B2bNgxInputThemeEnum;
 	public readonly b2bNgxSelectThemeEnum: typeof B2bNgxSelectThemeEnum = B2bNgxSelectThemeEnum;
 
-	public readonly isAdmin = this.userService.getUser().role.name === "admin";
+	public readonly isAdmin = this.userService.getUser()?.role?.name === "admin";
 
 	public foundationYear$: Observable<any>;
 	public employeesNumber$: Observable<SelectItem[]>;
@@ -111,7 +107,6 @@ export class ClientCompanyInformationComponent implements OnInit {
 		private readonly userService: UserService,
 		private readonly apiService: ApiService,
 		private readonly dialog: MatDialog,
-		// private readonly dialogService: DialogService,
 		private readonly categoriesService: CategoriesService,
 		private readonly changeDetectorRef: ChangeDetectorRef,
 		private readonly renderer2: Renderer2,

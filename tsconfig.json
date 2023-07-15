@@ -92,6 +92,9 @@
       ],
       "@b2b/ngx-chats-list": [
         "projects/ngx-chats-list/src/public-api"
+      ],
+      "@b2b/ngx-logo": [
+        "projects/ngx-logo/src/public-api"
       ]
     },
     "declaration": false,

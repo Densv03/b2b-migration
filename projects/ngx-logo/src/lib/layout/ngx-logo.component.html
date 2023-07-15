@@ -1,0 +1,33 @@
+<div class="ngx-file">
+	<label class="ngx-file-label" for="file">
+		<ng-content></ng-content>
+	</label>
+
+<div *ngIf="!logo" class="control">
+	<button
+		b2bNgxButton
+		[theme]="b2bNgxButtonThemeEnum.OUTLINE_BLACK"
+		class="ngx-file-button"
+		[class.ng-invalid]="formControl.invalid"
+		[class.ng-touched]="formControl.touched">
+		<img b2bNgxIcon name="photo" alt="photo" />
+		<span class="ngx-file-button-text">{{ label }}</span>
+		<input
+			#fileInput
+			[accept]="'.svg, .jpg, .png'"
+
+			(change)="uploadFiles($event)"
+			class="ngx-file-input"
+			type="file"
+			id="file" />
+	</button>
+
+	<div class="empty-file-label">No File Chosen</div>
+</div>
+		<div *ngIf="logo" class="ngx-logo">
+			<img [src]="preview$ | async | safe: 'url'" alt="logo"/>
+			<span class="ngx-logo-name">{{ logo.name }}</span>
+			<img (click)="removeLogo()" b2bNgxIcon name="cancel" class="ngx-logo-icon" alt="cancel" />
+		</div>
+
+</div>
