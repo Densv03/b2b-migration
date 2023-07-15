@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
-import { FormControl } from "@ngneat/reactive-forms";
 import { B2bNgxButtonThemeEnum } from "@b2b/ngx-button";
 import { MatDialogRef } from "@angular/material/dialog";
+import {FormControl} from "@angular/forms";
 
 @Component({
 	selector: "b2b-delete-product-modal",

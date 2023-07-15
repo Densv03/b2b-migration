@@ -9,7 +9,6 @@ import {
 } from "@angular/core";
 import { B2bNgxLinkService } from "@b2b/ngx-link";
 import { TranslocoService } from "@ngneat/transloco";
-import { AmplitudeService } from "apps/site/src/app/core/services/amplitude/amplitude.service";
 
 @Component({
 	selector: "b2b-client-how-it-works",
@@ -24,7 +23,6 @@ export class ClientHowItWorksComponent implements OnDestroy {
 	constructor(
 		public readonly b2bNgxLinkService: B2bNgxLinkService,
 		private readonly _translocoService: TranslocoService,
-		private readonly _ampService: AmplitudeService
 	) {}
 
 	public get ruVideo() {

@@ -38,10 +38,11 @@ export class B2bNgxInputDirective implements OnChanges {
 			const labelText = this._renderer2.createText(this.label);
 
 			this._renderer2.appendChild(labelElement, labelText);
-
 			this._renderer2.addClass(labelElement, "b2b-ngx-input-label");
-			this._renderer2.addClass(labelElement, this.labelClass);
 
+      if (!!this.labelClass) {
+        this._renderer2.addClass(labelElement, this.labelClass);
+      }
 			this._renderer2.insertBefore(parentElement, labelElement, nativeElement);
 		}
 	}

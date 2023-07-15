@@ -1,18 +1,19 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from "@angular/core";
 import { Router } from "@angular/router";
 import { B2bNgxLinkService, B2bNgxLinkThemeEnum } from "@b2b/ngx-link";
-import { DialogService } from "@ngneat/dialog";
 import { HotToastService } from "@ngneat/hot-toast";
 import { TranslocoService } from "@ngneat/transloco";
 import { UntilDestroy, untilDestroyed } from "@ngneat/until-destroy";
-import { OffersService } from "apps/site/src/app/client/services/offers/offers.service";
 import { Observable, Subject } from "rxjs";
 import { tap, switchMap, startWith, filter } from "rxjs/operators";
 import { ClientProfileMyOfferDeleteComponent } from "../components/client-profile-my-offer-delete/client-profile-my-offer-delete.component";
 import { ClientProfileMyOfferMarkAsSoldComponent } from "../components/client-profile-my-offer-mark-as-sold/client-profile-my-offer-mark-as-sold.component";
 import { B2bNgxButtonThemeEnum } from "@b2b/ngx-button";
+import {MatDialog} from "@angular/material/dialog";
+import {OffersService} from "../../../../../services/offers/offers.service";
+import {NgxSkeletonLoaderConfig} from "ngx-skeleton-loader/lib/ngx-skeleton-loader-config.types";
 
-function generateQueryString(obj, initialValue: string = "?") {
+function generateQueryString(obj: { [s: string]: unknown; } | ArrayLike<unknown>, initialValue: string = "?") {
 	return Object.entries(obj)
 		.filter(([, value]: any) => !!value)
 		.reduce((queryString: string, [key, value]: any) => {
@@ -31,7 +32,7 @@ function generateQueryString(obj, initialValue: string = "?") {
 })
 export class ClientProfileMyOffersComponent {
 	public readonly offers$: Observable<any>;
-	public readonly offersSkeletonOptions: any[];
+	public readonly offersSkeletonOptions:  Partial<NgxSkeletonLoaderConfig>;
 	public menuOptions: any[];
 	public readonly b2bNgxLinkThemeEnum: typeof B2bNgxLinkThemeEnum;
 	public readonly b2bNgxButtonThemeEnum = B2bNgxButtonThemeEnum;
@@ -45,7 +46,7 @@ export class ClientProfileMyOffersComponent {
 		private readonly _router: Router,
 		private readonly _translocoService: TranslocoService,
 		public readonly b2bNgxLinkService: B2bNgxLinkService,
-		private readonly _dialogService: DialogService,
+		private readonly dialog: MatDialog,
 		private readonly _hotToastService: HotToastService
 	) {
 		const isLangAlreadyLoaded = this._translocoService.translate("OFFERS.MARK_AS_SOLD") !== "OFFERS.MARK_AS_SOLD";
@@ -80,7 +81,7 @@ export class ClientProfileMyOffersComponent {
 			{
 				label: this._translocoService.translate("OFFERS.MARK_AS_SOLD"),
 				icon: "check",
-				onClick: (offer) => {
+				onClick: (offer: { _id: string; }) => {
 					this.markAsSold(offer._id);
 					// this._offersService.markAsSold(offer._id);
 				},
@@ -88,14 +89,14 @@ export class ClientProfileMyOffersComponent {
 			{
 				label: this._translocoService.translate("OFFERS.EDIT"),
 				icon: "edit",
-				onClick: (offer) => {
+				onClick: (offer: { _id: any; }) => {
 					this._router.navigateByUrl(this.b2bNgxLinkService.getStaticLink(`/profile/my-offers/${offer._id}`));
 				},
 			},
 			{
 				label: this._translocoService.translate("OFFERS.HIDE"),
 				icon: "eye",
-				onClick: (offer) => {
+				onClick: (offer: { _id: string; }) => {
 					this._offersService
 						.hideOffer(offer._id)
 						.pipe(untilDestroyed(this))
@@ -107,7 +108,7 @@ export class ClientProfileMyOffersComponent {
 			{
 				label: this._translocoService.translate("OFFERS.UNHIDE"),
 				icon: "eye",
-				onClick: (offer) => {
+				onClick: (offer: { userTypeWhoHideOffer: string; _id: string; }) => {
 					if (offer.userTypeWhoHideOffer === "admin") {
 						this._hotToastService.error(
 							"Sorry, your offer was hidden by the administration of the site, please write to Contact Us",
@@ -128,7 +129,7 @@ export class ClientProfileMyOffersComponent {
 			{
 				label: this._translocoService.translate("OFFERS.DELETE"),
 				icon: "delete-red",
-				onClick: (offer) => {
+				onClick: (offer: { _id: string; }) => {
 					this.deleteOffer(offer._id);
 					// this._offersService.deleteOfferById(offer._id);
 				},
@@ -137,7 +138,7 @@ export class ClientProfileMyOffersComponent {
 	}
 
 	public markAsSold(id: string) {
-		this._dialogService
+		this.dialog
 			.open(ClientProfileMyOfferMarkAsSoldComponent, {
 				data: {
 					id,
@@ -145,16 +146,16 @@ export class ClientProfileMyOffersComponent {
 				width: "40vw",
 				height: "auto",
 				minHeight: "0",
-				windowClass: "report-dialog",
+				backdropClass: "report-dialog",
 			})
-			.afterClosed$.pipe(untilDestroyed(this))
+			.afterClosed().pipe(untilDestroyed(this))
 			.subscribe(() => {
 				this.forceUpdateSubject.next(true);
 			});
 	}
 
 	public deleteOffer(id: string) {
-		this._dialogService
+		this.dialog
 			.open(ClientProfileMyOfferDeleteComponent, {
 				data: {
 					id,
@@ -162,16 +163,16 @@ export class ClientProfileMyOffersComponent {
 				width: "40vw",
 				height: "auto",
 				minHeight: "0",
-				windowClass: "report-dialog",
+				backdropClass: "report-dialog",
 			})
-			.afterClosed$.pipe(untilDestroyed(this))
+			.afterClosed().pipe(untilDestroyed(this))
 			.subscribe(() => {
 				this.forceUpdateSubject.next(true);
 			});
 	}
 
 	public getOffersSkeletonOptions() {
-		return [
+    const skeleton = [
 			{
 				count: 10,
 				animation: "progress",
@@ -180,6 +181,8 @@ export class ClientProfileMyOffersComponent {
 				},
 			},
 		];
+
+    return skeleton as  Partial<NgxSkeletonLoaderConfig>
 	}
 
 	public goTo(link: string): void {

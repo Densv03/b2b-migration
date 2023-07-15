@@ -6,7 +6,6 @@ import { B2bNgxButtonModule } from "@b2b/ngx-button";
 import { B2bNgxIconModule } from "@b2b/ngx-icon";
 import { B2bNgxImageModule } from "@b2b/ngx-image";
 import { B2bNgxLinkModule } from "@b2b/ngx-link";
-// import { DialogModule } from "@ngneat/dialog";
 import { AnnualBillingComponent } from "./components/annual-billing/annual-billing.component";
 import { TradebidPurchaseComponent } from "./components/tradebid-purchase/tradebid-purchase.component";
 import { MatTabsModule } from "@angular/material/tabs";
@@ -24,7 +23,6 @@ import { ClientProfileBillingComponent } from "./layout/client-profile-billing.c
 		B2bNgxIconModule,
 		B2bNgxImageModule,
 		B2bNgxLinkModule,
-		// DialogModule,
 		MatTabsModule,
 		InvoicesModule,
 	],

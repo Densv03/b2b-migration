@@ -4,9 +4,9 @@
 		<div
 			class="badge"
 			[class.invalid]="
-				formState['title']?.errors?.latin ||
-				formState['contactCompanyName']?.errors?.latin ||
-				formState['contactPersonName']?.errors?.latin
+				formState['title']?.errors?.['latin'] ||
+				formState['contactCompanyName']?.errors?.['latin'] ||
+				formState['contactPersonName']?.errors?.['latin']
 			">
 			<img b2bNgxIcon name="info-1" />
 			<div class="text">B2B Discount is an international platform, therefore, the product info must be entered in English</div>
@@ -61,12 +61,12 @@
 						[isClickable]="true"
 						formControlName="photos"
 						class="client-profile-add-offer-right-documents"
-						[errors]="formGroup.getControl('documents')?.errors"
+						[errors]="formGroup.get('documents')?.errors"
 						[label]="'Choose photos'"
 						>Choose photos</b2b-ngx-file
 					>
 				</div>
-				<p *ngIf="formState['photos'].touched && formState['photos'].errors?.required" class="error" [@fadeInOut]>
+				<p *ngIf="formState['photos'].touched && formState['photos'].errors?.['required']" class="error" [@fadeInOut]>
 					Photo is required
 				</p>
 				<div class="tip">Please use only real photos of the cargo. All photos will be checked by the moderators.</div>

@@ -6,6 +6,7 @@ import { UntilDestroy, untilDestroyed } from "@ngneat/until-destroy";
 import { Observable } from "rxjs";
 import { tap } from "rxjs/operators";
 import {OffersService} from "../../../../../services/offers/offers.service";
+import {NgxSkeletonLoaderConfig} from "ngx-skeleton-loader/lib/ngx-skeleton-loader-config.types";
 
 @UntilDestroy()
 @Component({
@@ -15,10 +16,10 @@ import {OffersService} from "../../../../../services/offers/offers.service";
 	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ClientProfileSavedOffersComponent {
-	public readonly offers$: Observable<any>;
-	public readonly offersSkeletonOptions: any[];
-	public readonly menuOptions: any[];
-	public readonly b2bNgxLinkThemeEnum: typeof B2bNgxLinkThemeEnum;
+	public offers$: Observable<any>;
+	public offersSkeletonOptions: Partial<NgxSkeletonLoaderConfig>;
+	public menuOptions: any[];
+	public b2bNgxLinkThemeEnum: typeof B2bNgxLinkThemeEnum;
 
 	public loading: boolean;
 
@@ -27,7 +28,6 @@ export class ClientProfileSavedOffersComponent {
 		private readonly _offersService: OffersService,
 		private readonly _router: Router,
 		public readonly b2bNgxLinkService: B2bNgxLinkService,
-		// private readonly _translocoService: TranslocoService
 	) {
 		this.offers$ = this.getSavedOffers();
 		this.offersSkeletonOptions = this.getOffersSkeletonOptions();
@@ -67,8 +67,8 @@ export class ClientProfileSavedOffersComponent {
 		];
 	}
 
-	public getOffersSkeletonOptions() {
-		return [
+	public getOffersSkeletonOptions(): Partial<NgxSkeletonLoaderConfig> {
+		const skeleton = [
 			{
 				count: 10,
 				animation: "progress",
@@ -77,5 +77,7 @@ export class ClientProfileSavedOffersComponent {
 				},
 			},
 		];
+
+    return (skeleton as Partial<NgxSkeletonLoaderConfig>);
 	}
 }

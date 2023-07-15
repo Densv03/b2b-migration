@@ -1,7 +1,6 @@
 import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from "@angular/core";
 import { B2bNgxLinkThemeEnum } from "@b2b/ngx-link";
 import { B2bNgxButtonThemeEnum } from "@b2b/ngx-button";
-import { DialogService } from "@ngneat/dialog";
 import { ApiService } from "../../../../../../../core/services/api/api.service";
 import { HotToastService } from "@ngneat/hot-toast";
 import { TranslocoService } from "@ngneat/transloco";
@@ -17,8 +16,8 @@ import { ClientProfileAddPaymentDialogComponent } from "../../../../components/c
 import { ClientProfileDeletePaymentMethodDialogComponent } from "../../../../components/client-profile-delete-payment-method-dialog/client-profile-delete-payment-method-dialog.component";
 import { Router } from "@angular/router";
 import { environment } from "../../../../../../../../environments/environment";
-import { AdminBillingService } from "../../../../../../../admin/pages/admin-billing/services/admin-billing.service";
 import { GetPaymentPlanResponse } from "../../../../../../../core/models/admin-billing/responses/get-payment-plan-response.model";
+import {AdminBillingService} from "../../../../../../../admin/services/admin-billing.service";
 
 @Component({
 	selector: "b2b-tradebid-purchase",
@@ -42,7 +41,6 @@ export class TradebidPurchaseComponent implements OnInit {
 	public quotesPaymentPlans$: Observable<GetPaymentPlanResponse[]>;
 
 	constructor(
-		private readonly dialogService: DialogService,
 		private readonly apiService: ApiService,
 		private readonly hotToastService: HotToastService,
 		private readonly translocoService: TranslocoService,

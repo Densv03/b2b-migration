@@ -1,0 +1,66 @@
+@import "projects/shared/src/styles";
+
+:host {
+	display: block;
+}
+.ngx-chips-input {
+	width: 100%;
+}
+.ngx-chips-input-error {
+	display: block;
+	font-size: 14px;
+	color: rgba(108, 112, 119, 0.6);
+	margin-top: 4px;
+}
+.ngx-chips {
+	margin-top: 20px;
+	display: flex;
+	flex-wrap: wrap;
+	.ngx-chip {
+		display: flex;
+		align-items: center;
+		padding: 7px 10px;
+		background: #ffffff;
+		border: 1px solid #005dff;
+		border-radius: 4px;
+		margin: 8px 8px 0 0;
+		.ngx-chip-label {
+			font-weight: 500;
+			font-size: 14px;
+			color: #005dff;
+		}
+		.ngx-chip-icon {
+			margin-left: 8px;
+		}
+		&:first-child {
+			margin-left: 0;
+		}
+		&:last-child {
+			margin-right: 0;
+		}
+	}
+}
+
+.ngx-chips-input-container {
+	position: relative;
+	background: #f3f6f8;
+	border-radius: 4px;
+	display: flex;
+	.ngx-chips-add-button {
+		z-index: 9999;
+		right: 30px;
+		top: 12.5px;
+		position: absolute;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 24px;
+		height: 24px;
+		background: #005dff;
+		border-radius: 50%;
+
+		b2b-ngx-icon {
+			margin-top: 3px;
+		}
+	}
+}

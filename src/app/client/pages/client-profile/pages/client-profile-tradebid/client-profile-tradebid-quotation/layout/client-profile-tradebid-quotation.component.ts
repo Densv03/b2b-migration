@@ -3,7 +3,7 @@ import { ClientProfileTradebidService } from "../../client-profile-tradebid.serv
 import { Observable } from "rxjs";
 import { B2bNgxButtonThemeEnum } from "@b2b/ngx-button";
 
-function generateQueryString(obj, initialValue: string = "?") {
+function generateQueryString(obj: { [s: string]: unknown; } | ArrayLike<unknown>, initialValue: string = "?") {
 	return Object.entries(obj)
 		.filter(([, value]: any) => !!value)
 		.reduce((queryString: string, [key, value]: any) => {

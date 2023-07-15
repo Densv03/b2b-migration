@@ -1,13 +1,12 @@
 import { Component } from "@angular/core";
-import { Validators } from "@angular/forms";
+import {FormControl, Validators} from "@angular/forms";
 import { Router } from "@angular/router";
 import { B2bNgxButtonThemeEnum } from "@b2b/ngx-button";
-import { DialogRef } from "@ngneat/dialog";
 import { HotToastService } from "@ngneat/hot-toast";
-import { FormControl } from "@ngneat/reactive-forms";
 import { UntilDestroy, untilDestroyed } from "@ngneat/until-destroy";
-import { AuthService } from "apps/site/src/app/auth/services/auth/auth.service";
 import { UserService } from "../../services/user/user.service";
+import {MatDialogRef} from "@angular/material/dialog";
+import {AuthService} from "../../../../../auth/services/auth/auth.service";
 
 @UntilDestroy()
 @Component({
@@ -22,7 +21,7 @@ export class ClientProfileDeleteAccountComponent {
 	otherReasonControl: FormControl;
 
 	constructor(
-		public ref: DialogRef,
+		public matDialogRef: MatDialogRef<ClientProfileDeleteAccountComponent>,
 		private readonly _userService: UserService,
 		private readonly _hotToastService: HotToastService,
 		private readonly _router: Router,
@@ -35,10 +34,10 @@ export class ClientProfileDeleteAccountComponent {
 	}
 
 	public close(): void {
-		this.ref.close();
+		this.matDialogRef.close();
 	}
 
-	public deleteOffer(ev): void {
+	public deleteOffer(ev: { preventDefault: () => void; stopImmediatePropagation: () => void; }): void {
 		ev.preventDefault();
 		ev.stopImmediatePropagation();
 		if (this.formControl.value === "Other" && this.otherReasonControl.value === "") {
@@ -53,7 +52,7 @@ export class ClientProfileDeleteAccountComponent {
 			.deleteUser({ body })
 			.pipe(untilDestroyed(this))
 			.subscribe(() => {
-				this.ref.close();
+				this.matDialogRef.close();
 				this._authService.logOut();
 				this._hotToastService.error("Your account has been deleted");
 				this._router.navigateByUrl("/");

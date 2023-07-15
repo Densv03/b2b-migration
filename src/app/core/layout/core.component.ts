@@ -13,7 +13,7 @@ import {UserService} from "../../client/pages/client-profile/services/user/user.
 import {HotToastService} from "@ngneat/hot-toast";
 import {Observable} from "rxjs";
 import {User} from "../models/user/user.model";
-import {SlideInOutAnimation} from "../../client/pages/client-marketplace/shared/animations/slide-in-out.animation";
+import {SlideInOutAnimation} from "../../client/shared/animations/slide-in-out.animation";
 
 @Component({
   selector: "b2b-core",

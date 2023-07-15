@@ -24,7 +24,6 @@ import { ChatsService } from "../../../services/chats/chats.service";
 import { HotToastService } from "@ngneat/hot-toast";
 import { B2bNgxLinkService } from "@b2b/ngx-link";
 import { TranslocoService } from "@ngneat/transloco";
-import { AmplitudeService } from "apps/site/src/app/core/services/amplitude/amplitude.service";
 
 @UntilDestroy()
 @Component({
@@ -73,7 +72,6 @@ export class ClientChatComponent implements OnInit, OnDestroy {
 		public changeDetectorRef: ChangeDetectorRef,
 		public readonly b2bNgxLinkService: B2bNgxLinkService,
 		private readonly _translocoService: TranslocoService,
-		private readonly _ampService: AmplitudeService
 	) {
 		this.b2bNgxButtonThemeEnum = B2bNgxButtonThemeEnum;
 		this.formGroup = this._formBuilder.group({

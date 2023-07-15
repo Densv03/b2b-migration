@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component } from "@angular/core";
 import { Observable } from "rxjs";
-import { ChatsService } from "apps/site/src/app/client/services/chats/chats.service";
 import { Router } from "@angular/router";
 import { UntilDestroy, untilDestroyed } from "@ngneat/until-destroy";
 import { HotToastService } from "@ngneat/hot-toast";
@@ -8,6 +7,7 @@ import { B2bNgxLinkService, B2bNgxLinkThemeEnum } from "@b2b/ngx-link";
 import { map, tap } from "rxjs/operators";
 import { AuthService } from "../../../../../../auth/services/auth/auth.service";
 import { TranslocoService } from "@ngneat/transloco";
+import {ChatsService} from "../../../../../services/chats/chats.service";
 
 @UntilDestroy()
 @Component({
@@ -47,7 +47,7 @@ export class ClientProfileMyChatsComponent {
 		this.loading = true;
 		return this._chatsService.getChatsByUser().pipe(
 			map((chats) => {
-				return chats.map((chat) => ({
+				return chats.map((chat: any) => ({
 					...chat,
 				}));
 			}),
@@ -74,7 +74,7 @@ export class ClientProfileMyChatsComponent {
 			{
 				label: this._translocoService.translate("OFFERS.REQUEST_CONTACTS"),
 				icon: "user-2",
-				onClick: (chat) => {
+				onClick: (chat: any) => {
 					this._chatsService
 						.requestContacts(chat)
 						.pipe(
@@ -91,7 +91,7 @@ export class ClientProfileMyChatsComponent {
 			{
 				label: this._translocoService.translate("OFFERS.DELETE"),
 				icon: "delete-red",
-				onClick: (chat) => {
+				onClick: (chat: { _id: string; }) => {
 					this._chatsService
 						.removeChatById(chat._id)
 						.pipe(
@@ -113,7 +113,7 @@ export class ClientProfileMyChatsComponent {
 			{
 				label: this._translocoService.translate("OFFERS.SEND_MY_CONTACTS"),
 				icon: "card",
-				onClick: async (chat) => {
+				onClick: async (chat: { offer: any; buyer: { _id: string; }; }) => {
 					this._chatsService.sendContacts(chat.offer, chat.buyer?._id);
 
 					this._hotToastService.success("Contacts sent successfully!");
@@ -122,7 +122,7 @@ export class ClientProfileMyChatsComponent {
 			{
 				label: this._translocoService.translate("OFFERS.UNHIDE_PRODUCT_INFO"),
 				icon: "trainings",
-				onClick: (chat) => {
+				onClick: (chat: { offer: any; buyer: { _id: string; }; }) => {
 					this._chatsService
 						.openContacts(chat.offer, chat.buyer?._id)
 						.pipe(
@@ -139,7 +139,7 @@ export class ClientProfileMyChatsComponent {
 			{
 				label: this._translocoService.translate("OFFERS.HIDE_PRODUCT_INFO"),
 				icon: "card",
-				onClick: (chat) => {
+				onClick: (chat: { offer: { _id: string; }; buyer: { _id: string; }; }) => {
 					this._chatsService
 						.closeContacts(chat.offer?._id, chat.buyer?._id)
 						.pipe(
@@ -156,7 +156,7 @@ export class ClientProfileMyChatsComponent {
 			{
 				label: this._translocoService.translate("OFFERS.DELETE"),
 				icon: "delete-red",
-				onClick: (chat) => {
+				onClick: (chat: { _id: string; }) => {
 					this._chatsService
 						.removeChatById(chat._id)
 						.pipe(

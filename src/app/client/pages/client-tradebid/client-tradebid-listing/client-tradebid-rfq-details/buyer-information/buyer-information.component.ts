@@ -1,7 +1,6 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from "@angular/core";
 
 import { User } from "../../../../../../core/models/user/user.model";
-// @ts-ignore
 import * as countryList from 'country-list';
 import { QuotePurchasingDialogComponent } from "../../dialogs/quote-purchasing-dialog/quote-purchasing-dialog.component";
 import { ActivatedRoute, Router } from "@angular/router";

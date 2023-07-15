@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, HostListener, OnInit } from "@angular/core";
 import { animate, style, transition, trigger } from "@angular/animations";
-import { AbstractControl, FormBuilder, FormGroup } from "@ngneat/reactive-forms";
 import { BehaviorSubject, combineLatest, filter, Observable } from "rxjs";
 import { B2bNgxInputThemeEnum } from "@b2b/ngx-input";
 import { B2bNgxSelectThemeEnum } from "@b2b/ngx-select";
@@ -8,17 +7,19 @@ import { B2bNgxButtonThemeEnum } from "@b2b/ngx-button";
 import { UnitsService } from "../../../../../../services/units/units.service";
 import { UserService } from "../../../../services/user/user.service";
 import { TranslocoService } from "@ngneat/transloco";
-import { ClientMarketplaceService } from "../../../../../client-marketplace/client-marketplace.service";
 import { TradebidService } from "../../../../../client-tradebid/tradebid.service";
 import { ActivatedRoute, Router } from "@angular/router";
 import { MatDialog } from "@angular/material/dialog";
 import { HotToastService } from "@ngneat/hot-toast";
 import { map } from "rxjs/operators";
-import { Validators } from "@angular/forms";
+import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import { onlyNumber } from "../../../../../../../core/helpers/validator/only-number";
 import { capitalizeFirstLetter } from "../../../../../../../core/helpers/function/capitalize-first-letter";
 import { UntilDestroy, untilDestroyed } from "@ngneat/until-destroy";
 import {CategoriesService} from "../../../../../../services/categories/categories.service";
+import {
+  ClientMarketplaceService
+} from "../../../../../../shared/services/client-marketplace-service/client-marketplace.service";
 
 export enum EditMode {
 	ARCHIVE = "archive",
@@ -55,12 +56,12 @@ export class ClientProfileMarketplaceEditProductComponent implements OnInit {
 	public b2bNgxSelectThemeEnum = B2bNgxSelectThemeEnum;
 	public b2bNgxButtonThemeEnum = B2bNgxButtonThemeEnum;
 	public unit$: Observable<any> = this.getUnit();
-	private isRedirectFromAdminPanel = !!this.activatedRoute.snapshot.queryParams?.admin;
+	private isRedirectFromAdminPanel = !!this.activatedRoute.snapshot.queryParams?.["admin"];
 
 	public readonly shippingMethods = this.getArrayForSelect(this.clientMarketplaceService.shippingMethods);
 	public readonly paymentMethods = this.getArrayForSelect(this.clientMarketplaceService.paymentMethods);
 	private hideLabelSource: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-	private productId: string = this.activatedRoute.snapshot.params.id;
+	private productId: string = this.activatedRoute.snapshot.params["id"];
 
 	constructor(
 		private unitsService: UnitsService,
@@ -230,7 +231,7 @@ export class ClientProfileMarketplaceEditProductComponent implements OnInit {
 	private getUnit(): Observable<any> {
 		return this.unitsService.getUnits().pipe(
 			map((units) =>
-				units.map((unit) => ({
+				units.map((unit: { name: string; }) => ({
 					...unit,
 					displayName: this.translocoService.translate(`UNITS.${unit.name.toUpperCase()}`),
 				}))
@@ -302,7 +303,7 @@ export class ClientProfileMarketplaceEditProductComponent implements OnInit {
 	private detectEditMode(): void {
 		this.activatedRoute.queryParams
 			.pipe(
-				map((data) => data.mode),
+				map((data) => data["mode"]),
 				filter((data) => !!data),
 				untilDestroyed(this)
 			)

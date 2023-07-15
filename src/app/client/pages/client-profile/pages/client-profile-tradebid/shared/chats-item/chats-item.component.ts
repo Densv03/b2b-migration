@@ -77,7 +77,7 @@ export class ChatsItemComponent implements OnInit {
 			{
 				label: this._translocoService.translate("OFFERS.DELETE"),
 				icon: "delete-red",
-				onClick: (chat) => {
+				onClick: (chat: { _id: string; }) => {
 					this._chatsService
 						.removeChatById(chat._id)
 						.pipe(

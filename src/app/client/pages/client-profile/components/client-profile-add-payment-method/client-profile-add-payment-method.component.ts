@@ -1,14 +1,13 @@
-import { Component, OnInit } from "@angular/core";
-import { Validators } from "@angular/forms";
+import {Component, Inject, OnInit} from "@angular/core";
+import {FormBuilder, Validators} from "@angular/forms";
 import { B2bNgxButtonThemeEnum } from "@b2b/ngx-button";
 import { B2bNgxInputThemeEnum } from "@b2b/ngx-input";
-import { DialogRef } from "@ngneat/dialog";
 import { HotToastService } from "@ngneat/hot-toast";
-import { FormBuilder } from "@ngneat/reactive-forms";
 import { TranslocoService } from "@ngneat/transloco";
 import { UntilDestroy } from "@ngneat/until-destroy";
 import { ApiService } from "../../../../../core/services/api/api.service";
 import { onlyNumber } from "../../../../../core/helpers/validator/only-number";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 
 @UntilDestroy()
 @Component({
@@ -27,15 +26,16 @@ export class ClientProfileAddPaymentMethodComponent implements OnInit {
 	public readonly b2bNgxButtonThemeEnum = B2bNgxButtonThemeEnum;
 
 	constructor(
+    @Inject(MAT_DIALOG_DATA) public data: any,
 		private readonly _formBuilder: FormBuilder,
-		public ref: DialogRef,
+		public matDialogRef: MatDialogRef<ClientProfileAddPaymentMethodComponent>,
 		private readonly _apiService: ApiService,
 		private readonly _hotToastService: HotToastService,
 		private readonly _translocoService: TranslocoService
 	) {}
 
 	ngOnInit(): void {
-		this.formGroup.patchValue(this.ref.data);
+		this.formGroup.patchValue(this.data.data);
 	}
 
 	submit() {
@@ -43,6 +43,6 @@ export class ClientProfileAddPaymentMethodComponent implements OnInit {
 			return;
 		}
 
-		this.ref.close(this.formGroup.value);
+		this.matDialogRef.close(this.formGroup.value);
 	}
 }

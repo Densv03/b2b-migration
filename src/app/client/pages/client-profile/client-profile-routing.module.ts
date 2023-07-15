@@ -1,8 +1,8 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { ClientProfileComponent } from "apps/site/src/app/client/pages/client-profile/layout/client-profile.component";
 import { DefaultRoleGuard } from "../../../auth/guards/defaultRole/deafult-role.guard";
 import { MyOfferGuard } from "./guards/myOffer/myOffer.guard";
+import {ClientProfileComponent} from "./layout/client-profile.component";
 
 const routes: Routes = [
 	{

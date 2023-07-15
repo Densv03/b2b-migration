@@ -4,7 +4,7 @@ import { Price } from "./price.model";
 import { Destination } from "./destination.model";
 import { Visibility } from "./visibility.model";
 import { Location } from "./location.model";
-import { Category } from "../../client/pages/client-marketplace/shared/models/category.model";
+import { Category } from "./category.model";
 
 export interface Offer {
 	_id: string;

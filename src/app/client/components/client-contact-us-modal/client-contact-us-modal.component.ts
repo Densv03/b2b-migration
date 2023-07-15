@@ -9,7 +9,6 @@ import { ApiService } from "../../../core/services/api/api.service";
 import { HotToastService } from "@ngneat/hot-toast";
 import { UntilDestroy, untilDestroyed } from "@ngneat/until-destroy";
 import { TranslocoService } from "@ngneat/transloco";
-import { AmplitudeService } from "../../../core/services/amplitude/amplitude.service";
 
 @UntilDestroy()
 @Component({
@@ -33,7 +32,6 @@ export class ClientContactUsModalComponent implements OnInit {
 		private readonly _apiService: ApiService,
 		private readonly _hotToastrService: HotToastService,
 		private readonly _translocoService: TranslocoService,
-		private readonly _ampService: AmplitudeService
 	) {
 		this.subjectOptions = [
 			{ label: this._translocoService.translate("CONTACT_US.SUPPORT"), value: "support" },

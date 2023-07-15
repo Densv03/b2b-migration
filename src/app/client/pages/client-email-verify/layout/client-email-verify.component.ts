@@ -7,7 +7,6 @@ import { FormBuilder, FormControl } from "@ngneat/reactive-forms";
 import { TranslocoService } from "@ngneat/transloco";
 import { UntilDestroy, untilDestroyed } from "@ngneat/until-destroy";
 import { AuthService } from "apps/site/src/app/auth/services/auth/auth.service";
-import { AmplitudeService } from "apps/site/src/app/core/services/amplitude/amplitude.service";
 import { interval, map, switchMap, take, tap } from "rxjs";
 import { ClientContactUsModalComponent } from "../../../components/client-contact-us-modal/client-contact-us-modal.component";
 import { UserService } from "../../client-profile/services/user/user.service";
@@ -39,7 +38,6 @@ export class ClientEmailVerifyComponent implements AfterViewInit {
 		private readonly _authService: AuthService,
 		private readonly _formBuilder: FormBuilder,
 		private readonly _userService: UserService,
-		private readonly _ampService: AmplitudeService,
 	) {
 		this._ampService.logEvent("Registration complete", { type: "main app", source: localStorage.getItem("source") });
 		this.formControl = this._formBuilder.control({ value: null, disabled: true });

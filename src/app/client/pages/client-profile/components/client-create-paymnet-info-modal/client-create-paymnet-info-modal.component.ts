@@ -1,16 +1,15 @@
-import { Component, OnInit } from "@angular/core";
-import { Validators } from "@angular/forms";
+import {Component, Inject, OnInit} from "@angular/core";
+import {FormBuilder, Validators} from "@angular/forms";
 import { onlyNumber } from "../../../../../core/helpers/validator/only-number";
 import { B2bNgxInputThemeEnum } from "@b2b/ngx-input";
 import { B2bNgxButtonThemeEnum } from "@b2b/ngx-button";
-import { FormBuilder } from "@ngneat/reactive-forms";
-import { DialogRef } from "@ngneat/dialog";
 import { ApiService } from "../../../../../core/services/api/api.service";
 import { HotToastService } from "@ngneat/hot-toast";
 import { TranslocoService } from "@ngneat/transloco";
 import { B2bNgxSelectThemeEnum } from "@b2b/ngx-select";
 import { onlyLatin } from "../../../../../core/helpers/validator/only-latin";
 import { animate, style, transition, trigger } from "@angular/animations";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 
 @Component({
 	selector: "b2b-client-create-paymnet-info-modal",
@@ -31,7 +30,7 @@ import { animate, style, transition, trigger } from "@angular/animations";
 	],
 })
 export class ClientCreatePaymnetInfoModalComponent implements OnInit {
-	public readonly formGroup = this._formBuilder.group({
+	public readonly formGroup = this.formBuilder.group({
 		cardNum: ["", [Validators.required, Validators.maxLength(16), Validators.minLength(16), onlyNumber()]],
 		email: ["", [Validators.required, Validators.email]],
 		expDate: ["", [Validators.required, Validators.minLength(4), Validators.maxLength(4)]],
@@ -47,21 +46,22 @@ export class ClientCreatePaymnetInfoModalComponent implements OnInit {
 	public readonly b2bNgxSelectnThemeEnum = B2bNgxSelectThemeEnum;
 
 	constructor(
-		private readonly _formBuilder: FormBuilder,
-		public ref: DialogRef,
-		private readonly _apiService: ApiService,
-		private readonly _hotToastService: HotToastService,
-		private readonly _translocoService: TranslocoService
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private readonly formBuilder: FormBuilder,
+		public dialogRef: MatDialogRef<ClientCreatePaymnetInfoModalComponent>,
+		private readonly apiService: ApiService,
+		private readonly hotToastService: HotToastService,
+		private readonly translocoService: TranslocoService
 	) {}
 
 	ngOnInit(): void {
-		this.formGroup.patchValue(this.ref.data);
+		this.formGroup.patchValue(this.data);
 	}
 
 	submit() {
 		if (this.formGroup.invalid) {
 			return;
 		}
-		this.ref.close(this.formGroup.value);
+		this.dialogRef.close(this.formGroup.value);
 	}
 }

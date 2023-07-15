@@ -1,7 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit } from "@angular/core";
 import { B2bNgxButtonThemeEnum } from "@b2b/ngx-button";
 import { B2bNgxLinkThemeEnum } from "@b2b/ngx-link";
-import { DialogService } from "@ngneat/dialog";
 import { HotToastService } from "@ngneat/hot-toast";
 import { TranslocoService } from "@ngneat/transloco";
 import { UntilDestroy, untilDestroyed } from "@ngneat/until-destroy";
@@ -14,6 +13,7 @@ import { ClientProfileAddPaymentMethodComponent } from "../../../../components/c
 import { ClientProfileDeletePaymentMethodComponent } from "../../../../components/client-profile-delete-payment-method/client-profile-delete-payment-method.component";
 import { ClientProfileUpgradePlanComponent } from "../../../../components/client-profile-upgrade-plan/client-profile-upgrade-plan.component";
 import * as CryptoJS from "crypto-js";
+import {MatDialog} from "@angular/material/dialog";
 
 const StarterPlan = {
 	type: "free",
@@ -63,11 +63,11 @@ export class AnnualBillingComponent implements OnInit {
 
 	payment: undefined | any;
 	plan = StarterPlan;
-	paymentData;
-	invoices = [];
+	paymentData: any;
+	invoices: { dataIssued: string; invoice: string; transactionId: string; sum: string; status: string; }[] = [];
 
 	constructor(
-		private readonly _dialogService: DialogService,
+		private readonly dialog: MatDialog,
 		private readonly _apiService: ApiService,
 		private readonly _hotToastService: HotToastService,
 		private readonly _translocoService: TranslocoService,
@@ -103,9 +103,9 @@ export class AnnualBillingComponent implements OnInit {
 	}
 
 	addPaymentMethod() {
-		this._dialogService
+		this.dialog
 			.open(ClientProfileAddPaymentMethodComponent)
-			.afterClosed$.pipe(
+			.afterClosed().pipe(
 				take(1),
 				switchMap((formValue) => {
 					this.paymentData = formValue;
@@ -115,7 +115,7 @@ export class AnnualBillingComponent implements OnInit {
 			.subscribe((response) => {
 				this.payment = {
 					...this.payment,
-					cardNumber: this.paymentData.cardNum.substr(this.paymentData.cardNum.length - 4),
+					cardNumber: this.paymentData.hasOwnProperty('cardNum') ? this.paymentData?.cardNum.substring(this.paymentData.cardNum.length - 4) : '',
 					type: "mastercard",
 				};
 				this.plan = BuyerPlan;
@@ -125,17 +125,17 @@ export class AnnualBillingComponent implements OnInit {
 	}
 
 	upgradePlan() {
-		this._dialogService.open(ClientProfileUpgradePlanComponent, { width: 720 });
+		this.dialog.open(ClientProfileUpgradePlanComponent, { width: '720px' });
 	}
 
 	edit() {
-		this._dialogService
+		this.dialog
 			.open(ClientProfileAddPaymentMethodComponent, {
 				data: this.payment,
 			})
-			.afterClosed$.pipe(
+			.afterClosed().pipe(
 				take(1),
-				switchMap((res) => {
+				switchMap(res => {
 					const updatedCard = {
 						cardNum: res.cardNum,
 						testMode: "1",
@@ -143,7 +143,7 @@ export class AnnualBillingComponent implements OnInit {
 					};
 					this.paymentData = {
 						...res,
-						cardNumber: this.paymentData.cardNum.substr(this.paymentData.cardNum.length - 4),
+						cardNumber: this.paymentData.cardNum.substring(this.paymentData.cardNum.length - 4),
 						type: "mastercard",
 					};
 
@@ -177,9 +177,9 @@ export class AnnualBillingComponent implements OnInit {
 	}
 
 	delete() {
-		this._dialogService
+		this.dialog
 			.open(ClientProfileDeletePaymentMethodComponent)
-			.afterClosed$.pipe(
+			.afterClosed().pipe(
 				untilDestroyed(this),
 				switchMap((res) => {
 					if (!res) {

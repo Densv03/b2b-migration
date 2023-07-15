@@ -5,7 +5,7 @@ import { ClientProfileTradebidService } from "../../client-profile-tradebid.serv
 import { ActivatedRoute, Router } from "@angular/router";
 import { PaginationParamsModel } from "../../../../../../../core/models/pagination-params.model";
 
-function generateQueryString(obj, initialValue: string = "?") {
+function generateQueryString(obj: { [s: string]: unknown; } | ArrayLike<unknown> | PaginationParamsModel, initialValue: string = "?") {
 	return Object.entries(obj)
 		.filter(([, value]: any) => !!value)
 		.reduce((queryString: string, [key, value]: any) => {

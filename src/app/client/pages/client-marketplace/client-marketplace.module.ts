@@ -43,8 +43,8 @@ import { ClientMarketCompanyPageModule } from "./pages/client-market-company-pag
 import {
     ClientMarketplaceProductItemModule
 } from "./components/client-marketplace-product-item/client-marketplace-product-item.module";
-import {B2bNgxPaginationModule} from "@b2b/ngx-pagination"
-import {B2bNgxFileModule} from "../../../../../projects/ngx-file/src";
+import {B2bNgxPaginationModule} from "@b2b/ngx-pagination";
+import {B2bNgxFileModule} from "@b2b/ngx-file";
 import {PaginationModule} from "../../shared/components/pagination/pagination.module";
 import {CategoriesDialogModule} from "@b2b/categories-modal";
 

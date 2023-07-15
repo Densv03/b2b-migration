@@ -3,7 +3,6 @@ import { Injectable } from "@angular/core";
 import { Observable, takeWhile } from "rxjs";
 import {first, map} from "rxjs/operators";
 
-import { CategoriesPaginationModel } from "../../pages/client-marketplace/shared/models/categories-pagination.model";
 import {ApiService} from "../../../core/services/api/api.service";
 import {CategoriesQuery} from "../../state/categories/categories.query";
 import {CategoriesStore} from "../../state/categories/categories.store";

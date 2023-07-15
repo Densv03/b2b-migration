@@ -1,10 +1,10 @@
 import { Injectable } from "@angular/core";
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from "@angular/router";
 import { B2bNgxLinkService } from "@b2b/ngx-link";
-import { AuthService } from "apps/site/src/app/auth/services/auth/auth.service";
 import { combineLatest } from "rxjs";
 import { filter, map } from "rxjs/operators";
 import { OffersService } from "../../../../services/offers/offers.service";
+import {AuthService} from "../../../../../auth/services/auth/auth.service";
 
 @Injectable({
 	providedIn: "root",

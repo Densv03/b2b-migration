@@ -2969,7 +2969,7 @@ export const MOCK_CATEGORIES_DATA =
       "sort": 0,
       "_id": "60a784870a04b16c574e85fa",
       "name": "Hobbies & Models",
-      "path": "hobbies-models",
+      "path": "hobbies-client-marketplace",
       "productsCount": 0
     }, {
       "children": [],

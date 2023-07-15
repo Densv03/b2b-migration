@@ -60,6 +60,9 @@
       "@b2b/ngx-password": [
         "projects/ngx-password/src/public-api"
       ],
+      "@b2b/ngx-file": [
+        "projects/ngx-file/src/public-api"
+      ],
       "@b2b/ngx-tel": [
         "projects/ngx-tel/src/public-api"
       ],
@@ -83,6 +86,18 @@
       ],
       "@b2b/ngx-social-medias": [
         "projects/ngx-social-medias/src/public-api"
+      ],
+      "@b2b/ngx-chips": [
+        "projects/ngx-chips/src/public-api"
+      ],
+      "@b2b/ngx-dropdown": [
+        "projects/ngx-dropdown/src/public-api"
+      ],
+      "@b2b/ngx-chats-list": [
+        "projects/ngx-chats-list/src/public-api"
+      ],
+      "@b2b/ngx-logo": [
+        "projects/ngx-logo/src/public-api"
       ]
     },
     "declaration": false,

@@ -16,7 +16,6 @@ import { UntilDestroy, untilDestroyed } from "@ngneat/until-destroy";
 import { UserService } from "apps/site/src/app/client/pages/client-profile/services/user/user.service";
 import { ChatService } from "apps/site/src/app/client/services/chat/chat.service";
 import { OffersService } from "apps/site/src/app/client/services/offers/offers.service";
-import { AmplitudeService } from "apps/site/src/app/core/services/amplitude/amplitude.service";
 import { B2bNgxButtonThemeEnum } from "libs/ngx-button/src";
 import { BehaviorSubject, combineLatest, Observable } from "rxjs";
 import { filter, map, switchMap, tap } from "rxjs/operators";
@@ -74,7 +73,6 @@ export class ClientOfferChatComponent implements OnInit, OnDestroy {
 		private readonly changeDetectorRef: ChangeDetectorRef,
 		public readonly b2bNgxLinkService: B2bNgxLinkService,
 		private readonly _translocoService: TranslocoService,
-		private readonly _ampService: AmplitudeService
 	) {
 		this.b2bNgxButtonThemeEnum = B2bNgxButtonThemeEnum;
 		this.formGroup = this._formBuilder.group({

@@ -13,7 +13,7 @@ import { B2bNgxLinkThemeEnum } from "@b2b/ngx-link";
 import { BehaviorSubject, Observable } from "rxjs";
 import { filter, first, map } from "rxjs/operators";
 import { CategoryListingService } from "../../client-marketplace/pages/category-listing/category-listing.service";
-import { Category } from "../../client-marketplace/shared/models/category.model";
+import { Category } from "../../client-marketplace/shared/client-marketplace/category.model";
 import { AuthService } from "../../../../auth/services/auth/auth.service";
 
 @Component({

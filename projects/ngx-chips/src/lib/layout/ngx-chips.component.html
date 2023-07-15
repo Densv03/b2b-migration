@@ -1,0 +1,24 @@
+<div class="ngx-chips-input-container">
+	<b2b-ngx-select
+		[theme]="b2bNgxSelectThemeEnum.BACKGROUND_GRAY"
+		[formControl]="formControl"
+		class="ngx-chips-input"
+		bindLabel="name"
+		bindValue="_id"
+		(searched)="emitSearch($event)"
+		[searchable]="true"
+		[options]="searchedOptions"></b2b-ngx-select>
+
+	<button type="button" class="ngx-chips-add-button" (click)="addChip(searchedText)">
+		<b2b-ngx-icon name="add" [svgStyle]="svgStyle" class="ngx-chips-add-button-icon"></b2b-ngx-icon>
+	</button>
+</div>
+
+<span *ngIf="formControl.invalid" class="ngx-chips-input-error">This field have to be uniq</span>
+
+<div class="ngx-chips">
+	<span *ngFor="let chip of chips" class="ngx-chip">
+		<span class="ngx-chip-label">{{ chip.name }}</span>
+		<img b2bNgxIcon class="ngx-chip-icon" name="cross" (click)="removeChip(chip)" />
+	</span>
+</div>

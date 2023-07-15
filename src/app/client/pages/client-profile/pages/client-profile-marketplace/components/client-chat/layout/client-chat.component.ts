@@ -23,9 +23,7 @@ import { ChatsService } from "../../../../../../../services/chats/chats.service"
 import { HotToastService } from "@ngneat/hot-toast";
 import { B2bNgxLinkService } from "@b2b/ngx-link";
 import { TranslocoService } from "@ngneat/transloco";
-import { AmplitudeService } from "../../../../../../../../core/services/amplitude/amplitude.service";
 import { getName } from "country-list";
-import { ClientMarketplaceService } from "../../../../../../client-marketplace/client-marketplace.service";
 
 @UntilDestroy()
 @Component({
@@ -76,7 +74,6 @@ export class ClientChatComponent implements OnInit, OnDestroy {
 		public changeDetectorRef: ChangeDetectorRef,
 		public readonly b2bNgxLinkService: B2bNgxLinkService,
 		private readonly _translocoService: TranslocoService,
-		private readonly _ampService: AmplitudeService
 	) {
 		this.b2bNgxButtonThemeEnum = B2bNgxButtonThemeEnum;
 		this.formGroup = this._formBuilder.group({
@@ -155,7 +152,7 @@ export class ClientChatComponent implements OnInit, OnDestroy {
 						}, 0);
 					}),
 					map((messages) =>
-						messages.map((message) => {
+						messages.map((message: { author: any; }) => {
 							const displayInfoOf =
 								chat.seller?._id === message?.author
 									? this._translocoService.translate("CHAT.SUPPLIER")
@@ -178,20 +175,18 @@ export class ClientChatComponent implements OnInit, OnDestroy {
 		);
 	}
 
-	public enterPressed(event) {
+	public enterPressed(event: { preventDefault: () => void; }) {
 		this.sendMessage(this.formGroup.get("message").value);
 		event.preventDefault();
 	}
 
-	public async sendMessage(body) {
+	public async sendMessage(body: any) {
 		if (!body) {
 			return;
 		}
 
 		this.chatInfo$.pipe(untilDestroyed(this)).subscribe((chatInfo) => {
 			const user = this._usersService.getUser();
-			this._ampService.logEvent("Message sent");
-
 			if (chatInfo.product) {
 				const productId = typeof chatInfo.product === "string" ? chatInfo.product : chatInfo.product._id;
 				this._socket.emit("message", {
@@ -215,45 +210,45 @@ export class ClientChatComponent implements OnInit, OnDestroy {
 	}
 
 	public subscribeOnMessage() {
-		return this._socket.on("message", (message) => {
+		return this._socket.on("message", (message: any) => {
 			const history = this._messagesHistoryBehaviourSubject.getValue();
 			this._messagesHistoryBehaviourSubject.next([...history, message]);
 		});
 	}
 
 	public subscribeOnChatInfo() {
-		return this._socket.on("chat_info", (chatInfo) => {
+		return this._socket.on("chat_info", (chatInfo: { unreadMessagesCount: number; }) => {
 			this._socketService.readMessages(chatInfo.unreadMessagesCount);
 			this._chatInfoBehaviourSubject.next(chatInfo);
 		});
 	}
 
 	public subscribeOnMessageHistory() {
-		return this._socket.on("message_history", (message_history) => {
+		return this._socket.on("message_history", (message_history: any) => {
 			this._messagesHistoryBehaviourSubject.next(message_history);
 		});
 	}
 
 	public subscribeOnUsersChatInfo() {
-		return this._socket.on("users_chat_info", (chatInfo) => {
+		return this._socket.on("users_chat_info", (chatInfo: { unreadMessagesCount: number; }) => {
 			this._socketService.readMessages(chatInfo.unreadMessagesCount);
 			this._chatInfoBehaviourSubject.next(chatInfo);
 		});
 	}
 	public subscribeOnUsersChatMessage() {
-		return this._socket.on("users_message", (message) => {
+		return this._socket.on("users_message", (message: any) => {
 			const history = this._messagesHistoryBehaviourSubject.getValue();
 			this._messagesHistoryBehaviourSubject.next([...history, message]);
 		});
 	}
 
 	public subscribeOnUserChatMessageHistory() {
-		return this._socket.on("message_users_history", (message_history) => {
+		return this._socket.on("message_users_history", (message_history: any) => {
 			this._messagesHistoryBehaviourSubject.next(message_history);
 		});
 	}
 
-	openConnection(token) {
+	openConnection(token: any) {
 		if (this._socket) {
 			this._socket.disconnect();
 		}

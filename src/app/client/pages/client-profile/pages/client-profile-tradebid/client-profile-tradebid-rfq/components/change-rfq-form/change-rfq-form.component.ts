@@ -1,6 +1,5 @@
 import { ChangeDetectorRef, Component, HostListener, OnInit } from "@angular/core";
 import { animate, style, transition, trigger } from "@angular/animations";
-import { FormBuilder, FormGroup } from "@ngneat/reactive-forms";
 import { BehaviorSubject, combineLatest, Observable } from "rxjs";
 import { B2bNgxInputThemeEnum } from "@b2b/ngx-input";
 import { B2bNgxButtonThemeEnum } from "@b2b/ngx-button";
@@ -8,7 +7,6 @@ import { B2bNgxSelectThemeEnum } from "@b2b/ngx-select";
 import { CategoriesService } from "../../../../../../../services/categories/categories.service";
 import { UnitsService } from "../../../../../../../services/units/units.service";
 import { TranslocoService } from "@ngneat/transloco";
-import { DialogService } from "@ngneat/dialog";
 import { HotToastService } from "@ngneat/hot-toast";
 import { ActivatedRoute, Router } from "@angular/router";
 import { TradebidService } from "../../../../../../client-tradebid/tradebid.service";
@@ -21,11 +19,12 @@ import { DocumentExtensions } from "../../../../../../../../core/add-offer/docum
 import { ClientOfferDocumentComponent } from "../../../../../../client-offer/components/client-offer-document/client-offer-document.component";
 import { capitalizeFirstLetter } from "../../../../../../../../core/helpers/function/capitalize-first-letter";
 import { CURRENCIES } from "../../../../../../../../core/helpers/constant/currencies";
-import { Validators } from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import { onlyLatin } from "../../../../../../../../core/helpers/validator/only-latin";
 import { onlyNumber } from "../../../../../../../../core/helpers/validator/only-number";
 import { onlyLatinAndNumber } from "../../../../../../../../core/helpers/validator/only-latin-and-number";
 import { ClientProfileTradebidService } from "../../../client-profile-tradebid.service";
+import {MatDialog} from "@angular/material/dialog";
 
 interface SelectItem {
 	id: string;
@@ -76,7 +75,7 @@ export class ChangeRfqFormComponent implements OnInit {
 		private categoriesService: CategoriesService,
 		private unitsService: UnitsService,
 		private translocoService: TranslocoService,
-		private dialogService: DialogService,
+		private dialog: MatDialog,
 		private hotToastService: HotToastService,
 		private router: Router,
 		private tradeBidService: TradebidService,
@@ -161,15 +160,15 @@ export class ChangeRfqFormComponent implements OnInit {
 		this.form
 			.get("productInformation")
 			.get("photos")
-			.valueChanges.subscribe((data) => {
+			.valueChanges.subscribe((data: string | any[]) => {
 				this.isFileLabelVisible = !(typeof data === "object" && data.length);
 			});
 		this.onResize();
 		this.patchValueToForm();
 	}
 
-	public openDocument(ev): void {
-		const document = this.form.value.documents.find((el) => el._id === ev.name);
+	public openDocument(ev: { name: any; }): void {
+		const document = this.form.value.documents.find((el: { _id: any; }) => el._id === ev.name);
 
 		const data = {
 			fullPath: environment.apiUrl + document.path,
@@ -178,7 +177,7 @@ export class ChangeRfqFormComponent implements OnInit {
 			isDocument: DocumentExtensions.includes(GetUrlExtension(document.path)),
 		};
 
-		this.dialogService.open(ClientOfferDocumentComponent, {
+		this.dialog.open(ClientOfferDocumentComponent, {
 			data,
 			width: "80vw",
 			height: "80vh",
@@ -250,14 +249,14 @@ export class ChangeRfqFormComponent implements OnInit {
 			shippingMethod: paymentShipping.shippingMethod,
 			paymentMethod: paymentShipping.paymentMethod,
 			destination: paymentShipping.destination,
-			rfqId: this.route.snapshot.params.id,
+			rfqId: this.route.snapshot.params["id"],
 		};
 	}
 
 	private getUnit(): Observable<any> {
 		return this.unitsService.getUnits().pipe(
 			map((units) =>
-				units.map((unit) => ({
+				units.map((unit: { name: string; }) => ({
 					...unit,
 					displayName: this.translocoService.translate(`UNITS.${unit.name.toUpperCase()}`),
 				}))
@@ -334,7 +333,7 @@ export class ChangeRfqFormComponent implements OnInit {
 	private getCategories(): Observable<any> {
 		return this.categoriesService
 			.getCategories()
-			.pipe(map(({ categories }) => categories.map((category) => ({ id: category._id, value: category.name }))));
+			.pipe(map(({ categories }) => categories.map((category: { _id: any; name: any; }) => ({ id: category._id, value: category.name }))));
 	}
 
 	@HostListener("window:resize", ["$event"])
@@ -343,7 +342,7 @@ export class ChangeRfqFormComponent implements OnInit {
 	}
 
 	private patchValueToForm(): void {
-		this.tradeBidService.getRfqById(this.route.snapshot.params.id).subscribe((el) => {
+		this.tradeBidService.getRfqById(this.route.snapshot.params['id']).subscribe((el) => {
 			this.form.patchValue({
 				productInformation: {
 					productName: el?.productName,
