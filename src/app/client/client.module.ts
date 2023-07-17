@@ -16,31 +16,33 @@ import { B2bNgxSelectModule } from "@b2b/ngx-select";
 import { ClientCookiesModalComponent } from "./components/client-cookies-modal/client-cookies-modal.component";
 import {ClientComponent} from "./layout/client.component";
 import {TranslocoModule} from "@ngneat/transloco";
+import {MaterialTreeviewComponent} from "./material-treeview/material-treeview.component";
 // import { CookieService } from "ngx-cookie-service";
 // import { TranslocoModule } from "@ngneat/transloco";
 @NgModule({
 	declarations: [ClientComponent, ClientFooterComponent, ClientCookiesModalComponent],
-    imports: [
-        CommonModule,
-        ClientRoutingModule,
-        RouterModule,
-        B2bNgxImageModule,
-        B2bNgxLinkModule,
-        B2bNgxIconModule,
-        B2bNgxButtonModule,
-        FormsModule,
-        ReactiveFormsModule,
-        B2bNgxInputModule,
-        B2bNgxButtonModule,
-        // B2bNgxTelModule,
-        // B2bNgxTextareaModule,
-        B2bNgxSelectModule,
-        TranslocoModule,
-        // NgxSmartModalModule.forChild(),
-        // SocketIoModule.forRoot({
-        // 	url: environment.apiUrl,
-        // }),
-    ],
+  imports: [
+    CommonModule,
+    ClientRoutingModule,
+    RouterModule,
+    B2bNgxImageModule,
+    B2bNgxLinkModule,
+    B2bNgxIconModule,
+    B2bNgxButtonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    B2bNgxInputModule,
+    B2bNgxButtonModule,
+    // B2bNgxTelModule,
+    // B2bNgxTextareaModule,
+    B2bNgxSelectModule,
+    TranslocoModule,
+    // NgxSmartModalModule.forChild(),
+    // SocketIoModule.forRoot({
+    // 	url: environment.apiUrl,
+    // }),
+    MaterialTreeviewComponent
+  ],
 	// providers: [CookieService],
 })
 export class ClientModule {}

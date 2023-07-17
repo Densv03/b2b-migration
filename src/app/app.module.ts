@@ -31,6 +31,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     TranslocoRootModule,
     BrowserAnimationsModule,
   ],
+  exports: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

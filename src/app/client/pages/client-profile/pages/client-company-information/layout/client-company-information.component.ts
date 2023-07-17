@@ -1,11 +1,11 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, Renderer2 } from "@angular/core";
 import { B2bNgxLinkThemeEnum } from "@b2b/ngx-link";
-import { B2bNgxInputThemeEnum } from "@b2b/ngx-input";
-import { B2bNgxSelectThemeEnum } from "@b2b/ngx-select";
+import {B2bNgxInputModule, B2bNgxInputThemeEnum} from "@b2b/ngx-input";
+import {B2bNgxSelectModule, B2bNgxSelectThemeEnum} from "@b2b/ngx-select";
 import { BehaviorSubject, combineLatest, Observable, of, tap } from "rxjs";
 import { TradebidService } from "../../../../client-tradebid/tradebid.service";
 import { filter, first, map } from "rxjs/operators";
-import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import { HotToastService } from "@ngneat/hot-toast";
 import { AuthService } from "../../../../../../auth/services/auth/auth.service";
 import { TranslocoService } from "@ngneat/transloco";
@@ -23,7 +23,14 @@ import { b2bNgxTel } from "../../../../../../core/helpers/validator/b2b-ngx-tel"
 import { UntilDestroy, untilDestroyed } from "@ngneat/until-destroy";
 import { B2bAuthRootRoleInterface} from "../../../../../../../../projects/shared/src/interfaces/b2b-auth-root-role.interface";
 import { Router } from "@angular/router";
-import {B2bNgxButtonThemeEnum} from "@b2b/ngx-button";
+import {B2bNgxButtonModule, B2bNgxButtonThemeEnum} from "@b2b/ngx-button";
+import {CommonModule, NgIf} from "@angular/common";
+import {B2bNgxCountrySelectModule} from "@b2b/ngx-country-select";
+import {B2bNgxTelModule} from "@b2b/ngx-tel";
+import {B2bNgxRadioModule} from "@b2b/ngx-radio";
+import {B2bNgxLogoModule} from "@b2b/ngx-logo";
+import {B2bNgxFileModule} from "@b2b/ngx-file";
+import {B2bNgxTextareaModule} from "@b2b/ngx-textarea";
 
 export interface SelectItem {
 	id: string;
@@ -44,23 +51,37 @@ interface SocialMediaButton {
 
 @UntilDestroy()
 @Component({
-	selector: "b2b-client-company-information",
-	templateUrl: "./client-company-information.component.html",
-	styleUrls: ["./client-company-information.component.scss"],
-	animations: [
-		trigger("fadeInOut", [
-			transition(":enter", [
-				// :enter is alias to 'void => *'
-				style({ opacity: 0 }),
-				animate(500, style({ opacity: 1 })),
-			]),
-			transition(":leave", [
-				// :leave is alias to '* => void'
-				animate(500, style({ opacity: 0 })),
-			]),
-		]),
-	],
-	changeDetection: ChangeDetectionStrategy.OnPush,
+  selector: "b2b-client-company-information",
+  templateUrl: "./client-company-information.component.html",
+  styleUrls: ["./client-company-information.component.scss"],
+  animations: [
+    trigger("fadeInOut", [
+      transition(":enter", [
+        // :enter is alias to 'void => *'
+        style({opacity: 0}),
+        animate(500, style({opacity: 1})),
+      ]),
+      transition(":leave", [
+        // :leave is alias to '* => void'
+        animate(500, style({opacity: 0})),
+      ]),
+    ]),
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [
+    ReactiveFormsModule,
+    B2bNgxInputModule,
+    CommonModule,
+    B2bNgxCountrySelectModule,
+    B2bNgxSelectModule,
+    B2bNgxTelModule,
+    B2bNgxRadioModule,
+    B2bNgxLogoModule,
+    B2bNgxFileModule,
+    B2bNgxButtonModule,
+    B2bNgxTextareaModule
+  ],
+  standalone: true
 })
 export class ClientCompanyInformationComponent implements OnInit {
 	public readonly b2bNgxLinkThemeEnum: typeof B2bNgxLinkThemeEnum = B2bNgxLinkThemeEnum;

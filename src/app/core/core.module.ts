@@ -19,19 +19,19 @@ import {HTTP_INTERCEPTORS} from "@angular/common/http";
 
 @NgModule({
 	declarations: [AppComponent, CoreComponent, ClientHeaderComponent],
-    imports: [
-        CommonModule,
-        CoreRoutingModule,
-        RouterOutlet,
-        TabsModule.forRoot(),
-        CarouselModule.forRoot(),
-        B2bNgxLinkModule,
-        B2bNgxIconModule,
-        B2bNgxButtonModule,
-        B2bNgxImageModule,
-        BrowserAnimationsModule,
-        TranslocoModule
-    ],
+  imports: [
+    CommonModule,
+    CoreRoutingModule,
+    RouterOutlet,
+    TabsModule.forRoot(),
+    CarouselModule.forRoot(),
+    B2bNgxLinkModule,
+    B2bNgxIconModule,
+    B2bNgxButtonModule,
+    B2bNgxImageModule,
+    BrowserAnimationsModule,
+    TranslocoModule,
+  ],
 	exports: [AppComponent],
   providers: [
     {

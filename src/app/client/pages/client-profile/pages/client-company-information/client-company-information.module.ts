@@ -15,7 +15,7 @@ import {B2bNgxRadioModule} from "@b2b/ngx-radio";
 import {B2bNgxLogoModule} from "@b2b/ngx-logo";
 
 @NgModule({
-	declarations: [ClientCompanyInformationComponent],
+	declarations: [],
   imports: [
     CommonModule,
     ClientCompanyInformationRoutingModule,
@@ -31,6 +31,7 @@ import {B2bNgxLogoModule} from "@b2b/ngx-logo";
     B2bNgxFileModule,
     B2bNgxLogoModule,
     B2bNgxRadioModule,
+    ClientCompanyInformationComponent
   ],
 })
 export class ClientCompanyInformationModule {}
