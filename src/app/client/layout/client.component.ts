@@ -7,8 +7,9 @@ import {combineLatest, Observable} from "rxjs";
 import {first} from "rxjs/operators";
 import {TradebidService} from "../pages/client-tradebid/tradebid.service";
 import {SeoService} from "../../core/services/seo/seo.service";
-import {ClientMarketplaceService} from "../pages/client-marketplace/client-marketplace.service";
 import {AuthService} from "../../auth/services/auth/auth.service";
+import {ClientMarketplaceService} from "../pages/client-marketplace/client-marketplace.service";
+import {FormControl, FormGroup} from "@angular/forms";
 
 @UntilDestroy()
 @Component({
@@ -48,7 +49,16 @@ export class ClientComponent implements OnInit {
 		this.seoService.addCanonicalRef();
 		this.initIntercomSettings();
 		this.addUserStatistics();
+    this.formGroup.valueChanges.subscribe(data => {
+      console.log('data from formcontrol', data)
+    });
+
+    this.formGroup.get('categories').setValue(["60a784830a04b16c574e8148", "60a784830a04b16c574e81c0"]);
 	}
+
+  public formGroup: FormGroup = new FormGroup<{categories: FormControl<string[]>}>({
+    categories: new FormControl([])
+  });
 
 	public addUserStatistics(): void {
 		if (!this.userService.getUser()) {
