@@ -1,4 +1,12 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnInit, Renderer2 } from "@angular/core";
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  CUSTOM_ELEMENTS_SCHEMA,
+  ElementRef,
+  OnInit,
+  Renderer2, ViewChild
+} from "@angular/core";
 import { B2bNgxInputThemeEnum } from "@b2b/ngx-input";
 import { ActivatedRoute, Router } from "@angular/router";
 import { ClientMarketplaceService } from "../../client-marketplace.service";
@@ -14,8 +22,11 @@ import { Category } from "../../shared/models/category.model";
 import { animate, style, transition, trigger } from "@angular/animations";
 import { UntilDestroy, untilDestroyed } from "@ngneat/until-destroy";
 import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
+import Swiper from "swiper";
+import {Navigation, Pagination} from "swiper/modules";
 
-// SwiperCore.use([Pagination, Navigation]);
+
+
 
 const breakpoints = {
 	320: {
@@ -74,7 +85,8 @@ export class ClientMarketplaceMainComponent implements OnInit {
 
 	public isAuth$: Observable<boolean>;
 
-	// private swiper: Swiper;
+  @ViewChild('swiperRef', { static: true }) _swiperRef: ElementRef;
+  swiper?: Swiper
 	constructor(
 		private readonly fb: FormBuilder,
 		private readonly router: Router,
@@ -140,18 +152,16 @@ export class ClientMarketplaceMainComponent implements OnInit {
 				filter((data) => data.length !== 0)
 			)
 			.subscribe(() => {
-				// this.swiper = new Swiper(".swiper", {
-				// 	navigation: {
-				// 		nextEl: ".swiper-button-next",
-				// 		prevEl: ".swiper-button-prev",
-				// 	},
-				// 	pagination: {
-				// 		el: ".swiper-pagination",
-				// 		dynamicBullets: true,
-				// 		clickable: true,
-				// 	},
-				// 	breakpoints,
-				// });
+        const swiperOptions = {
+          modules: [Navigation, Pagination],
+          navigation: {
+            nextEl: ".swiper-button-next",
+            prevEl: ".swiper-button-prev",
+          },
+          breakpoints,
+        }
+        Object.assign(this._swiperRef.nativeElement, swiperOptions);
+        this._swiperRef.nativeElement.initialize();
 			});
 	}
 

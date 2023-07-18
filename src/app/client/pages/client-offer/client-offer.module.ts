@@ -20,7 +20,7 @@ import { TranslocoModule } from "@ngneat/transloco";
 import { ClientOfferReportComponent } from "./components/client-offer-report/client-offer-report.component";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { ClientOfferContactSupplierComponent } from "./components/client-offer-contact-supplier/client-offer-contact-supplier.component";
-import {BrowserModule, Meta} from "@angular/platform-browser";
+import { Meta } from "@angular/platform-browser";
 import {NgxIntlTelInputModule} from "ngx-intl-tel-input";
 import {B2bNgxButtonModule} from "@b2b/ngx-button";
 import {
@@ -38,7 +38,6 @@ import {
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    BrowserModule,
     ClientOfferRoutingModule,
     ClientOfferReportComponent,
     // B2bNgxImagesCarouselModule,

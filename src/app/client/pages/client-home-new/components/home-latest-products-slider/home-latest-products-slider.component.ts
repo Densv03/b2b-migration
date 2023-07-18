@@ -1,9 +1,8 @@
-import {ChangeDetectionStrategy, Component, Input, OnInit} from '@angular/core';
-// import SwiperCore, {Navigation} from "swiper";
+import {AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 // @ts-ignore
 import {getName} from 'country-list'
+import {Navigation, Pagination} from "swiper/modules";
 
-// SwiperCore.use([Navigation]);
 
 const breakpoints = {
 	320: {
@@ -44,25 +43,36 @@ interface NavigationButtonsIds {
   styleUrls: ['./home-latest-products-slider.component.scss'],
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class HomeLatestProductsSliderComponent implements OnInit {
+export class HomeLatestProductsSliderComponent implements AfterViewInit {
 	@Input() navigationButtonsIds!: NavigationButtonsIds;
 	@Input() items: any;
+  @ViewChild('swiperRef', { static: true }) _swiperRef: ElementRef;
 
-	public swiperConfig: any;
   constructor() { }
 
-  ngOnInit(): void {
-		const {nextId, prevId} = this.navigationButtonsIds;
-		this.swiperConfig = {
-			navigation: {
-				nextEl: "#" + nextId,
-				prevEl: "#" + prevId,
-			},
-			breakpoints,
-		}
+  ngAfterViewInit() {
+    const {nextId, prevId} = this.navigationButtonsIds;
+    const swiperConfig = {
+      modules: [Navigation, Pagination],
+      navigation: {
+        nextEl: "#" + nextId,
+        prevEl: "#" + prevId,
+      },
+      injectStyles: [
+        `
+        .swiper-wrapper {
+          padding: 5px 0;
+        }
+        `
+      ],
+      breakpoints,
+    }
+
+    Object.assign(this._swiperRef.nativeElement, swiperConfig);
+    this._swiperRef.nativeElement.initialize();
   }
 
-	public getCountryName(countryCode: string): string {
+  public getCountryName(countryCode: string): string {
 		if (!countryCode) {
 			return "";
 		}

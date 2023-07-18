@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {HomeLatestProductsSliderComponent} from "./home-latest-products-slider.component";
 // import {SwiperModule} from "swiper/angular";
@@ -19,6 +19,7 @@ import {RouterModule} from "@angular/router";
 		B2bNgxIconModule,
 		B2bNgxImageModule,
 		RouterModule
-	]
+	],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class HomeLatestProductsSliderModule { }

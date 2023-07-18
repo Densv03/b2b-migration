@@ -5,7 +5,7 @@
 			<tab *ngFor="let tab of data; let idx = index" [heading]="$any(tab).name">
 			<b2b-home-latest-products-slider
 				[items]="$any(tab).products"
-				[navigationButtonsIds]="{nextId: 'prev-' + idx, prevId: 'next-' + idx}"
+				[navigationButtonsIds]="{nextId: 'next-' + idx, prevId: 'prev-' + idx}"
 			></b2b-home-latest-products-slider>
 			</tab>
 		</tabset>

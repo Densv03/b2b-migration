@@ -1,4 +1,4 @@
-import {NgModule} from "@angular/core";
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from "@angular/core";
 import {ClientMarketplaceMainComponent} from "./client-marketplace-main.component";
 import {RouterModule, Routes} from "@angular/router";
 import {CommonModule} from "@angular/common";
@@ -24,7 +24,8 @@ const routes: Routes = [{path: '', component: ClientMarketplaceMainComponent}]
 		B2bNgxSelectModule,
 		B2bNgxInputModule,
 		ReactiveFormsModule
-	]
+	],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 
 export class ClientMarketplaceMainModule {}
