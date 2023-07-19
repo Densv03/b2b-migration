@@ -1,15 +1,9 @@
-import {SelectionModel} from '@angular/cdk/collections';
-import {FlatTreeControl} from '@angular/cdk/tree';
 import {ChangeDetectorRef, Component, forwardRef, Input} from '@angular/core';
-import {MatTreeFlatDataSource, MatTreeFlattener, MatTreeModule} from '@angular/material/tree';
-import {MaterialTreeviewService} from "./material-treeview.service";
-import {MatCheckboxModule} from "@angular/material/checkbox";
-import {MatButtonModule} from "@angular/material/button";
-import {MatIconModule} from "@angular/material/icon";
-import {B2bNgxCheckboxModule} from "@b2b/ngx-checkbox";
+import {MaterialCategoriesTreeviewService} from "./material-categories-treeview.service";
+import {FlatTreeControl} from "@angular/cdk/tree";
+import {MatTreeFlatDataSource, MatTreeFlattener} from "@angular/material/tree";
+import {SelectionModel} from "@angular/cdk/collections";
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from "@angular/forms";
-import {CommonModule} from "@angular/common";
-
 
 export class CategoryItemNode {
   children: CategoryItemNode[] = [];
@@ -25,29 +19,21 @@ export class CategoryItemFlatNode {
 }
 
 @Component({
-  selector: 'b2b-material-treeview',
-  templateUrl: 'material-treeview.component.html',
-  styleUrls: ['material-treeview.component.scss'],
-  standalone: true,
+  selector: 'b2b-material-categories-treeview',
+  templateUrl: 'material-categories-treeview.component.html',
+  styleUrls: ['material-categories.component.scss'],
   providers: [
-    MaterialTreeviewService,
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => MaterialTreeviewComponent),
-      multi: true,
-    }],
-  imports: [
-    MatCheckboxModule,
-    MatButtonModule,
-    MatTreeModule,
-    MatIconModule,
-    B2bNgxCheckboxModule,
-    CommonModule
+      useExisting: forwardRef(() => MaterialCategoriesTreeviewComponent),
+      multi: true
+    }
   ]
 })
-export class MaterialTreeviewComponent implements ControlValueAccessor {
+export class MaterialCategoriesTreeviewComponent implements ControlValueAccessor {
   @Input() showSaveBtn: boolean;
   @Input() showBtnLabel: string;
+
   public flatNodeMap = new Map<CategoryItemFlatNode, CategoryItemNode>();
 
   public nestedNodeMap = new Map<CategoryItemNode, CategoryItemFlatNode>();
@@ -63,7 +49,7 @@ export class MaterialTreeviewComponent implements ControlValueAccessor {
   private onChange = (categories: string[]) => {};
   private onTouched = () => {};
 
-  constructor(private readonly _database: MaterialTreeviewService,
+  constructor(private readonly _database: MaterialCategoriesTreeviewService,
               private readonly c: ChangeDetectorRef) {
     this.treeFlattener = new MatTreeFlattener(
       this.transformer,

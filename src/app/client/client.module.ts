@@ -16,7 +16,7 @@ import { B2bNgxSelectModule } from "@b2b/ngx-select";
 import { ClientCookiesModalComponent } from "./components/client-cookies-modal/client-cookies-modal.component";
 import {ClientComponent} from "./layout/client.component";
 import {TranslocoModule} from "@ngneat/transloco";
-import {MaterialTreeviewComponent} from "./material-treeview/material-treeview.component";
+import {MaterialCategoriesTreeviewModule} from "@b2b/material-treeview";
 // import { CookieService } from "ngx-cookie-service";
 // import { TranslocoModule } from "@ngneat/transloco";
 @NgModule({
@@ -37,7 +37,7 @@ import {MaterialTreeviewComponent} from "./material-treeview/material-treeview.c
     // B2bNgxTextareaModule,
     B2bNgxSelectModule,
     TranslocoModule,
-    MaterialTreeviewComponent,
+    MaterialCategoriesTreeviewModule
     // NgxSmartModalModule.forChild(),
     // SocketIoModule.forRoot({
     // 	url: environment.apiUrl,

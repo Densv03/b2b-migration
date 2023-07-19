@@ -829,6 +829,37 @@
           }
         }
       }
+    },
+    "material-treeview": {
+      "projectType": "library",
+      "root": "projects/material-treeview",
+      "sourceRoot": "projects/material-treeview/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/material-treeview/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/material-treeview/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/material-treeview/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/material-treeview/src/test.ts",
+            "tsConfig": "projects/material-treeview/tsconfig.spec.json",
+            "karmaConfig": "projects/material-treeview/karma.conf.js"
+          }
+        }
+      }
     }
   },
   "cli": {
