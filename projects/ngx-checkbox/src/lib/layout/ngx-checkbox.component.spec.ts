@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { B2bCheckboxComponent } from "libs/ngx-checkbox/src/lib/layout/ngx-checkbox.component";
+import { B2bNgxCheckboxComponent } from "@b2b/ngx-checkbox";
 
 describe("CheckboxComponent", () => {
-	let component: B2bCheckboxComponent;
-	let fixture: ComponentFixture<B2bCheckboxComponent>;
+	let component: B2bNgxCheckboxComponent;
+	let fixture: ComponentFixture<B2bNgxCheckboxComponent>;
 
 	beforeEach(async () => {
 		await TestBed.configureTestingModule({
-			declarations: [B2bCheckboxComponent],
+			declarations: [B2bNgxCheckboxComponent],
 		}).compileComponents();
 	});
 
 	beforeEach(() => {
-		fixture = TestBed.createComponent(B2bCheckboxComponent);
+		fixture = TestBed.createComponent(B2bNgxCheckboxComponent);
 		component = fixture.componentInstance;
 		fixture.detectChanges();
 	});

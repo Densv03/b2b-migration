@@ -4,12 +4,12 @@ import {AuthRegisterBuyerCompanyInfoComponent} from "./auth-register-buyer-compa
 import {ReactiveFormsModule} from "@angular/forms";
 import {TranslocoModule} from "@ngneat/transloco";
 import {B2bNgxButtonModule} from "@b2b/ngx-button";
-// import {NgxCategoryDropdownsModule} from "../../../../../../../../../libs/ngx-category-dropdowns/src";
+// import {NgxCategoryDropdownsModule} from "../../../../../../../../../lib/ngx-category-dropdowns/src";
 import {B2bNgxSelectModule} from "@b2b/ngx-select";
 import {B2bNgxCountrySelectModule} from "@b2b/ngx-country-select";
-import {
-  NgxCategoryDropdownsModule
-} from "../../../../../../../projects/ngx-category-dropdowns/src/lib/ngx-category-dropdowns.module";
+// import {
+//   NgxCategoryDropdownsModule
+// } from "../../../../../../../projects/ngx-category-dropdowns/src/lib/ngx-category-dropdowns.module";
 
 
 @NgModule({
@@ -22,7 +22,7 @@ import {
 		ReactiveFormsModule,
 		TranslocoModule,
 		B2bNgxButtonModule,
-		NgxCategoryDropdownsModule,
+		// NgxCategoryDropdownsModule,
 		B2bNgxSelectModule,
 		B2bNgxCountrySelectModule
 	]

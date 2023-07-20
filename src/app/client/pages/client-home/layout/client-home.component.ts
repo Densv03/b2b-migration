@@ -3,7 +3,7 @@ import { TranslocoService } from "@ngneat/transloco";
 import { AuthService } from "apps/site/src/app/auth/services/auth/auth.service";
 import { OffersService } from "apps/site/src/app/client/services/offers/offers.service";
 import { AmplitudeService } from "apps/site/src/app/core/services/amplitude/amplitude.service";
-import { B2bNgxLinkService, B2bNgxLinkThemeEnum } from "libs/ngx-link/src";
+import { B2bNgxLinkService, B2bNgxLinkThemeEnum } from "lib/ngx-link/src";
 import { Observable } from "rxjs";
 import { map, tap } from "rxjs/operators";
 import { UserService } from "../../client-profile/services/user/user.service";

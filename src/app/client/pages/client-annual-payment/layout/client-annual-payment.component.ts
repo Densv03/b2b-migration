@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 import { FormBuilder } from "@ngneat/reactive-forms";
-import { B2bNgxButtonThemeEnum } from "libs/ngx-button/src";
-import { B2bNgxInputThemeEnum } from "libs/ngx-input/src";
+import { B2bNgxButtonThemeEnum } from "lib/ngx-button/src";
+import { B2bNgxInputThemeEnum } from "lib/ngx-input/src";
 import { B2bNgxLinkService, B2bNgxLinkThemeEnum } from "@b2b/ngx-link";
 import { PaymentService } from "../../../services/payment/payment.service";
 import { UntilDestroy, untilDestroyed } from "@ngneat/until-destroy";

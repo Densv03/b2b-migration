@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 import { B2bNgxButtonThemeEnum } from "@b2b/ngx-button";
-import { B2bNgxLinkService, B2bNgxLinkThemeEnum } from "libs/ngx-link/src";
+import { B2bNgxLinkService, B2bNgxLinkThemeEnum } from "lib/ngx-link/src";
 
 @Component({
 	selector: "b2b-client-annual-succeeded",

@@ -16,7 +16,7 @@ import {User} from "../../../../core/models/user/user.model";
 import {ApiService} from "../../../../core/services/api/api.service";
 import {siteLink} from "../../../../core/helpers/validator/site-link";
 import {animate, style, transition, trigger} from "@angular/animations";
-// import {B2bAuthRoleInterface} from "../../../../../../../../libs/shared/interfaces/src/lib/b2b-auth-role.interface";
+// import {B2bAuthRoleInterface} from "../../../../../../../../lib/shared/interfaces/src/lib/b2b-auth-role.interface";
 
 interface SelectItem {
 	id: string;

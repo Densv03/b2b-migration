@@ -11,9 +11,8 @@ import {
 import {CategoriesService} from "../../../../../src/app/client/services/categories/categories.service";
 import {BehaviorSubject, Observable, tap} from "rxjs";
 import {map} from "rxjs/operators";
-// import {TreeviewConfig} from "ngx-treeview";
-// import {FormBuilder, FormGroup} from "@ngneat/reactive-forms";
 import {ControlValueAccessor, FormBuilder, FormGroup, NG_VALUE_ACCESSOR} from "@angular/forms";
+import { TreeviewConfig } from "@b2b/ngx-treeview";
 
 @Component({
 	selector: "b2b-ngx-category-dropdowns",
@@ -37,13 +36,13 @@ export class NgxCategoryDropdownsComponent implements OnInit, ControlValueAccess
 	@Input() childCategoryLabel: string = "Select subcategory";
 	@Input() childCategoryPlaceholder: string = "Select subcategory";
 	public categories$: Observable<any> = this.getCategories$();
-	// public config: TreeviewConfig = TreeviewConfig.create({
-	// 	hasAllCheckBox: false,
-	// 	hasFilter: false,
-	// 	hasCollapseExpand: false,
-	// 	decoupleChildFromParent: false,
-	// 	maxHeight: 400,
-	// });
+	public config: TreeviewConfig = TreeviewConfig.create({
+		hasAllCheckBox: false,
+		hasFilter: false,
+		hasCollapseExpand: false,
+		decoupleChildFromParent: false,
+		maxHeight: 400,
+	});
 	public selectedSubcategories: string[] = [];
 	public form: FormGroup = this.fb.group({
 		categoryLevel1: [null],

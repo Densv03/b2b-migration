@@ -13,7 +13,7 @@ import { B2bNgxIconModule } from "@b2b/ngx-icon";
 import { CommonModule } from "@angular/common";
 import {
     CategoriesDialogModule
-} from "../../../../../../../../../../../libs/shared/components/categories-dialog/categories-dialog.module";
+} from "../../../../../../../../../../../lib/shared/components/categories-dialog/categories-dialog.module";
 
 @NgModule({
     imports: [

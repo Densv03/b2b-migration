@@ -8,7 +8,7 @@ import { ClientMarketplaceAddProductComponent } from "./components/client-market
 import { ClientMarketplaceSupplierListingComponent } from "./components/client-marketplace-supplier-listing/client-marketplace-supplier-listing.component";
 import { ClientMarketplaceSupplierFiltersComponent } from "./components/client-marketplace-supplier-filters/client-marketplace-supplier-filters.component";
 import { B2bNgxSelectModule } from "@b2b/ngx-select";
-// import { CategoriesDialogModule } from "../../../../../../../libs/shared/components/categories-dialog/categories-dialog.module";
+// import { CategoriesDialogModule } from "../../../../../../../lib/shared/components/categories-dialog/categories-dialog.module";
 import { B2bNgxCountrySelectModule } from "@b2b/ngx-country-select";
 import { ReactiveFormsModule } from "@angular/forms";
 import { B2bNgxButtonModule } from "@b2b/ngx-button";

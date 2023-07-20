@@ -17,7 +17,7 @@ import { UserService } from "apps/site/src/app/client/pages/client-profile/servi
 import { ChatService } from "apps/site/src/app/client/services/chat/chat.service";
 import { OffersService } from "apps/site/src/app/client/services/offers/offers.service";
 import { AmplitudeService } from "apps/site/src/app/core/services/amplitude/amplitude.service";
-import { B2bNgxButtonThemeEnum } from "libs/ngx-button/src";
+import { B2bNgxButtonThemeEnum } from "lib/ngx-button/src";
 import { BehaviorSubject, combineLatest, Observable } from "rxjs";
 import { filter, map, switchMap, tap } from "rxjs/operators";
 import { io } from "socket.io-client";

@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import {AuthRegisterComponent} from "../../auth-register.component";
 import {AuthRegisterAccountTypeComponent} from "./auth-register-account-type.component";
 import {ReactiveFormsModule} from "@angular/forms";
-// import {B2bNgxTelModule} from "../../../../../../../../../libs/ngx-tel/src/lib/ngx-tel.module";
+// import {B2bNgxTelModule} from "../../../../../../../../../lib/ngx-tel/src/lib/ngx-tel.module";
 import {B2bNgxCountrySelectModule} from "@b2b/ngx-country-select";
 import {B2bNgxSelectModule} from "@b2b/ngx-select";
 import {B2bNgxCheckboxModule} from "@b2b/ngx-checkbox";

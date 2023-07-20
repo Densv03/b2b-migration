@@ -1,0 +1,17 @@
+@import "projects/shared/src/styles";
+
+:host {
+	display: block;
+	text-align: center;
+	.ngx-divider-hr {
+		margin-bottom: -10px;
+		border: 1px solid #f3f6f8;
+	}
+	.ngx-divider-text {
+		font-weight: bold;
+		font-size: 14px;
+		color: #9fa4bb;
+		background-color: white;
+		padding: 0 14px;
+	}
+}

@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input } from "@angular/core";
 import { B2bNgxLinkService } from "@b2b/ngx-link";
 import { AmplitudeService } from "apps/site/src/app/core/services/amplitude/amplitude.service";
-import { B2bNgxButtonThemeEnum } from "libs/ngx-button/src";
+import { B2bNgxButtonThemeEnum } from "lib/ngx-button/src";
 
 @Component({
 	selector: "b2b-client-trading-wiki-list",

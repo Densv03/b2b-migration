@@ -11,8 +11,8 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { B2bNgxIconModule } from "@b2b/ngx-icon";
 import {B2bNgxButtonModule} from "@b2b/ngx-button";
 // import { B2bNgxFileModule } from "@b2b/ngx-file";
-// import { B2bNgxLogoModule } from "../../../../../../../../../libs/ngx-logo/src";
-// import { B2bNgxRadioModule } from "../../../../../../../../../libs/ngx-radio/src/lib/ngx-radio.module";
+// import { B2bNgxLogoModule } from "../../../../../../../../../lib/ngx-logo/src";
+// import { B2bNgxRadioModule } from "../../../../../../../../../lib/ngx-radio/src/lib/ngx-radio.module";
 
 @NgModule({
 	declarations: [ClientCompanyInformationComponent],

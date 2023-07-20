@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from "@angular/core";
 import { MarketProductModel } from "../../../../../client-marketplace/models/market-product.model";
-import {dropdownLabels} from "../../../../../../../../../../../libs/ngx-dropdown/src/lib/dropdown-labels.enum";
+import {dropdownLabels} from "../../../../../../../../../../../lib/ngx-dropdown/src/lib/dropdown-labels.enum";
 import {EditMode} from "../client-profile-marketplace-edit-product/client-profile-marketplace-edit-product.component";
 import {Router} from "@angular/router";
 import {HotToastService} from "@ngneat/hot-toast";
