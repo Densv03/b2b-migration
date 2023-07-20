@@ -373,17 +373,17 @@ const routes: Routes = [
 					},
 				},
 			},
-			// {
-			// 	path: "profile",
-			// 	canActivate: [AuthGuard],
-			// 	loadChildren: () => import("./pages/client-profile/client-profile.module").then((m) => m.ClientProfileModule),
-			// 	data: {
-			// 		meta: {
-			// 			title: "B2B Discount - Buy and Sell B2B Cargo with Discount!",
-			// 			description: "B2B Discount - Profile",
-			// 		},
-			// 	},
-			// },
+			{
+				path: "profile",
+				canActivate: [AuthGuard],
+				loadChildren: () => import("./pages/client-profile/client-profile.module").then((m) => m.ClientProfileModule),
+				data: {
+					meta: {
+						title: "B2B Discount - Buy and Sell B2B Cargo with Discount!",
+						description: "B2B Discount - Profile",
+					},
+				},
+			},
 			// {
 			// 	path: "offer",
 			// 	canActivate: [AuthGuard, CompanyInformationGuard, BuyerGuard],

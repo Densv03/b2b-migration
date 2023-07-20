@@ -5,10 +5,10 @@
 
 	<ul *ngIf="isMenuShow" class="ngx-dropdown">
 		<li *ngFor="let option of options">
-			<button b2bNgxButton class="ngx-dropdown-button" (click)="callOptionFunc($event, option)">
-				<img b2bNgxIcon class="ngx-dropdown-button-icon" [name]="option.icon" />
-				<span [class]="option.className + ' ngx-dropdown-text'">{{ option.label }}</span>
-			</button>
+      <button b2bNgxButton class="ngx-dropdown-button" (click)="callOptionFunc($event, option)">
+        <img b2bNgxIcon class="ngx-dropdown-button-icon" [name]="option.icon" />
+        <span [class]="option.className + ' ngx-dropdown-text'">{{ option.label }}</span>
+      </button>
 		</li>
 	</ul>
 </div>

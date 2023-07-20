@@ -7,7 +7,7 @@ import {UserService} from "../../../services/user/user.service";
 	styleUrls: ["./client-profile-unclaimed-cargo.component.scss"],
 })
 export class ClientProfileUnclaimedCargoComponent {
-	public isBuyerAccount = this.userService.getUser().rootRole.displayName === 'Buyer';
+	public isBuyerAccount = this.userService.getUser().rootRole?.displayName === 'Buyer';
 	constructor(private userService: UserService) {}
 
 }
