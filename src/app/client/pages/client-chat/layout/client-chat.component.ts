@@ -7,14 +7,14 @@ import {
 	OnInit,
 	ViewChild,
 } from "@angular/core";
-import { B2bNgxButtonThemeEnum } from "libs/ngx-button/src";
+import { B2bNgxButtonThemeEnum} from "@b2b/ngx-button";
 import { ActivatedRoute } from "@angular/router";
 import { UntilDestroy, untilDestroyed } from "@ngneat/until-destroy";
-import { ChatService } from "apps/site/src/app/client/services/chat/chat.service";
+import { ChatService} from "../../../services/chat/chat.service";
 import { BehaviorSubject, combineLatest, Observable } from "rxjs";
 import { filter, map, switchMap, tap } from "rxjs/operators";
-import { UserService } from "apps/site/src/app/client/pages/client-profile/services/user/user.service";
-import { OffersService } from "apps/site/src/app/client/services/offers/offers.service";
+import { UserService} from "../../client-profile/services/user/user.service";
+import { OffersService} from "../../../services/offers/offers.service";
 import { FormBuilder, FormGroup } from "@angular/forms";
 import { io } from "socket.io-client";
 import { AuthService } from "../../../../auth/services/auth/auth.service";
@@ -142,7 +142,7 @@ export class ClientChatComponent implements OnInit, OnDestroy {
 						}, 0);
 					}),
 					map((messages) =>
-						messages.map((message) => {
+						messages.map((message: any) => {
 							const dispayInfoOf =
 								chat.seller?._id === message?.author
 									? this._translocoService.translate("CHAT.SELLER")
@@ -169,19 +169,18 @@ export class ClientChatComponent implements OnInit, OnDestroy {
 		);
 	}
 
-	public enterPressed(event) {
+	public enterPressed(event: KeyboardEvent) {
 		this.sendMessage(this.formGroup.get("message").value);
 		event.preventDefault();
 	}
 
-	public async sendMessage(body) {
+	public async sendMessage(body: string) {
 		if (!body) {
 			return;
 		}
 
 		this.chatInfo$.pipe(untilDestroyed(this)).subscribe((chatInfo) => {
 			const user = this._usersService.getUser();
-			this._ampService.logEvent("Message sent");
 			this._socket.emit("message", {
 				type: "text",
 				body,
@@ -194,26 +193,26 @@ export class ClientChatComponent implements OnInit, OnDestroy {
 	}
 
 	public subscribeOnMessage() {
-		return this._socket.on("message", (message) => {
+		return this._socket.on("message", (message: any) => {
 			const history = this._messagesHistoryBehaviourSubject.getValue();
 			this._messagesHistoryBehaviourSubject.next([...history, message]);
 		});
 	}
 
 	public subscribeOnChatInfo() {
-		return this._socket.on("chat_info", (chatInfo) => {
+		return this._socket.on("chat_info", (chatInfo: any) => {
 			this._socketService.readMessages(chatInfo.unreadMessagesCount);
 			this._chatInfoBehaviourSubject.next(chatInfo);
 		});
 	}
 
 	public subscribeOnMessageHistory() {
-		return this._socket.on("message_history", (message_history) => {
+		return this._socket.on("message_history", (message_history: any) => {
 			this._messagesHistoryBehaviourSubject.next(message_history);
 		});
 	}
 
-	openConnection(token) {
+	openConnection(token: string) {
 		if (this._socket) {
 			this._socket.disconnect();
 		}
@@ -285,9 +284,6 @@ export class ClientChatComponent implements OnInit, OnDestroy {
 				})
 			)
 			.subscribe(() => {
-				this._ampService.logEvent("Press contact request");
-				this._ampService.logEvent("Contact request sent");
-				this._ampService.logEvent("Get contact request");
 				this.displayContactsRequested = false;
 				this.displayRequestContacts = false;
 				this.changeDetectorRef.detectChanges();
@@ -295,8 +291,6 @@ export class ClientChatComponent implements OnInit, OnDestroy {
 	}
 
 	openContacts() {
-		this._ampService.logEvent("Contact request approved");
-
 		this._chatsService.sendContacts(this.chat.offer, this.chat.buyer._id);
 		// this._hotToastService.success("Contacts sent successfully!");
 

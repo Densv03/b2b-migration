@@ -7,7 +7,7 @@ import { HotToastService } from "@ngneat/hot-toast";
 import { FormBuilder, FormControl } from "@ngneat/reactive-forms";
 import { TranslocoService } from "@ngneat/transloco";
 import { UntilDestroy, untilDestroyed } from "@ngneat/until-destroy";
-import { B2bNgxLinkService } from "libs/ngx-link/src";
+import { B2bNgxLinkService } from "lib/ngx-link/src";
 import { ApiService } from "../../../../core/services/api/api.service";
 
 export function password(): ValidatorFn {

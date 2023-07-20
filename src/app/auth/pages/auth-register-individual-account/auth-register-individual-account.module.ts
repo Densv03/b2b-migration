@@ -22,7 +22,7 @@ import { AuthRegisterIndividualAccountFirstStepComponent } from "../auth-registe
 import { AuthRegisterIndividualAccountSecondStepComponent } from "../auth-register-individual-account-second-step/auth-register-individual-account-second-step.component";
 // import {
 //     CategoriesDialogModule
-// } from "../../../../../../../libs/shared/components/categories-dialog/categories-dialog.module";
+// } from "../../../../../../../lib/shared/components/categories-dialog/categories-dialog.module";
 
 @NgModule({
 	declarations: [

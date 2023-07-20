@@ -17,9 +17,6 @@ export class ClientTradingWikiListComponent {
 		this.b2bNgxButtonThemeEnum = B2bNgxButtonThemeEnum;
 	}
 
-	processArticleClick(id) {
-		this._ampService.logEvent("View article", {
-			num: id,
-		});
+	processArticleClick(id: any) {
 	}
 }

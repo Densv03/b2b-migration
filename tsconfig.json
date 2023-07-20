@@ -84,8 +84,17 @@
       "@b2b/ngx-multiselect": [
         "projects/ngx-multiselect/src/public-api"
       ],
+      "@b2b/material-treeview": [
+        "projects/material-categories-treeview/src/public-api"
+      ],
       "@b2b/ngx-social-medias": [
         "projects/ngx-social-medias/src/public-api"
+      ],
+      "@b2b/ngx-divider": [
+        "projects/ngx-divider/src/public-api"
+      ],
+      "@b2b/ngx-treeview": [
+        "projects/ngx-treeview/src/public-api"
       ],
       "@b2b/ngx-chips": [
         "projects/ngx-chips/src/public-api"

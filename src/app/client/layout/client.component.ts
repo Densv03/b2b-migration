@@ -8,7 +8,7 @@ import {first} from "rxjs/operators";
 import {TradebidService} from "../pages/client-tradebid/tradebid.service";
 import {SeoService} from "../../core/services/seo/seo.service";
 import {AuthService} from "../../auth/services/auth/auth.service";
-import {ClientMarketplaceService} from "../shared/services/client-marketplace-service/client-marketplace.service";
+import {ClientMarketplaceService} from "../pages/client-marketplace/client-marketplace.service";
 
 @UntilDestroy()
 @Component({

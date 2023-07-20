@@ -1,0 +1,50 @@
+<ng-template
+	#itemTemplate
+	let-item="item"
+	let-onCollapseExpand="onCollapseExpand"
+	let-onCheckedChange="onCheckedChange">
+	<div class="ngx-treeview-item-button">
+		<label class="ngx-checkbox" *ngIf="!item.text.includes('hide')">
+			<input
+				class="ngx-checkbox__input"
+				type="checkbox"
+				[(ngModel)]="item.checked"
+				(ngModelChange)="onCheckedChange(); onCollapseExpand()" />
+			<span class="ngx-checkbox__icon"><img b2bNgxIcon name="check-white" /></span>
+		</label>
+
+		<span
+			class="ngx-treeview-item-button-checkbox-text"
+			(click)="item.checked = !item.checked; item.text.includes('hide') || onCheckedChange(); onCollapseExpand()"
+			>{{ item.text.replace("hide", "") }}</span
+		>
+		<img
+			*ngIf="item.children"
+			b2bNgxIcon
+			class="ngx-treeview-item-button-arrow"
+			[class.collapsed]="item.collapsed"
+			name="arrow-down-2"
+			(click)="onCollapseExpand()" />
+	</div>
+</ng-template>
+
+<ng-template #headerTemplate let-config="config" let-onFilterTextChange="onFilterTextChange">
+	<div *ngIf="config.hasFilter" class="row row-filter">
+		<div class="col-12">
+			<input class="form-control" type="text" (ngModelChange)="onFilterTextChange($event)" />
+			<!-- <input class="form-control" type="text" [(ngModel)]="filterText" (ngModelChange)="onFilterTextChange($event)" /> -->
+		</div>
+		<button class="save-btn" type="button" (click)="close()">{{ buttonName || "Save" }}</button>
+	</div>
+</ng-template>
+
+<label class="ngx-treeview-label">{{ label }}</label>
+<div class="ngx-treeview" [ngClass]="position + ' ' + theme">
+	<ngx-dropdown-treeview
+		buttonClass="ngx-treeview-button"
+		[config]="config"
+		[items]="itemsToDisplay"
+		[itemTemplate]="itemTemplate"
+		[headerTemplate]="headerTemplate"
+		(selectedChange)="emitChanges($event)"></ngx-dropdown-treeview>
+</div>

@@ -1,9 +1,8 @@
-import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component} from '@angular/core';
 import {B2bNgxLinkService, B2bNgxLinkThemeEnum} from "@b2b/ngx-link";
 import {B2bNgxButtonThemeEnum} from "@b2b/ngx-button";
 import {BehaviorSubject} from "rxjs";
 import {environment} from "../../../../environments/environment.prod";
-import {Location} from "@angular/common";
 import {B2bNgxInputThemeEnum} from "@b2b/ngx-input";
 import {animate, style, transition, trigger} from "@angular/animations";
 import {AbstractControl, FormBuilder, FormGroup, Validators} from "@angular/forms";

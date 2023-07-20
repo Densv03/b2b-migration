@@ -127,7 +127,7 @@ export class ClientOfferChatComponent implements OnInit, OnDestroy {
 
 		return combineLatest([user$, offer$]).pipe(
 			filter(([user, offer]) => !!user && !!offer),
-			switchMap(([user, offer]) =>
+			switchMap(([user, offer]: [any, any]) =>
 				this._messagesHistory$.pipe(
 					tap(() => {
 						setTimeout(() => {
@@ -135,7 +135,7 @@ export class ClientOfferChatComponent implements OnInit, OnDestroy {
 						}, 0);
 					}),
 					map((messages) =>
-						messages.map((message) => {
+						messages.map((message: any) => {
 							const isSeller = offer.user === message.author;
 							const author = isSeller
 								? message.contact?.personName || `${this._translocoService.translate("CHAT.SELLER")} of ${offer.title}`
@@ -158,12 +158,12 @@ export class ClientOfferChatComponent implements OnInit, OnDestroy {
 		);
 	}
 
-	public enterPressed(event) {
+	public enterPressed(event: any) {
 		this.sendMessage(this.formGroup.get("message").value);
 		event.preventDefault();
 	}
 
-	public async sendMessage(body) {
+	public async sendMessage(body: any) {
 		if (!body) {
 			return;
 		}
@@ -176,19 +176,18 @@ export class ClientOfferChatComponent implements OnInit, OnDestroy {
 				offerId: chatInfo.offer._id,
 			});
 		});
-		this._ampService.logEvent("Message sent");
 		this.formGroup.get("message").reset();
 	}
 
 	public subscribeOnMessage() {
-		return this._socket.on("message", (message) => {
+		return this._socket.on("message", (message: any) => {
 			const history = this._messagesHistoryBehaviourSubject.getValue();
 			this._messagesHistoryBehaviourSubject.next([...history, message]);
 		});
 	}
 
 	public subscribeOnChatInfo() {
-		return this._socket.on("chat_info", (chatInfo) => {
+		return this._socket.on("chat_info", (chatInfo: any) => {
 			this._socketService.readMessages(chatInfo.unreadMessagesCount);
 			this._chatInfoBehaviourSubject.next(chatInfo);
 
@@ -216,12 +215,12 @@ export class ClientOfferChatComponent implements OnInit, OnDestroy {
 	}
 
 	public subscribeOnMessageHistory() {
-		return this._socket.on("message_history", (message_history) => {
+		return this._socket.on("message_history", (message_history: any) => {
 			this._messagesHistoryBehaviourSubject.next(message_history);
 		});
 	}
 
-	openConnection(token) {
+	openConnection(token: any) {
 		if (this._socket) {
 			this._socket.disconnect();
 		}
@@ -244,7 +243,7 @@ export class ClientOfferChatComponent implements OnInit, OnDestroy {
 
 		combineLatest([offer$, token$, user$])
 			.pipe(untilDestroyed(this))
-			.subscribe(([offer, token]) => {
+			.subscribe(([offer, token]: any) => {
 				this.openConnection(token);
 
 				this.subscribeOnMessageHistory();

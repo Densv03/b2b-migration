@@ -11,26 +11,30 @@ import {B2bNgxIconModule} from "@b2b/ngx-icon";
 import {ReactiveFormsModule} from "@angular/forms";
 import {B2bNgxInputModule} from "@b2b/ngx-input";
 import {B2bNgxCheckboxModule} from "@b2b/ngx-checkbox";
+import {NgxPasswordModule} from "@b2b/ngx-password";
+import {B2bNgxDividerModule} from "@b2b/ngx-divider";
 
 const routes: Routes = [{path: '', component: AuthEnterCredentialsComponent}];
 
 
 @NgModule({
   declarations: [AuthEnterCredentialsComponent],
-    imports: [
-        CommonModule,
-        RouterModule.forChild(routes),
-        B2bNgxLinkModule,
-        // B2bNgxDividerModule,
-        B2bNgxButtonModule,
-        B2bNgxImageModule,
-        TranslocoModule,
-        B2bNgxIconModule,
-        // ErrorTailorModule,
-        ReactiveFormsModule,
-        B2bNgxInputModule,
-        B2bNgxCheckboxModule,
-        // NgxPasswordModule
-    ]
+  imports: [
+    CommonModule,
+    RouterModule.forChild(routes),
+    B2bNgxLinkModule,
+    // B2bNgxDividerModule,
+    B2bNgxButtonModule,
+    B2bNgxImageModule,
+    TranslocoModule,
+    B2bNgxIconModule,
+    // ErrorTailorModule,
+    ReactiveFormsModule,
+    B2bNgxInputModule,
+    B2bNgxCheckboxModule,
+    NgxPasswordModule,
+    B2bNgxDividerModule,
+    // NgxPasswordModule
+  ]
 })
 export class AuthEnterCredentialsModule { }

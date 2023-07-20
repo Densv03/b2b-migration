@@ -54,7 +54,7 @@ export class ClientHomeOldComponent {
 		return this._offersService.getActiveOffers();
 	}
 
-	processVideoClick(event) {
+	processVideoClick(event: any) {
 		const percents = (event.currentTime * 100) / event.duration;
 
 		const breakpoints = [0, 25, 50, 75, 100];
@@ -66,12 +66,10 @@ export class ClientHomeOldComponent {
 		const minIndex = differenece.indexOf(Math.min(...differenece.reverse()));
 
 		const percent = breakpoints[breakpoints.length - 1 - minIndex];
-		this._ampService.logEvent("View video", {
-			type: percent.toString() + "%",
-		});
+
 	}
 
-	processTitleBtnsClick(name, type) {
-		this._ampService.logEvent(name, type);
+	processTitleBtnsClick(name: any, type: any) {
+
 	}
 }
