@@ -23,7 +23,7 @@ export class ClientProfileMarketplaceComponent implements OnInit {
 	public archievedProducts$: Observable<any[]>;
 	public chats$: Observable<any[]>;
 
-	public isBuyerAccount = this.userService.getUser().rootRole.displayName === 'Buyer';
+	public isBuyerAccount = this.userService.getUser().rootRole?.displayName === 'Buyer';
 
 	public isUserAbleToUseMarketplace: boolean = this.userService.isUserAbleToUseMarketplace;
 
