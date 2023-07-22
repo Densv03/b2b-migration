@@ -1,0 +1,11 @@
+.admin {
+	display: flex;
+	min-height: 100vh;
+
+	background-color: #f3f6f8;
+
+	.admin-pages {
+		flex: 1;
+		overflow: hidden;
+	}
+}

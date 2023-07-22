@@ -1,0 +1,20 @@
+<ul class="admin-articles-list">
+	<li *ngFor="let article of articles" class="admin-articles-list-item">
+		<a [routerLink]="article._id" class="admin-articles-list-item-link">
+			<img class="admin-articles-list-item-img" b2bNgxImage [name]="article.image?.lg" />
+			<div class="admin-articles-list-item-info">
+				<p class="admin-articles-list-item-info-title">{{ article.title }}</p>
+				<p class="admin-articles-list-item-info-additional">
+					<span class="admin-articles-list-item-info-added">{{ article.author }}</span>
+				</p>
+			</div>
+			<div class="admin-articles-list-item-more">
+				<b2b-ngx-dropdown [options]="menuOptions" [optionToReturn]="article">
+					<button b2bNgxButton class="flex items-center">
+						<img b2bNgxIcon name="more" />
+					</button>
+				</b2b-ngx-dropdown>
+			</div>
+		</a>
+	</li>
+</ul>

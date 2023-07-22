@@ -1,0 +1,114 @@
+<form [formGroup]="formGroup" class="admin-article" (ngSubmit)="onSubmit(formGroup.value)" *transloco="let t">
+	<p class="admin-article__label">{{ formGroup.get("_id").value ? "Edit an post" : "Add an post" }}</p>
+	<b2b-ngx-file formControlName="image" class="admin-article__image">Image</b2b-ngx-file>
+
+	<div class="admin-article__main">
+		<b2b-ngx-input
+			formControlName="title"
+			class="admin-article__input"
+			[label]="t('LABELS.ARTICLE_LABEL')"
+			placeholder="Enter post label"></b2b-ngx-input>
+		<b2b-ngx-input
+			formControlName="author"
+			class="admin-article__input"
+			[label]="t('LABELS.ARTICLE_AUTHOR')"
+			placeholder="Enter post author"></b2b-ngx-input>
+	</div>
+
+	<div class="admin-article__categories">
+		<div class="admin-article__category">
+			<b2b-ngx-select
+				formControlName="level1Category"
+				placeholder="Select category"
+				[options]="level1Categories"
+				bindValue="_id"
+				bindLabel="name"
+				[theme]="b2bNgxSelectThemeEnum.BACKGROUND_GRAY"></b2b-ngx-select>
+		</div>
+		<div class="admin-article__sub-category">
+			<b2b-ngx-select
+				formControlName="level2Category"
+				placeholder="Select subcategory"
+				[options]="level2Categories"
+				bindValue="_id"
+				bindLabel="name"
+				[theme]="b2bNgxSelectThemeEnum.BACKGROUND_GRAY"></b2b-ngx-select>
+		</div>
+	</div>
+
+	<div class="admin-article__additional">
+		<b2b-ngx-country-select
+			formControlName="country"
+			[theme]="b2bNgxSelectThemeEnum.BACKGROUND_GRAY"
+			class="admin-article__country"
+			placeholder="Select Country"></b2b-ngx-country-select>
+
+		<div class="admin-article__tags">
+			<b2b-ngx-chips
+				formControlName="tags"
+				(searched)="setSearch($event)"
+				[searchedOptions]="searchedOptions$ | async"></b2b-ngx-chips>
+		</div>
+	</div>
+
+	<div class="admin-article__main">
+		<input
+			type="text"
+			b2bNgxInput
+			[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"
+			formControlName="shortDescription"
+			placeholder="Enter short description of this article (up to 140 symbols)" />
+	</div>
+
+	<angular-editor
+		class="admin-article__description"
+		formControlName="description"
+		[config]="editorConfig"></angular-editor>
+
+	<div *ngIf="blogAction === blogActionEnum.EDIT" class="image-alts">
+		<div class="image-alts__input">
+			<input
+				type="text"
+				b2bNgxInput
+				[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"
+				placeholder="Enter alt for picture 1"
+				label="Alt for picture 1"
+				formControlName="alt1" />
+		</div>
+		<div class="image-alts__input">
+			<input
+				type="text"
+				b2bNgxInput
+				[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"
+				placeholder="Enter alt for picture 2"
+				label="Alt for picture 2"
+				formControlName="alt2" />
+		</div>
+		<div class="image-alts__input">
+			<input
+				type="text"
+				b2bNgxInput
+				[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"
+				placeholder="Enter alt for picture 3"
+				label="Alt for picture 3"
+				formControlName="alt3" />
+		</div>
+		<div class="image-alts__input">
+			<input
+				type="text"
+				b2bNgxInput
+				[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"
+				placeholder="Enter alt for picture 4"
+				label="Alt for picture 4"
+				formControlName="alt4" />
+		</div>
+	</div>
+
+	<div *ngIf="blogAction === blogActionEnum.CREATE" class="image-alts__tooltip">
+		To change alts for picture, edit this post after creation
+	</div>
+
+	<button b2bNgxButton class="admin-article__button" [theme]="b2bNgxButtonThemeEnum.BACKGROUND_BLACK">
+		{{ formGroup.get("_id").value ? "Update an post" : "Create an post" }}
+	</button>
+</form>

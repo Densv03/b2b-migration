@@ -1,0 +1,144 @@
+<form [formGroup]="filtersForm" class="admin-users-filters">
+	<div class="admin-users-filters__wrapper">
+		<div>
+			<b2b-ngx-select
+				formControlName="userType"
+				placeholder="Select user type"
+				[options]="userRoles$ | async"
+				bindValue="_id"
+				bindLabel="displayName"
+				[multiple]="true"
+				[theme]="b2bNgxSelectThemeEnum.BACKGROUND_WHITE"
+				>User type</b2b-ngx-select
+			>
+		</div>
+		<div>
+			<input
+				b2bNgxInput
+				ngxDaterangepickerMd
+				[theme]="b2bNgxInputThemeEnum.BACKGROUND_WHITE"
+				label="Registration Time"
+				type="text"
+				[showClearButton]="true"
+				formControlName="registrationDate"
+				name="daterange" />
+		</div>
+		<div>
+			<input
+				b2bNgxInput
+				[theme]="b2bNgxInputThemeEnum.BACKGROUND_WHITE"
+				label="Full Name"
+				placeholder="Enter full name"
+				type="text"
+				matInput
+				formControlName="fullName"
+				name="fullName" />
+		</div>
+		<div>
+			<input
+				b2bNgxInput
+				[theme]="b2bNgxInputThemeEnum.BACKGROUND_WHITE"
+				label="Company"
+				placeholder="Enter company"
+				type="text"
+				matInput
+				formControlName="company"
+				name="company" />
+		</div>
+		<div>
+			<input
+				b2bNgxInput
+				[theme]="b2bNgxInputThemeEnum.BACKGROUND_WHITE"
+				label="Email"
+				placeholder="Enter email"
+				type="text"
+				matInput
+				formControlName="email"
+				name="email" />
+		</div>
+
+		<div>
+			<b2b-ngx-country-select
+				[multiple]="true"
+				formControlName="country"
+				[theme]="b2bNgxSelectThemeEnum.BACKGROUND_WHITE"
+				placeholder="Select Country"
+				>Country</b2b-ngx-country-select
+			>
+		</div>
+		<div>
+			<b2b-ngx-country-select
+				[multiple]="true"
+				formControlName="excludeCountry"
+				[theme]="b2bNgxSelectThemeEnum.BACKGROUND_WHITE"
+				placeholder="Select Country to exclude"
+				>Country</b2b-ngx-country-select
+			>
+			<input
+				b2bNgxInput
+				[theme]="b2bNgxInputThemeEnum.BACKGROUND_WHITE"
+				label="Website"
+				type="text"
+				placeholder="Enter website"
+				matInput
+				formControlName="website"
+				name="website" />
+		</div>
+
+		<div>
+			<input
+				b2bNgxInput
+				ngxDaterangepickerMd
+				[theme]="b2bNgxInputThemeEnum.BACKGROUND_WHITE"
+				label="Last Activity"
+				type="text"
+				[showClearButton]="true"
+				formControlName="lastActivity"
+				name="daterange" />
+		</div>
+		<div>
+			<input
+				b2bNgxInput
+				ngxDaterangepickerMd
+				[theme]="b2bNgxInputThemeEnum.BACKGROUND_WHITE"
+				label="Offers placed time"
+				type="text"
+				[showClearButton]="true"
+				formControlName="offerTime"
+				name="daterange" />
+		</div>
+		<div>
+			<b2b-ngx-tel
+				[theme]="b2bNgxInputThemeEnum.BACKGROUND_WHITE"
+				placeholder="phone number"
+				formControlName="phone"
+				>Phone</b2b-ngx-tel
+			>
+		</div>
+		<div>
+			<b2b-ngx-select
+				formControlName="socialAuthType"
+				placeholder="Select social auth type"
+				[options]="socialAuthTypesOptions"
+				bindValue="value"
+				bindLabel="label"
+				[multiple]="true"
+				[theme]="b2bNgxSelectThemeEnum.BACKGROUND_WHITE"
+				>Social auth type</b2b-ngx-select
+			>
+		</div>
+	</div>
+	<div class="admin-users-filters__categories">
+		<b2b-ngx-treeview
+			formControlName="preferences"
+			theme="white"
+			[items]="parsedCategories"
+			label="Preferences"
+			position="right"></b2b-ngx-treeview>
+		<div class="admin-users-filters__categories--toggles">
+			<b2b-ngx-toggle formControlName="categoryOneOrFilterType" customLabel="category__1 OR"></b2b-ngx-toggle>
+			<b2b-ngx-toggle formControlName="categoryTwoOrFilterType" customLabel="category__2 OR"></b2b-ngx-toggle>
+			<b2b-ngx-toggle formControlName="categoryThreeOrFilterType" customLabel="category__3 OR"></b2b-ngx-toggle>
+		</div>
+	</div>
+</form>

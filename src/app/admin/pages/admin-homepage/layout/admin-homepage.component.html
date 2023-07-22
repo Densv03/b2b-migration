@@ -1,0 +1,53 @@
+<form [formGroup]="form">
+	<div *ngIf="categories$ | async as categories" formArrayName="categories">
+		<div *ngFor="let parentCategoryControl of categoriesFormArray.controls; let parentIndex = index">
+			<div [formGroupName]="parentIndex" class="d-flex" style="flex-wrap: wrap">
+				<b2b-ngx-select
+					placeholder="Select parent category"
+					[options]="categories"
+					formControlName="parentCategory"
+					bindValue="_id"
+					bindLabel="name"
+					style="width: 70%"></b2b-ngx-select>
+				<button
+					b2bNgxButton
+					[theme]="b2bNgxButtonThemeEnum.BACKGROUND_BLUE"
+					style="width: 15%"
+					(click)="toggleCollapse(parentIndex)">
+					{{ parentCategoryControl.value.collapsed ? "Expand" : "Collapse" }}
+				</button>
+
+				<button
+					b2bNgxButton
+					[theme]="b2bNgxButtonThemeEnum.BACKGROUND_BLUE"
+					(click)="removeCategory(parentIndex)"
+					style="width: 15%">
+					Remove category
+				</button>
+
+				<div
+					[class.d-none]="!parentCategoryControl.value.parentCategory || parentCategoryControl.value.collapsed"
+					class="w-100">
+					<p *ngFor="let product of parentCategoryControl.value.productIds; let childIndex = index">
+						<input
+							(click)="onInputClick(parentIndex, childIndex)"
+							type="text"
+							b2bNgxInput
+							[theme]="b2bNgxInputThemeEnum.BACKGROUND_WHITE"
+							placeholder="Enter product url "
+							[label]="'Enter url ' + getLabel(childIndex)"
+							[class]="'url-input-' + parentIndex"/>
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="d-flex pt-2">
+		<button b2bNgxButton [theme]="b2bNgxButtonThemeEnum.BACKGROUND_BLUE" (click)="addCategory()" class="w-50 py-2">
+			Add category
+		</button>
+		<button b2bNgxButton [theme]="b2bNgxButtonThemeEnum.BACKGROUND_BLUE" (click)="onSave()" class="d-block w-50 py-2">
+			Save changes
+		</button>
+	</div>
+</form>

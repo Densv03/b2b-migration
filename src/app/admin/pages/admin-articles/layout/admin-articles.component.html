@@ -1,0 +1,19 @@
+<div class="admin-articles">
+	<a b2bNgxLink [theme]="b2bNgxLinkThemeEnum.BACKGROUND_BLACK" routerLink="create" class="admin-articles__link"
+		>Add Article</a
+	>
+	<a
+		b2bNgxLink
+		[theme]="b2bNgxLinkThemeEnum.BACKGROUND_BLACK"
+		routerLink="/admin/article-categories"
+		class="admin-articles__link"
+		>Add Сategories</a
+	>
+
+	<app-admin-articles-list
+		class="admin-articles__list"
+		[articles]="articles$ | async"
+		[menuOptions]="menuOptions"></app-admin-articles-list>
+
+	<b2b-ngx-pagination [length]="totalCount" [perPage]="10" (togglePageNumber)="setPage($event)"></b2b-ngx-pagination>
+</div>

@@ -1,0 +1,45 @@
+.admin-users {
+	padding: 30px;
+	&__table {
+		margin-top: 20px;
+	}
+}
+
+.admin-offers__button {
+	display: inline-block;
+	padding: 7.5px 15px;
+	margin: 0 15px 15px;
+	border-radius: 5px;
+	&:first-child {
+		margin-left: 0;
+	}
+	&:last-child {
+		margin-right: 0;
+	}
+}
+
+::ng-deep {
+	.datatable-row-detail {
+		width: 100vw;
+	}
+	.datatable-header {
+		min-width: 100%;
+	}
+
+	.datatable-body {
+		min-width: 100%;
+	}
+	.datatable-body-cell {
+		button {
+			margin-top: 10px;
+		}
+		.custom {
+			height: 45px;
+			overflow: hidden;
+		}
+		.show {
+			overflow: visible;
+			height: auto;
+		}
+	}
+}

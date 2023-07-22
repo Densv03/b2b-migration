@@ -1,0 +1,90 @@
+.admin-users-list {
+	.admin-users-list-item {
+		margin-top: 4px;
+		.admin-users-list-item-link {
+			display: flex;
+			align-items: center;
+			padding: 16px 24px;
+			background: #ffffff;
+			border-radius: 4px;
+			.admin-users-list-item-img {
+				width: 40px;
+				height: 40px;
+				border-radius: 4px;
+			}
+			.admin-users-list-item-info {
+				flex: 1;
+				margin-left: 16px;
+				.admin-users-list-item-info-title {
+					font-weight: bold;
+					font-size: 16px;
+					color: #0f0f11;
+					height: 20px;
+					display: flex;
+					align-items: center;
+				}
+			}
+			.admin-users-list-item-info-additional {
+				display: flex;
+				align-items: center;
+				margin-top: 5px;
+				font-style: normal;
+				font-weight: 500;
+				font-size: 12px;
+				color: #9fa4bb;
+				height: 20px;
+				.admin-users-list-item-info-icon {
+					margin-left: 10px;
+				}
+				.admin-users-list-item-info-added {
+				}
+				.admin-users-list-item-info-views {
+					margin-left: 5px;
+				}
+				.admin-users-list-item-info-stars {
+					margin-left: 5px;
+				}
+			}
+			.admin-users-list-item-chats {
+				width: 20%;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				.admin-users-list-item-chat {
+					background: #f3f6f8;
+					border-radius: 16px;
+					padding: 5px 10px;
+					display: flex;
+					align-items: center;
+					.admin-users-list-item-chat-amount {
+						font-weight: 500;
+						font-size: 12px;
+						color: #0f0f11;
+					}
+					.admin-users-list-item-chat-messages {
+						height: 20px;
+						width: 20px;
+						display: flex;
+						align-items: center;
+						justify-content: center;
+						background: #005dff;
+						border-radius: 100%;
+						font-size: 11px;
+						color: #ffffff;
+						margin-left: 10px;
+						padding-top: 1px;
+						padding-right: 1px;
+					}
+				}
+			}
+			.admin-users-list-item-more {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+		}
+		&:first-child {
+			margin-top: 0;
+		}
+	}
+}

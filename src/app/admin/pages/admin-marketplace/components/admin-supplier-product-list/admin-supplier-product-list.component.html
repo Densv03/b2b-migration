@@ -1,0 +1,30 @@
+<ul class="market-products">
+	<li *ngFor="let product of marketplaceProducts$ | async" class="product" (click)="redirectToProductDetails(product)">
+		<div class="photo">
+			<img b2bNgxImage [name]="product?.photos?.[0]?.lg" class="product-photo" />
+		</div>
+		<div class="info">
+			<div class="info-header">
+				<div class="product-title">{{ product.title }}</div>
+				<div class="product-views-circle">
+					<div class="product-views-amount">{{ product.views }}</div>
+				</div>
+			</div>
+			<div *ngIf="!product.productApproved && !product.productRejected" class="product-status">Need verification</div>
+			<div *ngIf="product.productApproved" class="product-status">Approved by admin</div>
+			<div *ngIf="product.productRejected" class="product-status">Rejected by admin</div>
+		</div>
+		<div class="dropdown">
+			<b2b-ngx-dropdown [options]="menuOptions" [optionToReturn]="product">
+				<button b2bNgxButton class="flex items-center">
+					<img b2bNgxIcon name="more" />
+				</button>
+			</b2b-ngx-dropdown>
+		</div>
+	</li>
+</ul>
+
+<b2b-ngx-pagination
+	[length]="productsTotalLength$ | async"
+	[perPage]="productsLimit"
+	(togglePageNumber)="togglePage($event)"></b2b-ngx-pagination>

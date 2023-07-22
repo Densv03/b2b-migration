@@ -1,0 +1,84 @@
+<div class="admin-users">
+	<button b2bNgxButton [theme]="b2bNgxButtonThemeEnum.BACKGROUND_BLACK" (click)="export()" class="admin-offers__button">
+		Export
+	</button>
+
+	<b2b-admin-users-filters [categories]="categories" [formControl]="filtersControl"> </b2b-admin-users-filters>
+	<div class="admin-users__table">
+		<ngx-datatable
+			class="material"
+			[rows]="users$ | async"
+			[columns]="columns"
+			[columnMode]="columnMode.force"
+			[headerHeight]="50"
+			[footerHeight]="50"
+			rowHeight="auto"
+			[scrollbarH]="true"
+			[externalPaging]="true"
+			[count]="totalCount"
+			[offset]="page"
+			[limit]="10"
+			[virtualization]="false"
+			(activate)="onClick($event)"
+			(scroll)="stopImmediatePropagation($event)"
+			(page)="setPage($event)">
+		</ngx-datatable>
+
+		<ng-template #headerCategoryOne let-column="column"> <strong>category__1</strong></ng-template>
+		<ng-template #editCategoryOne let-row="row" let-value="value">
+			<span *ngFor="let category of value">{{ category.name }}</span>
+		</ng-template>
+
+<!--		<ng-template #headerCategoryTwo let-column="column"> <strong>category__2</strong></ng-template>-->
+<!--		<ng-template #editCategoryTwo let-row="row" let-value="value">-->
+<!--			<span *ngFor="let category of value">{{ category.name }}</span>-->
+<!--		</ng-template>-->
+
+		<ng-template #headerPreferences let-column="column"> <strong>Prefered cargo</strong></ng-template>
+		<ng-template #editPreferences let-row="row" let-value="value">
+			<div class="custom" [class.show]="row && row?.visible">
+				<span *ngFor="let category of value">{{ category.name + ", " }} </span>
+			</div>
+			<button
+				*ngIf="row.category__3.length > 3"
+				b2bNgxButton
+				[theme]="b2bNgxButtonThemeEnum.BACKGROUND_BLACK"
+				(click)="showMore($event, row)">
+				{{ row?.visible ? "Show less" : "Show More" }}
+			</button>
+		</ng-template>
+
+		<ng-template #headerOffers let-column="column"> <strong>Placed offers (offer title)</strong></ng-template>
+		<ng-template #editOffers let-row="row" let-value="value">
+			<span *ngFor="let offer of value">{{ offer.title + ", " }}</span>
+		</ng-template>
+
+		<ng-template #headerOffersDate let-column="column"> <strong>Placed_offers_data</strong></ng-template>
+		<ng-template #editOffersDate let-row="row" let-value="value">
+			<span *ngFor="let offer of value">{{ (offer.date | date: "yy-MM-dd") + ", " }}</span>
+		</ng-template>
+
+		<ng-template #headerSoldCargo let-column="column"> <strong>Sold_cargo</strong></ng-template>
+		<ng-template #editSoldCargo let-row="row" let-value="value">
+			<div *ngFor="let offer of value">
+				<div *ngIf="offer.deleted && offer.reasonForDeletion">
+					<span>{{ offer.title + " | " + "[ " + offer.reasonForDeletion + " ]" + ", " }}</span>
+				</div>
+			</div>
+		</ng-template>
+
+		<ng-template #headerActions let-column="column"> <strong>Actions</strong></ng-template>
+		<ng-template #editActions let-row="row" let-value="value">
+			<button
+				b2bNgxButton
+				[theme]="b2bNgxButtonThemeEnum.BACKGROUND_BLACK"
+				(click)="deleteUser($event, value)"
+				class="admin-offers__button">
+				Delete
+			</button>
+		</ng-template>
+	</div>
+	<!-- <app-admin-users-list [users]="users$ | async" [menuOptions]="menuOptions"></app-admin-users-list> -->
+
+	<!-- <b2b-ngx-pagination [length]="totalCount" [perPage]="10" (togglePageNumber)="setPage($event)"></b2b-ngx-pagination> -->
+</div>

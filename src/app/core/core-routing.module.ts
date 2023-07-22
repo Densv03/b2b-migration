@@ -19,11 +19,11 @@ const routes: Routes = [
 				path: "auth",
 				loadChildren: () => import("../auth/auth.module").then((m) => m.AuthModule),
 			},
-			// {
-			// 	path: "admin",
-			// 	canActivate: [RoleGuard],
-			// 	loadChildren: () => import("../admin/admin.module").then((m) => m.AdminModule),
-			// },
+			{
+				path: "admin",
+				canActivate: [RoleGuard],
+				loadChildren: () => import("../admin/admin.module").then((m) => m.AdminModule),
+			},
 			{
 				path: "",
 				loadChildren: () => import("../client/client.module").then((m) => m.ClientModule),
@@ -44,11 +44,11 @@ const routes: Routes = [
 				path: "auth",
 				loadChildren: () => import("../auth/auth.module").then((m) => m.AuthModule),
 			},
-			// {
-			// 	path: "admin",
-			// 	canActivate: [RoleGuard],
-			// 	loadChildren: () => import("../admin/admin.module").then((m) => m.AdminModule),
-			// },
+			{
+				path: "admin",
+				canActivate: [RoleGuard],
+				loadChildren: () => import("../admin/admin.module").then((m) => m.AdminModule),
+			},
 			{
 				path: "",
 				loadChildren: () => import("../client/client.module").then((m) => m.ClientModule),

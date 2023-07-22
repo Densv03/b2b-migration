@@ -1,0 +1,26 @@
+<ul class="admin-users-list">
+	<li *ngFor="let user of users" class="admin-users-list-item">
+		<a [routerLink]="user._id" class="admin-users-list-item-link">
+			<img class="admin-users-list-item-img" b2bNgxImage [name]="user.previewPhoto" />
+			<div class="admin-users-list-item-info">
+				<p class="admin-users-list-item-info-title">{{ user.email }}</p>
+				<p class="admin-users-list-item-info-additional">
+					<span class="admin-users-list-item-info-added">{{ user.role?.displayName }}</span>
+				</p>
+			</div>
+			<div class="admin-users-list-item-chats" *ngIf="false">
+				<p class="admin-users-list-item-chat">
+					<span class="admin-users-list-item-chat-amount">1 Chat</span>
+					<span class="admin-users-list-item-chat-messages">5</span>
+				</p>
+			</div>
+			<div class="admin-users-list-item-more">
+				<b2b-ngx-dropdown [options]="menuOptions" [optionToReturn]="user">
+					<button b2bNgxButton class="flex items-center">
+						<img b2bNgxIcon name="more" />
+					</button>
+				</b2b-ngx-dropdown>
+			</div>
+		</a>
+	</li>
+</ul>

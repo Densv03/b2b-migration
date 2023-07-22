@@ -1,0 +1,138 @@
+<div class="admin-manager">
+	<form class="admin-manager__form-group" [formGroup]="formGroup" (ngSubmit)="generateLink(formGroup)">
+		<div class="admin-manager__form-group__container">
+			<div>
+				<input
+					type="text"
+					b2bNgxInput
+					[theme]="b2bNgxInputThemeEnum.BACKGROUND_WHITE"
+					formControlName="firstName"
+					placeholder="First name"
+					label="Enter first name" />
+			</div>
+			<div>
+				<input
+					type="text"
+					b2bNgxInput
+					[theme]="b2bNgxInputThemeEnum.BACKGROUND_WHITE"
+					formControlName="lastName"
+					placeholder="Second name"
+					label="Enter second name" />
+			</div>
+		</div>
+		<input type="text" b2bNgxInput
+					 [theme]="b2bNgxInputThemeEnum.BACKGROUND_WHITE"
+					 formControlName="url"
+					 placeholder="https://b2b.discount/blog"
+					 label="Enter the link for which the ref will be generated"
+					 class="mb-3">
+		<button b2bNgxButton [theme]="b2bNgxButtonThemeEnum.BACKGROUND_BLACK">Generate Link</button>
+	</form>
+
+	<div class="admin-manager__generated-link">
+		<input
+			b2bNgxInput
+			[(ngModel)]="generatedLink"
+			disabled
+			[theme]="b2bNgxInputThemeEnum.BACKGROUND_WHITE"
+			placeholder="Here will be generated link" />
+		<button
+			b2bNgxButton
+			[theme]="b2bNgxButtonThemeEnum.BACKGROUND_BLACK"
+			(click)="copyLink()"
+			[disabled]="!generatedLink">
+			Copy URL
+		</button>
+	</div>
+
+	<table mat-table [dataSource]="managersList" class="mat-elevation-z8">
+		<ng-container matColumnDef="refId">
+			<th class="th-id" mat-header-cell *matHeaderCellDef>Ref Id</th>
+			<td mat-cell *matCellDef="let element" (click)="copyLink(element.link)">
+				{{ element.refId }}
+			</td>
+		</ng-container>
+
+		<ng-container matColumnDef="firstName">
+			<th class="th-firstName" mat-header-cell *matHeaderCellDef>First Name</th>
+			<td mat-cell *matCellDef="let element">{{ element.firstName }}</td>
+		</ng-container>
+
+		<ng-container matColumnDef="lastName">
+			<th class="th-lastName" mat-header-cell *matHeaderCellDef>Last Name</th>
+			<td mat-cell *matCellDef="let element">{{ element.lastName }}</td>
+		</ng-container>
+
+		<ng-container matColumnDef="delete">
+			<th class="th-firstName" mat-header-cell *matHeaderCellDef></th>
+			<td mat-cell *matCellDef="let element">
+				<button
+					class="delete-btn"
+					b2bNgxButton
+					[theme]="b2bNgxButtonThemeEnum.BACKGROUND_RED"
+					(click)="deleteManager(element.refId)">
+					Delete
+				</button>
+			</td>
+		</ng-container>
+
+		<tr mat-header-row *matHeaderRowDef="displayedColumnsManagers"></tr>
+		<tr mat-row *matRowDef="let row; columns: displayedColumnsManagers"></tr>
+	</table>
+
+	<form
+		class="admin-manager__generated-link"
+		[formGroup]="usersByRefIdGroup"
+		(ngSubmit)="getUsersByRefId(usersByRefIdGroup)">
+		<input
+			type="text"
+			b2bNgxInput
+			[theme]="b2bNgxInputThemeEnum.BACKGROUND_WHITE"
+			formControlName="refId"
+			placeholder="Ref id" />
+		<button b2bNgxButton [theme]="b2bNgxButtonThemeEnum.BACKGROUND_BLACK">Submit</button>
+	</form>
+	<div *ngIf="userList.length">Total count: {{ userList.length }}</div>
+
+	<table *ngIf="userList?.length" mat-table [dataSource]="userList" class="mat-elevation-z8 w-100">
+		<ng-container matColumnDef="email">
+			<th class="th-firstName" mat-header-cell *matHeaderCellDef>Email</th>
+			<td mat-cell *matCellDef="let element">
+				{{ element.email }}
+
+				<img *ngIf="element.products?.length" b2bNgxIcon [name]="'check-blue'" />
+			</td>
+		</ng-container>
+
+		<ng-container matColumnDef="registrationType">
+			<th class="th-firstName" mat-header-cell *matHeaderCellDef>Registration type</th>
+			<td mat-cell *matCellDef="let element">
+				{{ element.typeRegistration }}
+			</td>
+		</ng-container>
+
+		<ng-container matColumnDef="country">
+			<th class="th-firstName" mat-header-cell *matHeaderCellDef>Country</th>
+			<td mat-cell *matCellDef="let element">
+				{{ getCountryNameByCode(element.userData[0]?.phone?.countryCode) }}
+			</td>
+		</ng-container>
+
+		<ng-container matColumnDef="registrationDate">
+			<th class="th-firstName" mat-header-cell *matHeaderCellDef>Registration date</th>
+			<td mat-cell *matCellDef="let element">
+				{{ element.userData[0]?.createdAt | date: "MM/d/yy" }}
+			</td>
+		</ng-container>
+
+		<ng-container matColumnDef="company">
+			<th class="th-firstName" mat-header-cell *matHeaderCellDef>Company name</th>
+			<td mat-cell *matCellDef="let element">
+				{{ element?.userData[0]?.company }}
+			</td>
+		</ng-container>
+
+		<tr mat-header-row *matHeaderRowDef="displayedColumnsUsers"></tr>
+		<tr mat-row *matRowDef="let row; columns: displayedColumnsUsers"></tr>
+	</table>
+</div>

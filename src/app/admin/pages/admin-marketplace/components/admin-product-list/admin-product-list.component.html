@@ -1,0 +1,31 @@
+<form [formGroup]="form">
+	<b2b-categories-dialog formControlName="categories[]"></b2b-categories-dialog>
+</form>
+
+<ul class="market-products">
+	<li *ngFor="let product of products$ | async" class="product" (click)="redirectToProductDetails(product)">
+		<div class="info">
+			<div class="info-header">
+				<div class="product-title">{{ product.title }}</div>
+				<div class="product-status">
+					<span *ngIf="!product.productApproved && !product.productRejected">Verification</span>
+					<span *ngIf="product.productApproved">Approved</span>
+					<span *ngIf="product.productRejected">Rejected</span>
+				</div>
+				<div class="product-views">
+					{{product.views}}
+					<img b2bNgxIcon name="eye">
+				</div>
+			</div>
+		</div>
+		<div class="dropdown">
+			<b2b-ngx-dropdown [options]="menuOptions" [optionToReturn]="product">
+				<button b2bNgxButton class="flex items-center">
+					<img b2bNgxIcon name="more"/>
+				</button>
+			</b2b-ngx-dropdown>
+		</div>
+	</li>
+</ul>
+
+<b2b-ngx-pagination [length]="productsLength$ | async" [perPage]="PRODUCTS_LIMIT" (togglePageNumber)="togglePage($event)"></b2b-ngx-pagination>

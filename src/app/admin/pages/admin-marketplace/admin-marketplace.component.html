@@ -1,0 +1,8 @@
+<form [formGroup]="form">
+	<b2b-ngx-select formControlName="activeSelection" [options]="dropdownOptions" placeholder="Select option" bindValue="id" bindLabel="label">
+		Select option
+	</b2b-ngx-select>
+</form>
+
+<b2b-admin-product-list *ngIf="(activeSelection$ | async) === VisibleListEnum.PRODUCTS"></b2b-admin-product-list>
+<b2b-admin-companies-list *ngIf="(activeSelection$ | async) === VisibleListEnum.COMPANIES"></b2b-admin-companies-list>

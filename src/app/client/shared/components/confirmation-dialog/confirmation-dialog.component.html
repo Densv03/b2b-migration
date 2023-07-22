@@ -1,16 +1,16 @@
 <div class="confirmation-dialog">
-	<div *ngIf="data.title" class="header">
-		<h2>{{ data.title }}</h2>
-	</div>
-	<hr *ngIf="data.title" color="#f5f5f5" />
-	<div *ngIf="data.message" class="body">{{ data.message }}</div>
-	<hr *ngIf="data.message" color="#f5f5f5" />
-	<div class="footer">
-		<button class="btn" b2bNgxButton (click)="closeDialog(true)" [theme]="confirmButtonTheme">
-			{{ data.confirmButtonText }}
-		</button>
-		<button class="btn" b2bNgxButton (click)="closeDialog(false)" [theme]="cancelButtonTheme">
-			{{ data.cancelButtonText }}
-		</button>
-	</div>
+  <div *ngIf="data.title" class="header">
+    <h2>{{ data.title }}</h2>
+  </div>
+  <hr *ngIf="data.title" color="#f5f5f5"/>
+  <div *ngIf="data.message" class="body">{{ data.message }}</div>
+  <hr *ngIf="data.message" color="#f5f5f5"/>
+  <div class="footer">
+    <button class="btn" b2bNgxButton (click)="closeDialog(true)">
+      {{ data.confirmButtonText }}
+    </button>
+    <button class="btn" b2bNgxButton (click)="closeDialog(false)">
+      {{ data.cancelButtonText }}
+    </button>
+  </div>
 </div>

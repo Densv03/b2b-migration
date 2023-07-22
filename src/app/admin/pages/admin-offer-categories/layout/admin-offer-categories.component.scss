@@ -1,0 +1,62 @@
+.admin-offer-categories {
+	padding: 30px;
+	.admin-offer-categories__create {
+		.admin-offer-categories__create-title {
+			font-size: 24px;
+			font-weight: bold;
+		}
+		.admin-offer-categories__create-sub-title {
+			margin-top: 5px;
+		}
+		.admin-offer-categories__create-form {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: space-between;
+			margin-top: 50px;
+
+			.admin-offer-categories__create-divider,
+			.admin-offer-categories__create-input,
+			.admin-offer-categories__create-toggle,
+			.admin-offer-categories__create-select {
+				width: 30%;
+				&.admin-offer-categories__create-divider {
+					display: flex;
+					justify-content: center;
+					padding: 15px 0;
+					font-weight: bold;
+				}
+				&.admin-offer-categories__create-toggle {
+					margin-top: 30px;
+					display: flex;
+					justify-content: center;
+				}
+			}
+
+			.admin-offer-categories__update-button,
+			.admin-offer-categories__create-button {
+				width: 30%;
+				padding: 15px 0;
+				margin-top: 50px;
+				&.admin-offer-categories__create-button {
+					margin-left: 15%;
+				}
+				&.admin-offer-categories__update-button {
+					margin-right: 15%;
+				}
+			}
+		}
+	}
+	.admin-offer-categories__update {
+		margin-top: 50px;
+		.admin-offer-categories__update-title {
+			font-size: 24px;
+			font-weight: bold;
+		}
+	}
+
+	.admin-offer-categories__error-message {
+		text-align: center;
+		margin-top: 30px;
+		color: #d0021b;
+	}
+}

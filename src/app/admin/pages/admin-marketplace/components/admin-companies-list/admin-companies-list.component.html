@@ -1,0 +1,33 @@
+<form [formGroup]="form">
+	<input type="text"
+				 formControlName="q"
+				 b2bNgxInput
+				 [theme]="b2bNgxInputThemeEnum.BACKGROUND_WHITE"
+				 placeholder="Enter name of company">
+</form>
+
+<ul class="market-products">
+	<li *ngFor="let company of companyList$ | async" class="product" (click)="goToSupplierListing(company.user)">
+		<div class="info">
+			<div class="info-header">
+				<div class="product-title">{{ company.companyName }}</div>
+				<div class="product-views">
+					<div class="d-flex flex-column mr-4">
+						{{company.countProducts}}
+						<img b2bNgxIcon name="box">
+					</div>
+					<div class="d-flex flex-column">
+						{{company.countChats}}
+						<img b2bNgxIcon name="chat">
+					</div>
+				</div>
+			</div>
+		</div>
+	</li>
+</ul>
+
+
+<b2b-ngx-pagination
+	[length]="companyListLength$ | async"
+	[perPage]="PRODUCTS_LIMIT"
+	(togglePageNumber)="toggleCompaniesPage($event)"></b2b-ngx-pagination>

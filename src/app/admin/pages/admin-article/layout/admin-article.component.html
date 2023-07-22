@@ -1,0 +1,67 @@
+<form [formGroup]="formGroup" class="admin-article" (ngSubmit)="onSubmit(formGroup.value)" *transloco="let t">
+	<p class="admin-article__label">{{ formGroup.get("_id").value ? "Edit an article" : "Add an article" }}</p>
+	<b2b-ngx-file formControlName="image" class="admin-article__image">Image</b2b-ngx-file>
+
+	<div class="admin-article__main">
+		<div>
+			<b2b-ngx-input
+				formControlName="title"
+				class="admin-article__input"
+				[label]="t('LABELS.ARTICLE_LABEL')"
+				placeholder="Enter article label"></b2b-ngx-input>
+			<p *ngIf="this.formGroup.get('title').errors?.['required']" class="error" [@fadeInOut]>This field is required</p>
+		</div>
+		<div>
+			<b2b-ngx-input
+				formControlName="author"
+				class="admin-article__input"
+				[label]="t('LABELS.ARTICLE_AUTHOR')"
+				placeholder="Enter article author"></b2b-ngx-input>
+		</div>
+	</div>
+
+	<div class="admin-article__categories">
+		<div class="admin-article__category">
+			<b2b-ngx-select
+				formControlName="level1Category"
+				placeholder="Select category"
+				[options]="level1Categories"
+				bindValue="_id"
+				bindLabel="name"
+				[theme]="b2bNgxSelectThemeEnum.BACKGROUND_GRAY"></b2b-ngx-select>
+		</div>
+		<div class="admin-article__sub-category">
+			<b2b-ngx-select
+				formControlName="level2Category"
+				placeholder="Select subcategory"
+				[options]="level2Categories"
+				bindValue="_id"
+				bindLabel="name"
+				[theme]="b2bNgxSelectThemeEnum.BACKGROUND_GRAY"></b2b-ngx-select>
+		</div>
+	</div>
+
+	<div class="admin-article__additional">
+		<b2b-ngx-country-select
+			formControlName="country"
+			[theme]="b2bNgxSelectThemeEnum.BACKGROUND_GRAY"
+			class="admin-article__country"
+			placeholder="Select Country"></b2b-ngx-country-select>
+
+		<div class="admin-article__tags">
+			<b2b-ngx-chips
+				formControlName="tags"
+				(searched)="setSearch($event)"
+				[searchedOptions]="searchedOptions$ | async"></b2b-ngx-chips>
+		</div>
+	</div>
+
+	<angular-editor
+		class="admin-article__description"
+		formControlName="description"
+		[config]="editorConfig"></angular-editor>
+
+	<button b2bNgxButton class="admin-article__button" [theme]="b2bNgxButtonThemeEnum.BACKGROUND_BLACK">
+		{{ formGroup.get("_id").value ? "Update an article" : "Create an article" }}
+	</button>
+</form>

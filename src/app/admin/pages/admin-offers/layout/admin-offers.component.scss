@@ -1,0 +1,21 @@
+.admin-offers {
+	padding: 30px;
+	overflow-y: auto;
+	.admin-offers__button {
+		display: inline-block;
+		padding: 7.5px 15px;
+		margin: 0 15px;
+		border-radius: 5px;
+		&:first-child {
+			margin-left: 0;
+		}
+		&:last-child {
+			margin-right: 0;
+		}
+	}
+
+	app-admin-offers-list {
+		display: block;
+		margin-top: 15px;
+	}
+}

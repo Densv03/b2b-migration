@@ -16,23 +16,23 @@ export class WikiService {
 		this._endpoint = "posts/";
 	}
 
-	public getTags(str) {
+	public getTags(str: unknown) {
 		return this._apiService.get(`tags?q=${str}`);
 	}
 
-	public createArticle(body) {
+	public createArticle(body: unknown) {
 		return this._apiService.post("post/create", body);
 	}
 
-	public getComments(post) {
+	public getComments(post: string) {
 		return this._apiService.get(`comment/${post}`);
 	}
 
-	public updateArticle(id, body) {
+	public updateArticle(id: any, body: unknown) {
 		return this._apiService.put(`post/${id}/update`, body);
 	}
 
-	public createComment(post, text) {
+	public createComment(post: any, text: any) {
 		return this._apiService.post(`comment/create`, {
 			post,
 			text,
@@ -50,11 +50,11 @@ export class WikiService {
 		return this._apiService.get(`post/${id}`);
 	}
 
-	public getArticles(queryString): Observable<any> {
+	public getArticles(queryString: any): Observable<any> {
 		return this._apiService.get(`posts${queryString}`);
 	}
 
-	public deleteArticleById(id) {
+	public deleteArticleById(id: any) {
 		return this._apiService.delete(`post/${id}/delete`);
 	}
 }

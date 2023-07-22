@@ -1,0 +1,12 @@
+:host {
+	.total-count {
+		background: white;
+		padding: 15px;
+		margin-top: 25px;
+	}
+	::ng-deep {
+		th, td {
+			vertical-align: middle;
+		}
+	}
+}
