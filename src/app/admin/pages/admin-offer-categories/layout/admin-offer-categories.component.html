@@ -1,0 +1,81 @@
+<div class="admin-offer-categories">
+	<div class="admin-offer-categories__create">
+		<p class="admin-offer-categories__create-title">Create / Update category</p>
+		<p class="admin-offer-categories__create-sub-title">To create a category you have to fill all levels</p>
+		<p class="admin-offer-categories__create-sub-title">
+			To update a category you have to select it and enter the new name
+		</p>
+		<form [formGroup]="formGroup" class="admin-offer-categories__create-form">
+			<b2b-ngx-select
+				formControlName="selectLevel1Category"
+				[options]="level1Categories"
+				bindValue="_id"
+				bindLabel="name"
+				placeholder="Select level 1 category"
+				class="admin-offer-categories__create-select"></b2b-ngx-select>
+			<b2b-ngx-select
+				formControlName="selectLevel2Category"
+				[options]="level2Categories"
+				bindValue="_id"
+				bindLabel="name"
+				placeholder="Select level 2 category"
+				class="admin-offer-categories__create-select"></b2b-ngx-select>
+			<b2b-ngx-select
+				formControlName="selectLevel3Category"
+				[options]="level3Categories"
+				bindValue="_id"
+				bindLabel="name"
+				placeholder="Select level 3 category"
+				class="admin-offer-categories__create-select"></b2b-ngx-select>
+
+			<p class="admin-offer-categories__create-divider">OR</p>
+			<p class="admin-offer-categories__create-divider">OR</p>
+			<p class="admin-offer-categories__create-divider">OR</p>
+
+			<b2b-ngx-input
+				formControlName="inputLevel1Category"
+				[theme]="b2bNgxInputThemeEnum.BACKGROUND_WHITE"
+				placeholder="Create / Update level 1 category"
+				class="admin-offer-categories__create-input"></b2b-ngx-input>
+			<b2b-ngx-input
+				formControlName="inputLevel2Category"
+				[theme]="b2bNgxInputThemeEnum.BACKGROUND_WHITE"
+				placeholder="Create / Update level 2 category"
+				class="admin-offer-categories__create-input"></b2b-ngx-input>
+			<b2b-ngx-input
+				formControlName="inputLevel3Category"
+				[theme]="b2bNgxInputThemeEnum.BACKGROUND_WHITE"
+				placeholder="Create / Update level 3 category"
+				class="admin-offer-categories__create-input"></b2b-ngx-input>
+
+			<b2b-ngx-toggle
+				formControlName="toggleLevel1Category"
+				class="admin-offer-categories__create-toggle"></b2b-ngx-toggle>
+			<b2b-ngx-toggle
+				formControlName="toggleLevel2Category"
+				class="admin-offer-categories__create-toggle"></b2b-ngx-toggle>
+			<b2b-ngx-toggle
+				formControlName="toggleLevel3Category"
+				class="admin-offer-categories__create-toggle"></b2b-ngx-toggle>
+
+			<button
+				b2bNgxButton
+				type="button"
+				[theme]="b2bNgxButtonThemeEnum.BACKGROUND_BLUE"
+				class="admin-offer-categories__create-button"
+				(click)="createCategory()">
+				Create category
+			</button>
+			<button
+				b2bNgxButton
+				type="button"
+				[theme]="b2bNgxButtonThemeEnum.BACKGROUND_WHITE"
+				class="admin-offer-categories__update-button"
+				(click)="updateCategory()">
+				Update category
+			</button>
+		</form>
+
+		<p class="admin-offer-categories__error-message" *ngIf="errorMessage">{{ errorMessage }}</p>
+	</div>
+</div>

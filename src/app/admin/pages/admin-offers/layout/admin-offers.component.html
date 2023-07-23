@@ -1,0 +1,17 @@
+<div class="admin-offers">
+	<!--	<button b2bNgxButton [theme]="b2bNgxButtonThemeEnum.BACKGROUND_BLACK" class="admin-offers__button" (click)="removeAllOffers()">Remove all offers</button>-->
+	<a
+		b2bNgxLink
+		[theme]="b2bNgxLinkThemeEnum.BACKGROUND_BLACK"
+		routerLink="/admin/offer-categories"
+		class="admin-offers__button"
+		>Add Сategories</a
+	>
+
+	<app-admin-offers-list [offers]="offers$ | async" [menuOptions]="menuOptions"></app-admin-offers-list>
+
+	<b2b-ngx-pagination
+		[length]="totalCount$ | async"
+		[perPage]="10"
+		(togglePageNumber)="setPage($event)"></b2b-ngx-pagination>
+</div>

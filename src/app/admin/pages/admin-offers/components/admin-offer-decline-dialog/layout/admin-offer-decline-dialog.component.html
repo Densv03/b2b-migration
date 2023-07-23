@@ -1,0 +1,9 @@
+<div class="dialog">
+	<div class="wrapper">
+		<h1>Reason for decline:</h1>
+		<textarea [formControl]="message" [placeholder]="'reason'" class="client-profile-chat-textarea" rows="5"></textarea>
+		<button b2bNgxButton type="button" [theme]="b2bNgxButtonThemeEnum.BACKGROUND_BLACK" (click)="decline()">
+			Decline
+		</button>
+	</div>
+</div>

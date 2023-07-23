@@ -1,0 +1,13 @@
+<div class="admin-payment-plan-item" (click)="editPaymentPlan(paymentPlan)">
+	<h2>{{ paymentPlan.title }}</h2>
+	<h3>Payment plan: {{ paymentPlan.typePlan }}</h3>
+	<h3>Price: {{ paymentPlan.price }}</h3>
+	<h3>Description: {{ paymentPlan.description }}</h3>
+	<h3 *ngIf="paymentPlan.typePlan === 'quotes'">Quotes number: {{ paymentPlan.amountOfQuotes }}</h3>
+	<button
+		b2bNgxButton
+		[theme]="b2bNgxButtonThemeEnum.BACKGROUND_BLACK"
+		(click)="deletePaymentPlan(paymentPlan._id, $event)">
+		Delete
+	</button>
+</div>

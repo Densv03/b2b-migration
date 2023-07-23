@@ -1,0 +1,17 @@
+<div class="modal-wrapper">
+	<h2>Current quotes value: {{ currentValueQuotes }}</h2>
+	<form [formGroup]="form">
+		<input
+			formControlName="quotesNumber"
+			[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"
+			b2bNgxInput
+			[(ngModel)]="quotesValue" />
+		<p *ngIf="formState.quotesNumber.touched && formState.quotesNumber.errors?.required" class="error" [@fadeInOut]>
+			This field is required!
+		</p>
+		<p *ngIf="formState.quotesNumber.touched && formState.quotesNumber.errors?.number" class="error" [@fadeInOut]>
+			Please use only number
+		</p>
+		<button (click)="confirmChanges()" [theme]="b2bNgxButtonThemeEnum.BACKGROUND_BLUE" b2bNgxButton>Confirm</button>
+	</form>
+</div>

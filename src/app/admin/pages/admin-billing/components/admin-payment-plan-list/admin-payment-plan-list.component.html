@@ -1,0 +1,9 @@
+<div class="admin-payment-plan-item-list__container">
+	<b2b-admin-payment-plan-item
+		*ngFor="let paymentPlan of paymentPlans"
+		[paymentPlan]="paymentPlan"
+		class="admin-payment-plan-item-list__item"
+		(onDelete)="deletePaymentPlan($event)"
+		(onEdit)="editPaymentPlan($event)">
+	</b2b-admin-payment-plan-item>
+</div>

@@ -1,0 +1,56 @@
+.admin-article-categories {
+	padding: 30px;
+	.admin-article-categories__create {
+		.admin-article-categories__create-title {
+			font-size: 24px;
+			font-weight: bold;
+		}
+		.admin-article-categories__create-sub-title {
+			margin-top: 5px;
+		}
+		.admin-article-categories__create-form {
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: space-between;
+			margin-top: 50px;
+
+			.admin-article-categories__create-divider,
+			.admin-article-categories__create-input,
+			.admin-article-categories__create-toggle,
+			.admin-article-categories__create-select {
+				width: 49%;
+				&.admin-article-categories__create-divider {
+					display: flex;
+					justify-content: center;
+					padding: 15px 0;
+					font-weight: bold;
+				}
+				&.admin-article-categories__create-toggle {
+					margin-top: 30px;
+					display: flex;
+					justify-content: center;
+				}
+			}
+
+			.admin-article-categories__update-button,
+			.admin-article-categories__create-button {
+				width: 49%;
+				padding: 15px 0;
+				margin-top: 50px;
+			}
+		}
+	}
+	.admin-article-categories__update {
+		margin-top: 50px;
+		.admin-article-categories__update-title {
+			font-size: 24px;
+			font-weight: bold;
+		}
+	}
+
+	.admin-article-categories__error-message {
+		text-align: center;
+		margin-top: 30px;
+		color: #d0021b;
+	}
+}

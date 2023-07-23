@@ -1,0 +1,54 @@
+<form [formGroup]="formGroup" (ngSubmit)="submitForm(formGroup)">
+	<label>Enter title</label>
+	<input
+		type="text"
+		formControlName="title"
+		b2bNgxInput
+		[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"
+		class="select-billing-method-dialog__form-item"
+		placeholder="Title" />
+	<label>Enter price</label>
+	<input
+		type="text"
+		formControlName="price"
+		b2bNgxInput
+		[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"
+		class="select-billing-method-dialog__form-item"
+		placeholder="Price" />
+	<label>Enter description</label>
+	<input
+		type="text"
+		formControlName="description"
+		b2bNgxInput
+		[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"
+		class="select-billing-method-dialog__form-item"
+		placeholder="Description" />
+	<b2b-ngx-select
+		placeholder="Select type of billing plan"
+		[options]="typePlanOptions"
+		[theme]="b2bNgxSelectThemeEnum.BACKGROUND_GRAY"
+		bindValue="value"
+		bindLabel="label"
+		formControlName="typePlan"
+		class="select-billing-method-dialog__form-item__select select-billing-method-dialog__form-item">
+		Select type of billing plan
+	</b2b-ngx-select>
+
+	<ng-container *ngIf="isQuotesAmountInputVisible$ | async">
+		<label>Enter amount of quotes</label>
+		<input
+			type="text"
+			b2bNgxInput
+			[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"
+			class="select-billing-method-dialog__form-item"
+			placeholder="Amount of quotes"
+			formControlName="amountOfQuotes" />
+	</ng-container>
+	<button
+		b2bNgxButton
+		[theme]="b2bNgxButtonThemeEnum.BACKGROUND_BLACK"
+		[disabled]="formGroup.status !== 'VALID'"
+		class="select-billing-method-dialog__submit-button">
+		{{ getButtonText() }}
+	</button>
+</form>

@@ -1,0 +1,9 @@
+<div class="admin-offers">
+	<app-admin-offers-list [offers]="offers$ | async" [menuOptions]="menuOptions" [listType]="listType.tradebid">
+	</app-admin-offers-list>
+
+	<b2b-ngx-pagination
+		[length]="totalCount$ | async"
+		[perPage]="10"
+		(togglePageNumber)="setPage($event)"></b2b-ngx-pagination>
+</div>

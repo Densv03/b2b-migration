@@ -1,0 +1,16 @@
+<div class="dialog">
+	<div class="wrapper" *ngIf="users.length">
+		<h1>Chat started with current users:</h1>
+		<div class="scroll">
+			<div *ngFor="let user of users" class="dialog-card">
+				<p>{{ user.fullName }}</p>
+				<span>{{ user.email }}</span>
+			</div>
+		</div>
+		<div class="total">Total count: {{ users.length }}</div>
+	</div>
+
+	<div class="wrapper" *ngIf="!users.length">
+		<h1>No active chats</h1>
+	</div>
+</div>

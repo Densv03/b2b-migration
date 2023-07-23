@@ -1,0 +1,42 @@
+<ul class="admin-offers-list">
+	<li *ngFor="let offer of offers" class="admin-offers-list-item">
+		<a [routerLink]="offer._id" class="admin-offers-list-item-link">
+			<img *ngIf="listType !== 'tradebid'" class="admin-offers-list-item-img" b2bNgxImage [name]="offer.previewPhoto" />
+			<div class="admin-offers-list-item-info">
+				<div class="admin-offers-list-item-info-header">
+					<p class="admin-offers-list-item-info-title">
+						{{ listType === "tradebid" ? offer.productName : offer.title }}
+					</p>
+					<div *ngIf="listType" class="circle">
+						{{ offer.rooms.length }}
+					</div>
+				</div>
+				<div class="badges">
+					<div class="badge" *ngIf="offer.userTypeWhoHideOffer">
+						<p>Hide by {{ offer.userTypeWhoHideOffer }}</p>
+					</div>
+					<div class="badge" *ngIf="!offer.rfqApproved && !offer.rfqRejected">
+						<p>Need verification</p>
+					</div>
+					<div class="badge" *ngIf="offer.rfqApproved">
+						<p>Approved by Admin</p>
+					</div>
+					<div class="badge" *ngIf="offer.rfqRejected">
+						<p>Rejected by Admin</p>
+					</div>
+				</div>
+				<p class="admin-offers-list-item-info-additional">
+					<span class="admin-offers-list-item-info-added">{{ offer.author }}</span>
+				</p>
+				<p *ngIf="listType === 'tradebid'">Quotations by this rfq: {{ offer.quotations.length }}</p>
+			</div>
+			<div class="admin-offers-list-item-more">
+				<b2b-ngx-dropdown [options]="menuOptions" [optionToReturn]="offer">
+					<button b2bNgxButton class="flex items-center">
+						<img b2bNgxIcon name="more" />
+					</button>
+				</b2b-ngx-dropdown>
+			</div>
+		</a>
+	</li>
+</ul>

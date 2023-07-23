@@ -1,0 +1,21 @@
+.admin-articles {
+	padding: 30px;
+	.admin-articles__link {
+		box-sizing: border-box;
+		display: inline-block;
+		padding: 7.5px 15px;
+		border-radius: 3px;
+		margin: 0 15px;
+		&:first-child {
+			margin-left: 0;
+		}
+		&:last-child {
+			margin-right: 0;
+		}
+	}
+
+	.admin-articles__list {
+		display: block;
+		margin-top: 15px;
+	}
+}

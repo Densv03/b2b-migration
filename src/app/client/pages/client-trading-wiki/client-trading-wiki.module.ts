@@ -10,7 +10,7 @@ import { B2bNgxLinkModule } from "@b2b/ngx-link";
 import { B2bNgxIconModule } from "@b2b/ngx-icon";
 import { ReactiveFormsModule } from "@angular/forms";
 import { ClientTradingWikiListComponent } from "./components/client-trading-wiki-list/client-trading-wiki-list.component";
-import { B2bNgxTreeviewModule } from "@b2b/ngx-treeview";
+import { TreeviewModule } from "@b2b/ngx-treeview";
 import { B2bNgxPaginationModule } from "@b2b/ngx-pagination";
 import { B2bNgxImageModule } from "@b2b/ngx-image";
 import { B2bNgxCountrySelectModule } from "@b2b/ngx-country-select";
@@ -28,7 +28,7 @@ import { TranslocoModule } from "@ngneat/transloco";
 		B2bNgxSkeletonModule,
 		B2bNgxLinkModule,
 		B2bNgxIconModule,
-		B2bNgxTreeviewModule,
+    TreeviewModule,
 		B2bNgxPaginationModule,
 		B2bNgxImageModule,
 		B2bNgxCountrySelectModule,

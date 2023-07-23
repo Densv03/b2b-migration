@@ -1,0 +1,14 @@
+.select-billing-method-dialog {
+	&__form-item {
+		margin-bottom: 15px;
+
+		&__select {
+			display: block;
+		}
+	}
+
+	&__submit-button {
+		padding: 15px 20px;
+		margin-top: 15px;
+	}
+}

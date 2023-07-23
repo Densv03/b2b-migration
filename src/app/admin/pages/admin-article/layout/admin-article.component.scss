@@ -1,0 +1,111 @@
+.admin-article {
+	display: block;
+	margin: 30px;
+	background-color: white;
+	padding: 60px;
+	.error {
+		font-size: 14px;
+		color: #e63d3d;
+		margin-top: 7px;
+		margin-bottom: 0;
+	}
+	.admin-article__image {
+		display: block;
+		margin-top: 30px;
+	}
+
+	.admin-article__label {
+		font-weight: bold;
+		font-size: 32px;
+		color: #0f0f11;
+	}
+
+	.admin-article__input {
+		display: block;
+		margin-top: 30px;
+	}
+
+	.admin-article__main {
+		display: flex;
+		justify-content: space-between;
+
+		div {
+			width: 49%;
+			.admin-article__input {
+				width: 100%;
+			}
+		}
+	}
+
+	.admin-article__additional {
+		display: flex;
+		justify-content: space-between;
+		margin-top: 30px;
+
+		.admin-article__country,
+		.admin-article__tags {
+			width: 49%;
+		}
+	}
+
+	.admin-article__categories {
+		display: flex;
+		justify-content: space-between;
+		margin-top: 30px;
+		.admin-article__category {
+			width: 49%;
+		}
+		.admin-article__sub-category {
+			width: 49%;
+		}
+	}
+
+	.admin-article__button {
+		margin-top: 30px;
+		padding: 15px 40px;
+	}
+}
+
+::ng-deep {
+	.angular-editor-textarea {
+		img {
+			max-width: 100%;
+		}
+		p {
+			line-height: 24px;
+		}
+	}
+}
+
+::ng-deep {
+	.admin-article__description {
+		display: block;
+		margin-top: 30px;
+		overflow: hidden;
+
+		line-height: 24px;
+
+		span,
+		p {
+			line-height: 24px;
+		}
+
+		ul,
+		li {
+			list-style: disc !important;
+		}
+
+		ul {
+			padding-left: 30px;
+		}
+
+		strong,
+		b {
+			font-weight: bold !important;
+		}
+
+		img {
+			width: 100%;
+		}
+	}
+}

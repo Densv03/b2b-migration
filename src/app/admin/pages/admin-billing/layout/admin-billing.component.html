@@ -1,0 +1,6 @@
+<div class="admin-billing__add-billing-plan" (click)="addBillingPlan()">+</div>
+
+<b2b-admin-payment-plan-list
+	[paymentPlans]="currentPaymentPlans | async"
+	(onDelete)="deletePaymentPlan($event)"
+	(onEdit)="editPaymentPlan($event)"></b2b-admin-payment-plan-list>

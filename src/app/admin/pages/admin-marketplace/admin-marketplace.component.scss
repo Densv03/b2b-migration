@@ -1,0 +1,79 @@
+:host {
+	.market-products {
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		padding: 25px;
+		.product {
+			height: auto;
+			display: flex;
+			width: 32%;
+			margin-right: 5px;
+			align-items: center;
+			justify-content: space-between;
+			margin-bottom: 10px;
+			background: #ffffff;
+			box-shadow: 2px 2px 8px #e3eaf1;
+			border-radius: 4px;
+			cursor: pointer;
+			.photo {
+				width: 20%;
+				height: 100%;
+				img {
+					width: 100%;
+					height: 100%;
+					object-fit: cover;
+				}
+			}
+			.info {
+				width: 100%;
+				margin-left: 15px;
+				height: 100%;
+				padding: 20px;
+				.info-header {
+					display: flex;
+					align-items: center;
+					justify-content: space-between;
+					.product-title {
+						margin-right: 10px;
+					}
+
+					.product-views {
+						display: flex;
+						flex-direction: column;
+						align-items: center;
+					}
+					.product-views-circle {
+						margin-left: 15px;
+						width: 27px;
+						height: 27px;
+						border-radius: 50%;
+						background-color: #005dff;
+						.product-views-amount {
+							color: #ffffff;
+							font-weight: 700;
+							transform: translate(20%, 20%);
+						}
+					}
+				}
+				.product-status {
+					background-color: #9fa4bb;
+					border-radius: 4px;
+					padding: 4px 6px;
+					width: 140px;
+					color: #fff;
+					font-weight: 400;
+					text-align: center;
+					margin-top: 10px;
+				}
+			}
+			.dropdown {
+				width: 20%;
+				text-align: end;
+			}
+		}
+		.company {
+			height: 50px;
+		}
+	}
+}

@@ -38,14 +38,14 @@ import { filter } from "rxjs/operators";
 export class B2bNgxChipsComponent implements OnChanges, ControlValueAccessor, OnInit {
 	@Output() public readonly searched = new EventEmitter<string>();
 
-	@Input() public readonly className: any[];
-	@Input() public readonly options: any[];
-	@Input() public readonly searchedOptions: any[] = [];
+	@Input() public className: any[];
+	@Input() public options: any[];
+	@Input() public searchedOptions: any[] = [];
 
-	public readonly formControl: FormControl;
+	public formControl: FormControl;
 	public readonly b2bNgxInputThemeEnum = B2bNgxInputThemeEnum;
 	public readonly b2bNgxSelectThemeEnum = B2bNgxSelectThemeEnum;
-	public readonly svgStyle: object;
+	public svgStyle: object;
 	public chips: any;
 
 	private onChange: (value: string) => void;

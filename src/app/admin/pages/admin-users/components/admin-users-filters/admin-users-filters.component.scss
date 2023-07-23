@@ -1,0 +1,32 @@
+.admin-users-filters {
+	&__wrapper {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 10px;
+		align-items: end;
+		& > div {
+			width: 20%;
+		}
+
+		.phone {
+			background-color: white;
+		}
+	}
+	&__categories {
+		margin-top: 10px;
+		width: 45%;
+		// display: flex;
+		// gap: 5px;
+		// align-items: center;
+		b2b-ngx-treeview {
+			width: 88%;
+		}
+		b2b-ngx-toggle {
+			margin-top: 20px;
+		}
+		&--toggles {
+			margin-top: 5px;
+			display: flex;
+		}
+	}
+}
