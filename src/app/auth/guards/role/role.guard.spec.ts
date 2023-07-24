@@ -1,16 +1,15 @@
-import { TestBed } from "@angular/core/testing";
+import { TestBed } from '@angular/core/testing';
+import { AuthGuard } from '../auth/auth.guard';
 
-import { AuthGuard } from "apps/site/src/app/auth/guards/auth/auth.guard";
+describe('AuthGuard', () => {
+  let guard: AuthGuard;
 
-describe("AuthGuard", () => {
-	let guard: AuthGuard;
+  beforeEach(() => {
+    TestBed.configureTestingModule({});
+    guard = TestBed.inject(AuthGuard);
+  });
 
-	beforeEach(() => {
-		TestBed.configureTestingModule({});
-		guard = TestBed.inject(AuthGuard);
-	});
-
-	it("should be created", () => {
-		expect(guard).toBeTruthy();
-	});
+  it('should be created', () => {
+    expect(guard).toBeTruthy();
+  });
 });

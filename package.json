@@ -39,6 +39,7 @@
     "express": "^4.15.2",
     "google-libphonenumber": "^3.2.32",
     "intl-tel-input": "^18.1.8",
+    "localstorage-polyfill": "^1.0.1",
     "mock-browser": "^0.92.14",
     "ng-gallery": "^7.1.2",
     "ngx-bootstrap": "9.0.0-RC.2",

@@ -1,16 +1,15 @@
-import { TestBed } from "@angular/core/testing";
+import { TestBed } from '@angular/core/testing';
+import { TransportTypesService } from './transport-types.service';
 
-import { TransportTypesService } from "apps/site/src/app/client/services/transport-types/transport-types.service";
+describe('TransportTypesService', () => {
+  let service: TransportTypesService;
 
-describe("TransportTypesService", () => {
-	let service: TransportTypesService;
+  beforeEach(() => {
+    TestBed.configureTestingModule({});
+    service = TestBed.inject(TransportTypesService);
+  });
 
-	beforeEach(() => {
-		TestBed.configureTestingModule({});
-		service = TestBed.inject(TransportTypesService);
-	});
-
-	it("should be created", () => {
-		expect(service).toBeTruthy();
-	});
+  it('should be created', () => {
+    expect(service).toBeTruthy();
+  });
 });

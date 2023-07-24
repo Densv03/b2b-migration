@@ -1,16 +1,15 @@
-import { TestBed } from "@angular/core/testing";
+import { TestBed } from '@angular/core/testing';
+import { WikiService } from './wiki.service';
 
-import { WikiService } from "apps/site/src/app/client/services/wiki/wiki.service";
+describe('OffersService', () => {
+  let service: WikiService;
 
-describe("OffersService", () => {
-	let service: WikiService;
+  beforeEach(() => {
+    TestBed.configureTestingModule({});
+    service = TestBed.inject(WikiService);
+  });
 
-	beforeEach(() => {
-		TestBed.configureTestingModule({});
-		service = TestBed.inject(WikiService);
-	});
-
-	it("should be created", () => {
-		expect(service).toBeTruthy();
-	});
+  it('should be created', () => {
+    expect(service).toBeTruthy();
+  });
 });
