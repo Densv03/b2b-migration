@@ -4,7 +4,7 @@ import { ngExpressEngine } from '@nguniversal/express-engine';
 import * as express from 'express';
 import { join } from 'path';
 
-import { AppServerModule } from './app/app.module.server';
+import { AppServerModule } from './src/main.server';
 import { APP_BASE_HREF } from '@angular/common';
 import { existsSync } from 'fs';
 import cookieParser from 'cookie-parser';
@@ -25,7 +25,7 @@ global['navigator'] = mock.getNavigator();
 global['localStorage'] = localStorage;
 const window = domino.createWindow(template);
 global['window'] = window as any;
-global['window']['cookieconsent'] = {
+(global as any)['window']['cookieconsent'] = {
   initialise: function () {
     console.warn('Cookie consent is not working on server side');
   },
@@ -76,7 +76,7 @@ export function app(): express.Express {
 }
 
 function run(): void {
-  const port = process.env.PORT || 4000;
+  const port = process.env['PORT'] || 4000;
 
   // Start up the Node server
   const server = app();
