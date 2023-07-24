@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "test-again": {
+    "fe-b2b": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/test-again/browser",
+            "outputPath": "dist/fe-b2b/browser",
             "index": "src/index.html",
             "main": "src/main.ts",
             "tsConfig": "tsconfig.app.json",
@@ -63,10 +63,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "test-again:build:production"
+              "browserTarget": "fe-b2b:build:production"
             },
             "development": {
-              "browserTarget": "test-again:build:development"
+              "browserTarget": "fe-b2b:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -74,7 +74,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "test-again:build"
+            "browserTarget": "fe-b2b:build"
           }
         },
         "test": {
@@ -96,7 +96,7 @@
         "server": {
           "builder": "@angular-devkit/build-angular:server",
           "options": {
-            "outputPath": "dist/test-again/server",
+            "outputPath": "dist/fe-b2b/server",
             "main": "server.ts",
             "tsConfig": "tsconfig.server.json",
             "inlineStyleLanguage": "scss"
@@ -117,12 +117,12 @@
           "builder": "@nguniversal/builders:ssr-dev-server",
           "configurations": {
             "development": {
-              "browserTarget": "test-again:build:development",
-              "serverTarget": "test-again:server:development"
+              "browserTarget": "fe-b2b:build:development",
+              "serverTarget": "fe-b2b:server:development"
             },
             "production": {
-              "browserTarget": "test-again:build:production",
-              "serverTarget": "test-again:server:production"
+              "browserTarget": "fe-b2b:build:production",
+              "serverTarget": "fe-b2b:server:production"
             }
           },
           "defaultConfiguration": "development"
@@ -136,12 +136,12 @@
           },
           "configurations": {
             "production": {
-              "browserTarget": "test-again:build:production",
-              "serverTarget": "test-again:server:production"
+              "browserTarget": "fe-b2b:build:production",
+              "serverTarget": "fe-b2b:server:production"
             },
             "development": {
-              "browserTarget": "test-again:build:development",
-              "serverTarget": "test-again:server:development"
+              "browserTarget": "fe-b2b:build:development",
+              "serverTarget": "fe-b2b:server:development"
             }
           },
           "defaultConfiguration": "production"

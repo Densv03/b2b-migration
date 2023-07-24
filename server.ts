@@ -17,7 +17,7 @@ const MockBrowser = require('mock-browser').mocks.MockBrowser;
 const mock = new MockBrowser();
 const template = fs
   .readFileSync(
-    path.join(process.cwd(), 'dist/test-again/browser', 'index.html')
+    path.join(process.cwd(), 'dist/fe-b2b/browser', 'index.html')
   )
   .toString();
 
@@ -35,7 +35,7 @@ global['document'] = window.document;
 // The Express app is exported so that it can be used by serverless Functions.
 export function app(): express.Express {
   const server = express();
-  const distFolder = join(process.cwd(), 'dist/test-again/browser');
+  const distFolder = join(process.cwd(), 'dist/fe-b2b/browser');
   const indexHtml = existsSync(join(distFolder, 'index.original.html'))
     ? 'index.original.html'
     : 'index';

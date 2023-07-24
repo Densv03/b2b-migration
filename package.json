@@ -1,5 +1,5 @@
 {
-  "name": "test-again",
+  "name": "fe-b2b",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -7,10 +7,10 @@
     "build": "ng build --optimization=false",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "dev:ssr": "ng run test-again:serve-ssr",
-    "serve:ssr": "node dist/test-again/server/main.js",
-    "build:ssr": "ng build --optimization=false && ng run test-again:server",
-    "prerender": "ng run test-again:prerender"
+    "dev:ssr": "ng run fe-b2b:serve-ssr",
+    "serve:ssr": "node dist/fe-b2b/server/main.js",
+    "build:ssr": "ng build --optimization=false && ng run fe-b2b:server",
+    "prerender": "ng run fe-b2b:prerender"
   },
   "private": true,
   "dependencies": {
