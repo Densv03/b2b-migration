@@ -3,10 +3,10 @@ import { Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { B2bNgxButtonThemeEnum } from '@b2b/ngx-button';
 import { B2bNgxInputThemeEnum } from '@b2b/ngx-input';
-import { FormBuilder, FormGroup } from '@ngneat/reactive-forms';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { skip } from 'rxjs';
 import { AuthService } from 'src/app/auth/services/auth/auth.service';
+import { FormGroup, FormBuilder } from '@angular/forms';
 
 @UntilDestroy()
 @Component({
@@ -42,7 +42,7 @@ export class ClientRegistrationCompleteComponent {
     this.formGroup.markAsUntouched();
   }
 
-  async logInWithForm(formGroup) {
+  async logInWithForm(formGroup: FormGroup) {
     if (formGroup.invalid) {
       return;
     }
@@ -67,21 +67,29 @@ export class ClientRegistrationCompleteComponent {
             await this._router.navigateByUrl(url);
           }
         });
-    } catch (err) {
+    } catch (err: any) {
       const { code } = err.error;
 
-      const field =
-        {
-          1000: 'email',
-          1001: 'password',
-          1014: 'email',
-        }[code] ?? null;
+      // const field: any =
+      //   {
+          // 1000: 'email',
+          // 1001: 'password',
+          // 1014: 'email',
+      //   }[code] ?? null;
+
+      const codesObj: any = {
+        1000: 'email',
+        1001: 'password',
+        1014: 'email',
+      }
+
+      const field: string = codesObj[code];
 
       if (!field) {
         return;
       }
 
-      this.formGroup.getControl(field).setErrors({ [code]: true });
+      this.formGroup.get(field).setErrors({ [code]: true });
       this._cdr.detectChanges();
     }
   }

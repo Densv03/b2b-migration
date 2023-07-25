@@ -13,7 +13,6 @@ export class ClientGoogleCompleteComponent {
 	public readonly b2bNgxButtonThemeEnum = B2bNgxButtonThemeEnum;
 
 	constructor(private readonly _router: Router) {
-		this._ampService.logEvent("Registration complete", { type: "google", source: localStorage.getItem("source") });
 	}
 
 	goToHome() {

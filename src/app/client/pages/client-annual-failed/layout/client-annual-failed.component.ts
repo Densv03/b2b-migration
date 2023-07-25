@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from "@angular/core";
 import { B2bNgxButtonThemeEnum } from "@b2b/ngx-button";
-import { B2bNgxLinkService, B2bNgxLinkThemeEnum } from "lib/ngx-link/src";
+import { B2bNgxLinkService, B2bNgxLinkThemeEnum } from "@b2b/ngx-link";
 
 @Component({
 	selector: "b2b-client-annual-failed",

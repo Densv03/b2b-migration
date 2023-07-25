@@ -9,13 +9,14 @@ import { ActivatedRoute } from '@angular/router';
 import { B2bNgxButtonThemeEnum } from '@b2b/ngx-button';
 import { B2bNgxInputThemeEnum } from '@b2b/ngx-input';
 import { HotToastService } from '@ngneat/hot-toast';
-import { FormBuilder, FormControl } from '@ngneat/reactive-forms';
+import { FormBuilder, FormControl } from '@angular/forms';
 import { TranslocoService } from '@ngneat/transloco';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { interval, map, switchMap, take, tap } from 'rxjs';
 import { ClientContactUsModalComponent } from '../../../components/client-contact-us-modal/client-contact-us-modal.component';
 import { UserService } from '../../client-profile/services/user/user.service';
 import { AuthService } from 'src/app/auth/services/auth/auth.service';
+import { User } from 'src/app/core/models/user/user.model';
 
 @UntilDestroy()
 @Component({
@@ -34,7 +35,7 @@ export class ClientEmailVerifyComponent implements AfterViewInit {
   inputWidth = 120;
   formControl: FormControl;
   isInputDisabled = true;
-  user;
+  user: User;
 
   constructor(
     private readonly _cdr: ChangeDetectorRef,
@@ -45,10 +46,6 @@ export class ClientEmailVerifyComponent implements AfterViewInit {
     private readonly _formBuilder: FormBuilder,
     private readonly _userService: UserService
   ) {
-    this._ampService.logEvent('Registration complete', {
-      type: 'main app',
-      source: localStorage.getItem('source'),
-    });
     this.formControl = this._formBuilder.control({
       value: null,
       disabled: true,
@@ -69,7 +66,7 @@ export class ClientEmailVerifyComponent implements AfterViewInit {
     this.startTimer(duration);
   }
 
-  startTimer(duration) {
+  startTimer(duration: any): void {
     let timer = 60;
     let minutes;
     let seconds;
@@ -148,6 +145,5 @@ export class ClientEmailVerifyComponent implements AfterViewInit {
   }
 
   public openContactUsModal() {
-    this._ampService.logEvent('Click on support button');
   }
 }

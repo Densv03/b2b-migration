@@ -384,119 +384,119 @@ const routes: Routes = [
 					},
 				},
 			},
-			// {
-			// 	path: "offer",
-			// 	canActivate: [AuthGuard, CompanyInformationGuard, BuyerGuard],
-			// 	loadChildren: () =>
-			// 		import("./pages/client-profile/pages/client-profile-add-offer/client-profile-add-offer.module").then(
-			// 			(m) => m.ClientProfileAddOfferModule
-			// 		),
-			// 	data: {
-			// 		meta: {
-			// 			title: "B2B Discount - Buy and Sell B2B Cargo with Discount!",
-			// 			description: "B2B Discount - Add Offer",
-			// 		},
-			// 	},
-			// },
-			// {
-			// 	path: "reset-password/:id",
-			// 	canActivate: [DefaultRoleGuard],
-			// 	loadChildren: () =>
-			// 		import("./pages/client-reset-password/client-reset-password.module").then((m) => m.ClientResetPasswordModule),
-			// 	data: {
-			// 		meta: {
-			// 			title: "B2B Discount - Buy and Sell B2B Cargo with Discount!",
-			// 			description: "B2B Discount - Reset Password",
-			// 		},
-			// 	},
-			// },
-			// {
-			// 	path: "google-registration-complete",
-			// 	loadChildren: () =>
-			// 		import("./pages/client-google-complete/client-google-complete.module").then(
-			// 			(m) => m.ClientGoogleCompleteModule
-			// 		),
-			// 	data: {
-			// 		meta: {
-			// 			title: "B2B Discount - Buy and Sell B2B Cargo with Discount!",
-			// 			description: "B2B Discount - Reset Password",
-			// 		},
-			// 	},
-			// },
-			// {
-			// 	path: "linkedin-registration-complete",
-			// 	loadChildren: () =>
-			// 		import("./pages/client-google-complete/client-google-complete.module").then(
-			// 			(m) => m.ClientGoogleCompleteModule
-			// 		),
-			// 	data: {
-			// 		meta: {
-			// 			title: "B2B Discount - Buy and Sell B2B Cargo with Discount!",
-			// 			description: "B2B Discount - Reset Password",
-			// 		},
-			// 	},
-			// },
-			// {
-			// 	path: "registration-complete",
-			// 	loadChildren: () =>
-			// 		import("./pages/client-registration-complete/client-registration-complete.module").then(
-			// 			(m) => m.ClientRegistrationCompleteModule
-			// 		),
-			// 	data: {
-			// 		meta: {
-			// 			title: "B2B Discount - Buy and Sell B2B Cargo with Discount!",
-			// 			description: "B2B Discount - Reset Password",
-			// 		},
-			// 	},
-			// },
-			// {
-			// 	path: "account-not-registered",
-			// 	loadChildren: () =>
-			// 		import("./pages/client-account-not-registered/client-account-not-registered-complete.module").then(
-			// 			(m) => m.ClientAccountNotRegistereModule
-			// 		),
-			// 	data: {
-			// 		meta: {
-			// 			title: "B2B Discount - Buy and Sell B2B Cargo with Discount!",
-			// 			description: "B2B Discount - Reset Password",
-			// 		},
-			// 	},
-			// },
-			// {
-			// 	path: "email-verify",
-			// 	loadChildren: () =>
-			// 		import("./pages/client-email-verify/client-email-verify.module").then((m) => m.ClientEmailVerifyModule),
-			// 	data: {
-			// 		meta: {
-			// 			title: "B2B Discount - Buy and Sell B2B Cargo with Discount!",
-			// 			description: "B2B Discount - Reset Password",
-			// 		},
-			// 	},
-			// },
-			// {
-			// 	path: "annual-succeeded",
-			// 	loadChildren: () =>
-			// 		import("./pages/client-annual-succeeded/client-annual-succeeded.module").then(
-			// 			(m) => m.ClientAnnualSucceededModule
-			// 		),
-			// 	data: {
-			// 		meta: {
-			// 			title: "B2B Discount - Buy and Sell B2B Cargo with Discount!",
-			// 			description: "B2B Discount - Annual Succeeded",
-			// 		},
-			// 	},
-			// },
-			// {
-			// 	path: "annual-failed",
-			// 	loadChildren: () =>
-			// 		import("./pages/client-annual-failed/client-annual-failed.module").then((m) => m.ClientAnnualFailedModule),
-			// 	data: {
-			// 		meta: {
-			// 			title: "B2B Discount - Buy and Sell B2B Cargo with Discount!",
-			// 			description: "B2B Discount - Payment Failed",
-			// 		},
-			// 	},
-			// },
+			{
+				path: "offer",
+				canActivate: [AuthGuard, CompanyInformationGuard, BuyerGuard],
+				loadChildren: () =>
+					import("./pages/client-profile/pages/client-profile-add-offer/client-profile-add-offer.module").then(
+						(m) => m.ClientProfileAddOfferModule
+					),
+				data: {
+					meta: {
+						title: "B2B Discount - Buy and Sell B2B Cargo with Discount!",
+						description: "B2B Discount - Add Offer",
+					},
+				},
+			},
+			{
+				path: "reset-password/:id",
+				canActivate: [DefaultRoleGuard],
+				loadChildren: () =>
+					import("./pages/client-reset-password/client-reset-password.module").then((m) => m.ClientResetPasswordModule),
+				data: {
+					meta: {
+						title: "B2B Discount - Buy and Sell B2B Cargo with Discount!",
+						description: "B2B Discount - Reset Password",
+					},
+				},
+			},
+			{
+				path: "google-registration-complete",
+				loadChildren: () =>
+					import("./pages/client-google-complete/client-google-complete.module").then(
+						(m) => m.ClientGoogleCompleteModule
+					),
+				data: {
+					meta: {
+						title: "B2B Discount - Buy and Sell B2B Cargo with Discount!",
+						description: "B2B Discount - Reset Password",
+					},
+				},
+			},
+			{
+				path: "linkedin-registration-complete",
+				loadChildren: () =>
+					import("./pages/client-google-complete/client-google-complete.module").then(
+						(m) => m.ClientGoogleCompleteModule
+					),
+				data: {
+					meta: {
+						title: "B2B Discount - Buy and Sell B2B Cargo with Discount!",
+						description: "B2B Discount - Reset Password",
+					},
+				},
+			},
+			{
+				path: "registration-complete",
+				loadChildren: () =>
+					import("./pages/client-registration-complete/client-registration-complete.module").then(
+						(m) => m.ClientRegistrationCompleteModule
+					),
+				data: {
+					meta: {
+						title: "B2B Discount - Buy and Sell B2B Cargo with Discount!",
+						description: "B2B Discount - Reset Password",
+					},
+				},
+			},
+			{
+				path: "account-not-registered",
+				loadChildren: () =>
+					import("./pages/client-account-not-registered/client-account-not-registered-complete.module").then(
+						(m) => m.ClientAccountNotRegistereModule
+					),
+				data: {
+					meta: {
+						title: "B2B Discount - Buy and Sell B2B Cargo with Discount!",
+						description: "B2B Discount - Reset Password",
+					},
+				},
+			},
+			{
+				path: "email-verify",
+				loadChildren: () =>
+					import("./pages/client-email-verify/client-email-verify.module").then((m) => m.ClientEmailVerifyModule),
+				data: {
+					meta: {
+						title: "B2B Discount - Buy and Sell B2B Cargo with Discount!",
+						description: "B2B Discount - Reset Password",
+					},
+				},
+			},
+			{
+				path: "annual-succeeded",
+				loadChildren: () =>
+					import("./pages/client-annual-succeeded/client-annual-succeeded.module").then(
+						(m) => m.ClientAnnualSucceededModule
+					),
+				data: {
+					meta: {
+						title: "B2B Discount - Buy and Sell B2B Cargo with Discount!",
+						description: "B2B Discount - Annual Succeeded",
+					},
+				},
+			},
+			{
+				path: "annual-failed",
+				loadChildren: () =>
+					import("./pages/client-annual-failed/client-annual-failed.module").then((m) => m.ClientAnnualFailedModule),
+				data: {
+					meta: {
+						title: "B2B Discount - Buy and Sell B2B Cargo with Discount!",
+						description: "B2B Discount - Payment Failed",
+					},
+				},
+			},
 			{
 				path: "tradebid",
 				canActivate: [],

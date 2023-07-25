@@ -18,8 +18,12 @@ export class ClientOfferContactSupplierComponent {
 		this.b2bNgxButtonThemeEnum = B2bNgxButtonThemeEnum;
 	}
 
-	contactSupplier() {
+	public contactSupplier(): void {
 		this._router.navigateByUrl("/offers/" + this.data._id + "/chat");
+		this.dialogRef.close();
+	}
+
+	public close(): void {
 		this.dialogRef.close();
 	}
 }

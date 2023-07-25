@@ -8,7 +8,7 @@ import { B2bNgxIconModule } from "@b2b/ngx-icon";
 // import { B2bNgxDividerModule } from "@b2b/ngx-divider";
 import { ClientOfferComponent} from "./layout/client-offer.component";
 import { ClientOfferRoutingModule} from "./client-offer-routing.module";
-// import { B2bNgxSkeletonModule } from "@b2b/ngx-skeleton";
+import { B2bNgxSkeletonModule } from "@b2b/ngx-skeleton";
 import { B2bNgxImageModule } from "@b2b/ngx-image";
 import { ClientOfferMapComponent } from "./components/client-offer-map/client-offer-map.component";
 // import { AgmCoreModule } from "@agm/core";
@@ -16,7 +16,7 @@ import { ClientOfferDocumentComponent } from "./components/client-offer-document
 import { ClientOfferImagesComponent } from "./components/client-offer-images/client-offer-images.component";
 import { NgxDocViewerModule } from "ngx-doc-viewer";
 import { TranslocoModule } from "@ngneat/transloco";
-// import { NgxTippyModule } from "ngx-tippy-wrapper";
+import { NgxTippyModule } from "ngx-tippy-wrapper";
 import { ClientOfferReportComponent } from "./components/client-offer-report/client-offer-report.component";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { ClientOfferContactSupplierComponent } from "./components/client-offer-contact-supplier/client-offer-contact-supplier.component";
@@ -46,11 +46,11 @@ import {
     // B2bNgxTooltipModule,
     B2bNgxIconModule,
     // B2bNgxDividerModule,
-    // B2bNgxSkeletonModule,
+    B2bNgxSkeletonModule,
     B2bNgxImageModule,
     // AgmCoreModule,
     NgxDocViewerModule,
-    // NgxTippyModule,
+    NgxTippyModule,
     TranslocoModule,
     NgxIntlTelInputModule,
     B2bNgxButtonModule,

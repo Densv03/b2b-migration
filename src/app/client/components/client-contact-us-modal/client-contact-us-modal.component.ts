@@ -1,14 +1,17 @@
 import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 // import { NgxSmartModalService } from "ngx-smart-modal";
-import { FormBuilder, FormGroup } from "@ngneat/reactive-forms";
-import { B2bNgxInputThemeEnum } from "@b2b/ngx-input";
-import { B2bNgxSelectThemeEnum } from "@b2b/ngx-select";
-import { B2bNgxButtonThemeEnum } from "@b2b/ngx-button";
+import { FormBuilder, FormGroup, ReactiveFormsModule } from "@angular/forms";
+import { B2bNgxInputModule, B2bNgxInputThemeEnum } from "@b2b/ngx-input";
+import { B2bNgxSelectModule, B2bNgxSelectThemeEnum } from "@b2b/ngx-select";
+import { B2bNgxButtonModule, B2bNgxButtonThemeEnum } from "@b2b/ngx-button";
 import { Validators } from "@angular/forms";
 import { ApiService } from "../../../core/services/api/api.service";
 import { HotToastService } from "@ngneat/hot-toast";
 import { UntilDestroy, untilDestroyed } from "@ngneat/until-destroy";
 import { TranslocoService } from "@ngneat/transloco";
+import { CommonModule } from "@angular/common";
+import { B2bNgxTelModule } from "@b2b/ngx-tel";
+import { B2bNgxTextareaModule } from "@b2b/ngx-textarea";
 
 @UntilDestroy()
 @Component({
@@ -16,8 +19,10 @@ import { TranslocoService } from "@ngneat/transloco";
 	templateUrl: "./client-contact-us-modal.component.html",
 	styleUrls: ["./client-contact-us-modal.component.scss"],
 	changeDetection: ChangeDetectionStrategy.OnPush,
+	standalone: true,
+	imports: [CommonModule, ReactiveFormsModule, B2bNgxSelectModule, B2bNgxInputModule, B2bNgxTelModule, B2bNgxTextareaModule, B2bNgxButtonModule]
 })
-export class ClientContactUsModalComponent implements OnInit {
+export class ClientContactUsModalComponent {
 	public readonly subjectOptions: any[];
 	public readonly socialMedias: any[];
 	public readonly formGroup: FormGroup;
@@ -29,9 +34,9 @@ export class ClientContactUsModalComponent implements OnInit {
 	constructor(
 		// private readonly _ngxSmartModalService: NgxSmartModalService,
 		private readonly _formBuilder: FormBuilder,
-		private readonly _apiService: ApiService,
 		private readonly _hotToastrService: HotToastService,
 		private readonly _translocoService: TranslocoService,
+		private readonly _apiService: ApiService
 	) {
 		this.subjectOptions = [
 			{ label: this._translocoService.translate("CONTACT_US.SUPPORT"), value: "support" },
@@ -76,7 +81,6 @@ export class ClientContactUsModalComponent implements OnInit {
 				})
 			)
 			.subscribe(() => {
-				this._ampService.logEvent("Let a support message");
 				this.closeModal();
 			});
 	}
@@ -102,11 +106,9 @@ export class ClientContactUsModalComponent implements OnInit {
 		];
 	}
 
-	public closeModal() {
+	public closeModal(): void {
 		// const modal = this._ngxSmartModalService.getModal("createContactModal");
 
 		// modal.close();
 	}
-
-	ngOnInit() {}
 }

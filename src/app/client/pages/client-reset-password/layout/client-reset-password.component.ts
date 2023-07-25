@@ -4,11 +4,11 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { B2bNgxButtonThemeEnum } from "@b2b/ngx-button";
 import { B2bNgxInputThemeEnum } from "@b2b/ngx-input";
 import { HotToastService } from "@ngneat/hot-toast";
-import { FormBuilder, FormControl } from "@ngneat/reactive-forms";
 import { TranslocoService } from "@ngneat/transloco";
 import { UntilDestroy, untilDestroyed } from "@ngneat/until-destroy";
-import { B2bNgxLinkService } from "lib/ngx-link/src";
+import { B2bNgxLinkService } from "@b2b/ngx-link";
 import { ApiService } from "../../../../core/services/api/api.service";
+import { FormControl, FormBuilder } from "@angular/forms";
 
 export function password(): ValidatorFn {
 	return (control: AbstractControl): ValidationErrors | null => {
