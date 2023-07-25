@@ -1,8 +1,6 @@
 import {
   ChangeDetectionStrategy,
-  ChangeDetectorRef,
   Component,
-  CUSTOM_ELEMENTS_SCHEMA,
   ElementRef,
   OnInit,
   Renderer2, ViewChild

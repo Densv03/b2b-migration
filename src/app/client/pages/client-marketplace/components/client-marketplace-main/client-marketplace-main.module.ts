@@ -10,6 +10,7 @@ import {MatTabsModule} from "@angular/material/tabs";
 import {B2bNgxSelectModule} from "@b2b/ngx-select";
 import {B2bNgxInputModule} from "@b2b/ngx-input";
 import {ReactiveFormsModule} from "@angular/forms";
+import { B2bBreadcrumpsModule } from "@b2b/breadcrumps";
 
 const routes: Routes = [{path: '', component: ClientMarketplaceMainComponent}]
 @NgModule({
@@ -23,7 +24,8 @@ const routes: Routes = [{path: '', component: ClientMarketplaceMainComponent}]
 		MatTabsModule,
 		B2bNgxSelectModule,
 		B2bNgxInputModule,
-		ReactiveFormsModule
+		ReactiveFormsModule,
+		B2bBreadcrumpsModule
 	],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

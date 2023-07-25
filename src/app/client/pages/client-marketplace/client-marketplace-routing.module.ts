@@ -21,6 +21,14 @@ const routes: Routes = [
 	{
 		path: "listing",
 		component: ClientMarketplaceComponent,
+		data: {
+			breadcrumbs: [
+				{ label: 'Home', url: '/' },
+				{ label: 'B2BMARKET', url: '/b2bmarket' },
+				{ label: 'OFFERS', url: '/b2bmarket/listing'}
+			]
+		}
+
 	},
 	{
 		path: "supplier-listing/:id",

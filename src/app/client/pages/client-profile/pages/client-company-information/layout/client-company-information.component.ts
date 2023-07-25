@@ -24,7 +24,7 @@ import { UntilDestroy, untilDestroyed } from "@ngneat/until-destroy";
 import { B2bAuthRootRoleInterface} from "../../../../../../../../projects/shared/src/interfaces/b2b-auth-root-role.interface";
 import { Router } from "@angular/router";
 import {B2bNgxButtonModule, B2bNgxButtonThemeEnum} from "@b2b/ngx-button";
-import {CommonModule, NgIf} from "@angular/common";
+import {CommonModule} from "@angular/common";
 import {B2bNgxCountrySelectModule} from "@b2b/ngx-country-select";
 import {B2bNgxTelModule} from "@b2b/ngx-tel";
 import {B2bNgxRadioModule} from "@b2b/ngx-radio";
@@ -347,6 +347,8 @@ export class ClientCompanyInformationComponent implements OnInit {
 			logo: [],
 		});
 	}
+
+	// , Validators.pattern('^(\\(\\d{3}\\)|\\d{3})\\s?\\d{3}(-|\\s)?\\d{4}$')
 
 	private patchValueToForm(res: PublicCompanyInfoModel): void {
 		const {

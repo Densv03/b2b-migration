@@ -1180,6 +1180,37 @@
           }
         }
       }
+    },
+    "b2b-breadcrumps": {
+      "projectType": "library",
+      "root": "projects/b2b-breadcrumps",
+      "sourceRoot": "projects/b2b-breadcrumps/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/b2b-breadcrumps/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/b2b-breadcrumps/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/b2b-breadcrumps/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/b2b-breadcrumps/src/test.ts",
+            "tsConfig": "projects/b2b-breadcrumps/tsconfig.spec.json",
+            "karmaConfig": "projects/b2b-breadcrumps/karma.conf.js"
+          }
+        }
+      }
     }
   },
   "cli": {

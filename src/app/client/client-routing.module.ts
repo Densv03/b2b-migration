@@ -546,6 +546,10 @@ const routes: Routes = [
 						title: "B2B Discount - Buy and Sell B2B Cargo with Discount!",
 						description: "B2B Discount - Marketplace",
 					},
+					breadcrumbs: [
+						{ label: 'Home', url: '/' },
+						{ label: 'B2BMARKET', url: '/b2bmarket' }
+					]
 				},
 			},
 			{

@@ -47,6 +47,7 @@ import {B2bNgxPaginationModule} from "@b2b/ngx-pagination";
 import {B2bNgxFileModule} from "@b2b/ngx-file";
 import {PaginationModule} from "../../shared/components/pagination/pagination.module";
 import {CategoriesDialogModule} from "@b2b/categories-modal";
+import { B2bBreadcrumpsModule } from "@b2b/breadcrumps";
 
 @NgModule({
 	declarations: [
@@ -93,6 +94,7 @@ import {CategoriesDialogModule} from "@b2b/categories-modal";
     ClientMarketplaceProductItemModule,
     B2bNgxPaginationModule,
     PaginationModule,
+    B2bBreadcrumpsModule
   ],
 	providers: [
 		Meta

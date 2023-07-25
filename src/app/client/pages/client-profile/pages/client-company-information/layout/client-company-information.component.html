@@ -99,6 +99,10 @@
 					<p *ngIf="formState['phone'].touched && formState['phone'].errors?.['required']" class="error" [@fadeInOut]>
 						Phone number is required
 					</p>
+
+					<p *ngIf="formState['phone'].touched && formState['phone'].errors?.['phone']" class="error" [@fadeInOut]>
+						Please, enter valid phone number
+				</p>
 				</div>
 				<div class="form-control-wrapper">
 					<input
