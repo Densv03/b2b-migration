@@ -26,9 +26,9 @@
 				[placeholder]="t('PLACEHOLDERS.YOUR_EMAIL')"
 				formControlName="email" />
 			<b2b-ngx-country-select
-				[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"
+				[theme]="b2bNgxSelectThemeEnum.BACKGROUND_GRAY"
 				formControlName="country"
-				[errors]="formGroup.getControl('country').errors"
+				[errors]="formGroup.get('country')?.errors"
 				>{{ t("INPUTS.COUNTRY") }}</b2b-ngx-country-select
 			>
 			<textarea

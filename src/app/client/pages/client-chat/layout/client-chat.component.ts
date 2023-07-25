@@ -169,7 +169,7 @@ export class ClientChatComponent implements OnInit, OnDestroy {
 		);
 	}
 
-	public enterPressed(event: KeyboardEvent) {
+	public enterPressed(event: Event) {
 		this.sendMessage(this.formGroup.get("message").value);
 		event.preventDefault();
 	}

@@ -13,7 +13,7 @@ import { B2bNgxLinkThemeEnum } from "@b2b/ngx-link";
 import { BehaviorSubject, Observable } from "rxjs";
 import { filter, first, map } from "rxjs/operators";
 import { CategoryListingService } from "../../client-marketplace/pages/category-listing/category-listing.service";
-import { Category } from "../../client-marketplace/shared/client-marketplace/category.model";
+import { Category } from "src/app/core/models/category.model";
 import { AuthService } from "../../../../auth/services/auth/auth.service";
 
 @Component({
@@ -45,7 +45,7 @@ export class ClientMarketPromoComponent implements OnInit {
 				filter((data) => !!data.length),
 				first()
 			)
-			.subscribe((data) => {
+			.subscribe((data: any) => {
 				this.categoriesNamesSource.next(this.getCategoryNamesArr(data));
 			});
 	}

@@ -107,6 +107,9 @@
       ],
       "@b2b/ngx-logo": [
         "projects/ngx-logo/src/public-api"
+      ],
+      "@b2b/ngx-list": [
+        "projects/ngx-list/src/public-api"
       ]
     },
     "declaration": false,

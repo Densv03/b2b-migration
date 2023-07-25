@@ -2,12 +2,12 @@ import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
 import { B2bNgxInputThemeEnum } from "@b2b/ngx-input";
 import { B2bNgxButtonThemeEnum } from "@b2b/ngx-button";
 import { B2bNgxSelectThemeEnum } from "@b2b/ngx-select";
-import { FormBuilder, FormGroup } from "@ngneat/reactive-forms";
 import { Validators } from "@angular/forms";
 import { UntilDestroy, untilDestroyed } from "@ngneat/until-destroy";
 import { ApiService } from "../../../../core/services/api/api.service";
 import { HotToastService } from "@ngneat/hot-toast";
 import { UserService } from "../../client-profile/services/user/user.service";
+import { FormBuilder, FormGroup } from "@angular/forms";
 
 import { getCode, getName } from "country-list";
 import { TranslocoService } from "@ngneat/transloco";

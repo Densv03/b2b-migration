@@ -1,5 +1,4 @@
 import { ChangeDetectionStrategy, Component, OnInit } from "@angular/core";
-import { FormBuilder, FormGroup } from "@ngneat/reactive-forms";
 import { B2bNgxInputThemeEnum } from "@b2b/ngx-input";
 import { B2bNgxSelectThemeEnum } from "@b2b/ngx-select";
 import { B2bNgxButtonThemeEnum } from "@b2b/ngx-button";
@@ -8,6 +7,7 @@ import { HotToastService } from "@ngneat/hot-toast";
 import { UntilDestroy, untilDestroyed } from "@ngneat/until-destroy";
 import { TranslocoService } from "@ngneat/transloco";
 import { ApiService } from "../../../../core/services/api/api.service";
+import {FormBuilder, FormGroup} from '@angular/forms'
 
 @UntilDestroy()
 @Component({
@@ -74,7 +74,6 @@ export class ClientContactUsComponent implements OnInit {
 				})
 			)
 			.subscribe(() => {
-				this._ampService.logEvent("Let a support message");
 				this.closeModal();
 			});
 	}

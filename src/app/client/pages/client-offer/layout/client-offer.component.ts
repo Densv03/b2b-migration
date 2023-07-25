@@ -5,14 +5,13 @@ import {
   OnInit,
 } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { DialogService } from '@ngneat/dialog';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { combineLatest, of } from 'rxjs';
 import { catchError, filter, map, switchMap, tap } from 'rxjs/operators';
 
 import { getName } from 'country-list';
-import { B2bNgxButtonThemeEnum } from 'lib/ngx-button/src';
-import { B2bNgxLinkService, B2bNgxLinkThemeEnum } from 'lib/ngx-link/src';
+import { B2bNgxButtonThemeEnum } from '@b2b/ngx-button';
+import { B2bNgxLinkService, B2bNgxLinkThemeEnum } from '@b2b/ngx-link';
 import { NgxTippyProps } from 'ngx-tippy-wrapper';
 import { environment } from '../../../../../environments/environment';
 import { AuthService } from '../../../../auth/services/auth/auth.service';
@@ -28,6 +27,7 @@ import { ImageExtensions } from '../../../../core/add-offer/image-extensions';
 import { UserService } from '../../client-profile/services/user/user.service';
 import { Meta, Title } from '@angular/platform-browser';
 import { OffersService } from 'src/app/client/services/offers/offers.service';
+import { MatDialog } from '@angular/material/dialog';
 
 @UntilDestroy()
 @Component({
@@ -56,12 +56,12 @@ export class ClientOfferComponent implements OnInit {
     private readonly _offersService: OffersService,
     private readonly _authService: AuthService,
     private readonly _changeDetectorRef: ChangeDetectorRef,
-    private readonly _dialogService: DialogService,
     public readonly b2bNgxLinkService: B2bNgxLinkService,
     private readonly _router: Router,
     private readonly userService: UserService,
     private readonly title: Title,
-    private readonly meta: Meta
+    private readonly meta: Meta,
+    private readonly dialog: MatDialog
   ) {
     this.isAuth = localStorage.getItem('token');
     this.offer = null;
@@ -92,14 +92,9 @@ export class ClientOfferComponent implements OnInit {
       'watchedOffers',
       watchedOffers ? (+watchedOffers + 1).toString() : '1'
     );
-    this._ampService.logEvent('View offer', {
-      num: +watchedOffers + 1,
-      category: category?.name || '',
-      source: localStorage.getItem('source'),
-    });
   }
 
-  processContactSupplierClick(offer: any) {
+  processContactSupplierClick(offer: any): any {
     // this._ampService.logEvent("Click contact supplier", {
     // 	type: this.offer.category?.name,
     // 	source: localStorage.getItem("source"),
@@ -143,8 +138,8 @@ export class ClientOfferComponent implements OnInit {
     };
   }
 
-  public openDocument(document) {
-    this._dialogService.open(ClientOfferDocumentComponent, {
+  public openDocument(document: any) {
+    this.dialog.open(ClientOfferDocumentComponent, {
       data: document,
       width: '80vw',
       height: '80vh',
@@ -152,7 +147,7 @@ export class ClientOfferComponent implements OnInit {
   }
 
   public openImages() {
-    this._dialogService.open(ClientOfferImagesComponent, {
+    this.dialog.open(ClientOfferImagesComponent, {
       data: {
         ...this.offer,
       },
@@ -162,7 +157,7 @@ export class ClientOfferComponent implements OnInit {
   }
 
   public openMap() {
-    this._dialogService.open(ClientOfferMapComponent, {
+    this.dialog.open(ClientOfferMapComponent, {
       data: {
         ...(this.location || {}),
         ...this.offer,
@@ -173,14 +168,14 @@ export class ClientOfferComponent implements OnInit {
   }
 
   public openReportPopover() {
-    this._dialogService.open(ClientOfferReportComponent, {
+    this.dialog.open(ClientOfferReportComponent, {
       data: {
         ...this.offer,
       },
       width: '40vw',
       height: 'auto',
       minHeight: '0',
-      windowClass: 'report-dialog',
+      panelClass: 'report-dialog'
     });
   }
 
@@ -189,7 +184,7 @@ export class ClientOfferComponent implements OnInit {
 
     const offer$ = this._activatedRouter.params.pipe(
       untilDestroyed(this),
-      switchMap((params) => this._offersService.getOfferById(params.id)),
+      switchMap((params) => this._offersService.getOfferById(params['id'])),
       catchError((err) => {
         this.error = err.error.code;
         this.loading = false;
@@ -200,7 +195,7 @@ export class ClientOfferComponent implements OnInit {
       map((offer) => ({
         ...offer,
         documents: Array.isArray(offer.documents)
-          ? offer.documents.map((document) => ({
+          ? offer.documents.map((document: any) => ({
               ...document,
               fullPath: environment.apiUrl + document.path,
               extension: GetUrlExtension(document.path),

@@ -1,7 +1,8 @@
-import { Component } from "@angular/core";
+import { DialogRef } from "@angular/cdk/dialog";
+import { Component, Inject } from "@angular/core";
+import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { Router } from "@angular/router";
 import { B2bNgxButtonThemeEnum } from "@b2b/ngx-button";
-import { DialogRef } from "@ngneat/dialog";
 import { UntilDestroy } from "@ngneat/until-destroy";
 
 @UntilDestroy()
@@ -13,12 +14,12 @@ import { UntilDestroy } from "@ngneat/until-destroy";
 export class ClientOfferContactSupplierComponent {
 	public readonly b2bNgxButtonThemeEnum: typeof B2bNgxButtonThemeEnum;
 
-	constructor(public ref: DialogRef, private readonly _router: Router) {
+	constructor(@Inject(MAT_DIALOG_DATA) public data: any, private readonly _router: Router, private readonly dialogRef: MatDialogRef<ClientOfferContactSupplierComponent>) {
 		this.b2bNgxButtonThemeEnum = B2bNgxButtonThemeEnum;
 	}
 
 	contactSupplier() {
-		this._router.navigateByUrl("/offers/" + this.ref.data._id + "/chat");
-		this.ref.close();
+		this._router.navigateByUrl("/offers/" + this.data._id + "/chat");
+		this.dialogRef.close();
 	}
 }

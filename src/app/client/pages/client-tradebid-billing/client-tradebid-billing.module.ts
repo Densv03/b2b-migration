@@ -4,7 +4,7 @@ import { CommonModule } from "@angular/common";
 import { ClientAnnualPaymentRoutingModule } from "../client-annual-payment/client-annual-payment-routing.module";
 import { ReactiveFormsModule } from "@angular/forms";
 // import { ErrorTailorModule } from "@ngneat/error-tailor";
-import { B2bNgxTabsModule } from "@b2b/ngx-tabs";
+// import { B2bNgxTabsModule } from "@b2b/ngx-tabs";
 import { B2bNgxIconModule } from "@b2b/ngx-icon";
 import { B2bNgxButtonModule } from "@b2b/ngx-button";
 import { B2bNgxListModule } from "@b2b/ngx-list";
@@ -23,7 +23,7 @@ import { ClientTradebidBillingRoutingModule } from "./client-tradebid-billing-ro
 		ClientTradebidBillingRoutingModule,
 		ReactiveFormsModule,
 		// ErrorTailorModule,
-		B2bNgxTabsModule,
+		// B2bNgxTabsModule,
 		B2bNgxIconModule,
 		B2bNgxButtonModule,
 		B2bNgxListModule,

@@ -15,15 +15,15 @@
 					[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"
 					[label]="t('LABELS.CARD_NUMBER')"
 					formControlName="cardNum"
-					disabled />
+					[disabled] />
 			</div>
 			<p
-				*ngIf="formGroup.get('cardNum').touched && formGroup.get('cardNum').errors?.required"
+				*ngIf="formGroup.get('cardNum').touched && formGroup.get('cardNum').errors?.['required']"
 				class="error"
 				[@fadeInOut]>
 				This field is required
 			</p>
-			<p *ngIf="formGroup.get('cardNum').touched && formGroup.get('cardNum').errors?.number" class="error" [@fadeInOut]>
+			<p *ngIf="formGroup.get('cardNum').touched && formGroup.get('cardNum').errors?.['number']" class="error" [@fadeInOut]>
 				Please, use only numbers!
 			</p>
 			<div class="input-container">
@@ -33,10 +33,10 @@
 					[label]="t('LABELS.EMAIL')"
 					formControlName="email" />
 			</div>
-			<p *ngIf="formGroup.get('email').touched && formGroup.get('email').errors?.required" class="error" [@fadeInOut]>
+			<p *ngIf="formGroup.get('email').touched && formGroup.get('email').errors?.['required']" class="error" [@fadeInOut]>
 				This field is required
 			</p>
-			<p *ngIf="formGroup.get('email').touched && formGroup.get('email').errors?.cyrillic" class="error" [@fadeInOut]>
+			<p *ngIf="formGroup.get('email').touched && formGroup.get('email').errors?.['cyrillic']" class="error" [@fadeInOut]>
 				Please, don`t use cyrillic characters
 			</p>
 
@@ -47,30 +47,30 @@
 						[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"
 						[label]="t('LABELS.EXPIRED_DATE')"
 						formControlName="expDate"
-						disabled />
+						[disabled] />
 					<p
-						*ngIf="formGroup.get('expDate').touched && formGroup.get('expDate').errors?.required"
+						*ngIf="formGroup.get('expDate').touched && formGroup.get('expDate').errors?.['required']"
 						class="error"
 						[@fadeInOut]>
 						This field is required
 					</p>
 					<p
-						*ngIf="formGroup.get('expDate').touched && formGroup.get('expDate').errors?.number"
+						*ngIf="formGroup.get('expDate').touched && formGroup.get('expDate').errors?.['number']"
 						class="error"
 						[@fadeInOut]>
 						Please use only numbers
 					</p>
 					<p
-						*ngIf="formGroup.get('expDate').touched && formGroup.get('expDate').errors?.minLength"
+						*ngIf="formGroup.get('expDate').touched && formGroup.get('expDate').errors?.['minLength']"
 						class="error"
 						[@fadeInOut]>
-						Please put 3 numbers, now is {{ formGroup.get("expDate").errors?.minLength.actualLength }}
+						Please put 3 numbers, now is {{ formGroup.get("expDate").errors?.['minLength'].actualLength }}
 					</p>
 					<p
-						*ngIf="formGroup.get('expDate').touched && formGroup.get('expDate').errors?.maxLength"
+						*ngIf="formGroup.get('expDate').touched && formGroup.get('expDate').errors?.['maxLength']"
 						class="error"
 						[@fadeInOut]>
-						Please put 3 numbers, now is {{ formGroup.get("expDate").errors?.maxLength.actualLength }}
+						Please put 3 numbers, now is {{ formGroup.get("expDate").errors?.['maxLength'].actualLength }}
 					</p>
 				</div>
 				<div class="wrapper-container">
@@ -79,30 +79,30 @@
 						[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"
 						[label]="t('LABELS.CVV')"
 						formControlName="cardCode"
-						disabled />
+						[disabled] />
 					<p
-						*ngIf="formGroup.get('cardCode').touched && formGroup.get('cardCode').errors?.required"
+						*ngIf="formGroup.get('cardCode').touched && formGroup.get('cardCode').errors?.['required']"
 						class="error"
 						[@fadeInOut]>
 						This field is required
 					</p>
 					<p
-						*ngIf="formGroup.get('cardCode').touched && formGroup.get('cardCode').errors?.number"
+						*ngIf="formGroup.get('cardCode').touched && formGroup.get('cardCode').errors?.['number']"
 						class="error"
 						[@fadeInOut]>
 						Please use only numbers
 					</p>
 					<p
-						*ngIf="formGroup.get('cardCode').touched && formGroup.get('cardCode').errors?.min"
+						*ngIf="formGroup.get('cardCode').touched && formGroup.get('cardCode').errors?.['min']"
 						class="error"
 						[@fadeInOut]>
-						Please put 3 numbers, now is {{ formGroup.get("cardCode").errors?.min.actual }}
+						Please put 3 numbers, now is {{ formGroup.get("cardCode").errors?.['min'].actual }}
 					</p>
 					<p
-						*ngIf="formGroup.get('cardCode').touched && formGroup.get('cardCode').errors?.maxLength"
+						*ngIf="formGroup.get('cardCode').touched && formGroup.get('cardCode').errors?.['maxLength']"
 						class="error"
 						[@fadeInOut]>
-						Please put 3 numbers, now is {{ formGroup.get("cardCode").errors?.maxLength.actualLength }}
+						Please put 3 numbers, now is {{ formGroup.get("cardCode").errors?.['maxLength'].actualLength }}
 					</p>
 				</div>
 			</div>
@@ -117,7 +117,7 @@
 							>Country
 						</b2b-ngx-country-select>
 						<p
-							*ngIf="formGroup.get('country').touched && formGroup.get('country').errors?.required"
+							*ngIf="formGroup.get('country').touched && formGroup.get('country').errors?.['required']"
 							class="error"
 							[@fadeInOut]>
 							This field is required
@@ -131,13 +131,13 @@
 							formControlName="region" />
 
 						<p
-							*ngIf="formGroup.get('region').touched && formGroup.get('region').errors?.required"
+							*ngIf="formGroup.get('region').touched && formGroup.get('region').errors?.['required']"
 							class="error"
 							[@fadeInOut]>
 							This field is required
 						</p>
 						<p
-							*ngIf="formGroup.get('region').touched && formGroup.get('region').errors?.number"
+							*ngIf="formGroup.get('region').touched && formGroup.get('region').errors?.['number']"
 							class="error"
 							[@fadeInOut]>
 							Please use only latin
@@ -153,28 +153,28 @@
 						[label]="t('LABELS.POST_CODE')"
 						formControlName="postCode" />
 					<p
-						*ngIf="formGroup.get('postCode').touched && formGroup.get('postCode').errors?.required"
+						*ngIf="formGroup.get('postCode').touched && formGroup.get('postCode').errors?.['required']"
 						class="error"
 						[@fadeInOut]>
 						This field is required
 					</p>
 					<p
-						*ngIf="formGroup.get('postCode').touched && formGroup.get('postCode').errors?.number"
+						*ngIf="formGroup.get('postCode').touched && formGroup.get('postCode').errors?.['number']"
 						class="error"
 						[@fadeInOut]>
 						Please use only numbers
 					</p>
 					<p
-						*ngIf="formGroup.get('postCode').touched && formGroup.get('postCode').errors?.minLength"
+						*ngIf="formGroup.get('postCode').touched && formGroup.get('postCode').errors?.['minLength']"
 						class="error"
 						[@fadeInOut]>
-						Please put 6 numbers, now is {{ formGroup.get("postCode").errors?.minLength.actualLength }}
+						Please put 6 numbers, now is {{ formGroup.get("postCode").errors?.['minLength'].actualLength }}
 					</p>
 					<p
-						*ngIf="formGroup.get('postCode').touched && formGroup.get('postCode').errors?.maxLength"
+						*ngIf="formGroup.get('postCode').touched && formGroup.get('postCode').errors?.['maxLength']"
 						class="error"
 						[@fadeInOut]>
-						Please put 6 numbers, now is {{ formGroup.get("postCode").errors?.maxLength.actualLength }}
+						Please put 6 numbers, now is {{ formGroup.get("postCode").errors?.['maxLength'].actualLength }}
 					</p>
 				</div>
 				<div class="wrapper-container">
@@ -183,16 +183,16 @@
 						[theme]="b2bNgxInputThemeEnum.BACKGROUND_GRAY"
 						[label]="t('LABELS.CITY')"
 						formControlName="city" />
-					<p *ngIf="formGroup.get('city').touched && formGroup.get('city').errors?.required" class="error" [@fadeInOut]>
+					<p *ngIf="formGroup.get('city').touched && formGroup.get('city').errors?.['required']" class="error" [@fadeInOut]>
 						This field is required
 					</p>
-					<p *ngIf="formGroup.get('city').touched && formGroup.get('city').errors?.latin" class="error" [@fadeInOut]>
+					<p *ngIf="formGroup.get('city').touched && formGroup.get('city').errors?.['latin']" class="error" [@fadeInOut]>
 						Please use latin
 					</p>
 				</div>
 			</div>
 
-			<button b2bNgxButton class="submit" [theme]="b2bNgxLinkThemeEnum.BACKGROUND_BLACK">Proceed to Payment</button>
+			<button b2bNgxButton class="submit" [theme]="b2bNgxButtonThemeEnum.BACKGROUND_BLACK">Proceed to Payment</button>
 		</form>
 	</div>
 

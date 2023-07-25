@@ -9,7 +9,7 @@ import { TranslocoModule } from "@ngneat/transloco";
 @NgModule({
 	declarations: [ClientCookiePolicyComponent],
 	imports: [CommonModule, ClientCookiePolicyRoutingModule,
-		// NgxDatatableModule,
+		NgxDatatableModule,
 		TranslocoModule],
 })
 export class ClientCookiePolicyModule {}

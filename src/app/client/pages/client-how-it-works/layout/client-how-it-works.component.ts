@@ -29,7 +29,7 @@ export class ClientHowItWorksComponent implements OnDestroy {
 		return this._translocoService.getActiveLang() === "ru";
 	}
 
-	processVideoClick(event) {
+	processVideoClick(event: any): void {
 		const percents = (event.currentTime * 100) / event.duration;
 
 		const breakpoints = [0, 25, 50, 75, 100];
@@ -41,21 +41,13 @@ export class ClientHowItWorksComponent implements OnDestroy {
 		const minIndex = differenece.indexOf(Math.min(...differenece.reverse()));
 
 		const percent = breakpoints[breakpoints.length - 1 - minIndex];
-		this._ampService.logEvent("Clicked on how video", {
-			type: percent.toString() + "%",
-			source: localStorage.getItem("source"),
-		});
 	}
 	ngOnDestroy() {
 		const percentFilled = (this.pageYOffset * 100) / this.innerHeight;
-		this._ampService.logEvent("View How it Works page", {
-			type: percentFilled.toString() + "%",
-			source: localStorage.getItem("source"),
-		});
 	}
 
 	@HostListener("window:scroll", ["$event"])
-	onScroll(event) {
+	onScroll() {
 		this.pageYOffset = window.pageYOffset;
 		this.innerHeight = window.innerHeight;
 	}

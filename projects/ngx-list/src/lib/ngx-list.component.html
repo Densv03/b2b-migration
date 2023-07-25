@@ -1,0 +1,6 @@
+<ul>
+	<li *ngFor="let option of options" class="ngx-list-item">
+		<img b2bNgxIcon class="ngx-list-item-icon" *ngIf="option.icon" [name]="option.icon" />
+		<span class="ngx-list-item-text">{{ option.label }}</span>
+	</li>
+</ul>

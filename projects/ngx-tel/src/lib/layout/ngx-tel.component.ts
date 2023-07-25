@@ -80,9 +80,10 @@ export class B2bNgxTelComponent implements ControlValueAccessor, OnInit, OnChang
 
   @Input() disabled: boolean = false;
 
+  @Input() placeholder: string = '';
+
   public readonly type: string = "tel";
   public phoneNumberFormat = PhoneNumberFormat;
-  public placeholder: string = "";
   public readonly selectFormControl: FormControl<string | null> = new FormControl<string>("", Validators.required);
   // public readonly inputFormControl: FormControl<string> = new FormControl<string>("", [b2bNgxTel()]);
   public readonly options: any[] = [];

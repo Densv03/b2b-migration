@@ -13,7 +13,7 @@ import { B2bNgxLinkService } from '@b2b/ngx-link';
 import { HotToastService } from '@ngneat/hot-toast';
 import { TranslocoService } from '@ngneat/transloco';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { B2bNgxButtonThemeEnum } from 'libs/ngx-button/src';
+import { B2bNgxButtonThemeEnum } from '@b2b/ngx-button';
 import { BehaviorSubject, combineLatest, Observable } from 'rxjs';
 import { filter, map, switchMap, tap } from 'rxjs/operators';
 import { io } from 'socket.io-client';

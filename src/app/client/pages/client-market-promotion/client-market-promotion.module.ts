@@ -9,7 +9,7 @@ import {B2bNgxTextareaModule} from "@b2b/ngx-textarea";
 import {B2bNgxTelModule} from "@b2b/ngx-tel";
 import {B2bNgxInputModule} from "@b2b/ngx-input";
 import {ReactiveFormsModule} from "@angular/forms";
-import {WriteToSupportModule} from "../../../shared/components/write-to-support/write-to-support.module";
+import { WriteToSupportModule } from '../../shared/components/write-to-support/write-to-support.module';
 
 const routes: Routes = [{path: '', component: ClientMarketPromotionComponent}]
 

@@ -83,9 +83,9 @@ export class CountdownComponent {
 		// }
 	}
 
-	private isInViewport(element: HTMLElement) {
+	private isInViewport(element: HTMLElement): any {
 		if (!element) {
-			return;
+			return ;
 		}
 
 		const rect = element.getBoundingClientRect();

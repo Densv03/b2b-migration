@@ -3,7 +3,6 @@ import { B2bNgxButtonThemeEnum } from "@b2b/ngx-button";
 import { ParticipateStepModel } from "./models/participate-step.model";
 import { ProgramBenefitModel } from "./models/program-benefit.model";
 import { B2bNgxInputThemeEnum } from "@b2b/ngx-input";
-import { FormBuilder, FormGroup } from "@ngneat/reactive-forms";
 import { ApiService } from "../../../core/services/api/api.service";
 import { Validators } from "@angular/forms";
 import { HotToastService } from "@ngneat/hot-toast";
@@ -11,6 +10,7 @@ import { untilDestroyed } from "@ngneat/until-destroy";
 import { PromotionFeatureModel } from "./models/promotion-feature.model";
 import { AuthService } from "../../../auth/services/auth/auth.service";
 import { Observable } from "rxjs";
+import {FormBuilder, FormGroup} from '@angular/forms'
 
 @Component({
 	selector: "b2b-client-market-promotion",

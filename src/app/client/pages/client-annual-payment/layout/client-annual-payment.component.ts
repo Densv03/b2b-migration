@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@ngneat/reactive-forms';
-import { B2bNgxButtonThemeEnum } from 'lib/ngx-button/src';
-import { B2bNgxInputThemeEnum } from 'lib/ngx-input/src';
+import { FormBuilder } from '@angular/forms';
+import { B2bNgxButtonThemeEnum } from '@b2b/ngx-button';
+import { B2bNgxInputThemeEnum } from '@b2b/ngx-input';
 import { B2bNgxLinkService, B2bNgxLinkThemeEnum } from '@b2b/ngx-link';
 import { PaymentService } from '../../../services/payment/payment.service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
@@ -52,7 +52,7 @@ export class ClientAnnualPaymentComponent implements OnInit {
     });
   }
 
-  sendCardData(formValue) {
+  sendCardData(formValue: any): void {
     this._paymentService
       .createCustomerProfile(formValue)
       .pipe(

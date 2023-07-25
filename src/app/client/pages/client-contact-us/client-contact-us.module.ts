@@ -22,7 +22,6 @@ import { ClientContactUsRoutingModule } from "./client-contact-us-routing.module
 		B2bNgxImageModule,
 		B2bNgxButtonModule,
 		B2bNgxIconModule,
-
 		TranslocoModule,
 		B2bNgxSelectModule,
 		B2bNgxInputModule,

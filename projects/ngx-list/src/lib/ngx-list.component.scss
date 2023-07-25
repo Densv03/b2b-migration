@@ -1,0 +1,19 @@
+@import "projects/shared/src/styles";
+
+.ngx-list-item {
+	display: flex;
+	align-items: center;
+	margin-top: 9px;
+	width: 100%;
+
+	.ngx-list-item-text {
+		margin-left: 14px;
+		font-size: 14px;
+		color: #556274;
+		line-height: 19px;
+	}
+
+	&:first-child {
+		margin-top: 0;
+	}
+}

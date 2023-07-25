@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { B2bNgxButtonThemeEnum } from "@b2b/ngx-button";
-import { DialogRef } from "@ngneat/dialog";
+import { DialogRef } from "@angular/cdk/dialog";
 
 @Component({
 	selector: "b2b-client-offer-map",

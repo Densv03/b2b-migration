@@ -2,7 +2,6 @@ import { Component, OnInit } from "@angular/core";
 import { B2bNgxInputThemeEnum } from "@b2b/ngx-input";
 import { B2bNgxButtonThemeEnum } from "@b2b/ngx-button";
 import { B2bNgxLinkService, B2bNgxLinkThemeEnum } from "@b2b/ngx-link";
-import { FormBuilder } from "@ngneat/reactive-forms";
 import { PaymentService } from "../../../services/payment/payment.service";
 import { HotToastService } from "@ngneat/hot-toast";
 import { TranslocoService } from "@ngneat/transloco";
@@ -16,6 +15,7 @@ import { B2bNgxSelectThemeEnum } from "@b2b/ngx-select";
 import { onlyLatin } from "../../../../core/helpers/validator/only-latin";
 import { onlyLatinAndNumberAndSymbols } from "../../../../core/helpers/validator/only -latin-numbers-symbols";
 import { animate, style, transition, trigger } from "@angular/animations";
+import { FormBuilder } from "@angular/forms";
 
 @Component({
 	selector: "b2b-client-tradebid-billing",
@@ -66,8 +66,8 @@ export class ClientTradebidBillingComponent implements OnInit {
 		private readonly _authService: AuthService,
 		private readonly route: ActivatedRoute
 	) {
-		this.quotesCount = +this.route.snapshot.params.quotes;
-		this.price = this.calcQuotesPrice(this.route.snapshot.params.quotes);
+		this.quotesCount = +this.route.snapshot.params['quotes'];
+		this.price = this.calcQuotesPrice(this.route.snapshot.params['quotes']);
 	}
 
 	ngOnInit() {
@@ -87,7 +87,7 @@ export class ClientTradebidBillingComponent implements OnInit {
 		}
 	}
 
-	sendCardData(formValue) {
+	sendCardData(formValue: any) {
 		this.formGroup.markAllAsTouched();
 		this._authService.getUser().subscribe((user) => {
 			if (!user.paymentInfo.cardNumber) {

@@ -31,10 +31,10 @@ import {
 		ClientOfferComponent,
 		ClientOfferMapComponent,
 		ClientOfferDocumentComponent,
-		ClientOfferImagesComponent,
 		ClientOfferContactSupplierComponent,
 	],
   imports: [
+		ClientOfferImagesComponent,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,

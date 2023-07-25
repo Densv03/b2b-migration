@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { ClientAnnualPaymentRoutingModule } from './client-annual-payment-routing.module';
-import { B2bNgxTabsModule } from '@b2b/ngx-tabs';
+// import { B2bNgxTabsModule } from '@b2b/ngx-tabs';
 import { B2bNgxIconModule } from '@b2b/ngx-icon';
 import { B2bNgxButtonModule } from '@b2b/ngx-button';
 import { B2bNgxListModule } from '@b2b/ngx-list';
@@ -23,7 +23,7 @@ import { ClientAnnualPaymentComponent } from './layout/client-annual-payment.com
     ClientAnnualPaymentRoutingModule,
     ReactiveFormsModule,
     // ErrorTailorModule,
-    B2bNgxTabsModule,
+    // B2bNgxTabsModule,
     B2bNgxIconModule,
     B2bNgxButtonModule,
     B2bNgxListModule,
