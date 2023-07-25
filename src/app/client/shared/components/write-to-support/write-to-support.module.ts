@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {WriteToSupportComponent} from "./write-to-support.component";
+import { TranslocoModule } from '@ngneat/transloco';
 
 
 
@@ -8,7 +9,8 @@ import {WriteToSupportComponent} from "./write-to-support.component";
   declarations: [WriteToSupportComponent],
 	exports: [WriteToSupportComponent],
   imports: [
-    CommonModule
+    CommonModule,
+    TranslocoModule
   ]
 })
 export class WriteToSupportModule { }

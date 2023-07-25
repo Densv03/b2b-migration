@@ -8,6 +8,7 @@ import {B2bNgxButtonModule} from "@b2b/ngx-button";
 import {B2bNgxLinkModule} from "@b2b/ngx-link";
 import {B2bNgxIconModule} from "@b2b/ngx-icon";
 import { WriteToSupportModule } from '../../shared/components/write-to-support/write-to-support.module';
+import { TranslocoModule } from '@ngneat/transloco';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { WriteToSupportModule } from '../../shared/components/write-to-support/w
         B2bNgxButtonModule,
         B2bNgxLinkModule,
         B2bNgxIconModule,
-        WriteToSupportModule
+        WriteToSupportModule,
+        TranslocoModule
     ]
 })
 export class ClientMarketPromoModule { }

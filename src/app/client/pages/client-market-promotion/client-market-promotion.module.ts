@@ -10,6 +10,7 @@ import {B2bNgxTelModule} from "@b2b/ngx-tel";
 import {B2bNgxInputModule} from "@b2b/ngx-input";
 import {ReactiveFormsModule} from "@angular/forms";
 import { WriteToSupportModule } from '../../shared/components/write-to-support/write-to-support.module';
+import { TranslocoModule } from '@ngneat/transloco';
 
 const routes: Routes = [{path: '', component: ClientMarketPromotionComponent}]
 
@@ -25,7 +26,8 @@ const routes: Routes = [{path: '', component: ClientMarketPromotionComponent}]
 		B2bNgxTelModule,
 		B2bNgxInputModule,
 		ReactiveFormsModule,
-		WriteToSupportModule
+		WriteToSupportModule,
+		TranslocoModule
 	]
 })
 export class ClientMarketPromotionModule { }

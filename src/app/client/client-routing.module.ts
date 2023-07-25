@@ -6,6 +6,7 @@ import {AuthGuard} from "../auth/guards/auth/auth.guard";
 import {ChatGuard} from "../auth/guards/chat/chat.guard";
 import {CompanyInformationGuard} from "../auth/guards/companyInformation/company-information.guard";
 import {BuyerGuard} from "../auth/guards/buyer/buyer.guard";
+import { LanguageGuard } from "../core/guards/language.guard";
 
 const routes: Routes = [
 	{
@@ -16,7 +17,7 @@ const routes: Routes = [
 		children: [
 			{
 				path: "",
-				// canActivate: [DefaultRoleGuard],
+				canActivate: [DefaultRoleGuard, LanguageGuard],
 				loadChildren: () =>
 					import("../client/pages/client-home-new/client-home.module").then((m) => m.ClientHomeModule),
 				data: {
@@ -39,10 +40,22 @@ const routes: Routes = [
 			// },
 			{
 				path: 'market-promotion',
+				loadChildren: () => import('./pages/client-market-promotion/client-market-promotion.module').then(m => m.ClientMarketPromotionModule),
+				canActivate: [LanguageGuard]
+			},
+			{
+				path: 'market-promotion/:lang',
+				canActivate: [LanguageGuard],
 				loadChildren: () => import('./pages/client-market-promotion/client-market-promotion.module').then(m => m.ClientMarketPromotionModule)
 			},
 			{
 				path: 'market-promo',
+				loadChildren: () => import('./pages/client-market-promo/client-market-promo.module').then(m => m.ClientMarketPromoModule),
+				canDeactivate: [LanguageGuard]
+			},
+			{
+				path: 'market-promo/:lang',
+				canActivate: [LanguageGuard],
 				loadChildren: () => import('./pages/client-market-promo/client-market-promo.module').then(m => m.ClientMarketPromoModule)
 			},
 			// {
@@ -92,6 +105,7 @@ const routes: Routes = [
 			},
 			{
 				path: "promo_rus",
+				canActivate: [LanguageGuard],
 				loadChildren: () =>
 					import("./pages/client-how-it-works-2/client-how-it-works-2.module").then((m) => m.ClientHowItWorks2Module),
 				data: {
@@ -103,6 +117,7 @@ const routes: Routes = [
 			},
 			{
 				path: "promo_ukr",
+				canActivate: [LanguageGuard],
 				loadChildren: () =>
 					import("./pages/client-how-it-works-3/client-how-it-works-3.module").then((m) => m.ClientHowItWorks3Module),
 				data: {
@@ -114,6 +129,7 @@ const routes: Routes = [
 			},
 			{
 				path: "promo_eng",
+				canActivate: [LanguageGuard],
 				loadChildren: () =>
 					import("./pages/client-promo-eng/client-promo-eng.module").then((m) => m.ClientPromoEngModule),
 				data: {
@@ -125,6 +141,7 @@ const routes: Routes = [
 			},
 			{
 				path: "promo_tr",
+				canActivate: [LanguageGuard],
 				loadChildren: () => import("./pages/client-promo-tr/client-promo-tr.module").then((m) => m.ClientPromoTrModule),
 				data: {
 					meta: {
@@ -135,6 +152,7 @@ const routes: Routes = [
 			},
 			{
 				path: "promo_esp",
+				canActivate: [LanguageGuard],
 				loadChildren: () =>
 					import("./pages/client-promo-esp/client-promo-esp.module").then((m) => m.ClientPromoEspModule),
 				data: {
@@ -146,6 +164,7 @@ const routes: Routes = [
 			},
 			{
 				path: "promo_fr",
+				canActivate: [LanguageGuard],
 				loadChildren: () => import("./pages/client-promo-fr/client-promo-fr.module").then((m) => m.ClientPromoFrModule),
 				data: {
 					meta: {
@@ -220,7 +239,7 @@ const routes: Routes = [
 			},
 			{
 				path: "contact-us",
-				canActivate: [DefaultRoleGuard],
+				canActivate: [DefaultRoleGuard, LanguageGuard],
 				loadChildren: () =>
 					import("./pages/client-contact-us/client-contact-us.module").then((m) => m.ClientContactUsModule),
 				data: {
@@ -232,6 +251,7 @@ const routes: Routes = [
 			},
 			{
 				path: "cookie-policy",
+				canActivate: [LanguageGuard],
 				loadChildren: () =>
 					import("./pages/client-cookie-policy/client-cookie-policy.module").then((m) => m.ClientCookiePolicyModule),
 				data: {
@@ -243,7 +263,7 @@ const routes: Routes = [
 			},
 			{
 				path: "legal-help",
-				canActivate: [AuthGuard],
+				canActivate: [AuthGuard, LanguageGuard],
 				loadChildren: () =>
 					import("./pages/client-legal-help/client-legal-help.module").then((m) => m.ClientLegalHelpModule),
 				data: {
@@ -255,7 +275,7 @@ const routes: Routes = [
 			},
 			{
 				path: "chats/:id",
-				canActivate: [ChatGuard],
+				canActivate: [ChatGuard, LanguageGuard],
 				loadChildren: () => import("./pages/client-chat/client-chat.module").then((m) => m.ClientChatModule),
 				data: {
 					meta: {
@@ -266,7 +286,7 @@ const routes: Routes = [
 			},
 			{
 				path: "latest-offers",
-				canActivate: [],
+				canActivate: [AuthGuard, LanguageGuard],
 				loadChildren: () =>
 					import("./pages/client-latest-offers/client-latest-offers.module").then((m) => m.ClientLatestOffersModule),
 				data: {
@@ -278,13 +298,13 @@ const routes: Routes = [
 			},
 			{
 				path: "offers/:id",
-				canActivate: [DefaultRoleGuard],
+				canActivate: [DefaultRoleGuard, LanguageGuard],
 				// canActivate: [AuthGuard],
 				loadChildren: () => import("./pages/client-offer/client-offer.module").then((m) => m.ClientOfferModule),
 			},
 			{
 				path: "annual-payment",
-				canActivate: [AuthGuard],
+				canActivate: [AuthGuard, LanguageGuard],
 				loadChildren: () =>
 					import("./pages/client-annual-payment/client-annual-payment.module").then((m) => m.ClientAnnualPaymentModule),
 				data: {
@@ -296,7 +316,7 @@ const routes: Routes = [
 			},
 			{
 				path: "tradebid-billing/:quotes",
-				canActivate: [AuthGuard],
+				canActivate: [AuthGuard, LanguageGuard],
 				loadChildren: () =>
 					import("./pages/client-tradebid-billing/client-tradebid-billing.module").then(
 						(m) => m.ClientTradebidBillingModule
@@ -352,7 +372,7 @@ const routes: Routes = [
 			// // },
 			{
 				path: "blog",
-				canActivate: [DefaultRoleGuard],
+				canActivate: [DefaultRoleGuard, LanguageGuard],
 				loadChildren: () => import("./pages/client-blog/client-blog.module").then((m) => m.ClientBlogModule),
 				data: {
 					meta: {
@@ -363,7 +383,7 @@ const routes: Routes = [
 			},
 			{
 				path: "blog/:id",
-				canActivate: [DefaultRoleGuard],
+				canActivate: [DefaultRoleGuard, LanguageGuard],
 				loadChildren: () =>
 					import("./pages/client-blog-article/client-blog-article.module").then((m) => m.ClientBlogWikiArticleModule),
 				data: {
@@ -375,7 +395,7 @@ const routes: Routes = [
 			},
 			{
 				path: "profile",
-				canActivate: [AuthGuard],
+				canActivate: [AuthGuard, LanguageGuard],
 				loadChildren: () => import("./pages/client-profile/client-profile.module").then((m) => m.ClientProfileModule),
 				data: {
 					meta: {
@@ -386,7 +406,7 @@ const routes: Routes = [
 			},
 			{
 				path: "offer",
-				canActivate: [AuthGuard, CompanyInformationGuard, BuyerGuard],
+				canActivate: [AuthGuard, CompanyInformationGuard, BuyerGuard, LanguageGuard],
 				loadChildren: () =>
 					import("./pages/client-profile/pages/client-profile-add-offer/client-profile-add-offer.module").then(
 						(m) => m.ClientProfileAddOfferModule
@@ -400,7 +420,7 @@ const routes: Routes = [
 			},
 			{
 				path: "reset-password/:id",
-				canActivate: [DefaultRoleGuard],
+				canActivate: [DefaultRoleGuard, LanguageGuard],
 				loadChildren: () =>
 					import("./pages/client-reset-password/client-reset-password.module").then((m) => m.ClientResetPasswordModule),
 				data: {
@@ -412,6 +432,7 @@ const routes: Routes = [
 			},
 			{
 				path: "google-registration-complete",
+				canActivate: [LanguageGuard],
 				loadChildren: () =>
 					import("./pages/client-google-complete/client-google-complete.module").then(
 						(m) => m.ClientGoogleCompleteModule
@@ -425,6 +446,7 @@ const routes: Routes = [
 			},
 			{
 				path: "linkedin-registration-complete",
+				canActivate: [LanguageGuard],
 				loadChildren: () =>
 					import("./pages/client-google-complete/client-google-complete.module").then(
 						(m) => m.ClientGoogleCompleteModule
@@ -438,6 +460,7 @@ const routes: Routes = [
 			},
 			{
 				path: "registration-complete",
+				canActivate: [LanguageGuard],
 				loadChildren: () =>
 					import("./pages/client-registration-complete/client-registration-complete.module").then(
 						(m) => m.ClientRegistrationCompleteModule
@@ -451,6 +474,7 @@ const routes: Routes = [
 			},
 			{
 				path: "account-not-registered",
+				canActivate: [LanguageGuard],
 				loadChildren: () =>
 					import("./pages/client-account-not-registered/client-account-not-registered-complete.module").then(
 						(m) => m.ClientAccountNotRegistereModule
@@ -464,6 +488,7 @@ const routes: Routes = [
 			},
 			{
 				path: "email-verify",
+				canActivate: [LanguageGuard],
 				loadChildren: () =>
 					import("./pages/client-email-verify/client-email-verify.module").then((m) => m.ClientEmailVerifyModule),
 				data: {
@@ -475,6 +500,7 @@ const routes: Routes = [
 			},
 			{
 				path: "annual-succeeded",
+				canActivate: [LanguageGuard],
 				loadChildren: () =>
 					import("./pages/client-annual-succeeded/client-annual-succeeded.module").then(
 						(m) => m.ClientAnnualSucceededModule
@@ -488,6 +514,7 @@ const routes: Routes = [
 			},
 			{
 				path: "annual-failed",
+				canActivate: [LanguageGuard],
 				loadChildren: () =>
 					import("./pages/client-annual-failed/client-annual-failed.module").then((m) => m.ClientAnnualFailedModule),
 				data: {
@@ -499,7 +526,7 @@ const routes: Routes = [
 			},
 			{
 				path: "tradebid",
-				canActivate: [],
+				canActivate: [LanguageGuard],
 				loadChildren: () =>
 					import("./pages/client-tradebid/client-tradebid.module").then((m) => m.ClientTradebidModule),
 				data: {
@@ -511,7 +538,7 @@ const routes: Routes = [
 			},
 			{
 				path: "b2bmarket",
-				canActivate: [],
+				canActivate: [LanguageGuard],
 				loadChildren: () =>
 					import("./pages/client-marketplace/client-marketplace.module").then((m) => m.ClientMarketplaceModule),
 				data: {
@@ -523,7 +550,7 @@ const routes: Routes = [
 			},
 			{
 				path: "about-us",
-				canActivate: [],
+				canActivate: [LanguageGuard],
 				loadChildren: () => import("./pages/client-about-us/client-about-us.module").then((m) => m.ClientAboutUsModule),
 			},
 			{

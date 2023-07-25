@@ -486,7 +486,7 @@
 		width: 35%;
 		text-align: center;
 
-		a {
+		.link {
 			color: #005DFF;
 		}
 
@@ -498,8 +498,46 @@
 }
 
 .map {
-	img {
-		width: 100%;
+	padding: 52px 150px;
+	height: 741px;
+
+	@include breakpoint('2') {
+		padding: 16px 50px;
+		height: 222px;
+	}
+
+	div	{
+		background: 100% 100% no-repeat url("/assets/images/main-page-map.png");
+		background-size: cover;
+		height: 100%;
+
+		@include breakpoint('2') {
+			background-size: contain;
+		}
+
+		.map-title {
+			max-width: 429px;
+			font-weight: bold;
+			font-size: 40px;
+			line-height: 134%;
+
+			@include breakpoint('2') {
+				font-size: 20px;
+				line-height: 118%;
+			}
+		}
+
+		p {
+			max-width: 429px;
+			font-size: 18px;
+			line-height: 150%;
+			color: #556274;
+
+			@include breakpoint('2') {
+				font-size: 14px;
+				line-height: 148%;
+			}
+		}
 	}
 }
 
@@ -638,5 +676,3 @@
 		stroke-linecap: round;
 	}
 }
-
-

@@ -1,20 +1,13 @@
-import {
-	ChangeDetectionStrategy,
-	ChangeDetectorRef,
-	Component,
-	ElementRef,
-	HostListener,
-	Input,
-	OnInit,
-	ViewChild,
-} from "@angular/core";
-import { B2bNgxButtonThemeEnum } from "@b2b/ngx-button";
-import { B2bNgxLinkThemeEnum } from "@b2b/ngx-link";
-import { BehaviorSubject, Observable } from "rxjs";
-import { filter, first, map } from "rxjs/operators";
-import { CategoryListingService } from "../../client-marketplace/pages/category-listing/category-listing.service";
-import { Category } from "src/app/core/models/category.model";
-import { AuthService } from "../../../../auth/services/auth/auth.service";
+import {ChangeDetectorRef, Component, ElementRef, HostListener, Input, OnInit, ViewChild,} from "@angular/core";
+import {B2bNgxButtonThemeEnum} from "@b2b/ngx-button";
+import {B2bNgxLinkThemeEnum} from "@b2b/ngx-link";
+import {BehaviorSubject, Observable} from "rxjs";
+import {filter, first, map} from "rxjs/operators";
+import {CategoryListingService} from "../../client-marketplace/pages/category-listing/category-listing.service";
+import {Category} from "../../client-marketplace/shared/models/category.model";
+import {AuthService} from "../../../../auth/services/auth/auth.service";
+import {TranslocoService} from "@ngneat/transloco";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
 	selector: "b2b-client-market-promo",
@@ -27,7 +20,7 @@ export class ClientMarketPromoComponent implements OnInit {
 
 	private categoriesNamesSource: BehaviorSubject<string[]> = new BehaviorSubject<string[]>([]);
 
-	@ViewChild("circle", { static: true }) circle?: ElementRef;
+	@ViewChild("circle", {static: true}) circle?: ElementRef;
 	@Input() limitDeg: number = 360;
 	@Input() value: number = 0;
 	@Input() width: number = 7;
@@ -36,16 +29,22 @@ export class ClientMarketPromoComponent implements OnInit {
 	constructor(
 		private changeDetectorRef: ChangeDetectorRef,
 		private readonly categoriesListingService: CategoryListingService,
-		private readonly authService: AuthService
-	) {}
+		private readonly authService: AuthService,
+		private readonly translocoService: TranslocoService,
+		private readonly activatedRoute: ActivatedRoute
+	) {
+	}
 
 	public ngOnInit() {
+		if (this.activatedRoute.snapshot.params?.['lang']) {
+			this.translocoService.setActiveLang(this.activatedRoute.snapshot.params?.['lang']);
+		}
 		this.categoriesListingService.presentCategoriesSource$
 			.pipe(
 				filter((data) => !!data.length),
 				first()
 			)
-			.subscribe((data: any) => {
+			.subscribe((data) => {
 				this.categoriesNamesSource.next(this.getCategoryNamesArr(data));
 			});
 	}
@@ -61,12 +60,13 @@ export class ClientMarketPromoComponent implements OnInit {
 	get circleLength(): number {
 		return 2 * Math.PI * this.radius;
 	}
+
 	@HostListener("document:scroll", ["$event"])
 	public onViewportScroll() {
 		const windowHeight = window.innerHeight;
-		const boundingRectFive = this.circle.nativeElement.getBoundingClientRect();
+		const boundingRectFive = this.circle?.nativeElement.getBoundingClientRect();
 
-		if (boundingRectFive.top >= 0 && boundingRectFive.bottom <= windowHeight) {
+		if (boundingRectFive?.top >= 0 && boundingRectFive?.bottom <= windowHeight) {
 			setTimeout(() => {
 				this.value = this.getDaysToEndDate() / 100;
 				this.changeDetectorRef.detectChanges();
@@ -91,7 +91,7 @@ export class ClientMarketPromoComponent implements OnInit {
 
 	public smoothScrollToAdvantages(): void {
 		const advantagesElement = document.getElementById("ts-advantages");
-		advantagesElement.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
+		advantagesElement.scrollIntoView({behavior: "smooth", block: "start", inline: "nearest"});
 	}
 
 	private getCategoryNamesArr(categories: Category[]): string[] {
