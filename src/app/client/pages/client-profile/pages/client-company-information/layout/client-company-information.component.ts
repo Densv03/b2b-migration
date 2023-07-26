@@ -348,8 +348,6 @@ export class ClientCompanyInformationComponent implements OnInit {
 		});
 	}
 
-	// , Validators.pattern('^(\\(\\d{3}\\)|\\d{3})\\s?\\d{3}(-|\\s)?\\d{4}$')
-
 	private patchValueToForm(res: PublicCompanyInfoModel): void {
 		const {
 			companyName,
