@@ -48,18 +48,7 @@ export class ClientComponent implements OnInit {
 	}
 
 	ngOnInit() {
-    this.router.events
-      .pipe(
-        filter(event => event instanceof NavigationStart || event instanceof NavigationEnd)
-      ).subscribe((event) => {
-      if (event instanceof NavigationStart) {
-        this.startTime = Date.now();
-      } else if (event instanceof NavigationEnd && !event.urlAfterRedirects.startsWith('/auth' || '/email-verify')) {
-        const duration = Date.now() - this.startTime;
-        const route = event.urlAfterRedirects;
-        this.mixpanelService.track(location.host + route, {'Time Spend': moment().startOf('day').seconds(duration / 10).format('HH:mm:ss')})
-      }
-    });
+    this.mixpanelTracking();
 		this.setQueryParamForAuthorizationType();
 		this.seoService.addCanonicalRef();
 		this.initIntercomSettings();
@@ -192,4 +181,18 @@ export class ClientComponent implements OnInit {
 		// 	}
 		// });
 	}
+  private mixpanelTracking(): void {
+    this.router.events
+      .pipe(
+        filter(event => event instanceof NavigationStart || event instanceof NavigationEnd)
+      ).subscribe((event) => {
+      if (event instanceof NavigationStart) {
+        this.startTime = Date.now();
+      } else if (event instanceof NavigationEnd && !event.urlAfterRedirects.startsWith('/auth' || '/email-verify')) {
+        const duration = Date.now() - this.startTime;
+        const route = event.urlAfterRedirects;
+        this.mixpanelService.track(location.host + route, {'Time Spend': moment().startOf('day').seconds(duration / 10).format('HH:mm:ss')})
+      }
+    });
+  }
 }
