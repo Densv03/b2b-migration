@@ -6,9 +6,7 @@
 			background: #F7FBFE;
 
 			min-height: 500px;
-			padding-left: 70px;
-			padding-bottom: 70px;
-			padding-top: 70px;
+      padding: 70px;
 			gap: 20px;
 			@include breakpoint('4') {
 				padding-left: 40px;
@@ -21,7 +19,10 @@
 			}
 
 			&__wrapper {
-				position: relative;
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+				//position: relative;
 				&__info {
 					width: 44%;
 					padding-top: 30px;
@@ -90,10 +91,10 @@
 					}
 				}
 				&__image {
-					position: absolute;
+					//position: absolute;
 					right: 0;
 					top: 0;
-					width: 40%;
+					width: 50%;
 					height: 100%;
 					@include breakpoint('4') {
 						width: 50%;
@@ -526,4 +527,8 @@
 			}
 		}
 	}
+}
+
+.mirror {
+  direction: rtl;
 }

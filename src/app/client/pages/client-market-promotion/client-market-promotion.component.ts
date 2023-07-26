@@ -25,6 +25,7 @@ export class ClientMarketPromotionComponent {
 
 	public readonly formGroup: FormGroup;
 	public readonly user$: Observable<any>;
+  public lang: string;
 
 	constructor(
 		private readonly _formBuilder: FormBuilder,
@@ -35,6 +36,7 @@ export class ClientMarketPromotionComponent {
 		private readonly activatedRoute: ActivatedRoute
 	) {
 		if (this.activatedRoute.snapshot.params?.['lang']) {
+      this.lang = this.activatedRoute.snapshot.params['lang'];
 			this.translocoService.setActiveLang(this.activatedRoute.snapshot.params?.['lang']);
 		}
 		this.formGroup = this.getFormGroup();
@@ -79,8 +81,8 @@ export class ClientMarketPromotionComponent {
 				photo: "market-promotion/workspace",
 			},
 			{
-				title: "MARKET_PROMOTION.BRAND_PROMOTION",
-				description: "MARKET_PROMOTION.YOU_WILL_BE_ABLE",
+        title: "MARKET_PROMOTION.COMPANY_STATUS",
+        description: "MARKET_PROMOTION.AFTER_PRE-MODERATION",
 				releaseDate:  "MARKET_PROMOTION.COMING_IN_SEPTEMBER",
 				photo: "market-promotion/market",
 			},

@@ -15,6 +15,7 @@ import {ActivatedRoute} from "@angular/router";
 	styleUrls: ["./client-market-promo.component.scss"],
 })
 export class ClientMarketPromoComponent implements OnInit {
+  public lang: string;
 	public b2bNgxButtonThemeEnum = B2bNgxButtonThemeEnum;
 	public b2bNgxLinkThemeEnum = B2bNgxLinkThemeEnum;
 
@@ -37,6 +38,7 @@ export class ClientMarketPromoComponent implements OnInit {
 
 	public ngOnInit() {
 		if (this.activatedRoute.snapshot.params?.['lang']) {
+      this.lang = this.activatedRoute.snapshot.params['lang'];
 			this.translocoService.setActiveLang(this.activatedRoute.snapshot.params?.['lang']);
 		}
 		this.categoriesListingService.presentCategoriesSource$

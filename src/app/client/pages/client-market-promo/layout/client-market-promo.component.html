@@ -1,4 +1,4 @@
-<ng-container *transloco="let t">
+<div *transloco="let t" [class.mirror]="lang === 'ar'">
 	<section class="title">
 		<div class="title__text">
 			<h1>{{ t("MARKET_PROMO.PROMO_TITLE") }}</h1>
@@ -186,4 +186,4 @@
 	</div>
 
 	<b2b-write-to-support></b2b-write-to-support>
-</ng-container>
+</div>
