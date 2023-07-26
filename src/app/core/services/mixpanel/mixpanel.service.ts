@@ -7,7 +7,7 @@ import {environment} from "../../../../environments/environment";
 })
 
 export class MixpanelService {
-	private token: string | null = '7a0cfcbc67cff070e51719b1e725ded8'
+	private token: string | null = 'c66a4412cf0b4eff56542461afb338bd'
 	;
 
 	constructor() {
