@@ -252,11 +252,11 @@ export class CoreComponent implements OnInit, AfterViewInit {
         label: 'dicsount',
         labelBackground: '#005dff'
       },
-      {
-        text: "HEADER.CALCULATE_LOGISTICS",
-        link: "/",
-        disabled: true,
-      },
+      // {
+      //   text: "HEADER.CALCULATE_LOGISTICS",
+      //   link: "/",
+      //   disabled: true,
+      // },
       {
         text: "HEADER.TRADE_BID",
         link: "/tradebid",
@@ -291,11 +291,11 @@ export class CoreComponent implements OnInit, AfterViewInit {
         label: "HEADER.UNCLAIMED_CARGO",
         link: "/latest-offers",
       },
-      {
-        label: "HEADER.CALCULATE_LOGISTICS",
-        link: '',
-        disabled: true
-      },
+      // {
+      //   label: "HEADER.CALCULATE_LOGISTICS",
+      //   link: '',
+      //   disabled: true
+      // },
       {
         label: "HEADER.TRADE_BID",
         link: "/tradebid",

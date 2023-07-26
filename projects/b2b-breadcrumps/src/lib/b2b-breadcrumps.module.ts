@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import {CommonModule, NgForOf} from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { B2bBreadcrumpsComponent } from './b2b-breadcrumps.component';
@@ -10,7 +10,8 @@ import { B2bBreadcrumpsComponent } from './b2b-breadcrumps.component';
     B2bBreadcrumpsComponent
   ],
   imports: [
-    RouterModule
+    CommonModule,
+    RouterModule,
   ],
   exports: [
     B2bBreadcrumpsComponent
