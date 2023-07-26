@@ -30,8 +30,15 @@ const routes: Routes = [
 		}
 	},
 	{
-		path: 'listing/:category',
+		path: 'listing/:id',
 		component: ClientMarketplaceComponent,
+		data: {
+			breadcrumbs: [
+				{label: 'Home', url: '/'},
+				{label: 'B2BMARKET', url: '/b2bmarket'},
+				{label: 'OFFERS', url: '/b2bmarket/listing'}
+			]
+		}
 	},
 	{
 		path: "supplier-listing/:id",
@@ -53,6 +60,13 @@ const routes: Routes = [
 	{
 		path: "products/:id",
 		component: ClientMarketplaceProductDetailsComponent,
+		data: {
+			breadcrumbs: [
+				{label: 'Home', url: '/'},
+				{label: 'B2BMARKET', url: '/b2bmarket'},
+				{label: 'OFFERS', url: '/b2bmarket/listing'}
+			]
+		}
 	},
 	{
 		path: "category-listing",

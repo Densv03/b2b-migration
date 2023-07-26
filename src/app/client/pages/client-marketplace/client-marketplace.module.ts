@@ -94,6 +94,7 @@ import { B2bBreadcrumpsModule } from "@b2b/breadcrumps";
     ClientMarketplaceProductItemModule,
     B2bNgxPaginationModule,
     PaginationModule,
+    B2bBreadcrumpsModule,
     B2bBreadcrumpsModule
   ],
 	providers: [

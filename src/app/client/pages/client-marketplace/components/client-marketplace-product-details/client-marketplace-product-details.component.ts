@@ -2,8 +2,7 @@ import {ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit
 import {ClientMarketplaceService} from "../../client-marketplace.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {TradebidService} from "../../../client-tradebid/tradebid.service";
-import {BehaviorSubject, combineLatest, exhaustMap, mergeMap, Observable, Subject} from "rxjs";
-// @ts-ignore
+import {BehaviorSubject, exhaustMap, mergeMap, Observable, Subject} from "rxjs";
 import {getName} from "country-list";
 import {
 	ClientOfferReportComponent

@@ -8,13 +8,20 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class B2bBreadcrumpsComponent implements OnInit {
 
-  public breadcrumbs: any;
+	public breadcrumbs: { label: string, url: string }[];
+
 	constructor(private router: Router, private route: ActivatedRoute) { }
+
 	ngOnInit() {
-		this.route.data.subscribe((data: any) => {
-			this.breadcrumbs =	this.router.getCurrentNavigation()?.extras.state?.['breadcrumbs'] ?
-				this.router.getCurrentNavigation().extras.state?.['breadcrumbs'] : data?.breadcrumbs;
-			console.log(this.breadcrumbs);
+		this.route.data.subscribe(data => {
+			this.breadcrumbs = data?.['breadcrumbs'];
+
+			if (this.route.snapshot.params?.['id']) {
+				this.breadcrumbs.push({
+					label: this.route.snapshot.params['id'],
+					url: this.router.url
+				})
+			}
 		});
 	}
 }
