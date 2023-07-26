@@ -12,6 +12,7 @@ import { B2bNgxButtonThemeEnum } from "@b2b/ngx-button";
 import {MatDialog} from "@angular/material/dialog";
 import {OffersService} from "../../../../../services/offers/offers.service";
 import {NgxSkeletonLoaderConfig} from "ngx-skeleton-loader/lib/ngx-skeleton-loader-config.types";
+import {MixpanelService} from "../../../../../../core/services/mixpanel/mixpanel.service";
 
 function generateQueryString(obj: { [s: string]: unknown; } | ArrayLike<unknown>, initialValue: string = "?") {
 	return Object.entries(obj)
@@ -47,7 +48,8 @@ export class ClientProfileMyOffersComponent {
 		private readonly _translocoService: TranslocoService,
 		public readonly b2bNgxLinkService: B2bNgxLinkService,
 		private readonly dialog: MatDialog,
-		private readonly _hotToastService: HotToastService
+		private readonly _hotToastService: HotToastService,
+    private readonly mixpanelService: MixpanelService
 	) {
 		const isLangAlreadyLoaded = this._translocoService.translate("OFFERS.MARK_AS_SOLD") !== "OFFERS.MARK_AS_SOLD";
 		if (isLangAlreadyLoaded) {
@@ -81,7 +83,11 @@ export class ClientProfileMyOffersComponent {
 			{
 				label: this._translocoService.translate("OFFERS.MARK_AS_SOLD"),
 				icon: "check",
-				onClick: (offer: { _id: string; }) => {
+				onClick: (offer: any) => {
+          this.mixpanelService.track('User marked Unclaimed Cargo as Sold', {
+            'Product Sector': offer.category,
+            'Destination': offer.currentLocation
+          });
 					this.markAsSold(offer._id);
 					// this._offersService.markAsSold(offer._id);
 				},
@@ -129,7 +135,11 @@ export class ClientProfileMyOffersComponent {
 			{
 				label: this._translocoService.translate("OFFERS.DELETE"),
 				icon: "delete-red",
-				onClick: (offer: { _id: string; }) => {
+				onClick: (offer: any) => {
+          this.mixpanelService.track('User deleted an Unclaimed Cargo offer', {
+            'Product Sector': offer.category,
+            'Destination': offer.currentLocation
+          });
 					this.deleteOffer(offer._id);
 					// this._offersService.deleteOfferById(offer._id);
 				},

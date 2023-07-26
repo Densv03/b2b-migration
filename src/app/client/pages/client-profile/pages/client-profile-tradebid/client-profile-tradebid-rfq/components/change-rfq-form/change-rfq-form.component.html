@@ -32,6 +32,7 @@
 			<b2b-ngx-select
 				[options]="categories$ | async"
 				formControlName="category"
+        (change)="selectCategory($event)"
 				bindValue="id"
 				bindLabel="value"
 				placeholder="Select category"

@@ -1,14 +1,17 @@
 import {ChangeDetectionStrategy, Component, OnInit} from "@angular/core";
 import {B2bNgxLinkThemeEnum} from "@b2b/ngx-link";
 import {UntilDestroy, untilDestroyed} from "@ngneat/until-destroy";
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute, NavigationEnd, NavigationStart, Router} from "@angular/router";
 import {UserService} from "../pages/client-profile/services/user/user.service";
 import {combineLatest, Observable} from "rxjs";
-import {first} from "rxjs/operators";
+import {filter, first} from "rxjs/operators";
 import {TradebidService} from "../pages/client-tradebid/tradebid.service";
 import {SeoService} from "../../core/services/seo/seo.service";
 import {AuthService} from "../../auth/services/auth/auth.service";
 import {ClientMarketplaceService} from "../pages/client-marketplace/client-marketplace.service";
+import {MixpanelService} from "../../core/services/mixpanel/mixpanel.service";
+import moment from "moment";
+
 
 @UntilDestroy()
 @Component({
@@ -22,7 +25,7 @@ export class ClientComponent implements OnInit {
 	public readonly socialMedias: any[];
 	public readonly user$: Observable<any>;
 	public readonly b2bNgxLinkThemeEnum = B2bNgxLinkThemeEnum;
-
+  private startTime: number;
 	constructor(
 		private route: ActivatedRoute,
 		private userService: UserService,
@@ -30,6 +33,7 @@ export class ClientComponent implements OnInit {
 		private router: Router,
 		private seoService: SeoService,
 		private marketService: ClientMarketplaceService,
+    private readonly mixpanelService: MixpanelService,
     private authService: AuthService
 	) {
 		this.route.queryParams.pipe(untilDestroyed(this)).subscribe((data) => {
@@ -44,6 +48,18 @@ export class ClientComponent implements OnInit {
 	}
 
 	ngOnInit() {
+    this.router.events
+      .pipe(
+        filter(event => event instanceof NavigationStart || event instanceof NavigationEnd)
+      ).subscribe((event) => {
+      if (event instanceof NavigationStart) {
+        this.startTime = Date.now();
+      } else if (event instanceof NavigationEnd && !event.urlAfterRedirects.startsWith('/auth' || '/email-verify')) {
+        const duration = Date.now() - this.startTime;
+        const route = event.urlAfterRedirects;
+        this.mixpanelService.track(location.host + route, {'Time Spend': moment().startOf('day').seconds(duration / 10).format('HH:mm:ss')})
+      }
+    });
 		this.setQueryParamForAuthorizationType();
 		this.seoService.addCanonicalRef();
 		this.initIntercomSettings();

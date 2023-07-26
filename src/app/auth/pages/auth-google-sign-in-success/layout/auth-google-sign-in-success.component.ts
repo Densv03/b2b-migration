@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 import { UntilDestroy, untilDestroyed } from "@ngneat/until-destroy";
 import { AuthService } from "../../../services/auth/auth.service";
 import { AuthRecoverAccountComponent } from "../../auth-recover-account/auth-recover-account.component";
+import {MixpanelService} from "../../../../core/services/mixpanel/mixpanel.service";
 
 @UntilDestroy()
 @Component({
@@ -22,6 +23,7 @@ export class AuthGoogleSignInSuccessComponent {
 		private readonly _activatedRoute: ActivatedRoute,
 		private readonly _authService: AuthService,
 		private readonly _router: Router,
+    private readonly mixpanelService: MixpanelService
 		// private readonly _dialogService: DialogService
 	) {
 		this._activatedRoute.queryParams.pipe(untilDestroyed(this)).subscribe((params) => {
@@ -43,6 +45,7 @@ export class AuthGoogleSignInSuccessComponent {
 						// 	.afterClosed$.pipe(untilDestroyed(this))
 						// 	.subscribe();
 					}
+          this.mixpanelService.logIn(user, 'User successfully logs in');
 					this._authService.updateToken(token);
 					this._authService.updateRole(user?.role);
 					this._router.navigateByUrl("/");

@@ -7,6 +7,7 @@ import {
   ClientMarketplaceService
 } from "../../../../../../shared/services/client-marketplace-service/client-marketplace.service";
 import {dropdownLabels} from "@b2b/ngx-dropdown";
+import {MixpanelService} from "../../../../../../../core/services/mixpanel/mixpanel.service";
 
 @Component({
 	selector: "b2b-client-profile-marketplace-product-item",
@@ -22,7 +23,8 @@ export class ClientProfileMarketplaceProductItemComponent implements OnInit{
 
 	constructor(private clientMarketplaceService: ClientMarketplaceService,
 							private router: Router,
-							private hotToastService: HotToastService,) {}
+							private hotToastService: HotToastService,
+              private readonly mixpanelService: MixpanelService) {}
 
 	ngOnInit() {
 		this.updateItemsForDropDown();
@@ -41,14 +43,14 @@ export class ClientProfileMarketplaceProductItemComponent implements OnInit{
 			{
 				label: dropdownLabels.RESTORE,
 				icon: "edit",
-				onClick: (productId: string, paymentMethods: string | any[]) => {
+				onClick: (product: any, paymentMethods: string | any[]) => {
 					if (!paymentMethods.length) {
-						this.router.navigate(["/profile/your-workspace/b2bmarket/edit", productId],
+						this.router.navigate(["/profile/your-workspace/b2bmarket/edit", product._id],
 							{queryParams: {mode: EditMode.ARCHIVE}})
 						this.hotToastService.warning("Please edit product info firstly");
 					} else {
 						this.clientMarketplaceService
-							.restoreProduct(productId)
+							.restoreProduct(product._id)
 							.pipe(
 								this.hotToastService.observe({
 									loading: "Restoring product...",
@@ -57,6 +59,12 @@ export class ClientProfileMarketplaceProductItemComponent implements OnInit{
 								})
 							)
 							.subscribe(() => {
+                this.mixpanelService.track('User posted an earlier archived product', {
+                  'Product Category': product.category[0]?.name,
+                  'Supplier\'s Country': product.country,
+                  'Product Count': product.amount.count + ' ' + product.amount.unit?.name,
+                  'Posting Date': Date()
+                });
 								this.clientMarketplaceService.updateManageProducts();
 							});
 					}
@@ -101,8 +109,8 @@ export class ClientProfileMarketplaceProductItemComponent implements OnInit{
 			{
 				label: dropdownLabels.EDIT,
 				icon: "edit",
-				onClick: (productId: any) => {
-					this.router.navigate(["profile", "your-workspace", "b2bmarket", "edit", productId], {
+				onClick: (product: any) => {
+					this.router.navigate(["profile", "your-workspace", "b2bmarket", "edit", product._id], {
 						queryParams: { mode: EditMode.EDIT },
 					});
 				},
@@ -110,9 +118,9 @@ export class ClientProfileMarketplaceProductItemComponent implements OnInit{
 			{
 				label: dropdownLabels.ARCHIVE,
 				icon: "archive-red",
-				onClick: (productId: any) => {
+				onClick: (product: any) => {
 					this.clientMarketplaceService
-						.archiveProduct(productId)
+						.archiveProduct(product._id)
 						.pipe(
 							this.hotToastService.observe({
 								loading: "Archiving product...",
@@ -121,6 +129,12 @@ export class ClientProfileMarketplaceProductItemComponent implements OnInit{
 							})
 						)
 						.subscribe(() => {
+              this.mixpanelService.track('User archived an earlier posted product', {
+                'Product Category': product.category[0]?.name,
+                'Supplier\'s Country': product.country,
+                'Product Count': product.amount.count + ' ' + product.amount.unit?.name,
+                'Posting Date': Date()
+              });
 							this.clientMarketplaceService.updateManageProducts();
 						});
 				},

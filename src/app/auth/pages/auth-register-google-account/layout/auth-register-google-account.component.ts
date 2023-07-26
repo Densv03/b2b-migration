@@ -22,6 +22,7 @@ import { fullName } from "../../../../core/helpers/validator/full-name";
 import { onlyLatin } from "../../../../core/helpers/validator/only-latin";
 import { capitalizeFirstLetter } from "../../../../core/helpers/function/capitalize-first-letter";
 import {User} from "../../../../core/models/user/user.model";
+import {MixpanelService} from "../../../../core/services/mixpanel/mixpanel.service";
 
 function setValuesToFormData(formData: FormData, values: any, prefix?: string) {
 	Object.entries(values).forEach(([key, value]: any) => {
@@ -89,6 +90,7 @@ export class AuthRegisterGoogleAccountComponent implements OnInit {
 		public readonly b2bNgxLinkService: B2bNgxLinkService,
 		private readonly _userService: UserService,
 		private readonly _authStore: AuthStore,
+    private readonly mixpanelService: MixpanelService
 	) {
 		this.b2bNgxLinkThemeEnum = B2bNgxLinkThemeEnum;
 		this.b2bNgxButtonThemeEnum = B2bNgxButtonThemeEnum;
@@ -191,7 +193,10 @@ export class AuthRegisterGoogleAccountComponent implements OnInit {
 				.subscribe((user) => {
 					this.user = user;
 					this.token = token;
-
+          const mixpanel = {
+            _id: user._id,
+          };
+          this.mixpanelService.signUp(mixpanel, 'User begins sign up by using Google or Linkedin accounts to sign up');
 					this._authService.updateToken(token);
 					this._authService.updateRole(role);
 					this.router.navigate(['/auth/register']);

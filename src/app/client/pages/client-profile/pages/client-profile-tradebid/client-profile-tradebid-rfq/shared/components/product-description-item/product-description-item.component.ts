@@ -15,10 +15,9 @@ export class ProductDescriptionItemComponent implements OnInit {
 	@Output() itemId: EventEmitter<string> = new EventEmitter<string>();
 
 	@Output() edit: EventEmitter<string> = new EventEmitter<string>();
-	@Output() archivate: EventEmitter<string> = new EventEmitter<string>();
-	@Output() delete: EventEmitter<string> = new EventEmitter<string>();
-	@Output() restore: EventEmitter<string> = new EventEmitter<string>();
-
+  @Output() archivate: EventEmitter<any> = new EventEmitter<any>();
+  @Output() delete: EventEmitter<any> = new EventEmitter<any>();
+  @Output() restore: EventEmitter<any> = new EventEmitter<any>();
 	constructor() {}
 
 	get imageName(): string {
@@ -47,14 +46,14 @@ export class ProductDescriptionItemComponent implements OnInit {
 	}
 
 	public onArchivate(): void {
-		this.archivate.emit(this.myRfqItem._id);
+		this.archivate.emit(this.myRfqItem);
 	}
 
 	public onDelete(): void {
-		this.delete.emit(this.myRfqItem._id);
+		this.delete.emit(this.myRfqItem);
 	}
 
 	public onRestore(): void {
-		this.restore.emit(this.myRfqItem._id);
+		this.restore.emit(this.myRfqItem);
 	}
 }

@@ -17,6 +17,7 @@ import {
 	AuthResetPasswordModalComponent
 } from "../components/auth-reset-password-modal/auth-reset-password-modal.component";
 import {environment} from "../../../../../environments/environment";
+import {MixpanelService} from "../../../../core/services/mixpanel/mixpanel.service";
 
 @UntilDestroy()
 @Component({
@@ -40,6 +41,7 @@ export class AuthLogInComponent {
 		// private readonly _ngxSmartModalService: NgxSmartModalService,
 		public readonly b2bNgxLinkService: B2bNgxLinkService,
 		private readonly _hotToastService: HotToastService,
+    private readonly mixpanelService: MixpanelService
 		// private readonly _dialogService: DialogService
 	) {
 		this.formGroup = this.getFormGroup();
@@ -135,7 +137,13 @@ public get emailError() {
 			this.authService
 				.getUser()
 				.pipe(untilDestroyed(this), skip(1))
-				.subscribe(async () => {
+				.subscribe(async (val) => {
+          const mixpanel = {
+            'User_id': val._id,
+            ' Account type': val.role.name,
+            'Company Name': val.company
+          };
+          this.mixpanelService.logIn(mixpanel, 'User successfully logs in');
 					isRecovered && this.showDialog();
 					if (localStorage.getItem("blocked-route")?.includes("tradebid")) {
 						await this.router.navigateByUrl("/");

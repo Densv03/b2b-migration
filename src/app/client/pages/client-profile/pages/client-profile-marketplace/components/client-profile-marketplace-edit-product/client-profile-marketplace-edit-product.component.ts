@@ -20,6 +20,7 @@ import {CategoriesService} from "../../../../../../services/categories/categorie
 import {
   ClientMarketplaceService
 } from "../../../../../../shared/services/client-marketplace-service/client-marketplace.service";
+import {MixpanelService} from "../../../../../../../core/services/mixpanel/mixpanel.service";
 
 export enum EditMode {
 	ARCHIVE = "archive",
@@ -74,7 +75,8 @@ export class ClientProfileMarketplaceEditProductComponent implements OnInit {
 		public dialog: MatDialog,
 		private hotToastService: HotToastService,
 		private router: Router,
-		private categoriesService: CategoriesService
+		private categoriesService: CategoriesService,
+    private readonly mixpanelService: MixpanelService
 	) {
 		this.formGroup = this.createFormGroup();
 		this.formState = this.formGroup.controls;
@@ -114,6 +116,12 @@ export class ClientProfileMarketplaceEditProductComponent implements OnInit {
 				})
 			)
 			.subscribe(() => {
+        this.mixpanelService.track('User archived an earlier posted product', {
+          'Product Category': this.formGroup.value.category,
+          'Supplier\'s Country': this.formGroup.value.country,
+          'Product Count': this.formGroup.value.amount,
+          'Posting Date': Date()
+        });
 				// this.clientMarketplaceService.updateMarketplaceProducts(this.filteredQueryObj);
 				this.router.navigate(["profile/your-workspace/b2bmarket"]);
 			});
@@ -131,6 +139,12 @@ export class ClientProfileMarketplaceEditProductComponent implements OnInit {
 			this.updateProductByUser();
 			this.tradebidService.updateCompanyInfo({companyDescription: this.formGroup.value.companyDescription}).subscribe()
 		}
+    this.mixpanelService.track('User edited an earlier posted product', {
+      'Product Category': this.formGroup.value.category,
+      'Supplier\'s Country': this.formGroup.value.country,
+      'Product Count': this.formGroup.value.amount,
+      'Posting Date': Date()
+    });
 	}
 
 	public updateAndRestore(): void {

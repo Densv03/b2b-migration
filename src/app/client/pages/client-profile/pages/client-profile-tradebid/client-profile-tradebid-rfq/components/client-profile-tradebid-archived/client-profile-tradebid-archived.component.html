@@ -2,6 +2,6 @@
 	<b2b-product-description-item
 		[buttonType]="buttonType"
 		[myRfqItem]="item"
-		(delete)="this.delete.emit($event)"
-		(restore)="this.restore.emit($event)"></b2b-product-description-item>
+    (delete)="deleteEvent($event)"
+    (restore)="restoreEvent($event)"></b2b-product-description-item>
 </div>

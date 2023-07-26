@@ -31,6 +31,7 @@ import {B2bNgxRadioModule} from "@b2b/ngx-radio";
 import {B2bNgxLogoModule} from "@b2b/ngx-logo";
 import {B2bNgxFileModule} from "@b2b/ngx-file";
 import {B2bNgxTextareaModule} from "@b2b/ngx-textarea";
+import {MixpanelService} from "../../../../../../core/services/mixpanel/mixpanel.service";
 
 export interface SelectItem {
 	id: string;
@@ -132,7 +133,8 @@ export class ClientCompanyInformationComponent implements OnInit {
 		private readonly changeDetectorRef: ChangeDetectorRef,
 		private readonly renderer2: Renderer2,
 		private readonly router: Router,
-		private readonly hotToastrService: HotToastService
+		private readonly hotToastrService: HotToastService,
+    private readonly mixpanelService: MixpanelService
 	) {
 		if (router.getCurrentNavigation()?.extras.state?.['showPopUp']) {
 			hotToastrService.info(
@@ -284,7 +286,16 @@ export class ClientCompanyInformationComponent implements OnInit {
 					e164Number: phoneObj.phoneE164Number,
 				},
 			});
+      this.mixpanelService.track('User filled up the required company information', {'Account Type': this.userService.getUser().role.displayName});
+      if (form.value.website) {
+        this.mixpanelService.track('User added website link', {'Link': form.value.website})
+      }
+      if (form.value.facebook || form.value.instagram || form.value.linkedin || form.value.twitter) {
+        const links = [form.value.facebook, form.value.instagram, form.value.linkedin, form.value.twitter]
+        this.mixpanelService.track('User added Social media Link', {'Social Media Type': links})
+      }
 		});
+
 	}
 
 	public addSocialControl(type: SocialMediaEnum): void {

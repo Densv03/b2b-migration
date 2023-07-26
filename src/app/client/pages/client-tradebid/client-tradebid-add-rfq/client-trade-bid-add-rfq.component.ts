@@ -31,6 +31,7 @@ import {onlyLatinAndNumberAndSymbols} from "../../../../core/helpers/validator/o
 import {onlyLatinAndSymbols} from "../../../../core/helpers/validator/only-latin-symbols";
 import {onlyNumberandSymbols} from "../../../../core/helpers/validator/only-number-symbols";
 import {MatDialog} from "@angular/material/dialog";
+import {MixpanelService} from "../../../../core/services/mixpanel/mixpanel.service";
 
 interface SelectItem {
   id: string;
@@ -75,6 +76,7 @@ export class ClientTradeBidAddRfqComponent implements OnInit, OnDestroy {
 
   private hideLabelSource: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   private isAdminPage: boolean = false;
+  private selectedCategory: string;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -87,7 +89,8 @@ export class ClientTradeBidAddRfqComponent implements OnInit, OnDestroy {
     private activatedRoute: ActivatedRoute,
     private tradeBidService: TradebidService,
     private userService: UserService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private readonly mixpanelService: MixpanelService
   ) {
     this.showCancelBtn = !!localStorage.getItem("showCancelButton");
 
@@ -190,6 +193,10 @@ export class ClientTradeBidAddRfqComponent implements OnInit, OnDestroy {
     });
   }
 
+  public selectCategory(event: {id: string,value: string}): void {
+    this.selectedCategory = event.value
+  }
+
   public openDocument(ev: { name: any; }): void {
     const document = this.form.value.documents.find((el: { _id: any; }) => el._id === ev.name);
 
@@ -232,6 +239,10 @@ export class ClientTradeBidAddRfqComponent implements OnInit, OnDestroy {
         )
         .subscribe({
           complete: () => {
+            this.mixpanelService.track('User posted a New RFQ and it passed admin\'s verification', {
+              'Product Sector': this.selectedCategory,
+              'Destination': form.value.pymentShipping?.destination
+            });
             this.router.navigate(["/admin/tradebid"]);
           },
         });

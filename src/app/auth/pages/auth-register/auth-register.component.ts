@@ -9,6 +9,7 @@ import {HotToastService} from "@ngneat/hot-toast";
 import {combineLatest} from "rxjs";
 import {User} from "../../../core/models/user/user.model";
 import {TradebidService} from "../../../client/pages/client-tradebid/tradebid.service";
+import {MixpanelService} from "../../../core/services/mixpanel/mixpanel.service";
 
 @UntilDestroy()
 @Component({
@@ -30,7 +31,8 @@ export class AuthRegisterComponent implements OnInit {
 		private readonly userService: UserService,
 		private readonly _hotToastService: HotToastService,
 		private readonly route: ActivatedRoute,
-		private readonly tradebidService: TradebidService
+		private readonly tradebidService: TradebidService,
+    private readonly mixpanelService: MixpanelService
 	) {
 		this.updateStepperSelectedIndex();
 	}
@@ -55,11 +57,13 @@ export class AuthRegisterComponent implements OnInit {
 	public firstStep(stepper: MatStepper, event: BasicInfoInterface): void {
 		stepper.next();
 		this.basicInfo = event;
+    this.mixpanelService.track('User completed "Basic info" step of Sign-up');
 	}
 
 	public secondStep(stepper: MatStepper, event: "buyer" | "supplier"): void {
 		stepper.next();
 		this.selectedUserType = event;
+    this.mixpanelService.track('User completed "Account type" step of sign-up', {'User Property': event});
 	}
 
 	public thirdStep(event: any): void {
@@ -77,6 +81,14 @@ export class AuthRegisterComponent implements OnInit {
 		this.authService.registerWithForm(model)
 			.pipe(untilDestroyed(this))
 			.subscribe(({token}) => {
+        this.mixpanelService.signUp({
+          'User_id': model._id,
+          'Registration date': new Date().toISOString(),
+          'Email confirmed': model.email,
+          'Company Name': model.company,
+          'Product sectors': model.categories,
+          'Country': model.country,
+        }, 'User completed "Company info" step of Sign-up');
 				this.authService.updateToken(token);
 				this.authService.initUser();
 				this.router.navigateByUrl(`/email-verify?email=${this.authService.userCredentials$.value.email}`);
@@ -130,7 +142,16 @@ export class AuthRegisterComponent implements OnInit {
 						const roleObject = roles.find((role) => role._id === roleId);
 						// @ts-ignore
             this.authService.updateUser({...this.userService.getUser(), role: roleObject, rootRole: rootRoleObject});
-
+            this.mixpanelService.signUp({
+                'User_id': user._id,
+                'Registration date': new Date().toISOString(),
+                'Email confirmed': user.email,
+                'Company Name': user.company,
+                'Product sectors': user.categories,
+                'Country': user.country,
+                'Login Method': user.socialAuthType
+              },
+              'User completed "Company info" step of Sign-up');
 						if (rootRoleObject?.name === 'supplier') {
 							this.router.navigateByUrl('/profile/your-account/company-information', {state: {showPopUp: true}});
 						} else {

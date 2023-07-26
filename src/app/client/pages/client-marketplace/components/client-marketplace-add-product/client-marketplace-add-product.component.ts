@@ -18,6 +18,7 @@ import { HotToastService } from "@ngneat/hot-toast";
 import { animate, style, transition, trigger } from "@angular/animations";
 import { CategoriesService } from "../../../../services/categories/categories.service";
 import { UntilDestroy } from "@ngneat/until-destroy";
+import {MixpanelService} from "../../../../../core/services/mixpanel/mixpanel.service";
 
 @UntilDestroy()
 @Component({
@@ -68,7 +69,8 @@ export class ClientMarketplaceAddProductComponent implements OnInit {
 		private dialog: MatDialog,
 		private hotToastService: HotToastService,
 		private router: Router,
-		private categoriesService: CategoriesService
+		private categoriesService: CategoriesService,
+    private readonly mixpanelService: MixpanelService
 	) {
 		this.formGroup = this.createFormGroup();
 		this.formState = this.formGroup.controls;
@@ -117,6 +119,12 @@ export class ClientMarketplaceAddProductComponent implements OnInit {
 				})
 			)
 			.subscribe(() => {
+        this.mixpanelService.track('User created and posted a new product and product was approved', {
+          'Product Category': this.formGroup.value.category[0],
+          'Supplier\'s Country': this.formGroup.value.country,
+          'Product Count': this.formGroup.value.country.amount,
+          'Posting Date': Date()
+        });
 				this.router.navigate(["/b2bmarket/product-posting-complete"]);
 			});
 	}

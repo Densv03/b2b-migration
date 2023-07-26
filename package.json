@@ -44,6 +44,7 @@
     "localstorage-polyfill": "^1.0.1",
     "mixpanel-browser": "^2.47.0",
     "mock-browser": "^0.92.14",
+    "moment": "^2.29.4",
     "ng-gallery": "^7.1.2",
     "ngx-bootstrap": "9.0.0-RC.2",
     "ngx-daterangepicker-material": "^6.0.4",

@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { RfqButtonTypeEnum } from "../../shared/enums/RfqButtonType.enum";
 import { ClientProfileTradebidService } from "../../../client-profile-tradebid.service";
 import { Observable } from "rxjs";
+import {MixpanelService} from "../../../../../../../../core/services/mixpanel/mixpanel.service";
 
 @Component({
 	selector: "b2b-client-profile-tradebid-manage-rfq",
@@ -15,7 +16,8 @@ export class ClientProfileTradebidManageRfqComponent implements OnInit {
 	@Output() edit: EventEmitter<string | number> = new EventEmitter<string | number>();
 	@Output() archivate: EventEmitter<string | number> = new EventEmitter<string | number>();
 
-	constructor(private clientTradeBidService: ClientProfileTradebidService) {}
+	constructor(private clientTradeBidService: ClientProfileTradebidService,
+              private readonly mixpanelService: MixpanelService) {}
 
 	public ngOnInit(): void {}
 
@@ -23,7 +25,12 @@ export class ClientProfileTradebidManageRfqComponent implements OnInit {
 		this.edit.emit(id);
 	}
 
-	public onArchivate(id: string | number): void {
-		this.archivate.emit(id);
+	public onArchivate(item: any): void {
+		this.archivate.emit(item._id);
+
+    this.mixpanelService.track('User archived RFQ', {
+      'Product Sector': item.category,
+      'Destination': item.destination.to
+    });
 	}
 }

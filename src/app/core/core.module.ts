@@ -15,10 +15,11 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {TranslocoModule} from "@ngneat/transloco";
 import {AuthInterceptor} from "../auth/interceptors/auth/auth.interceptor";
 import {HTTP_INTERCEPTORS} from "@angular/common/http";
+import {MixpanelDirective} from "./directives/mixpanel.directive";
 
 
 @NgModule({
-	declarations: [AppComponent, CoreComponent, ClientHeaderComponent],
+	declarations: [AppComponent, CoreComponent, ClientHeaderComponent, MixpanelDirective],
   imports: [
     CommonModule,
     CoreRoutingModule,
@@ -32,7 +33,7 @@ import {HTTP_INTERCEPTORS} from "@angular/common/http";
     BrowserAnimationsModule,
     TranslocoModule,
   ],
-	exports: [AppComponent],
+	exports: [AppComponent, MixpanelDirective],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,

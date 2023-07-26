@@ -10,6 +10,7 @@ import {password} from "../../../core/helpers/validator/password";
 import {UniqEmail} from "../../../core/helpers/validator/uniq-email";
 import {Router} from "@angular/router";
 import {AuthService} from "../../services/auth/auth.service";
+import {MixpanelService} from "../../../core/services/mixpanel/mixpanel.service";
 
 @Component({
   selector: 'b2b-auth-enter-credentials',
@@ -48,7 +49,8 @@ export class AuthEnterCredentialsComponent {
 							private readonly uniqEmail: UniqEmail,
 							private readonly fb: FormBuilder,
 							private readonly router: Router,
-							private readonly authService: AuthService) {
+							private readonly authService: AuthService,
+              private readonly mixpanelService: MixpanelService) {
 		this.b2bNgxLinkThemeEnum = B2bNgxLinkThemeEnum;
 		this.b2bNgxButtonThemeEnum = B2bNgxButtonThemeEnum;
 		this.b2bNgxInputThemeEnum = B2bNgxInputThemeEnum;
@@ -63,6 +65,7 @@ export class AuthEnterCredentialsComponent {
 	}
 
 	public goToNextStep(form: FormGroup): void {
+    this.mixpanelService.track('User begins sign up by inputting Email, password');
 		this.router.navigate(['/auth/register']);
 		this.authService.userCredentials$.next(form.value);
 	}

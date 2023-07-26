@@ -30,6 +30,7 @@ import { onlyLatinAndNumberAndSymbols } from "../../../../../../core/helpers/val
 import {TradebidService} from "../../../../client-tradebid/tradebid.service";
 import {getOfferFormData} from "../get-offer-form-data";
 import {Dialog} from "@angular/cdk/dialog";
+import {MixpanelService} from "../../../../../../core/services/mixpanel/mixpanel.service";
 
 export function oneContainer(): ValidatorFn {
 	const oneContainer = /^[^. ,]+$/;
@@ -132,7 +133,8 @@ export class ClientProfileAddOfferComponent implements OnInit, OnDestroy, OnDest
 		private readonly _translocoService: TranslocoService,
 		public readonly b2bNgxLinkService: B2bNgxLinkService,
 		private readonly dialog: Dialog,
-		private readonly tradebidService: TradebidService
+		private readonly tradebidService: TradebidService,
+    private readonly mixpanelService: MixpanelService
 	) {
 		this.showCancelBtn = !!localStorage.getItem("showCancelButton");
 		// this._ampService.logEvent("View add lot");
@@ -301,6 +303,11 @@ export class ClientProfileAddOfferComponent implements OnInit, OnDestroy, OnDest
 		}
 
 		this.loading = true;
+
+    this.mixpanelService.track('User posted Unclaimed Cargo offer and it passed admin\'s verification', {
+      'Product Sector': formGroup.value.category,
+      'Destination': formGroup.value.currentLocation
+    });
 
 		if (!this.editMode) {
 			const dialogRef = this.dialog.open(ClientProfileAddOfferDialogComponent, {

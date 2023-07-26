@@ -25,6 +25,7 @@ import { onlyNumber } from "../../../../../../../../core/helpers/validator/only-
 import { onlyLatinAndNumber } from "../../../../../../../../core/helpers/validator/only-latin-and-number";
 import { ClientProfileTradebidService } from "../../../client-profile-tradebid.service";
 import {MatDialog} from "@angular/material/dialog";
+import {MixpanelService} from "../../../../../../../../core/services/mixpanel/mixpanel.service";
 
 interface SelectItem {
 	id: string;
@@ -69,7 +70,7 @@ export class ChangeRfqFormComponent implements OnInit {
 	public b2bNgxSelectThemeEnum = B2bNgxSelectThemeEnum;
 
 	private hideLabelSource: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-
+  private selectedCategory: string;
 	constructor(
 		private formBuilder: FormBuilder,
 		private categoriesService: CategoriesService,
@@ -81,7 +82,8 @@ export class ChangeRfqFormComponent implements OnInit {
 		private tradeBidService: TradebidService,
 		private changeDetectionRef: ChangeDetectorRef,
 		private route: ActivatedRoute,
-		private profileTradebidService: ClientProfileTradebidService
+		private profileTradebidService: ClientProfileTradebidService,
+    private readonly mixpanelService: MixpanelService
 	) {
 		this.form = this.formBuilder.group({
 			productInformation: this.createProductInformationGroup(),
@@ -184,6 +186,10 @@ export class ChangeRfqFormComponent implements OnInit {
 		});
 	}
 
+  public selectCategory(event: any): void {
+    this.selectedCategory = event.value
+  }
+
 	public submitForm(form: FormGroup): void {
 		const body = this.getFormData(this.getBodyRequest(form));
 		this.profileTradebidService
@@ -198,6 +204,10 @@ export class ChangeRfqFormComponent implements OnInit {
 			)
 			.subscribe({
 				complete: () => {
+          this.mixpanelService.track('User edited RFQ and it passed admin\'s verification', {
+            'Product Sector': this.selectedCategory,
+            'Destination': form.value.pymentShipping?.destination
+          });
 					this.router.navigate(["/profile/your-workspace/tradebid/my-rfq"]);
 				},
 			});
