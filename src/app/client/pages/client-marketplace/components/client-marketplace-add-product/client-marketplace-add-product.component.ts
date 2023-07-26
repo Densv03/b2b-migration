@@ -125,6 +125,10 @@ export class ClientMarketplaceAddProductComponent implements OnInit {
           'Product Count': this.formGroup.value.country.amount,
           'Posting Date': Date()
         });
+        if (this.userService.getUser().statistics.products.created === 0 &&
+          this.userService.getUser().statistics.rfq.created === 0 &&
+          this.userService.getUser().statistics.offers.created === 0) {
+        }
 				this.router.navigate(["/b2bmarket/product-posting-complete"]);
 			});
 	}

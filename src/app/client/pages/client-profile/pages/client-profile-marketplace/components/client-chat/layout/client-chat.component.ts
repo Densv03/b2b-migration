@@ -24,6 +24,8 @@ import { HotToastService } from "@ngneat/hot-toast";
 import { B2bNgxLinkService } from "@b2b/ngx-link";
 import { TranslocoService } from "@ngneat/transloco";
 import { getName } from "country-list";
+import mixpanel from "mixpanel-browser";
+import {MixpanelService} from "../../../../../../../../core/services/mixpanel/mixpanel.service";
 
 @UntilDestroy()
 @Component({
@@ -74,6 +76,7 @@ export class ClientChatComponent implements OnInit, OnDestroy {
 		public changeDetectorRef: ChangeDetectorRef,
 		public readonly b2bNgxLinkService: B2bNgxLinkService,
 		private readonly _translocoService: TranslocoService,
+    private readonly mixpanelService: MixpanelService
 	) {
 		this.b2bNgxButtonThemeEnum = B2bNgxButtonThemeEnum;
 		this.formGroup = this._formBuilder.group({
@@ -301,6 +304,26 @@ export class ClientChatComponent implements OnInit, OnDestroy {
 						productId: chat.product,
 						typeRoom: "product",
 					});
+          this.getMessages()
+            .pipe(untilDestroyed(this)).subscribe(messages => {
+            const filteredMessages = messages.filter((message: any) => message.author !== user._id);
+            if (filteredMessages.length === 1) {
+              const currentDate = new Date();
+              const dateSent = new Date(chat.createdAt);
+              const day = Math.floor((Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()) - Date.UTC(dateSent.getFullYear(), dateSent.getMonth(), dateSent.getDate())) / (1000 * 60 * 60 * 24));
+              const received = day < 0 ? '1st Day' : `${day}st Day`;
+              const trackLabel = role === 'seller' ? 'User received a new request on his product on the B2B Market'
+                : 'User responded to a new Request on the B2B Market'
+              this.mixpanelService.track(trackLabel, {
+                'Product category': chat.product,
+                'First Request received': received,
+                'Supplier\'s country ': chat.seller.country,
+                'Subject': 'Market',
+                'Buyer\'s country': chat.buyer.country
+              })
+              mixpanel.people.set({'Average Response Time': Date()});
+            }
+          })
 				} else {
 					this._socket.emit("start_users_chat", {
 						userId: contactTo?._id,

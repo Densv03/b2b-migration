@@ -8,6 +8,7 @@ import {ApiService} from "../../../core/services/api/api.service";
 import {AuthStore} from "../../state/auth/auth.store";
 import {RegisterResponseInterface} from "../../../../../projects/shared/src/interfaces/auth-responses.interface";
 import {B2bAuthRoleInterface} from "../../../../../projects/shared/src/interfaces/b2b-auth-role.interface";
+import {MixpanelService} from "../../../core/services/mixpanel/mixpanel.service";
 
 @Injectable({
 	providedIn: "root",
@@ -20,7 +21,8 @@ export class AuthService {
 	constructor(
 		private readonly apiService: ApiService,
 		private readonly authStore: AuthStore,
-		private readonly authQuery: AuthQuery
+		private readonly authQuery: AuthQuery,
+    private readonly mixpanelService: MixpanelService
 	) {
 		setTimeout(() => {
 			this.initUser();
@@ -93,6 +95,7 @@ export class AuthService {
 
 	public logOut() {
 		localStorage.removeItem("token");
+    this.mixpanelService.logout();
 		// this.authStore.update({
 		// 	user: null,
 		// 	token: null,

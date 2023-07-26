@@ -12,7 +12,7 @@ import { ActivatedRoute } from "@angular/router";
 import { UntilDestroy, untilDestroyed } from "@ngneat/until-destroy";
 import { ChatService} from "../../../services/chat/chat.service";
 import { BehaviorSubject, combineLatest, Observable } from "rxjs";
-import { filter, map, switchMap, tap } from "rxjs/operators";
+import {filter, map, switchMap, take, tap} from "rxjs/operators";
 import { UserService} from "../../client-profile/services/user/user.service";
 import { OffersService} from "../../../services/offers/offers.service";
 import { FormBuilder, FormGroup } from "@angular/forms";
@@ -24,6 +24,8 @@ import { ChatsService } from "../../../services/chats/chats.service";
 import { HotToastService } from "@ngneat/hot-toast";
 import { B2bNgxLinkService } from "@b2b/ngx-link";
 import { TranslocoService } from "@ngneat/transloco";
+import {MixpanelService} from "../../../../core/services/mixpanel/mixpanel.service";
+import mixpanel from "mixpanel-browser";
 
 @UntilDestroy()
 @Component({
@@ -72,6 +74,7 @@ export class ClientChatComponent implements OnInit, OnDestroy {
 		public changeDetectorRef: ChangeDetectorRef,
 		public readonly b2bNgxLinkService: B2bNgxLinkService,
 		private readonly _translocoService: TranslocoService,
+    private readonly mixpanelService: MixpanelService
 	) {
 		this.b2bNgxButtonThemeEnum = B2bNgxButtonThemeEnum;
 		this.formGroup = this._formBuilder.group({
@@ -269,8 +272,31 @@ export class ClientChatComponent implements OnInit, OnDestroy {
 					userId: contactTo?._id,
 					offerId: chat.offer?._id,
 				});
+
+        this.getMessages()
+          .pipe(take(1))
+          .subscribe((messages) => {
+            const filteredMessages = messages.filter((message: any) => message.author !== user._id);
+            if (filteredMessages.length === 1) {
+              const currentDate = new Date();
+              const dateSent = new Date(chat.createdAt);
+              const day = Math.floor((Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()) - Date.UTC(dateSent.getFullYear(), dateSent.getMonth(), dateSent.getDate()) ) /(1000 * 60 * 60 * 24));
+              const received = day < 0 ? '1st Day' : `${day}st Day`;
+              const trackLabel = role === 'seller' ? 'User received a new request on his product on the B2B Market'
+                : 'User responded to a new Request on the B2B Market'
+              this.mixpanelService.track(trackLabel, {
+                'Product category': chat.offer.category,
+                'First Request received': received,
+                'Supplier\'s country ': chat.seller.country,
+                'Subject': 'UC',
+                'Buyer\'s country': chat.buyer.country
+              })
+              mixpanel.people.set({'Average Response Time': Date()})
+            }
+          })
 			});
 	}
+
 
 	requestContacts() {
 		this._chatsService

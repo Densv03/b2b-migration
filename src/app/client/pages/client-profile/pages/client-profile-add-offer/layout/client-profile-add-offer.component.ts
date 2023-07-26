@@ -206,11 +206,6 @@ export class ClientProfileAddOfferComponent implements OnInit, OnDestroy, OnDest
 	}
 
 	ngOnInit(): void {
-		// this.formGroup.get("visibilityCompanyName").valueChanges.subscribe(data => {
-		// 	// console.log(this.formGroup.get("visibilityCompanyName").value)
-		// 	// this.formGroup.get("visibilityCompanyName").patchValue(data, {emitEvent: false})
-		// 	console.log(this.formGroup.value)
-		// })
 
 
 		this.patchCompanyDataToForm();
