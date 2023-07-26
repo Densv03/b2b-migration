@@ -96,14 +96,14 @@ export class ClientMarketplaceComponent implements OnInit, AfterViewInit, OnDest
   public filters = [
     {
       name: 'Sectors',
-      initialOpenState: true,
+      isOpen: true,
       selectedOption: new BehaviorSubject(null),
       options$: this.categoriesService.getCategories()
         .pipe(filter(data => !!data.totalCount), map( data => data.categories))
     },
     {
       name: 'Company type',
-      initialOpenState: false,
+      isOpen: false,
       selectedOption: new BehaviorSubject(null),
       options$: of([
         {name: 'Manufacturer', count: 45},

@@ -84,10 +84,10 @@
     <ng-container *ngFor="let filter of filters; let filterIndex = index">
       <b2b-filters-dropdown
         (changeOption)="chooseFilter(null, filterIndex)"
-        [menuIsOpen]="filter.initialOpenState"
+        [menuIsOpen]="filter.isOpen"
         [selectedOption]="filters[filterIndex].selectedOption.getValue()"
         [title]="filters[filterIndex].name">
-        <div *ngIf="!filters[filterIndex].selectedOption.getValue(); else selectedOption" class="options">
+        <div *ngIf="!filter.isMultiSelect; else multiSelectFilter" class="options">
           <div
             *ngFor="let option of filters[filterIndex].options$ | async; let idx = index"
             (click)="chooseFilter(option, filterIndex)"
@@ -117,6 +117,15 @@
         </ng-template>
       </b2b-filters-dropdown>
     </ng-container>
+    <ng-template #multiSelectFilter>
+      <div *ngIf="filters[0].selectedOption.getValue()" class="options">
+        <div *ngFor="let item of filters[0].selectedOption.getValue().children" class="item">
+          <b2b-ngx-checkbox>
+            <div class="label">{{item.name}}</div>
+          </b2b-ngx-checkbox>
+        </div>
+      </div>
+    </ng-template>
 <!--		<form [formGroup]="desktopFilters">-->
 <!--			<b2b-client-marketplace-filters-->
 <!--			[filterValues]="filterValue"-->
