@@ -312,8 +312,8 @@ export class ClientChatComponent implements OnInit, OnDestroy {
               const dateSent = new Date(chat.createdAt);
               const day = Math.floor((Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()) - Date.UTC(dateSent.getFullYear(), dateSent.getMonth(), dateSent.getDate())) / (1000 * 60 * 60 * 24));
               const received = day < 0 ? '1st Day' : `${day}st Day`;
-              const trackLabel = role === 'seller' ? 'User received a new request on his product on the B2B Market'
-                : 'User responded to a new Request on the B2B Market'
+              const trackLabel = role === 'seller' ? 'New Request received'
+                : 'Request Response'
               this.mixpanelService.track(trackLabel, {
                 'Product category': chat.product,
                 'First Request received': received,

@@ -239,7 +239,7 @@ export class ClientTradeBidAddRfqComponent implements OnInit, OnDestroy {
         )
         .subscribe({
           complete: () => {
-            this.mixpanelService.track('User posted a New RFQ and it passed admin\'s verification', {
+            this.mixpanelService.track('New RFQ posted', {
               'Product Sector': this.selectedCategory,
               'Destination': form.value.pymentShipping?.destination
             });

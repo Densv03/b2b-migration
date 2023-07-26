@@ -119,7 +119,7 @@ export class ClientMarketplaceAddProductComponent implements OnInit {
 				})
 			)
 			.subscribe(() => {
-        this.mixpanelService.track('User created and posted a new product and product was approved', {
+        this.mixpanelService.track('New Product posted', {
           'Product Category': this.formGroup.value.category[0],
           'Supplier\'s Country': this.formGroup.value.country,
           'Product Count': this.formGroup.value.country.amount,

@@ -286,13 +286,13 @@ export class ClientCompanyInformationComponent implements OnInit {
 					e164Number: phoneObj.phoneE164Number,
 				},
 			});
-      this.mixpanelService.track('User filled up the required company information', {'Account Type': this.userService.getUser().role.displayName});
+      this.mixpanelService.track('Company information completed', {'Account Type': this.userService.getUser().role.displayName});
       if (form.value.website) {
-        this.mixpanelService.track('User added website link', {'Link': form.value.website})
+        this.mixpanelService.track('Website Link added', {'Link': form.value.website})
       }
       if (form.value.facebook || form.value.instagram || form.value.linkedin || form.value.twitter) {
         const links = [form.value.facebook, form.value.instagram, form.value.linkedin, form.value.twitter]
-        this.mixpanelService.track('User added Social media Link', {'Social Media Type': links})
+        this.mixpanelService.track('Social Media Link added', {'Social Media Type': links})
       }
 		});
 

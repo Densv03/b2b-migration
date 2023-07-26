@@ -19,14 +19,14 @@ export class ClientProfileTradebidArchivedComponent {
               private readonly mixpanelService: MixpanelService) {}
   public deleteEvent(event: any): void {
     this.delete.emit(event._id)
-    this.mixpanelService.track('User deleted RFQ', {
+    this.mixpanelService.track('RFQ deleted', {
       'Product Sector': event.category,
       'Destination': event.destination.to
     });
   }
   public restoreEvent(event: any): void {
     this.restore.emit(event._id)
-    this.mixpanelService.track('User posted an earlier archived RFQ', {
+    this.mixpanelService.track('Archived RFQ posted', {
       'Product Sector': event.category,
       'Destination': event.destination.to
     });

@@ -299,7 +299,7 @@ export class ClientProfileAddOfferComponent implements OnInit, OnDestroy, OnDest
 
 		this.loading = true;
 
-    this.mixpanelService.track('User posted Unclaimed Cargo offer and it passed admin\'s verification', {
+    this.mixpanelService.track('Unclaimed cargo posted', {
       'Product Sector': formGroup.value.category,
       'Destination': formGroup.value.currentLocation
     });

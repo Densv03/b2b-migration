@@ -204,7 +204,7 @@ export class ChangeRfqFormComponent implements OnInit {
 			)
 			.subscribe({
 				complete: () => {
-          this.mixpanelService.track('User edited RFQ and it passed admin\'s verification', {
+          this.mixpanelService.track('RFQ edited', {
             'Product Sector': this.selectedCategory,
             'Destination': form.value.pymentShipping?.destination
           });

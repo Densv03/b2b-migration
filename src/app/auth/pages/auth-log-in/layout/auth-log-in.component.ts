@@ -143,7 +143,7 @@ public get emailError() {
             ' Account type': val.role.name,
             'Company Name': val.company
           };
-          this.mixpanelService.logIn(mixpanel, 'User successfully logs in');
+          this.mixpanelService.logIn(mixpanel, 'Login completed');
 					isRecovered && this.showDialog();
 					if (localStorage.getItem("blocked-route")?.includes("tradebid")) {
 						await this.router.navigateByUrl("/");

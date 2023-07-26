@@ -28,7 +28,7 @@ export class ClientProfileTradebidManageRfqComponent implements OnInit {
 	public onArchivate(item: any): void {
 		this.archivate.emit(item._id);
 
-    this.mixpanelService.track('User archived RFQ', {
+    this.mixpanelService.track('RFQ archived', {
       'Product Sector': item.category,
       'Destination': item.destination.to
     });

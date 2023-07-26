@@ -65,7 +65,7 @@ export class AuthEnterCredentialsComponent {
 	}
 
 	public goToNextStep(form: FormGroup): void {
-    this.mixpanelService.track('User begins sign up by inputting Email, password');
+    this.mixpanelService.track('Sign-Up started');
 		this.router.navigate(['/auth/register']);
 		this.authService.userCredentials$.next(form.value);
 	}

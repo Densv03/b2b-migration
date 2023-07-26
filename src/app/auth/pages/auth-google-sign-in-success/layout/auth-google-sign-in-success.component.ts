@@ -45,7 +45,7 @@ export class AuthGoogleSignInSuccessComponent {
 						// 	.afterClosed$.pipe(untilDestroyed(this))
 						// 	.subscribe();
 					}
-          this.mixpanelService.logIn(user, 'User successfully logs in');
+          this.mixpanelService.logIn(user, 'Login completed');
 					this._authService.updateToken(token);
 					this._authService.updateRole(user?.role);
 					this._router.navigateByUrl("/");

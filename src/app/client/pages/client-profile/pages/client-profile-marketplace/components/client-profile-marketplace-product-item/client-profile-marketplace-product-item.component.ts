@@ -59,7 +59,7 @@ export class ClientProfileMarketplaceProductItemComponent implements OnInit{
 								})
 							)
 							.subscribe(() => {
-                this.mixpanelService.track('User posted an earlier archived product', {
+                this.mixpanelService.track('Archived product posted', {
                   'Product Category': product.category[0]?.name,
                   'Supplier\'s Country': product.country,
                   'Product Count': product.amount.count + ' ' + product.amount.unit?.name,
@@ -129,7 +129,7 @@ export class ClientProfileMarketplaceProductItemComponent implements OnInit{
 							})
 						)
 						.subscribe(() => {
-              this.mixpanelService.track('User archived an earlier posted product', {
+              this.mixpanelService.track('Product archived', {
                 'Product Category': product.category[0]?.name,
                 'Supplier\'s Country': product.country,
                 'Product Count': product.amount.count + ' ' + product.amount.unit?.name,

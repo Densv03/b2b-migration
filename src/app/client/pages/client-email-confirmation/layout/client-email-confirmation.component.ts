@@ -5,6 +5,7 @@ import { catchError, map, switchMap } from "rxjs/operators";
 import { ApiService } from "../../../../core/services/api/api.service";
 import { of } from "rxjs";
 import { B2bNgxLinkService } from "@b2b/ngx-link";
+import {MixpanelService} from "../../../../core/services/mixpanel/mixpanel.service";
 
 @UntilDestroy()
 @Component({
@@ -19,7 +20,8 @@ export class ClientEmailConfirmationComponent implements OnInit {
 		private readonly _activatedRoute: ActivatedRoute,
 		private readonly _router: Router,
 		private readonly _apiService: ApiService,
-		public readonly b2bNgxLinkService: B2bNgxLinkService
+		public readonly b2bNgxLinkService: B2bNgxLinkService,
+    private readonly mixpanelService: MixpanelService
 	) {}
 
 	ngOnInit() {
@@ -30,6 +32,7 @@ export class ClientEmailConfirmationComponent implements OnInit {
 				switchMap((id) => this._apiService.get(`email/verify/${id}`)),
 				catchError(() => {
 					this.isAccountActivated = true;
+          this.mixpanelService.track('Email confirmed')
 					return of();
 				})
 			)

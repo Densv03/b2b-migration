@@ -57,13 +57,13 @@ export class AuthRegisterComponent implements OnInit {
 	public firstStep(stepper: MatStepper, event: BasicInfoInterface): void {
 		stepper.next();
 		this.basicInfo = event;
-    this.mixpanelService.track('User completed "Basic info" step of Sign-up');
+    this.mixpanelService.track('Sign-Up 1st step completed');
 	}
 
 	public secondStep(stepper: MatStepper, event: "buyer" | "supplier"): void {
 		stepper.next();
 		this.selectedUserType = event;
-    this.mixpanelService.track('User completed "Account type" step of sign-up', {'User Property': event});
+    this.mixpanelService.track('Sign-Up 2nd step completed', {'User Property': event});
 	}
 
 	public thirdStep(event: any): void {
@@ -88,7 +88,7 @@ export class AuthRegisterComponent implements OnInit {
           'Company Name': model.company,
           'Product sectors': model.categories,
           'Country': model.country,
-        }, 'User completed "Company info" step of Sign-up');
+        }, 'Sign-Up completed');
 				this.authService.updateToken(token);
 				this.authService.initUser();
 				this.router.navigateByUrl(`/email-verify?email=${this.authService.userCredentials$.value.email}`);
@@ -151,7 +151,7 @@ export class AuthRegisterComponent implements OnInit {
                 'Country': user.country,
                 'Login Method': user.socialAuthType
               },
-              'User completed "Company info" step of Sign-up');
+              'Sign-Up completed');
 						if (rootRoleObject?.name === 'supplier') {
 							this.router.navigateByUrl('/profile/your-account/company-information', {state: {showPopUp: true}});
 						} else {

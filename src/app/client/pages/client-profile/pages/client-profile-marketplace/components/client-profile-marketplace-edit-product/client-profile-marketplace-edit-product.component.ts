@@ -116,7 +116,7 @@ export class ClientProfileMarketplaceEditProductComponent implements OnInit {
 				})
 			)
 			.subscribe(() => {
-        this.mixpanelService.track('User archived an earlier posted product', {
+        this.mixpanelService.track('Product archived', {
           'Product Category': this.formGroup.value.category,
           'Supplier\'s Country': this.formGroup.value.country,
           'Product Count': this.formGroup.value.amount,
@@ -139,7 +139,7 @@ export class ClientProfileMarketplaceEditProductComponent implements OnInit {
 			this.updateProductByUser();
 			this.tradebidService.updateCompanyInfo({companyDescription: this.formGroup.value.companyDescription}).subscribe()
 		}
-    this.mixpanelService.track('User edited an earlier posted product', {
+    this.mixpanelService.track('Product edited', {
       'Product Category': this.formGroup.value.category,
       'Supplier\'s Country': this.formGroup.value.country,
       'Product Count': this.formGroup.value.amount,

@@ -84,7 +84,7 @@ export class ClientProfileMyOffersComponent {
 				label: this._translocoService.translate("OFFERS.MARK_AS_SOLD"),
 				icon: "check",
 				onClick: (offer: any) => {
-          this.mixpanelService.track('User marked Unclaimed Cargo as Sold', {
+          this.mixpanelService.track('Unclaimed cargo marked as Sold', {
             'Product Sector': offer.category,
             'Destination': offer.currentLocation
           });
@@ -136,7 +136,7 @@ export class ClientProfileMyOffersComponent {
 				label: this._translocoService.translate("OFFERS.DELETE"),
 				icon: "delete-red",
 				onClick: (offer: any) => {
-          this.mixpanelService.track('User deleted an Unclaimed Cargo offer', {
+          this.mixpanelService.track('Unclaimed cargo deleted', {
             'Product Sector': offer.category,
             'Destination': offer.currentLocation
           });

@@ -191,7 +191,10 @@ export class ClientComponent implements OnInit {
       } else if (event instanceof NavigationEnd && !event.urlAfterRedirects.startsWith('/auth' || '/email-verify')) {
         const duration = Date.now() - this.startTime;
         const route = event.urlAfterRedirects;
-        this.mixpanelService.track(location.host + route, {'Time Spend': moment().startOf('day').seconds(duration / 10).format('HH:mm:ss')})
+        this.mixpanelService.track('Page View', {
+          'Time Spend': moment().startOf('day').seconds(duration / 10).format('HH:mm:ss'),
+          'URL': location.host + route
+        })
       }
     });
   }
