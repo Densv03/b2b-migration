@@ -15,7 +15,7 @@
 			</div>
 			<b2b-ngx-checkbox
 				*ngIf="category.visible"
-				(change)="selectCategory($event, category.value)"
+				(checkboxChange)="selectCategory($event, category.value)"
 				[checked]="category.checked"></b2b-ngx-checkbox>
 		</div>
 	</li>

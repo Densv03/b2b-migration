@@ -81,38 +81,67 @@
 
 <div class="main-content">
 	<div class="filters">
-    <ng-container *ngFor="let filter of filters; let filterIndex = index">
+    <ng-container *ngFor="let filter of filtersArr$ | async as filtersArr; let filterIndex = index">
       <b2b-filters-dropdown
-        (changeOption)="chooseFilter(null, filterIndex)"
+        (changeOption)="chooseFilter(null, filterIndex, filter.hiddenLabel)"
         [menuIsOpen]="filter.isOpen"
-        [selectedOption]="filters[filterIndex].selectedOption.getValue()"
-        [title]="filters[filterIndex].name">
-        <div *ngIf="!filter.isMultiSelect; else multiSelectFilter" class="options">
-          <div
-            *ngFor="let option of filters[filterIndex].options$ | async; let idx = index"
-            (click)="chooseFilter(option, filterIndex)"
-            class="item">
-            <input
-              [checked]="isOptionSelected(option, filterIndex)"
-              type="radio"
-              [id]="idx"
-              name="radio-group">
-            <label [for]="idx" class="label">
-              {{option.name}}
-              <ng-container *ngIf="option.count">
-                ({{option.count}})
-              </ng-container>
-            </label>
+        [openIsRestricted]="restrictOpen(filter, filtersArr)"
+        [selectedOption]="filter.selectedOption.getValue()"
+        [title]="filter.name">
+        <ng-container *ngIf="!filter.isMultiSelect; else multiSelectFilter">
+          <div *ngIf="!filter.selectedOption.getValue(); else selectedOption" class="options">
+            <div
+              *ngFor="let option of filter.options; let idx = index"
+              (click)="chooseFilter(option, filterIndex, filter.hiddenLabel)"
+              class="item">
+              <div class="circle">
+                <div
+                  class="inner-circle"
+                  [class.selected]="isOptionSelected(option, filterIndex, filtersArr)"></div>
+              </div>
+
+              <div *ngIf="filter.hiddenLabel !== 'country'; else countryLabel" class="label">
+                {{option.name}}
+                <ng-container *ngIf="option.count">
+                  ({{option.count}})
+                </ng-container>
+              </div>
+              <ng-template #countryLabel>
+                <label>
+                  <img b2bNgxIcon group="flags/" [name]="option.name | uppercase">
+                  {{getCountryName(option.name)}}
+                  ({{option.count}})
+                </label>
+              </ng-template>
+            </div>
           </div>
-        </div>
+        </ng-container>
+        <ng-template #multiSelectFilter>
+          <div class="options multi-options">
+            <div *ngFor="let item of filter.options" class="item">
+              <b2b-ngx-checkbox
+                [checked]="item?.checked"
+                (checkboxChange)="chooseFilter(item, filterIndex, filter.hiddenLabel, $event.target)">
+                <div class="label">{{item.name}} ({{item.count}})</div>
+              </b2b-ngx-checkbox>
+
+            </div>
+          </div>
+        </ng-template>
         <ng-template #selectedOption>
           <div class="item">
-            <input
-              [checked]="true"
-              type="radio"
-              id="selected"
-              name="radio-group">
-            <label for="selected" class="label">{{filters[filterIndex].selectedOption.getValue().name}}</label>
+            <div class="circle">
+              <div class="inner-circle selected"></div>
+            </div>
+            <ng-container *ngIf="filtersArr[filterIndex].name !== 'Country'; else selectedCountryFilter">
+              <div class="label">{{filtersArr[filterIndex].selectedOption.getValue()[0].name}}</div>
+              ({{filtersArr[filterIndex].selectedOption.getValue()[0].count}})
+            </ng-container>
+            <ng-template #selectedCountryFilter>
+              <img b2bNgxIcon group="flags/" [name]="filtersArr[filterIndex].selectedOption.getValue()[0].name | uppercase">
+              {{getCountryName(filtersArr[filterIndex].selectedOption.getValue()[0].name)}}
+              ({{filtersArr[filterIndex].selectedOption.getValue()[0].count}})
+            </ng-template>
           </div>
         </ng-template>
       </b2b-filters-dropdown>

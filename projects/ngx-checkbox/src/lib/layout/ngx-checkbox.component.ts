@@ -40,7 +40,7 @@ export class B2bNgxCheckboxComponent implements ControlValueAccessor, OnInit, On
 	@Input() public customClass: string = ''
 	@Input() public errors: ValidationErrors | null = {};
 
-	@Output() change: EventEmitter<Event> = new EventEmitter<Event>();
+	@Output() checkboxChange: EventEmitter<Event> = new EventEmitter<Event>();
 
 	public readonly type: string;
 	public readonly formControl: FormControl<string | null>;
@@ -110,6 +110,6 @@ export class B2bNgxCheckboxComponent implements ControlValueAccessor, OnInit, On
 	}
 
 	public onCheckboxChange(e: Event): void {
-		this.change.emit(e);
+		this.checkboxChange.emit(e);
 	}
 }

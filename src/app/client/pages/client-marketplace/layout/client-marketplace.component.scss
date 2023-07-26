@@ -1,5 +1,37 @@
 @import "projects/shared/src/styles";
 
+label {
+  display: flex;
+  gap: 5px;
+  img {
+    width: 23px;
+  }
+}
+.multi-options {
+  .item {
+    margin-top: 10px !important;
+  }
+}
+.circle {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 1px solid #828282;
+  position: relative;
+  .inner-circle {
+    width: 11px;
+    height: 12px;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    &.selected {
+      background: #828282;
+    }
+  }
+}
+
 .latest-offers-header {
 	display: flex;
 	align-items: center;
@@ -216,6 +248,12 @@
 			padding-left: 0;
 		}
 	}
+
+  .ngx-checkbox__label {
+    .label {
+      width: 100% !important;
+    }
+  }
 }
 
 // Styles for filters popup

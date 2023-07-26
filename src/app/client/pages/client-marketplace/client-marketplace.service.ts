@@ -17,6 +17,7 @@ export class ClientMarketplaceService {
 
 	public shippingMethods: string[] = ["EXW", "FCA", "FAS", "FOB", "CFR/CIF", "DPU", "DAP", "DDP"];
 	public paymentMethods: string[] = ["T/T", "L/C", "CAD", "Other"];
+  public marketFilters$: BehaviorSubject<any> = new BehaviorSubject<any>([]);
 
 	private marketplaceProductsSource: BehaviorSubject<MarketProductModel[]> = new BehaviorSubject<MarketProductModel[]>([]);
 	private marketplaceProductsLengthSource: BehaviorSubject<number> = new BehaviorSubject<number>(0);
@@ -109,11 +110,12 @@ export class ClientMarketplaceService {
 				filter((data) => !!data),
 				first()
 			)
-			.subscribe((data: any) => {
+			.subscribe(({filters, result: {products, totalCount}}) => {
 				this.completeLoading();
         // TODO: remove this condition before deploy
-				this.marketplaceProductsLengthSource.next(environment.apiUrl.includes('api-dev') ? data.result.totalCount : data.totalCount);
-				this.marketplaceProductsSource.next(environment.apiUrl.includes('api-dev') ? data.result.products : data.products);
+				this.marketplaceProductsLengthSource.next(environment.apiUrl.includes('api-dev') ? totalCount : totalCount);
+				this.marketplaceProductsSource.next(environment.apiUrl.includes('api-dev') ? products : products);
+        this.processFilters(filters);
 			});
 	}
 
@@ -304,4 +306,53 @@ export class ClientMarketplaceService {
 			params: {offset: queryObj.offset, limit: queryObj.limit, ...otherParams},
 		});
 	}
+
+
+
+  private processFilters(filters: any): any {
+    if (filters.rootCategories) {
+      filters.rootCategories = {
+        name: 'Sectors',
+        hiddenLabel: 'categories[]',
+        isOpen: true,
+        selectedOption:
+          filters.rootCategories.length === 1 ?
+            new BehaviorSubject(filters.rootCategories) : new BehaviorSubject<any>(null),
+        options: filters.rootCategories
+      }
+    }
+    if (filters.categories) {
+      filters.categories = {
+        name: 'Categories',
+        hiddenLabel: 'categories[]',
+        isOpen: filters.rootCategories.options.length === 1,
+        isMultiSelect: true,
+        selectedOption: new BehaviorSubject<any>(null),
+        options: filters.categories
+      }
+    }
+    if (filters.suppliersType) {
+      filters.suppliersType = {
+        name: 'Company type',
+        hiddenLabel: 'type',
+        isOpen: true,
+        selectedOption:
+          filters.suppliersType.length === 1 ?
+            new BehaviorSubject(filters.suppliersType) : new BehaviorSubject<any>(null),
+        options: filters.suppliersType
+      }
+    }
+    if (filters.country) {
+      filters.country = {
+        name: 'Country',
+        hiddenLabel: 'country',
+        isOpen: true,
+        selectedOption:
+          filters.country.length === 1 ?
+            new BehaviorSubject(filters.country) : new BehaviorSubject<any>(null),
+        options: filters.country
+      }
+    }
+    this.marketFilters$.next([filters.rootCategories, filters.categories, filters.suppliersType, filters.country])
+  }
 }

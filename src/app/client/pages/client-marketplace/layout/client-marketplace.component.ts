@@ -25,6 +25,7 @@ import {SlideInOutAnimation} from "../shared/animations/slide-in-out.animation";
 import {UntilDestroy, untilDestroyed} from "@ngneat/until-destroy";
 import {SortType} from "../../../../core/models/sort-type.model";
 import {User} from "../../../../core/models/user/user.model";
+import { getName } from "country-list";
 
 function generateQueryString(obj: any, initialValue: string = "?") {
 	const filteredState = obj;
@@ -53,6 +54,7 @@ export class ClientMarketplaceComponent implements OnInit, AfterViewInit, OnDest
 	public queryParams: any = this.route.snapshot.queryParams;
 
 	public marketplaceProducts$: Observable<any> = this.clientMarketplaceService.marketplaceProducts$;
+  public filtersArr$: Observable<any> = this.clientMarketplaceService.marketFilters$.asObservable();
 	public totalMarketplaceProductsLength$: Observable<number> = this.clientMarketplaceService.marketplaceProductsLength$;
 	// public loadMorePaginatorIsVisible$: Observable<boolean> = this.clientMarketplaceService.marketplaceProductsPaginatorIsVisible$;
 	public offersListTheme: "list" | "grid" = "grid";
@@ -87,6 +89,10 @@ export class ClientMarketplaceComponent implements OnInit, AfterViewInit, OnDest
 	private filteredQueryObj: PaginationParamsModel = {limit: this.PRODUCTS_LIMIT, offset: 0};
 
 	private listingState: { [key: string]: any };
+  private state: BehaviorSubject<any> = new BehaviorSubject<any>({
+    "categories[]": [],
+    "type": null
+  });
 	private animationStateSource: BehaviorSubject<"in" | "out"> = new BehaviorSubject<"in" | "out">("out");
 	private mobileFiltersPlaceholderSource: BehaviorSubject<string> = new BehaviorSubject<string>("All");
 	private currentPageSource: BehaviorSubject<number> = new BehaviorSubject<number>(1);
@@ -139,11 +145,22 @@ export class ClientMarketplaceComponent implements OnInit, AfterViewInit, OnDest
 
 	public ngOnInit(): void {
 		this.initQueryParams();
-		this.initFilters(this.desktopFilters);
-		this.initFilters(this.mobileFilters);
+		// this.initFilters(this.desktopFilters);
+		// this.initFilters(this.mobileFilters);
 		this.initPagination();
 		this.getProductsOnRouteChange();
+    this.state.pipe(skip(1)).subscribe(data => {
+      this.clientMarketplaceService.updateMarketplaceProducts(generateQueryString(this.state.getValue()),
+        (this.listingState['page'] - 1) * this.PRODUCTS_LIMIT );
+    })
 	}
+
+  public getCountryName(countryCode: string): string {
+    if (!countryCode) {
+      return "";
+    }
+    return getName(countryCode);
+  }
 
 	public ngAfterViewInit(): void {
 		if (this.backdrop) {
@@ -184,7 +201,7 @@ export class ClientMarketplaceComponent implements OnInit, AfterViewInit, OnDest
 				...this.listingState,
 				relevance: type === "Relevance",
 			};
-			this.clientMarketplaceService.updateMarketplaceProducts(generateQueryString(this.listingState));
+      this.clientMarketplaceService.updateMarketplaceProducts(generateQueryString(this.state.getValue()));
 		}
 	}
 
@@ -196,7 +213,7 @@ export class ClientMarketplaceComponent implements OnInit, AfterViewInit, OnDest
 		this.listingState['page'] = page;
 
 		this.clientMarketplaceService.updateMarketplaceProducts(
-			generateQueryString(this.listingState),
+			generateQueryString(this.state.getValue()),
 			(page - 1) * this.clientMarketplaceService.PRODUCTS_LIMIT
 		);
 		this.router.navigate([], {
@@ -261,7 +278,7 @@ export class ClientMarketplaceComponent implements OnInit, AfterViewInit, OnDest
 			takeUntil(this.componentIsDestroyed),
 			tap((res) => (this.listingState['q'] = res)),
 			switchMap(() => {
-				return this.clientMarketplaceService.getMarketplaceProducts(generateQueryString(this.listingState));
+        return this.clientMarketplaceService.getMarketplaceProducts(generateQueryString(this.state.getValue()));
 			})
 		)
 			.subscribe((res) => {
@@ -384,12 +401,38 @@ export class ClientMarketplaceComponent implements OnInit, AfterViewInit, OnDest
 		this.componentIsDestroyed.next();
 	}
 
-  chooseFilter(option: any, filterIndex: number) {
-    this.filters[filterIndex].selectedOption.next(option);
+  chooseFilter(option: any, filterIndex: number, hiddenLabel: string, filterAdded?: any) {
+    if (filterAdded) {
+      filterAdded = filterAdded['checked'];
+    }
+    const state = this.state.getValue();
+    if (!option) {
+      state[hiddenLabel] = [];
+      this.state.next(state);
+      return;
+    }
+
+    if (hiddenLabel === 'type' || hiddenLabel === 'country') {
+      state[hiddenLabel] = option.name;
+    } else {
+      if (filterAdded === false) {
+        state[hiddenLabel] = state[hiddenLabel].filter((val: any) => val !== option.id);
+      } else {
+        state[hiddenLabel].push(option.id);
+      }
+    }
+    this.state.next(state);
+
   }
-  isOptionSelected(option: any, filterIndex: number) {
-    if (this.filters[filterIndex].selectedOption.getValue()) {
-      return option.name === this.filters[filterIndex].selectedOption.getValue().name;
+  isOptionSelected(option: any, filterIndex: number, filtersArr: any[]) {
+    if (!filtersArr[filterIndex].selectedOption.getValue()) return false;
+    return option.name === filtersArr[filterIndex].selectedOption.getValue().name;
+  }
+
+  restrictOpen(option: any, filtersArr: any[]) {
+    const rootCategoriesIndex = filtersArr.findIndex((item) => item.name === 'Sectors');
+    if(option.name === 'Categories' && !filtersArr[rootCategoriesIndex].selectedOption.getValue()) {
+      return true;
     } return false;
   }
 }

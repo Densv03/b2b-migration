@@ -32,6 +32,7 @@ export class FiltersDropdownComponent implements OnInit {
   @Input() menuIsOpen: boolean;
   @Input() selectedOption: any;
   @Input() options!: any[];
+  @Input() openIsRestricted: boolean;
   @Output() changeOption: EventEmitter<void> = new EventEmitter<void>();
   constructor(private cdr: ChangeDetectorRef) { }
   ngOnInit(): void {
@@ -42,6 +43,7 @@ export class FiltersDropdownComponent implements OnInit {
     this.menuIsOpen = true;
   }
   openDropdown() {
+    if (this.openIsRestricted) return;
     if (!this.selectedOption) {
       this.menuIsOpen = !this.menuIsOpen;
     }

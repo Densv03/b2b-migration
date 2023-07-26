@@ -184,7 +184,7 @@
 
 			<div class="values d-flex flex-wrap justify-content-between">
 				<b2b-ngx-checkbox
-					(change)="selectedCategories($event, category.value)"
+					(checkboxChange)="selectedCategories($event, category.value)"
 					*ngFor="let category of categories"
 					[checked]="$any(category).checked"
 					[customClass]="'subscription-checkbox'">

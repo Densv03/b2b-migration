@@ -2,7 +2,7 @@
   <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle matTreeNodePadding>
     <button mat-icon-button disabled></button>
     <b2b-ngx-checkbox [checked]="checklistSelection.isSelected(node)"
-                      (change)="categoryLeafItemSelectionToggle(node, $event)">
+                      (checkboxChange)="categoryLeafItemSelectionToggle(node, $event)">
       {{node.item}}
     </b2b-ngx-checkbox>
   </mat-tree-node>
@@ -15,7 +15,7 @@
       </mat-icon>
     </button>
     <b2b-ngx-checkbox [checked]="descendantsAllSelected(node)"
-                      (change)="categoryItemSelectionToggle(node, $event)">{{node.item}}</b2b-ngx-checkbox>
+                      (checkboxChange)="categoryItemSelectionToggle(node, $event)">{{node.item}}</b2b-ngx-checkbox>
   </mat-tree-node>
 </mat-tree>
 
