@@ -26,6 +26,7 @@ import { B2bNgxLinkService } from "@b2b/ngx-link";
 import { TranslocoService } from "@ngneat/transloco";
 import {MixpanelService} from "../../../../core/services/mixpanel/mixpanel.service";
 import mixpanel from "mixpanel-browser";
+import {CategoriesService} from "../../../services/categories/categories.service";
 
 @UntilDestroy()
 @Component({
@@ -74,7 +75,8 @@ export class ClientChatComponent implements OnInit, OnDestroy {
 		public changeDetectorRef: ChangeDetectorRef,
 		public readonly b2bNgxLinkService: B2bNgxLinkService,
 		private readonly _translocoService: TranslocoService,
-    private readonly mixpanelService: MixpanelService
+    private readonly mixpanelService: MixpanelService,
+    private readonly categoriesService: CategoriesService
 	) {
 		this.b2bNgxButtonThemeEnum = B2bNgxButtonThemeEnum;
 		this.formGroup = this._formBuilder.group({
@@ -141,7 +143,7 @@ export class ClientChatComponent implements OnInit, OnDestroy {
 				this._messagesHistory$.pipe(
 					tap(() => {
 						setTimeout(() => {
-							this.chatContainer.nativeElement.scrollTop = this.chatContainer.nativeElement.scrollHeight;
+							this.chatContainer.nativeElement.scrollTop = this.chatContainer.nativeElement?.scrollHeight;
 						}, 0);
 					}),
 					map((messages) =>
@@ -274,8 +276,9 @@ export class ClientChatComponent implements OnInit, OnDestroy {
 				});
 
         this.getMessages()
+        combineLatest([this.categoriesService.getCategoryNameById(chat.offer.category),  this.getMessages()])
           .pipe(take(1))
-          .subscribe((messages) => {
+          .subscribe(([categoryName, messages]) => {
             const filteredMessages = messages.filter((message: any) => message.author !== user._id);
             if (filteredMessages.length === 1) {
               const currentDate = new Date();
@@ -285,7 +288,7 @@ export class ClientChatComponent implements OnInit, OnDestroy {
               const trackLabel = role === 'seller' ? 'New Request received'
                 : 'Request Response';
               this.mixpanelService.track(trackLabel, {
-                'Product category': chat.offer.category,
+                'Product category': categoryName,
                 'First Request received': received,
                 'Supplier\'s country ': chat.seller.country,
                 'Subject': 'UC',

@@ -140,7 +140,7 @@ public get emailError() {
 				.subscribe(async (val) => {
           const mixpanel = {
             'User_id': val._id,
-            ' Account type': val.role.name,
+            ' Account type': val.rootRole?.displayName,
             'Company Name': val.company
           };
           this.mixpanelService.logIn(mixpanel, 'Login completed');

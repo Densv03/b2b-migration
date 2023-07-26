@@ -63,7 +63,7 @@ export class AuthRegisterComponent implements OnInit {
 	public secondStep(stepper: MatStepper, event: "buyer" | "supplier"): void {
 		stepper.next();
 		this.selectedUserType = event;
-    this.mixpanelService.track('Sign-Up 2nd step completed', {'User Property': event});
+    this.mixpanelService.track('Sign-Up 2nd step completed', {'Account Property': event});
 	}
 
 	public thirdStep(event: any): void {

@@ -63,6 +63,7 @@ export class ClientProfileMarketplaceEditProductComponent implements OnInit {
 	public readonly paymentMethods = this.getArrayForSelect(this.clientMarketplaceService.paymentMethods);
 	private hideLabelSource: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 	private productId: string = this.activatedRoute.snapshot.params["id"];
+  private categoryName: string;
 
 	constructor(
 		private unitsService: UnitsService,
@@ -103,6 +104,10 @@ export class ClientProfileMarketplaceEditProductComponent implements OnInit {
 		this.router.navigate(["profile/your-workspace/b2bmarket"]);
 	}
 
+  public selectCategoryName(name: string): void {
+    this.categoryName = name;
+  }
+
 	public delete(): void {}
 
 	public archive(): void {
@@ -117,7 +122,7 @@ export class ClientProfileMarketplaceEditProductComponent implements OnInit {
 			)
 			.subscribe(() => {
         this.mixpanelService.track('Product archived', {
-          'Product Category': this.formGroup.value.category,
+          'Product Category': this.categoryName,
           'Supplier\'s Country': this.formGroup.value.country,
           'Product Count': this.formGroup.value.amount,
           'Posting Date': Date()
@@ -140,7 +145,7 @@ export class ClientProfileMarketplaceEditProductComponent implements OnInit {
 			this.tradebidService.updateCompanyInfo({companyDescription: this.formGroup.value.companyDescription}).subscribe()
 		}
     this.mixpanelService.track('Product edited', {
-      'Product Category': this.formGroup.value.category,
+      'Product Category': this.categoryName,
       'Supplier\'s Country': this.formGroup.value.country,
       'Product Count': this.formGroup.value.amount,
       'Posting Date': Date()

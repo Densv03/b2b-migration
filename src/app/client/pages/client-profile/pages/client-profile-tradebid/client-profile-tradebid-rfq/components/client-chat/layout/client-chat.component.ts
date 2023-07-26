@@ -28,6 +28,7 @@ import * as countryList from 'country-list';
 import { TradebidService } from "../../../../../../../client-tradebid/tradebid.service";
 import mixpanel from "mixpanel-browser";
 import {MixpanelService} from "../../../../../../../../../core/services/mixpanel/mixpanel.service";
+import {CategoriesService} from "../../../../../../../../services/categories/categories.service";
 
 @UntilDestroy()
 @Component({
@@ -80,7 +81,8 @@ export class ClientChatComponent implements OnInit, OnDestroy {
 		public readonly b2bNgxLinkService: B2bNgxLinkService,
 		private readonly _translocoService: TranslocoService,
 		private readonly tradebidService: TradebidService,
-    private readonly mixpanelService: MixpanelService
+    private readonly mixpanelService: MixpanelService,
+    private readonly categoriesService: CategoriesService
 	) {
 		this.b2bNgxButtonThemeEnum = B2bNgxButtonThemeEnum;
 		this.formGroup = this._formBuilder.group({
@@ -160,6 +162,32 @@ export class ClientChatComponent implements OnInit, OnDestroy {
 							const displayInfo =
 								dispayInfoOf === this._translocoService.translate("CHAT.SELLER") ? chat.offer?.contact : chat.buyer;
 							const author = displayInfo?.fullName || displayInfo?.personName || chat.seller.fullName;
+
+              this.categoriesService.getCategoryNameById(this.rfqInfo.rfq.category)
+                .pipe(
+                  take(1),
+                  untilDestroyed(this)
+                ).subscribe((categoryName) => {
+                const filteredMessages = messages.filter((message: any) => message.author !== user._id);
+                if (filteredMessages.length === 1) {
+                  const currentDate = new Date();
+                  const dateSent = new Date(chat.createdAt);
+                  const day = Math.floor((Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()) - Date.UTC(dateSent.getFullYear(), dateSent.getMonth(), dateSent.getDate())) / (1000 * 60 * 60 * 24));
+                  const received = day < 0 ? '1st Day' : `${day}st Day`;
+                  const trackLabel = chat.seller?._id === message?.author ? 'New Request received'
+                    : 'Request Response'
+                  this.mixpanelService.track(trackLabel, {
+                    'Product category': categoryName,
+                    'First Request received': received,
+                    'Supplier\'s country ': chat.seller.country,
+                    'Subject': 'RFQ',
+                    'Buyer\'s country': chat.buyer.country
+                  })
+                  mixpanel.people.set({'Average Response Time': Date()})
+                }
+              });
+
+
 							return {
 								...message,
 								contact: {
@@ -271,27 +299,6 @@ export class ClientChatComponent implements OnInit, OnDestroy {
 					rfqId: chat.rfq,
 					typeRoom: "rfq",
 				});
-        this.getMessages()
-          .pipe(take(1))
-          .subscribe((messages) => {
-            const filteredMessages = messages.filter((message: any) => message.author !== user._id);
-            if (filteredMessages.length === 1) {
-              const currentDate = new Date();
-              const dateSent = new Date(chat.createdAt);
-              const day = Math.floor((Date.UTC(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate()) - Date.UTC(dateSent.getFullYear(), dateSent.getMonth(), dateSent.getDate()) ) /(1000 * 60 * 60 * 24));
-              const received = day < 0 ? '1st Day' : `${day}st Day`;
-              const trackLabel = role === 'seller' ? 'New Request received'
-                : 'Request Response';
-              this.mixpanelService.track(trackLabel, {
-                'Product category': chat.rfq,
-                'First Request received': received,
-                'Supplier\'s country ': chat.seller.country,
-                'Subject': 'RFQ',
-                'Buyer\'s country': chat.buyer.country
-              })
-              mixpanel.people.set({'Average Response Time': Date()})
-            }
-          })
 			});
 	}
 

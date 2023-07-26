@@ -38,6 +38,7 @@
 				<div class="control-wrapper">
 					<b2b-categories-dialog
 						formControlName="category"
+            (categoryName)="selectCategoryName($event)"
 						[touched]="formState['category'].touched"
 						[theme]="b2bNgxSelectThemeEnum.BACKGROUND_GRAY"
 						[required]="true"

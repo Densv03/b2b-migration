@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, forwardRef, Input, OnInit} from "@angular/core";
+import {ChangeDetectionStrategy, Component, EventEmitter, forwardRef, Input, OnInit, Output} from "@angular/core";
 import {MatDialog} from "@angular/material/dialog";
 import {CategoriesPopupComponent} from "../categories-popup-component/categories-popup.component";
 import {ControlValueAccessor, NG_VALUE_ACCESSOR, ValidationErrors} from "@angular/forms";
@@ -21,7 +21,7 @@ import {B2bNgxSelectThemeEnum} from "@b2b/ngx-select";
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CategoriesDialogComponent implements ControlValueAccessor {
-
+  @Output() categoryName = new EventEmitter<string>();
 	@Input() required?: boolean;
 	@Input() multiple?: boolean;
 	@Input() theme: B2bNgxSelectThemeEnum = B2bNgxSelectThemeEnum.BACKGROUND_TRANSPARENT;
@@ -97,10 +97,12 @@ export class CategoriesDialogComponent implements ControlValueAccessor {
 		if (typeof value === 'string') {
 			this.categoriesService.getCategoryNameById(value).pipe(filter(data => !!data), first()).subscribe(categoryName => {
 				this.categoriesPlaceholderSource.next(categoryName);
+        this.categoryName.emit(categoryName);
 			})
 		} else if (Array.isArray(value)) {
 			this.categoriesService.getCategoryNameById(value[0]).pipe(filter(data => !!data), first()).subscribe(categoryName => {
 				this.categoriesPlaceholderSource.next(categoryName);
+        this.categoryName.emit(categoryName);
 			})
 		}
 	}

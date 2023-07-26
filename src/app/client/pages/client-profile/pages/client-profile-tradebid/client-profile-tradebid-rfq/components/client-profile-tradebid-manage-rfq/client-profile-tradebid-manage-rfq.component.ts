@@ -3,6 +3,8 @@ import { RfqButtonTypeEnum } from "../../shared/enums/RfqButtonType.enum";
 import { ClientProfileTradebidService } from "../../../client-profile-tradebid.service";
 import { Observable } from "rxjs";
 import {MixpanelService} from "../../../../../../../../core/services/mixpanel/mixpanel.service";
+import {CategoriesService} from "../../../../../../../services/categories/categories.service";
+import {take} from "rxjs/operators";
 
 @Component({
 	selector: "b2b-client-profile-tradebid-manage-rfq",
@@ -17,7 +19,8 @@ export class ClientProfileTradebidManageRfqComponent implements OnInit {
 	@Output() archivate: EventEmitter<string | number> = new EventEmitter<string | number>();
 
 	constructor(private clientTradeBidService: ClientProfileTradebidService,
-              private readonly mixpanelService: MixpanelService) {}
+              private readonly mixpanelService: MixpanelService,
+              private readonly categoriesService: CategoriesService) {}
 
 	public ngOnInit(): void {}
 
@@ -29,8 +32,15 @@ export class ClientProfileTradebidManageRfqComponent implements OnInit {
 		this.archivate.emit(item._id);
 
     this.mixpanelService.track('RFQ archived', {
-      'Product Sector': item.category,
+      'Product Sector': this.getCategoryName(item.category),
       'Destination': item.destination.to
     });
 	}
+  private getCategoryName(id: string): string {
+    let categoryName: string
+    this.categoriesService.getCategoryNameById(id)
+      .pipe(take(1))
+      .subscribe(name => categoryName = name)
+    return categoryName;
+  }
 }
