@@ -49,6 +49,7 @@ import {PaginationModule} from "../../shared/components/pagination/pagination.mo
 import {CategoriesDialogModule} from "@b2b/categories-modal";
 import {NgxTippyModule} from "ngx-tippy-wrapper";
 import { B2bBreadcrumpsModule } from "@b2b/breadcrumps";
+import {FiltersDropdownModule} from "./components/filters-dropdown/filters-dropdown.module";
 
 @NgModule({
 	declarations: [
@@ -96,7 +97,8 @@ import { B2bBreadcrumpsModule } from "@b2b/breadcrumps";
         B2bNgxPaginationModule,
         PaginationModule,
         NgxTippyModule,
-        B2bBreadcrumpsModule
+        B2bBreadcrumpsModule,
+        FiltersDropdownModule
     ],
 	providers: [
 		Meta

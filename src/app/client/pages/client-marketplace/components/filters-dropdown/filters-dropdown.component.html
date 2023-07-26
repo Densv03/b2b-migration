@@ -1,0 +1,16 @@
+<div
+  [@dropdownAnimation]="
+  {value: menuIsOpen && !selectedOption ? 'open' : 'closed',
+  params: {maxHeight, minHeight: selectedOption ? '95px' : '54px'}}"
+  [class.closed]="dropdownIsClosed()"
+  class="dropdown">
+  <div (click)="openDropdown()" class="dropdown__header">
+    <div class="dropdown__header-title">{{title}}</div>
+    <div *ngIf="selectedOption"
+         (click)="resetSelected($event)"
+         class="dropdown__header-subtitle">Change</div>
+  </div>
+  <div *ngIf="menuIsOpen || selectedOption" class="content">
+    <ng-content></ng-content>
+  </div>
+</div>

@@ -81,13 +81,49 @@
 
 <div class="main-content">
 	<div class="filters">
-		<form [formGroup]="desktopFilters">
-			<b2b-client-marketplace-filters
-			[filterValues]="filterValue"
-				formControlName="filters"
-				class="marketplace-filters-component"
-				></b2b-client-marketplace-filters>
-		</form>
+    <ng-container *ngFor="let filter of filters; let filterIndex = index">
+      <b2b-filters-dropdown
+        (changeOption)="chooseFilter(null, filterIndex)"
+        [menuIsOpen]="filter.initialOpenState"
+        [selectedOption]="filters[filterIndex].selectedOption.getValue()"
+        [title]="filters[filterIndex].name">
+        <div *ngIf="!filters[filterIndex].selectedOption.getValue(); else selectedOption" class="options">
+          <div
+            *ngFor="let option of filters[filterIndex].options$ | async; let idx = index"
+            (click)="chooseFilter(option, filterIndex)"
+            class="item">
+            <input
+              [checked]="isOptionSelected(option, filterIndex)"
+              type="radio"
+              [id]="idx"
+              name="radio-group">
+            <label [for]="idx" class="label">
+              {{option.name}}
+              <ng-container *ngIf="option.count">
+                ({{option.count}})
+              </ng-container>
+            </label>
+          </div>
+        </div>
+        <ng-template #selectedOption>
+          <div class="item">
+            <input
+              [checked]="true"
+              type="radio"
+              id="selected"
+              name="radio-group">
+            <label for="selected" class="label">{{filters[filterIndex].selectedOption.getValue().name}}</label>
+          </div>
+        </ng-template>
+      </b2b-filters-dropdown>
+    </ng-container>
+<!--		<form [formGroup]="desktopFilters">-->
+<!--			<b2b-client-marketplace-filters-->
+<!--			[filterValues]="filterValue"-->
+<!--				formControlName="filters"-->
+<!--				class="marketplace-filters-component"-->
+<!--				></b2b-client-marketplace-filters>-->
+<!--		</form>-->
 	</div>
 	<div class="listing">
 		<b2b-client-marketplace-listing-grid

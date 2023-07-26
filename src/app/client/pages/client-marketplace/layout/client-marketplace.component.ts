@@ -16,7 +16,7 @@ import {B2bNgxLinkThemeEnum} from "@b2b/ngx-link";
 import {FormControl, FormGroup} from "@angular/forms";
 import {AuthService} from "../../../../auth/services/auth/auth.service";
 import {ActivatedRoute, Router} from "@angular/router";
-import {BehaviorSubject, Observable, Subject, tap} from "rxjs";
+import {BehaviorSubject, Observable, of, Subject, tap} from "rxjs";
 import {PaginationParamsModel} from "../../../../core/models/pagination-params.model";
 import {map, skip, switchMap, takeUntil, filter, first} from "rxjs/operators";
 import {CategoriesService} from "../../../services/categories/categories.service";
@@ -91,6 +91,28 @@ export class ClientMarketplaceComponent implements OnInit, AfterViewInit, OnDest
 	private mobileFiltersPlaceholderSource: BehaviorSubject<string> = new BehaviorSubject<string>("All");
 	private currentPageSource: BehaviorSubject<number> = new BehaviorSubject<number>(1);
 	private categoryFilterName: BehaviorSubject<string> = new BehaviorSubject<string>(null);
+
+  public sectors: Observable<any>;
+  public filters = [
+    {
+      name: 'Sectors',
+      initialOpenState: true,
+      selectedOption: new BehaviorSubject(null),
+      options$: this.categoriesService.getCategories()
+        .pipe(filter(data => !!data.totalCount), map( data => data.categories))
+    },
+    {
+      name: 'Company type',
+      initialOpenState: false,
+      selectedOption: new BehaviorSubject(null),
+      options$: of([
+        {name: 'Manufacturer', count: 45},
+        {name: 'Wholesaler', count: 21},
+        {name: 'Distributor', count: 34},
+        {name: 'Agent', count: 49},
+      ])
+    }
+  ]
 
 	constructor(
 		private clientMarketplaceService: ClientMarketplaceService,
@@ -361,4 +383,13 @@ export class ClientMarketplaceComponent implements OnInit, AfterViewInit, OnDest
 	ngOnDestroy(): void {
 		this.componentIsDestroyed.next();
 	}
+
+  chooseFilter(option: any, filterIndex: number) {
+    this.filters[filterIndex].selectedOption.next(option);
+  }
+  isOptionSelected(option: any, filterIndex: number) {
+    if (this.filters[filterIndex].selectedOption.getValue()) {
+      return option.name === this.filters[filterIndex].selectedOption.getValue().name;
+    } return false;
+  }
 }

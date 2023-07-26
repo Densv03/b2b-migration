@@ -1,0 +1,38 @@
+:host {
+  .dropdown {
+    width: 100%;
+    flex-shrink: 0;
+    border-radius: 8px;
+    background: #FFF;
+    padding: 18px 18px 12px 18px;
+    overflow: hidden;
+    box-shadow: 4px 4px 8px 0px #E5F2FD, -4px -4px 8px 0px #E5F2FD;
+    &.closed {
+      background: rgba(243, 246, 248, 1);
+      .dropdown__header-title {
+        color: #A2A6AB;
+      }
+    }
+    &__header {
+      cursor: pointer;
+      margin-bottom: 18px;
+      display: flex;
+      justify-content: space-between;
+      &-title {
+        color: #000;
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 18px;
+        letter-spacing: 0.32px;
+      }
+      &-subtitle {
+        color: #005DFF;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 18px;
+        letter-spacing: 0.28px;
+        text-decoration-line: underline;
+      }
+    }
+  }
+}
