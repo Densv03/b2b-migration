@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from "@angular/core";
+import {Component, HostListener, OnInit, ViewChild} from "@angular/core";
 import {MatStepper} from "@angular/material/stepper";
 import {BasicInfoInterface} from "./models/basic-info.interface";
 import {AuthService} from "../../services/auth/auth.service";
@@ -34,11 +34,18 @@ export class AuthRegisterComponent implements OnInit {
 	) {
 		this.updateStepperSelectedIndex();
 	}
+  @HostListener('window:beforeunload', ['$event'])
+  public unloadHandler(event: BeforeUnloadEvent): void {
+    event.preventDefault();
+    event.returnValue = '';
+  }
 
 	public ngOnInit(): void {
 		if (this.userService.getUser()) {
 			this.user = this.userService.getUser();
-		}
+		} else if (!this.userService.getUser() && !this.authService.userCredentials$.value) {
+      this.router.navigate(['auth/register-credentials'])
+    }
 	}
 
 	public back(): void {
