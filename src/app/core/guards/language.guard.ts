@@ -16,11 +16,14 @@ export class LanguageGuard implements CanActivate {
 		const urlArr = currentUrl.split('/');
 		const availableLangs = ["es", "fr", "hi", "pt", "tr", "ar"];
 		if (currentUrl.includes('/market-promo' || '/market-promotion')) {
-			if (urlArr.length > 2 && !availableLangs.includes(urlArr[urlArr.length - 1])) {
-				urlArr.pop();
-				currentUrl = urlArr.join('/');
-				this.router.navigate([currentUrl]);
-			}
+      if (urlArr.length > 2) {
+        const param = urlArr[urlArr.length - 1];
+        if (param.includes('?') && 	!availableLangs.includes(param.split('?')[0])) {
+          urlArr.pop();
+          currentUrl = urlArr.join('/');
+          this.router.navigate([currentUrl]);
+        }
+      }
 			return true;
 		} else {
 			this.translocoService.setActiveLang('en');
