@@ -18,7 +18,7 @@ import {animate, style, transition, trigger} from "@angular/animations";
 })
 export class CategoryItemComponent implements OnInit {
 	@Input() category: Category;
-	@Output() categoryItemClicked: EventEmitter<string> = new EventEmitter<string>();
+	@Output() categoryItemClicked: EventEmitter<Category> = new EventEmitter<Category>();
 
 	private childrenCategoriesSource: BehaviorSubject<Category> = new BehaviorSubject<Category>(null);
 

@@ -11,7 +11,7 @@
 
 	<div class="categories-list">
 		<div *ngFor="let category of categories$ | async" class="category-wrapper">
-			<b2b-category-item (categoryItemClicked)="goToListing($event)" [category]="category"> </b2b-category-item>
+			<b2b-category-item (categoryItemClicked)="goToListing($event, category)" [category]="category"> </b2b-category-item>
 		</div>
 	</div>
 </div>

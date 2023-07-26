@@ -188,7 +188,7 @@
       <swiper-container
         #swiperRef init="false">
         <swiper-slide *ngFor="let product of categoriesSource$ | async">
-          <b2b-category-item (categoryItemClicked)="goToListing($event)" [category]="product"></b2b-category-item>
+			<b2b-category-item (categoryItemClicked)="goToListing($event, product)" [category]="product"></b2b-category-item>
         </swiper-slide>
 
       </swiper-container>

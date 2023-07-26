@@ -18,7 +18,7 @@ import {AuthService} from "../../../../auth/services/auth/auth.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {BehaviorSubject, Observable, Subject, tap} from "rxjs";
 import {PaginationParamsModel} from "../../../../core/models/pagination-params.model";
-import {map, skip, switchMap, takeUntil} from "rxjs/operators";
+import {map, skip, switchMap, takeUntil, filter, first} from "rxjs/operators";
 import {CategoriesService} from "../../../services/categories/categories.service";
 import {InitialCategoryState} from "../shared/models/initial-category-state.model";
 import {SlideInOutAnimation} from "../shared/animations/slide-in-out.animation";
@@ -77,6 +77,8 @@ export class ClientMarketplaceComponent implements OnInit, AfterViewInit, OnDest
 	public readonly b2bNgxSelectThemeEnum: typeof B2bNgxSelectThemeEnum;
 	public readonly b2bNgxLinkThemeEnum: typeof B2bNgxLinkThemeEnum;
 
+	public filterValue: any;
+
 	public animationState: "in" | "out" = "out";
 
 	@ViewChild("backdrop", {static: true}) backdrop?: ElementRef;
@@ -88,7 +90,7 @@ export class ClientMarketplaceComponent implements OnInit, AfterViewInit, OnDest
 	private animationStateSource: BehaviorSubject<"in" | "out"> = new BehaviorSubject<"in" | "out">("out");
 	private mobileFiltersPlaceholderSource: BehaviorSubject<string> = new BehaviorSubject<string>("All");
 	private currentPageSource: BehaviorSubject<number> = new BehaviorSubject<number>(1);
-
+	private categoryFilterName: BehaviorSubject<string> = new BehaviorSubject<string>(null);
 
 	constructor(
 		private clientMarketplaceService: ClientMarketplaceService,
@@ -269,34 +271,57 @@ export class ClientMarketplaceComponent implements OnInit, AfterViewInit, OnDest
 	}
 
 	private initFilters(formGroupFilters: FormGroup): void {
-		formGroupFilters.get('filters').setValue(this.route.snapshot.queryParams)
+		this.filterValue = {...this.route.snapshot.queryParams};
+
+		if (this.route.snapshot.params?.['category']) {
+			const ids = localStorage.getItem('categoryId');
+			this.filterValue['categories[]'] = ids.includes(';') ? ids.split(';') : ids;
+		}
+		// formGroupFilters.get('filters').setValue(this.filterValue);
+		// console.log(this.filterValue);
 
 		formGroupFilters.get('filters').valueChanges
 			.subscribe(filters => {
-			this.router.navigate([], {
-				queryParams: {...filters},
-			});
-			this.currentPageSource.next(1)
+				if (filters['categories[]']) {
+					// console.log(filters['categories[]']);
 
-			this.listingState = {
-				...this.listingState,
-				...filters,
-			};
-			// FIXME: remove this if it's not needed
-			if (Object.values(filters).length) {
-				this.clientMarketplaceService.updateMarketplaceProducts(generateQueryString(this.listingState),
-					(this.listingState['page'] - 1) * this.PRODUCTS_LIMIT );
-			} else {
+					this.getCategoryName(filters['categories[]']);
+					if (!!this.categoryFilterName.getValue() && this.categoryFilterName.value !== this.route.snapshot.params?.['category']) {
+						localStorage.setItem('categoryId', (filters['categories[]'] instanceof Array ?
+							filters['categories[]'].join(';')
+							: filters['categories[]']));
+						// console.log(this.categoryFilterName.value)
+						this.router.navigate(['/b2bmarket/listing', this.categoryFilterName.value]);
+					}
+				}
+
+				if (!filters['categories[]']) {
+					console.log(filters)
+					this.router.navigate([], {
+						queryParams: {...filters},
+					});
+				}
+				this.currentPageSource.next(1)
+
 				this.listingState = {
 					...this.listingState,
-					"categories[]": null,
-					"country": null,
-					"type": null,
+					...filters,
 				};
-				// this.clientMarketplaceService.updateMarketplaceProducts(generateQueryString(this.listingState));
-			}
+				// FIXME: remove this if it's not needed
+				if (Object.values(filters).length) {
+					this.clientMarketplaceService.updateMarketplaceProducts(generateQueryString(this.listingState),
+						(this.listingState['page'] - 1) * this.PRODUCTS_LIMIT);
+				} else {
+					this.listingState = {
+						...this.listingState,
+						"categories[]": null,
+						"country": null,
+						"type": null,
+					};
+					// this.clientMarketplaceService.updateMarketplaceProducts(generateQueryString(this.listingState));
+				}
 
-		});
+			});
 		formGroupFilters.get('filters').updateValueAndValidity();
 	}
 
@@ -315,6 +340,23 @@ export class ClientMarketplaceComponent implements OnInit, AfterViewInit, OnDest
 					(this.listingState['page'] - 1) * this.PRODUCTS_LIMIT );
 			})
 	}
+
+	private getCategoryName(category: string | string[]): void {
+		if (category instanceof Array) {
+			const categories: any[] = [];
+			category.map(el => {
+				this.categoriesService.getCategoryNameById(el).pipe(filter(data => !!data), first()).subscribe(categoryName => {
+					categories.push(categoryName);
+				});
+				this.categoryFilterName.next(categories.join(';'));
+			});
+		} else {
+			this.categoriesService.getCategoryNameById(category).pipe(filter(data => !!data), first()).subscribe(categoryName => {
+				this.categoryFilterName.next(categoryName)
+			});
+		}
+	}
+
 
 	ngOnDestroy(): void {
 		this.componentIsDestroyed.next();

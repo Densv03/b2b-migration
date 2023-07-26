@@ -6,13 +6,13 @@
 		<img b2bNgxImage [name]="category.image" alt="category-photo" />
 	</div>
 	<div class="category-content">
-		<div class="category-title" (click)="categoryItemClicked.emit(category._id)">{{ category?.name }}</div>
+		<div class="category-title" (click)="categoryItemClicked.emit(category)">{{ category?.name }}</div>
 		<ul class="sub-category-list">
 			<li class="list-item">
 				<div
 					[@fadeAnimation]
 					*ngFor="let category of childrenCategory.children"
-					(click)="categoryItemClicked.emit(category._id)">
+					(click)="categoryItemClicked.emit(category)">
 					{{ category.name }} {{category.productsCount > 0 ? '(' + category.productsCount + ')' : ''}}
 				</div>
 			</li>

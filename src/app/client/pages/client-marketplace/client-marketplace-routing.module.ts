@@ -28,7 +28,10 @@ const routes: Routes = [
 				{ label: 'OFFERS', url: '/b2bmarket/listing'}
 			]
 		}
-
+	},
+	{
+		path: 'listing/:category',
+		component: ClientMarketplaceComponent,
 	},
 	{
 		path: "supplier-listing/:id",

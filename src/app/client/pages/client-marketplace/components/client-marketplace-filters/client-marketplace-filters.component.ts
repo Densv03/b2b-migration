@@ -17,6 +17,7 @@ import {B2bNgxButtonThemeEnum} from "@b2b/ngx-button";
 import {AuthService} from "../../../../../auth/services/auth/auth.service";
 import {InitialCategoryState} from "../../shared/models/initial-category-state.model";
 import {ControlValueAccessor, FormBuilder, NG_VALUE_ACCESSOR} from "@angular/forms";
+import { Router } from "@angular/router";
 
 @Component({
 	selector: "b2b-client-marketplace-filters",
@@ -32,6 +33,12 @@ import {ControlValueAccessor, FormBuilder, NG_VALUE_ACCESSOR} from "@angular/for
 	]
 })
 export class ClientMarketplaceFiltersComponent implements OnInit, OnDestroy, ControlValueAccessor {
+	@Input()
+	public set filterValues(values: any) {
+		if (Object.values(values)) {
+			this.form.patchValue({...values});
+		}
+	}
 	@Input() initialCategoryState: InitialCategoryState;
 	@Output() filterEvent: EventEmitter<any> = new EventEmitter<any>();
 
@@ -55,7 +62,8 @@ export class ClientMarketplaceFiltersComponent implements OnInit, OnDestroy, Con
 		private dialog: MatDialog,
 		private authService: AuthService,
 		private translocoService: TranslocoService,
-		private formBuilder: FormBuilder
+		private formBuilder: FormBuilder,
+		private router: Router
 	) {}
 
 
@@ -73,6 +81,7 @@ export class ClientMarketplaceFiltersComponent implements OnInit, OnDestroy, Con
 
 	public resetForm(): void {
 		this.form.reset();
+		this.router.navigate(['b2bmarket/listing']);
 	}
 
 	private getRoles(): Observable<any[]> {
