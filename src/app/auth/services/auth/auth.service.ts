@@ -96,10 +96,10 @@ export class AuthService {
 	public logOut() {
 		localStorage.removeItem("token");
     this.mixpanelService.logout();
-		// this.authStore.update({
-		// 	user: null,
-		// 	token: null,
-		// });
+		this.authStore.update({
+			user: null,
+			token: null,
+		});
 	}
 
 	public getRoles(): Observable<B2bAuthRoleInterface[]> {

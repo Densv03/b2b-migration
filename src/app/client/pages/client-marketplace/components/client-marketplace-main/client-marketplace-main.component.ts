@@ -23,6 +23,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import Swiper from 'swiper';
 import { Navigation, Pagination } from 'swiper/modules';
+import {B2bNgxSelectThemeEnum} from "@b2b/ngx-select";
 
 const breakpoints = {
   320: {
@@ -76,6 +77,7 @@ export class ClientMarketplaceMainComponent implements OnInit {
   });
   public b2bNgxInputThemeEnum = B2bNgxInputThemeEnum;
   public readonly b2bNgxButtonThemeEnum: typeof B2bNgxButtonThemeEnum;
+  public readonly b2bNgxSelectThemeEnum: typeof B2bNgxSelectThemeEnum;
 
   public categoriesSource$: Observable<Category[]> =
     this.categoryListingService.presentCategoriesSource$;
@@ -104,6 +106,7 @@ export class ClientMarketplaceMainComponent implements OnInit {
     private readonly categoryListingService: CategoryListingService
   ) {
     this.b2bNgxButtonThemeEnum = B2bNgxButtonThemeEnum;
+    this.b2bNgxSelectThemeEnum = B2bNgxSelectThemeEnum;
     this.user$ = this.usersService.getUser$();
     this.offersSkeletonOptions = this.getOffersSkeletonOptions();
     this.isAuth$ = this.authService.user$.pipe(map((user) => !!user));

@@ -141,6 +141,7 @@
 
 							<mat-tab label="Use filters">
 								<b2b-ngx-select placeholder="Category"
+                                [theme]="b2bNgxSelectThemeEnum.BACKGROUND_WHITE"
 																[options]="level1Categories$ | async"
 																class="marketplace-main-wrapper__blocks__select"
 																bindValue="_id"
@@ -148,6 +149,7 @@
 																formControlName="level1Category">
 								</b2b-ngx-select>
 								<b2b-ngx-select placeholder="Sub Category"
+                                [theme]="b2bNgxSelectThemeEnum.BACKGROUND_WHITE"
 																[options]="level2Categories$ | async"
 																class="marketplace-main-wrapper__blocks__select"
 																bindValue="_id"

@@ -17,34 +17,37 @@ export class MixpanelService {
 	}
 
 	public track(event: string, props?: unknown): void {
-		if (this.token) {
-				mixpanel.track(event, props);
-		}
+    if (!environment.apiUrl.includes('-dev')) {
+      mixpanel.track(event, props);
+    }
 	}
 
 	public logIn(user: any, track: string): void {
-		if (this.token) {
-			if (mixpanel.get_distinct_id()) {
-				mixpanel.identify(user['User_id']);
-				mixpanel.people.set({...user, time: new Date().toISOString(), deviceType: this.detectDeviceType()});
-				this.track(track);
-			} else {
-				this.signUp(user, track);
-			}
-		}
+    if (!environment.apiUrl.includes('-dev')) {
+      if (mixpanel.get_distinct_id()) {
+        mixpanel.identify(user['User_id']);
+        mixpanel.people.set({...user, time: new Date().toISOString(), deviceType: this.detectDeviceType()});
+        this.track(track);
+      } else {
+        this.signUp(user, track);
+      }
+    }
 	}
 
 	public signUp(user: any, track: string): void {
-		if (this.token) {
-			mixpanel.alias(user['User_id']);
-			mixpanel.people.set({distinct_id: user['User_id'], ...user, time: new Date().toISOString(), deviceType: this.detectDeviceType()});
-			this.track(track);
-		}
+    if (!environment.apiUrl.includes('-dev')) {
+      mixpanel.alias(user['User_id']);
+      mixpanel.people.set({distinct_id: user['User_id'], ...user, time: new Date().toISOString(), deviceType: this.detectDeviceType()});
+      this.track(track);
+    }
 	}
 
 	public logout(): void {
-		this.track('Log Out');
-		mixpanel.reset();
+    if (!environment.apiUrl.includes('-dev')) {
+      this.track('Log Out');
+      mixpanel.reset();
+    }
+
 	}
 
 	private detectDeviceType(): string {
